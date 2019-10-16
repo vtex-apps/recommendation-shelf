@@ -1,0 +1,13 @@
+type Query {
+  """
+  Get a recommendation for a given strategy.
+  """
+  recommendation(
+    store: String!
+    strategy: String!
+    page: String!
+    user: String
+    products: [String]
+    categories: [String]
+  ): Null
+}
