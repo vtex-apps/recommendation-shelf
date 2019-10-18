@@ -9,5 +9,5 @@ type Query {
     user: String
     products: [String]
     categories: [String]
-  ): Null
+  ): String
 }

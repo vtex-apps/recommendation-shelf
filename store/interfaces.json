@@ -1,0 +1,15 @@
+{
+  "shelf.recommendation": {
+    "required": ["product-summary"],
+    "component": "RecommendationShelf",
+    "preview": {
+      "type": "grid",
+      "height": 550
+    },
+    "content": {
+      "properties": {
+        "productList": { "$ref": "app:vtex.shelf#/definitions/ProductList" }
+      }
+    }
+  }
+}
