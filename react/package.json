@@ -7,14 +7,14 @@
     "@types/pubsub-js": "^1.5.18",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "typescript": "3.5.2",
     "apollo-client": "2.4.12",
-    "react-apollo": "2.4.1",
-    "graphql": "14.1.1",
     "eslint": "^5.15.1",
-    "eslint-config-vtex-react": "^4.1.0"
+    "eslint-config-vtex-react": "^4.1.0",
+    "graphql": "14.1.1",
+    "react": "^16.8.6",
+    "react-apollo": "2.4.1",
+    "react-dom": "^16.8.6",
+    "typescript": "3.5.2"
   },
   "scripts": {
     "start": "react-scripts start",

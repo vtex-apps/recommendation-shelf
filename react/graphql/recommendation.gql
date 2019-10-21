@@ -1,0 +1,17 @@
+query recommendation(
+  $store: String!
+  $strategy: String!
+  $user: String
+  $products: [String]
+  $categories: [String]
+) {
+  recommendation(
+    store: $store
+    strategy: $strategy
+    user: $user
+    products: $products
+    categories: $categories
+  ) {
+    recommendationIds
+  }
+}
