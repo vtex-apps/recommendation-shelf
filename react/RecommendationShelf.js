@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { path } from "ramda";
+import { compose, map, path, take } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
 import { Loading } from "vtex.render-runtime";
@@ -46,12 +46,19 @@ const RecommendationShelf = ({ strategy, productList, account: store }) => {
   const [products, setProducts] = useState([]);
 
   useMemo(() => {
-    setProducts([path(["productId"], product)].filter(x => x != null));
-  }, [product]);
+    if (product) {
+      setProducts([path(["productId"], product)].filter(x => x != null));
+    }
 
-  useEffect(() => {
-    console.log(searchQuery);
-  }, [searchQuery]);
+    if (searchQuery && searchQuery.products) {
+      setProducts(
+        compose(
+          map(path(["productId"])),
+          take(5),
+        )(searchQuery.products),
+      );
+    }
+  }, [product, searchQuery]);
 
   return (
     <Query
