@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { path } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
+import { Loading } from "vtex.render-runtime";
+import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
+import useProduct from "vtex.product-context/useProduct";
 import withAccount from "./withAccount";
 
 import productsByIdentifier from "./graphql/productsByIdentifier.gql";
@@ -14,6 +18,10 @@ const ProductListWrapper = props => {
     <Query query={productsByIdentifier} variables={{ ids }}>
       {({ data, loading, error }) => {
         if (error) return null;
+
+        if (loading) {
+          return <Loading />;
+        }
 
         if (data && data.productsByIdentifier) {
           setProducts(data.productsByIdentifier);
@@ -32,7 +40,18 @@ const ProductListWrapper = props => {
 };
 
 const RecommendationShelf = ({ strategy, productList, account: store }) => {
+  const { product } = useProduct();
+  const { searchQuery } = useSearchPage();
   const [ids, setIds] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useMemo(() => {
+    setProducts([path(["productId"], product)].filter(x => x != null));
+  }, [product]);
+
+  useEffect(() => {
+    console.log(searchQuery);
+  }, [searchQuery]);
 
   return (
     <Query
@@ -40,10 +59,15 @@ const RecommendationShelf = ({ strategy, productList, account: store }) => {
       variables={{
         strategy,
         store,
+        products,
       }}
     >
       {({ data, loading, error }) => {
         if (error) return null;
+
+        if (loading) {
+          return <Loading />;
+        }
 
         if (data && data.recommendation) {
           setIds(data.recommendation.recommendationIds);

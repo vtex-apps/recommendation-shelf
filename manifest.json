@@ -16,7 +16,8 @@
   "dependencies": {
     "vtex.shelf": "1.x",
     "vtex.product-summary": "2.x",
-    "vtex.search-graphql": "0.x"
+    "vtex.search-graphql": "0.x",
+    "vtex.product-context": "0.x"
   },
   "policies": [
     {
