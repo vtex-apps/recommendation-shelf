@@ -24,12 +24,13 @@ export default class BiggyFrontClient extends ExternalClient {
     super("http://api.biggylabs.com.br/rec-api/v1/", context, options);
   }
 
-  public recommendation(
+  public async recommendation(
     input: RecommendationInput,
-  ): Promise<ApiBasedRecommendation> {
+  ): Promise<ApiBasedRecommendation[]> {
     const { store, strategy, user, products, categories } = input;
-    return this.http
-      .post<ApiBasedRecommendation[]>(
+
+    try {
+      const result = await this.http.post<ApiBasedRecommendation[]>(
         `${store}/io/ondemand/${strategy}`,
         {
           user,
@@ -39,22 +40,25 @@ export default class BiggyFrontClient extends ExternalClient {
         {
           metric: "recommendation",
         },
-      )
-      .then((result: ApiBasedRecommendation[]) => {
-        for (const recommendation of result) {
-          if (recommendation.baseItems) {
-            recommendation.baseItems.map(item => this.restructure(item));
-          }
+      );
 
-          if (recommendation.recommendationItems) {
-            recommendation.recommendationItems.map(item =>
-              this.restructure(item),
-            );
-          }
+      for (const recommendation of result) {
+        if (recommendation.baseItems) {
+          recommendation.baseItems.map(item => this.restructure(item));
         }
 
-        return result[0];
-      });
+        if (recommendation.recommendationItems) {
+          recommendation.recommendationItems.map(item =>
+            this.restructure(item),
+          );
+        }
+      }
+
+      return result;
+    } catch (err) {
+      // TODO: log error to monitoring solution
+      return [];
+    }
   }
 
   private restructure(item: ProductRecommendation): ProductRecommendation {

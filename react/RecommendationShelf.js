@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { compose, map, path, take } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
@@ -23,9 +23,7 @@ const ProductListWrapper = props => {
           return <Loading />;
         }
 
-        if (data && data.productsByIdentifier) {
-          setProducts(data.productsByIdentifier);
-        }
+        setProducts(path(["productsByIdentifier"], data));
 
         return (
           <ProductList
@@ -76,9 +74,17 @@ const RecommendationShelf = ({ strategy, productList, account: store }) => {
           return <Loading />;
         }
 
-        if (data && data.recommendation) {
-          setIds(data.recommendation.recommendationIds);
+        const recommendation = map(
+          path(["recommendationIds"]),
+          data.recommendation,
+        );
+
+        if (recommendation.length === 0) {
+          return null;
         }
+
+        // For default view mode only the first recommendation list is required.
+        setIds(recommendation[0]);
 
         return (
           <ProductListWrapper

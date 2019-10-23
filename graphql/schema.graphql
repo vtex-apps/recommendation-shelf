@@ -8,7 +8,7 @@ type Query {
     user: String
     products: [String]
     categories: [String]
-  ): ApiBasedRecommendation
+  ): [ApiBasedRecommendation]
 }
 
 type ApiBasedRecommendation {
