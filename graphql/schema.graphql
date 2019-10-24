@@ -6,9 +6,16 @@ type Query {
     store: String!
     strategy: String!
     user: String
+    anonymousUser: String
     products: [String]
     categories: [String]
+    userNavigationInfo: UserNavigationInfo
   ): [ApiBasedRecommendation]
+}
+
+input UserNavigationInfo {
+  google: Boolean!
+  bing: Boolean!
 }
 
 type ApiBasedRecommendation {

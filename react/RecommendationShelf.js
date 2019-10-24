@@ -4,8 +4,10 @@ import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
 import { Loading } from "vtex.render-runtime";
 import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
+import { useAnonymous } from "./utils/useAnonymous";
+import { useUserNavigation } from "./utils/useUserNavigation";
+import { useRuntime } from "vtex.render-runtime";
 import useProduct from "vtex.product-context/useProduct";
-import withAccount from "./withAccount";
 
 import productsByIdentifier from "./graphql/productsByIdentifier.gql";
 import recommendation from "./graphql/recommendation.gql";
@@ -37,9 +39,13 @@ const ProductListWrapper = props => {
   );
 };
 
-const RecommendationShelf = ({ strategy, productList, account: store }) => {
+const RecommendationShelf = ({ strategy, productList }) => {
+  const { account: store } = useRuntime();
   const { product } = useProduct();
   const { searchQuery } = useSearchPage();
+  const { anonymous: anonymousUser } = useAnonymous(store);
+  const { userNavigation: userNavigationInfo } = useUserNavigation();
+
   const [ids, setIds] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -65,6 +71,8 @@ const RecommendationShelf = ({ strategy, productList, account: store }) => {
         strategy,
         store,
         products,
+        anonymousUser,
+        userNavigationInfo,
       }}
     >
       {({ data, loading, error }) => {
@@ -98,4 +106,4 @@ const RecommendationShelf = ({ strategy, productList, account: store }) => {
   );
 };
 
-export default withAccount(RecommendationShelf);
+export default RecommendationShelf;

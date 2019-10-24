@@ -20,8 +20,10 @@ export interface RecommendationInput {
   store: string;
   strategy: string;
   user?: string;
+  anonymousUser?: string;
   products?: string[];
   categories?: string[];
+  userNavigationInfo?: { google: boolean; bing: boolean };
 }
 
 // tslint:disable-next-line:interface-over-type-literal

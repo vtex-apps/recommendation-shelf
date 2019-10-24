@@ -27,15 +27,25 @@ export default class BiggyFrontClient extends ExternalClient {
   public async recommendation(
     input: RecommendationInput,
   ): Promise<ApiBasedRecommendation[]> {
-    const { store, strategy, user, products, categories } = input;
+    const {
+      store,
+      strategy,
+      user,
+      anonymousUser,
+      products,
+      categories,
+      userNavigationInfo,
+    } = input;
 
     try {
       const result = await this.http.post<ApiBasedRecommendation[]>(
         `${store}/io/ondemand/${strategy}`,
         {
           user,
+          anonymousUser,
           products,
           categories,
+          userNavigationInfo,
         },
         {
           metric: "recommendation",

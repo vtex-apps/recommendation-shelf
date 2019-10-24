@@ -2,13 +2,16 @@ query recommendation(
   $store: String!
   $strategy: String!
   $user: String
+  $anonymousUser: String
   $products: [String]
   $categories: [String]
+  $userNavigationInfo: UserNavigationInfo
 ) {
   recommendation(
     store: $store
     strategy: $strategy
     user: $user
+    anonymousUser: $anonymousUser
     products: $products
     categories: $categories
   ) {
