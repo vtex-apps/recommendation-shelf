@@ -14,6 +14,7 @@ query recommendation(
     anonymousUser: $anonymousUser
     products: $products
     categories: $categories
+    userNavigationInfo: $userNavigationInfo
   ) {
     recommendationIds
   }

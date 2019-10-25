@@ -1,4 +1,4 @@
-import { ClientsConfig, LRUCache, Service } from "@vtex/api";
+import { ClientsConfig, Service } from "@vtex/api";
 import { Clients } from "./clients";
 import { queries } from "./resolvers/queries";
 
@@ -8,9 +8,6 @@ const clients: ClientsConfig<Clients> = {
     default: {
       retries: 2,
       timeout: 2000,
-    },
-    status: {
-      memoryCache: new LRUCache<string, any>({ max: 5000 }),
     },
   },
 };
