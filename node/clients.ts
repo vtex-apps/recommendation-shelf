@@ -66,9 +66,20 @@ export default class BiggyFrontClient extends ExternalClient {
 
       return result;
     } catch (err) {
-      // TODO: log error to monitoring solution
+      this.log(store, err);
       return [];
     }
+  }
+
+  private log(storeSlug: string, error: any) {
+    const message = `\nMessage: ${error.message}\n${
+      error.stack != null ? error.stack : ""
+    }`;
+
+    this.http.post(`/${storeSlug}/io/log`, {
+      message,
+      url: "Node Builder",
+    });
   }
 
   private restructure(item: ProductRecommendation): ProductRecommendation {
