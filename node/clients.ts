@@ -11,6 +11,7 @@ import {
   ProductSpec,
   RecommendationInput,
 } from "./resolvers/queries";
+import logError from "./api/log";
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -66,7 +67,7 @@ export default class BiggyFrontClient extends ExternalClient {
 
       return result;
     } catch (err) {
-      // TODO: log error to monitoring solution
+      logError(store, "node-builder", "__graphql", err);
       return [];
     }
   }

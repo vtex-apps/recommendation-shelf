@@ -2,11 +2,11 @@ import React, { useState, useMemo } from "react";
 import { compose, map, path, take } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
-import { Loading } from "vtex.render-runtime";
+import { logError } from "./api/log";
+import { Loading, useRuntime } from "vtex.render-runtime";
 import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
 import { useAnonymous } from "./utils/useAnonymous";
 import { useUserNavigation } from "./utils/useUserNavigation";
-import { useRuntime } from "vtex.render-runtime";
 import useProduct from "vtex.product-context/useProduct";
 
 import productsByIdentifier from "./graphql/productsByIdentifier.gql";
@@ -14,12 +14,17 @@ import recommendation from "./graphql/recommendation.gql";
 
 const ProductListWrapper = props => {
   const { ids } = props;
+  const { account, workspace, route } = useRuntime();
+
   const [products, setProducts] = useState([]);
 
   return (
     <Query query={productsByIdentifier} variables={{ ids }}>
       {({ data, loading, error }) => {
-        if (error) return null;
+        if (error) {
+          logError(account, workspace, route.path, error);
+          return null;
+        }
 
         if (loading) {
           return <Loading />;
@@ -40,10 +45,10 @@ const ProductListWrapper = props => {
 };
 
 const RecommendationShelf = ({ strategy, productList }) => {
-  const { account: store } = useRuntime();
+  const { account, workspace, route } = useRuntime();
   const { product } = useProduct();
   const { searchQuery } = useSearchPage();
-  const { anonymous: anonymousUser } = useAnonymous(store);
+  const { anonymous: anonymousUser } = useAnonymous(account);
   const { userNavigation: userNavigationInfo } = useUserNavigation();
 
   const [ids, setIds] = useState([]);
@@ -69,14 +74,17 @@ const RecommendationShelf = ({ strategy, productList }) => {
       query={recommendation}
       variables={{
         strategy,
-        store,
+        store: account,
         products,
         anonymousUser,
         userNavigationInfo,
       }}
     >
       {({ data, loading, error }) => {
-        if (error) return null;
+        if (error) {
+          logError(account, workspace, route.path, error);
+          return null;
+        }
 
         if (loading) {
           return <Loading />;
