@@ -6,6 +6,7 @@ query recommendation(
   $products: [String]
   $categories: [String]
   $userNavigationInfo: UserNavigationInfo
+  $settings: StoreFrontSettings
 ) {
   recommendation(
     store: $store
@@ -15,6 +16,7 @@ query recommendation(
     products: $products
     categories: $categories
     userNavigationInfo: $userNavigationInfo
+    settings: $settings
   ) {
     recommendationIds
   }

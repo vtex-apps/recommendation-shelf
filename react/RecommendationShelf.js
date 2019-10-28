@@ -54,6 +54,9 @@ const RecommendationShelf = ({ strategy, productList }) => {
   const [ids, setIds] = useState([]);
   const [products, setProducts] = useState([]);
 
+  const maxProducts = productList.maxItems || 8;
+  const minProducts = productList.itemsPerPage || 4;
+
   useMemo(() => {
     if (product) {
       setProducts([path(["productId"], product)].filter(x => x != null));
@@ -78,6 +81,10 @@ const RecommendationShelf = ({ strategy, productList }) => {
         products,
         anonymousUser,
         userNavigationInfo,
+        settings: {
+          maxProducts,
+          minProducts,
+        },
       }}
     >
       {({ data, loading, error }) => {

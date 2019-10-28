@@ -24,6 +24,10 @@ export interface RecommendationInput {
   products?: string[];
   categories?: string[];
   userNavigationInfo?: { google: boolean; bing: boolean };
+  settings?: {
+    minProducts?: number;
+    maxProducts?: number;
+  };
 }
 
 // tslint:disable-next-line:interface-over-type-literal

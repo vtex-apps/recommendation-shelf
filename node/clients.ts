@@ -35,6 +35,7 @@ export default class BiggyFrontClient extends ExternalClient {
       products,
       categories,
       userNavigationInfo,
+      settings,
     } = input;
 
     try {
@@ -46,6 +47,7 @@ export default class BiggyFrontClient extends ExternalClient {
           products,
           categories,
           userNavigationInfo,
+          ...settings,
         },
         {
           metric: "recommendation",

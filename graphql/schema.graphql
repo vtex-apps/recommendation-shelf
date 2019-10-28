@@ -18,6 +18,11 @@ input UserNavigationInfo {
   bing: Boolean!
 }
 
+input StoreFrontSettings {
+  minProducts: Int
+  maxProducts: Int
+}
+
 type ApiBasedRecommendation {
   baseIds: [String]
   baseItems: [ProductRecommendation]
