@@ -1,8 +1,8 @@
 {
-  "name": "front",
+  "name": "recommendation-shelf",
   "vendor": "vtex",
   "version": "0.0.1",
-  "title": "Front",
+  "title": "Recommendation Shelf",
   "description": "Recommendation components and functionality for VTEX IO.",
   "scripts": {
     "prereleasy": "bash pre.sh"

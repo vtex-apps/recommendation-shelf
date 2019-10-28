@@ -1,7 +1,9 @@
+import PropTypes from "prop-types";
 import React, { useState, useMemo } from "react";
 import { compose, map, path, take } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
+import { productListSchemaPropTypes } from "vtex.shelf/utils/propTypes";
 import { Loading, useRuntime } from "vtex.render-runtime";
 import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
 import { useAnonymous } from "./utils/useAnonymous";
@@ -44,7 +46,11 @@ const ProductListWrapper = props => {
   );
 };
 
-const RecommendationShelf = ({ strategy, productList }) => {
+const RecommendationShelf = ({
+  strategy,
+  productList,
+  paginationDotsVisibility = "visible",
+}) => {
   const { account, workspace, route } = useRuntime();
   const { product } = useProduct();
   const { searchQuery } = useSearchPage();
@@ -113,12 +119,47 @@ const RecommendationShelf = ({ strategy, productList }) => {
           <ProductListWrapper
             loading={loading}
             ids={ids}
+            paginationDotsVisibility={paginationDotsVisibility}
             {...productList}
           ></ProductListWrapper>
         );
       }}
     </Query>
   );
+};
+
+RecommendationShelf.propTypes = {
+  /** Recommendation strategy used to fetch product suggestions for a user. */
+  strategy: PropTypes.oneOf([
+    "most_viewed_store",
+    "most_viewed_user",
+    "most_viewed_products",
+    "best_sellers_store",
+    "best_sellers_user",
+    "best_sellers_products",
+    "offers_store",
+    "offers_user",
+    "offers_products",
+    "new_releases_store",
+    "new_releases_user",
+    "new_releases_products",
+    "click_history",
+    "navigation_history",
+    "order_history",
+    "cart_abandonment",
+    "bought_together",
+    "best_choice",
+    "similar_products",
+  ]).isRequired,
+  /** Should display navigation dots below the Shelf */
+  paginationDotsVisibility: PropTypes.oneOf([
+    "visible",
+    "hidden",
+    "mobileOnly",
+    "desktopOnly",
+  ]),
+  /** ProductList schema configuration */
+  productList: PropTypes.shape(productListSchemaPropTypes),
 };
 
 export default RecommendationShelf;
