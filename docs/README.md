@@ -2,7 +2,7 @@
 
 ## Description
 
-The VTEX Recommendation shelf app is a store component that shows a collection of products using recommendation
+The VTEX Recommendation Shelf app is a store component that shows a collection of products using recommendation
 strategies.
 
 :loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
@@ -79,7 +79,7 @@ The following interface lists the available blocks within `recommendation-shelf`
 
 ### Configuration
 
-You can configure the `recommendation.shelf` block in your theme app using the props:
+You can configure the `recommendation.shelf` block in your theme app using the following props:
 
 | Prop name                  | Type                | Description                                                                                                                                                         | Default value |
 | -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -91,7 +91,7 @@ Also, you can configure the product summary that is defined on shelf. See [here]
 
 ## Recommendation Strategies
 
-Below you can find all the available recommendation strategies that can be used to fetch for product sugestions.
+Below you can find all the available recommendation strategies that can be used to fetch product sugestions.
 
 | `strategy`              | Description                                                                                                       | Pages                           |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------- |
