@@ -10,6 +10,7 @@ type Query {
     products: [String]
     categories: [String]
     userNavigationInfo: UserNavigationInfo
+    settings: StoreFrontSettings
   ): [ApiBasedRecommendation]
 }
 

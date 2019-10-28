@@ -3,7 +3,6 @@ import React, { useState, useMemo } from "react";
 import { compose, map, path, take } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
-import { productListSchemaPropTypes } from "vtex.shelf/utils/propTypes";
 import { Loading, useRuntime } from "vtex.render-runtime";
 import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
 import { useAnonymous } from "./utils/useAnonymous";
@@ -159,7 +158,7 @@ RecommendationShelf.propTypes = {
     "desktopOnly",
   ]),
   /** ProductList schema configuration */
-  productList: PropTypes.shape(productListSchemaPropTypes),
+  productList: PropTypes.object,
 };
 
 export default RecommendationShelf;
