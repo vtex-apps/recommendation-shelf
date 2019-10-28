@@ -5,6 +5,11 @@
     "preview": {
       "type": "grid",
       "height": 550
+    },
+    "content": {
+      "properties": {
+        "productList": { "$ref": "app:vtex.shelf#/definitions/ProductList" }
+      }
     }
   }
 }
