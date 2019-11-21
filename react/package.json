@@ -41,7 +41,23 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^1.18.2",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.4.3",
+    "prettier": "^1.19.1",
     "tslint": "^5.18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js(x)?": [
+      "eslint"
+    ],
+    "*.{js(x)?,ts(x)?,md,json}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

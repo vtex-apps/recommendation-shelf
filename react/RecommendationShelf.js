@@ -47,6 +47,7 @@ const ProductListWrapper = props => {
 
 const RecommendationShelf = ({
   strategy,
+  paidNavigationFilter,
   productList,
   paginationDotsVisibility = "visible",
 }) => {
@@ -69,10 +70,7 @@ const RecommendationShelf = ({
 
     if (searchQuery && searchQuery.products) {
       setProducts(
-        compose(
-          map(path(["productId"])),
-          take(5),
-        )(searchQuery.products),
+        compose(map(path(["productId"])), take(5))(searchQuery.products),
       );
     }
   }, [product, searchQuery]);
@@ -89,6 +87,7 @@ const RecommendationShelf = ({
         settings: {
           maxProducts,
           minProducts,
+          paidNavigationFilter,
         },
       }}
     >
@@ -159,6 +158,12 @@ RecommendationShelf.propTypes = {
   ]),
   /** ProductList schema configuration */
   productList: PropTypes.object,
+  /** Paid Navigation filter schema configuration */
+  paidNavigationFilter: PropTypes.shape({
+    filterBingAds: PropTypes.bool,
+    filterGoogleAds: PropTypes.bool,
+    categories: PropTypes.arrayOf(PropTypes.string),
+  }),
 };
 
 export default RecommendationShelf;

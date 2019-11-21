@@ -27,6 +27,7 @@ export interface RecommendationInput {
   settings?: {
     minProducts?: number;
     maxProducts?: number;
+    paidNavigationFilter?: PaidNavigationFilter;
   };
 }
 
@@ -89,4 +90,10 @@ export interface Category {
   parent: string;
   originalId: string;
   ancestors: string[];
+}
+
+export interface PaidNavigationFilter {
+  filterBingAds: boolean;
+  filterGoogleAds: boolean;
+  categories: string[];
 }

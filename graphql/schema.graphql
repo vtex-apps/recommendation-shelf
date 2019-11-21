@@ -22,6 +22,13 @@ input UserNavigationInfo {
 input StoreFrontSettings {
   minProducts: Int
   maxProducts: Int
+  paidNavigationFilter: PaidNavigationFilter
+}
+
+input PaidNavigationFilter {
+  filterBingAds: Boolean
+  filterGoogleAds: Boolean
+  categories: [String]
 }
 
 type ApiBasedRecommendation {

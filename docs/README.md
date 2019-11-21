@@ -81,13 +81,36 @@ The following interface lists the available blocks within `recommendation-shelf`
 
 You can configure the `recommendation.shelf` block in your theme app using the following props:
 
-| Prop name                  | Type                | Description                                                                                                                                                         | Default value |
-| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `strategy`                 | `Enum`              | **(Required)** Recommendation strategy used to fetch product suggestions for a user. [`See Recommendation Strategies`](#recommendation-strategies)                  | -             |
-| `paginationDotsVisibility` | `Enum`              | Controls if pagination dots below the Shelf should be rendered or not. Possible values: `visible` (always show), `hidden` (never show), `desktopOnly`, `mobileOnly` | `visible`     |
-| `productList`              | `ProductListSchema` | Product list schema. [`See ProductListSchema (on vtex-apps/shelf)`](https://github.com/vtex-apps/shelf/blob/master/docs/README.md#configuration)                    | -             |
+| Prop name                  | Type                         | Description                                                                                                                                                         | Default value |
+| -------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `strategy`                 | `Enum`                       | **(Required)** Recommendation strategy used to fetch product suggestions for a user. [`See Recommendation Strategies`](#recommendation-strategies)                  | -             |
+| `paginationDotsVisibility` | `Enum`                       | Controls if pagination dots below the Shelf should be rendered or not. Possible values: `visible` (always show), `hidden` (never show), `desktopOnly`, `mobileOnly` | `visible`     |
+| `productList`              | `ProductListSchema`          | Product list schema. [`See ProductListSchema (on vtex-apps/shelf)`](https://github.com/vtex-apps/shelf/blob/master/docs/README.md#configuration)                    | -             |
+| `paidNavigationFilter`     | `PaidNavigationFilterSchema` | Paid Navigation Filter schema. `See PaidNavigationFilterSchema`                                                                                                     | -             |
 
 Also, you can configure the product summary that is defined on shelf. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
+
+`PaidNavigationFilterSchema`:
+
+| Prop name         | Type            | Description                                                                       | Default value |
+| ----------------- | --------------- | --------------------------------------------------------------------------------- | ------------- |
+| `filterBingAds`   | `Boolean`       | If navigations coming from paid bing navigations should have products filtered.   | -             |
+| `filterGoogleAds` | `Boolean`       | If navigations coming from paid google navigations should have products filtered. | -             |
+| `categories`      | `Array(String)` | Which categories should not appear when recommendations are filtered.             | -             |
+
+When passing categories to `paidNavigationFilter`, the `Category Slug` should be used, only lowecase letters and numbers with all other characters being replaced by `-`.
+
+- Given the `Books & E-Books` category, the `paidNavigationFilter` object should look like:
+
+```json
+{
+  "paidNavigationFilter": {
+    "filterBingAds": true,
+    "filterGoogleAds": true,
+    "categories": ["books---e-books"]
+  }
+}
+```
 
 ## Recommendation Strategies
 
