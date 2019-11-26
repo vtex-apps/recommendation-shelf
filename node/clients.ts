@@ -35,6 +35,7 @@ export default class BiggyFrontClient extends ExternalClient {
       products,
       categories,
       userNavigationInfo,
+      secondaryStrategy,
       settings,
     } = input;
 
@@ -47,6 +48,7 @@ export default class BiggyFrontClient extends ExternalClient {
           products,
           categories,
           userNavigationInfo,
+          secondaryStrategy,
           ...settings,
         },
         {

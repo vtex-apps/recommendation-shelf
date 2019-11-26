@@ -47,6 +47,7 @@ const ProductListWrapper = props => {
 
 const RecommendationShelf = ({
   strategy,
+  secondaryStrategy,
   paidNavigationFilter,
   productList,
   paginationDotsVisibility = "visible",
@@ -80,6 +81,7 @@ const RecommendationShelf = ({
       query={recommendation}
       variables={{
         strategy,
+        secondaryStrategy,
         store: account,
         products,
         anonymousUser,
@@ -126,29 +128,33 @@ const RecommendationShelf = ({
   );
 };
 
+const strategies = PropTypes.oneOf([
+  "most_viewed_store",
+  "most_viewed_user",
+  "most_viewed_products",
+  "best_sellers_store",
+  "best_sellers_user",
+  "best_sellers_products",
+  "offers_store",
+  "offers_user",
+  "offers_products",
+  "new_releases_store",
+  "new_releases_user",
+  "new_releases_products",
+  "click_history",
+  "navigation_history",
+  "order_history",
+  "cart_abandonment",
+  "bought_together",
+  "best_choice",
+  "similar_products",
+]);
+
 RecommendationShelf.propTypes = {
   /** Recommendation strategy used to fetch product suggestions for a user. */
-  strategy: PropTypes.oneOf([
-    "most_viewed_store",
-    "most_viewed_user",
-    "most_viewed_products",
-    "best_sellers_store",
-    "best_sellers_user",
-    "best_sellers_products",
-    "offers_store",
-    "offers_user",
-    "offers_products",
-    "new_releases_store",
-    "new_releases_user",
-    "new_releases_products",
-    "click_history",
-    "navigation_history",
-    "order_history",
-    "cart_abandonment",
-    "bought_together",
-    "best_choice",
-    "similar_products",
-  ]).isRequired,
+  strategy: strategies.isRequired,
+  /** Recommendation strategy to use if the first one provides no return. */
+  secondaryStrategy: strategies,
   /** Should display navigation dots below the Shelf */
   paginationDotsVisibility: PropTypes.oneOf([
     "visible",

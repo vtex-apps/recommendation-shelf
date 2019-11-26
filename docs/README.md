@@ -35,7 +35,8 @@ Now, you can change the behavior of the shelf block. See an example of how to co
 ```json
 "shelf.recommendation": {
   "props": {
-    "strategy": "most_viewed_store",
+    "strategy": "most_viewed_user",
+    "secondaryStrategy": "most_viewed_store",
     "productList": {
       "maxItems": 10,
       "itemsPerPage": 4,
@@ -84,6 +85,7 @@ You can configure the `recommendation.shelf` block in your theme app using the f
 | Prop name                  | Type                         | Description                                                                                                                                                         | Default value |
 | -------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `strategy`                 | `Enum`                       | **(Required)** Recommendation strategy used to fetch product suggestions for a user. [`See Recommendation Strategies`](#recommendation-strategies)                  | -             |
+| `secondaryStrategy`        | `Enum`                       | Recommendation strategy to use if the first one provides no return. [`See Recommendation Strategies`](#recommendation-strategies)                                   | -             |
 | `paginationDotsVisibility` | `Enum`                       | Controls if pagination dots below the Shelf should be rendered or not. Possible values: `visible` (always show), `hidden` (never show), `desktopOnly`, `mobileOnly` | `visible`     |
 | `productList`              | `ProductListSchema`          | Product list schema. [`See ProductListSchema (on vtex-apps/shelf)`](https://github.com/vtex-apps/shelf/blob/master/docs/README.md#configuration)                    | -             |
 | `paidNavigationFilter`     | `PaidNavigationFilterSchema` | Paid Navigation Filter schema. `See PaidNavigationFilterSchema`                                                                                                     | -             |

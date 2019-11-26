@@ -19,6 +19,7 @@ export interface IContext {
 export interface RecommendationInput {
   store: string;
   strategy: string;
+  secondaryStrategy: string;
   user?: string;
   anonymousUser?: string;
   products?: string[];
