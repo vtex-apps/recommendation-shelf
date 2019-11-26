@@ -18,5 +18,5 @@ export const useAnonymous = account => {
     return {};
   }
 
-  return {};
+  return { anonymous };
 };
