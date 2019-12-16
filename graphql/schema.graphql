@@ -5,6 +5,7 @@ type Query {
   recommendation(
     store: String!
     strategy: String!
+    secondaryStrategy: String
     user: String
     anonymousUser: String
     products: [String]
@@ -22,6 +23,13 @@ input UserNavigationInfo {
 input StoreFrontSettings {
   minProducts: Int
   maxProducts: Int
+  paidNavigationFilter: PaidNavigationFilter
+}
+
+input PaidNavigationFilter {
+  filterBingAds: Boolean
+  filterGoogleAds: Boolean
+  categories: [String]
 }
 
 type ApiBasedRecommendation {
