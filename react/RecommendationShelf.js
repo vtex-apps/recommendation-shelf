@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState, useMemo } from "react";
-import { compose, map, path, take } from "ramda";
+import { compose, map, path, take, pick } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
 import { Loading, useRuntime } from "vtex.render-runtime";
@@ -14,7 +14,7 @@ import productsByIdentifier from "./graphql/productsByIdentifier.gql";
 import recommendation from "./graphql/recommendation.gql";
 
 const ProductListWrapper = props => {
-  const { ids } = props;
+  const { ids, secondaryStrategy, titleText, secondaryTitleText } = props;
   const { account, workspace, route } = useRuntime();
 
   const [products, setProducts] = useState([]);
@@ -38,6 +38,7 @@ const ProductListWrapper = props => {
             {...props}
             products={products}
             loading={loading}
+            titleText={(secondaryStrategy && secondaryTitleText) || titleText}
           ></ProductList>
         );
       }}
@@ -58,7 +59,6 @@ const RecommendationShelf = ({
   const { anonymous: anonymousUser } = useAnonymous(account);
   const { userNavigation: userNavigationInfo } = useUserNavigation();
 
-  const [ids, setIds] = useState([]);
   const [products, setProducts] = useState([]);
 
   const maxProducts = productList.maxItems || 8;
@@ -104,7 +104,7 @@ const RecommendationShelf = ({
         }
 
         const recommendation = map(
-          path(["recommendationIds"]),
+          pick(["recommendationIds", "secondaryStrategy"]),
           data.recommendation,
         );
 
@@ -113,13 +113,14 @@ const RecommendationShelf = ({
         }
 
         // For default view mode only the first recommendation list is required.
-        setIds(recommendation[0]);
+        const { recommendationIds, secondaryStrategy } = recommendation[0];
 
         return (
           <ProductListWrapper
             loading={loading}
-            ids={ids}
+            ids={recommendationIds}
             paginationDotsVisibility={paginationDotsVisibility}
+            secondaryStrategy={secondaryStrategy}
             {...productList}
           ></ProductListWrapper>
         );
