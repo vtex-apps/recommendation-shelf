@@ -34,12 +34,14 @@ const ProductListWrapper = props => {
         setProducts(path(["productsByIdentifier"], data));
 
         return (
-          <ProductList
-            {...props}
-            products={products}
-            loading={loading}
-            titleText={(secondaryStrategy && secondaryTitleText) || titleText}
-          ></ProductList>
+          <div className="pv4 pb9">
+            <ProductList
+              {...props}
+              products={products}
+              loading={loading}
+              titleText={(secondaryStrategy && secondaryTitleText) || titleText}
+            ></ProductList>
+          </div>
         );
       }}
     </Query>
@@ -171,6 +173,10 @@ RecommendationShelf.propTypes = {
     filterGoogleAds: PropTypes.bool,
     categories: PropTypes.arrayOf(PropTypes.string),
   }),
+};
+
+RecommendationShelf.schema = {
+  title: "admin/editor.shelf.title",
 };
 
 export default RecommendationShelf;
