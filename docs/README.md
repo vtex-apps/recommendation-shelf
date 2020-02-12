@@ -9,12 +9,23 @@ strategies.
 
 ## Table of Contents
 
+- [Prerequisites](#prerequisites)
 - [Usage](#usage)
   - [Blocks API](#blocks-api)
     - [Configuration](#configuration)
 - [Recommendation Strategies](#recommendation-strategies)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
+
+## Prerequisites
+
+Most of the recommendations use user navigation as input. Therefore, it is necessary to install `biggy.pixel` to make the `recommendation-shelf` work properly. `biggy.pixel` is app used to track user navigation.
+
+First, install the `biggy.pixel`  app:
+```
+vtex install biggy.pixel
+```
+Then go to `/admin/apps` and select the *Biggy Pixel* app. In the `apiKey` field, insert the key provided by our team.
 
 ## Usage
 
