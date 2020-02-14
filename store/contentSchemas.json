@@ -8,6 +8,56 @@
           "default": "store/shelf.title"
         }
       }
+    },
+    "RecommendationShelf": {
+      "properties": {
+        "strategy": {
+          "title": "admin/editor.recommendationShelf.strategy.title",
+          "$ref": "#/definitions/Strategy"
+        },
+        "secondaryStrategy": {
+          "title": "admin/editor.recommendationShelf.secondaryStrategy.title",
+          "$ref": "#/definitions/Strategy"
+        },
+        "productList": {
+          "properties": {
+            "$ref": "app:vtex.shelf#/definitions/ProductList/properties",
+            "titleText": {
+              "title": "admin/editor.shelf-properties.title.title",
+              "$ref": "app:vtex.native-types#/definitions/text",
+              "isLayout": false
+            },
+            "secondaryTitleText": {
+              "title": "admin/editor.recommendationShelf.secondaryTitleText.title",
+              "$ref": "app:vtex.native-types#/definitions/text",
+              "isLayout": false
+            }
+          }
+        }
+      }
+    },
+    "Strategy": {
+      "enum": [
+        "most_viewed_store",
+        "most_viewed_user",
+        "most_viewed_products",
+        "best_sellers_store",
+        "best_sellers_user",
+        "best_sellers_products",
+        "offers_store",
+        "offers_user",
+        "offers_products",
+        "new_releases_store",
+        "new_releases_user",
+        "new_releases_products",
+        "click_history",
+        "navigation_history",
+        "order_history",
+        "cart_abandonment",
+        "bought_together",
+        "best_choice",
+        "similar_products"
+      ]
     }
   }
 }

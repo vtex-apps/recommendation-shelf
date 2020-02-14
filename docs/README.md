@@ -39,12 +39,12 @@ To use this app you need to import it in your dependencies on the `manifest.json
   }
 ```
 
-Then, add the `shelf.recommendation` block into your app theme.
+Then, add the `recommendation-shelf` block into your app theme.
 
 Now, you can change the behavior of the shelf block. See an example of how to configure:
 
 ```json
-"shelf.recommendation": {
+"recommendation-shelf": {
   "props": {
     "strategy": "most_viewed_user",
     "secondaryStrategy": "most_viewed_store",
@@ -83,7 +83,7 @@ When implementing this app as a block, various inner blocks may be available.
 The following interface lists the available blocks within `recommendation-shelf`.
 
 ```json
-  "shelf.recommendation": {
+  "recommendation-shelf": {
     "required": ["product-summary"],
     "component": "RecommendationShelf"
   }

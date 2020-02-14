@@ -37,6 +37,7 @@ type ApiBasedRecommendation {
   baseItems: [ProductRecommendation]
   recommendationIds: [String]
   recommendationItems: [ProductRecommendation]
+  secondaryStrategy: Boolean
 }
 
 type ProductRecommendation {
