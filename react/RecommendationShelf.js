@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import { compose, map, path, take, pick } from "ramda";
 import { Query } from "react-apollo";
 import { ProductList } from "vtex.shelf";
+import { useDevice } from "vtex.device-detector";
 import { Loading, useRuntime } from "vtex.render-runtime";
 import { useSearchPage } from "vtex.search-page-context/SearchPageContext";
 import { useAnonymous } from "./utils/useAnonymous";
@@ -16,6 +17,7 @@ import recommendation from "./graphql/recommendation.gql";
 const ProductListWrapper = props => {
   const { ids, secondaryStrategy, titleText, secondaryTitleText } = props;
   const { account, workspace, route } = useRuntime();
+  const { isMobile } = useDevice();
 
   const [products, setProducts] = useState([]);
 
@@ -37,6 +39,7 @@ const ProductListWrapper = props => {
           <div className="pv4 pb9">
             <ProductList
               {...props}
+              isMobile={isMobile}
               products={products}
               loading={loading}
               titleText={(secondaryStrategy && secondaryTitleText) || titleText}

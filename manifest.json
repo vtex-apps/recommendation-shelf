@@ -1,7 +1,7 @@
 {
   "name": "recommendation-shelf",
   "vendor": "vtex",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "title": "Recommendation Shelf",
   "description": "Recommendation components and functionality for VTEX IO.",
   "scripts": {
@@ -20,7 +20,8 @@
     "vtex.product-summary": "2.x",
     "vtex.search-graphql": "0.x",
     "vtex.product-context": "0.x",
-    "vtex.search-page-context": "0.x"
+    "vtex.search-page-context": "0.x",
+    "vtex.device-detector": "0.x"
   },
   "policies": [
     {
