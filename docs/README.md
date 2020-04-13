@@ -1,7 +1,7 @@
 > :warning: :hammer:
 > 
 > **WIP**: Hello! Thanks for checking this app, it's currently under development and research by the VTEX Personalization team,
-> and during this phase only this app should be installed on selected accounts, **if you're not in contact with the** 
+> and during this phase this app should be only installed on selected accounts, **if you're not in contact with the** 
 > **VTEX Personalization team, installing this app on your workspace will not do anything.**
 > 
 > _Additional information: biggy@vtex.com.br_
