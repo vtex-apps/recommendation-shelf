@@ -3,45 +3,121 @@ query productsByIdentifier($ids: [ID!]) {
     @context(provider: "vtex.search-graphql") {
     cacheId
     productId
-    productName
     description
-    categories
-    categoryTree {
-      name
-      href
-    }
-    link
+    productName
+    productReference
     linkText
     brand
-    items {
+    brandId
+    link
+    categories
+    priceRange {
+      sellingPrice {
+        highPrice
+        lowPrice
+      }
+      listPrice {
+        highPrice
+        lowPrice
+      }
+    }
+    specificationGroups {
       name
+      originalName
+      specifications {
+        name
+        originalName
+        values
+      }
+    }
+    items {
       itemId
+      name
+      nameComplete
+      complementName
+      ean
+      variations {
+        name
+        values
+      }
       referenceId {
+        Key
         Value
       }
+      measurementUnit
+      unitMultiplier
       images {
-        imageUrl
+        cacheId
+        imageId
+        imageLabel
         imageTag
+        imageUrl
+        imageText
       }
       sellers {
         sellerId
+        sellerName
         commertialOffer {
+          discountHighlights {
+            name
+          }
+          teasers {
+            name
+            conditions {
+              minimumQuantity
+              parameters {
+                name
+                value
+              }
+            }
+            effects {
+              parameters {
+                name
+                value
+              }
+            }
+          }
           Installments {
             Value
             InterestRate
             TotalValuePlusInterestRate
             NumberOfInstallments
             Name
+            PaymentSystemName
           }
-          AvailableQuantity
           Price
           ListPrice
+          Tax
+          taxPercentage
+          spotPrice
+          PriceWithoutDiscount
+          RewardValue
+          PriceValidUntil
+          AvailableQuantity
         }
+      }
+    }
+    skuSpecifications {
+      field {
+        name
+        originalName
+      }
+      values {
+        name
+        originalName
       }
     }
     productClusters {
       id
       name
+    }
+    properties {
+      name
+      values
+    }
+    selectedProperties {
+      key
+      value
     }
   }
 }

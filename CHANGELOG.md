@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add new fields to the `productsByIdentifier` query.
+
 ## [0.0.5] - 2020-03-25
 
 ### Added
