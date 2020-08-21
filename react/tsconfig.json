@@ -5,11 +5,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es2017",
-    "types": ["node", "jest", "graphql"],
+    "types": ["node", "jest", "graphql"]
   },
-  "include": [
-    "./typings/*.d.ts",
-    "./**/*.tsx",
-    "./**/*.ts"
-  ]
+  "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }
