@@ -1,6 +1,6 @@
 > :warning: :hammer:
 > 
-> **WIP**: Hello! Thanks for checking this app, it's currently under development and research by the VTEX Personalization team,
+> **WIP**: Hello! Thanks for checking this app, it's currently under development and research by the VTEX Search & Personalization team,
 > and during this phase this app should be only installed on selected accounts, **if you're not in contact with the** 
 > **VTEX Personalization team, installing this app on your workspace will not do anything.**
 > 
@@ -13,8 +13,7 @@
 
 ## Description
 
-The VTEX Recommendation Shelf app is a store component that shows a collection of products using recommendation
-strategies.
+The VTEX Recommendation Shelf app is an app that provides store components that can show a collection of products using recommendation strategies.
 
 :loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
