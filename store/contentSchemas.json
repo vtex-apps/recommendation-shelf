@@ -1,36 +1,125 @@
 {
   "definitions": {
-    "ProductList": {
-      "properties": {
-        "titleText": {
-          "title": "admin/editor.shelf.titleText.title",
-          "$ref": "app:vtex.native-types#/definitions/text",
-          "default": "store/shelf.title"
-        }
-      }
-    },
     "RecommendationShelf": {
+      "type": "object",
       "properties": {
         "strategy": {
-          "title": "admin/editor.recommendationShelf.strategy.title",
+          "title": "admin/recommendation-shelf.strategy.title",
           "$ref": "#/definitions/Strategy"
         },
         "secondaryStrategy": {
-          "title": "admin/editor.recommendationShelf.secondaryStrategy.title",
+          "title": "admin/recommendation-shelf.secondaryStrategy.title",
           "$ref": "#/definitions/Strategy"
         },
-        "productList": {
+        "recommendation": {
+          "title": "Recommendation Options",
           "properties": {
-            "$ref": "app:vtex.shelf#/definitions/ProductList/properties",
-            "titleText": {
-              "title": "admin/editor.shelf-properties.title.title",
-              "$ref": "app:vtex.native-types#/definitions/text",
-              "isLayout": false
+            "count": {
+              "properties": {
+                "minimum": {
+                  "title": "Min items",
+                  "type": "number"
+                },
+                "recommendations": {
+                  "type": "number",
+                  "title": "Max items"
+                }
+              }
             },
-            "secondaryTitleText": {
-              "title": "admin/editor.recommendationShelf.secondaryTitleText.title",
-              "$ref": "app:vtex.native-types#/definitions/text",
-              "isLayout": false
+            "sort": {
+              "title": "Ordenation",
+              "properties": {
+                "field": {
+                  "title": "Order by",
+                  "$ref": "#/definitions/OrderBy"
+                },
+                "desc": {
+                  "title": "Descendent",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RecommendationRefresh": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "title": "admin/recommendation-shelf.strategy.title",
+          "$ref": "#/definitions/RefreshShelfStrategy"
+        },
+        "secondaryStrategy": {
+          "title": "admin/recommendation-shelf.secondaryStrategy.title",
+          "$ref": "#/definitions/RefreshShelfStrategy"
+        },
+        "recommendation": {
+          "title": "Recommendation Options",
+          "properties": {
+            "count": {
+              "properties": {
+                "minimum": {
+                  "title": "Min items",
+                  "type": "number"
+                },
+                "recommendations": {
+                  "type": "number",
+                  "title": "Max items"
+                }
+              }
+            },
+            "sort": {
+              "title": "Ordenation",
+              "properties": {
+                "field": {
+                  "title": "Order by",
+                  "$ref": "#/definitions/OrderBy"
+                },
+                "desc": {
+                  "title": "Descendent",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RecommendationBuyTogether": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "title": "admin/recommendation-shelf.strategy.title",
+          "$ref": "#/definitions/BuyTogetherStrategy"
+        },
+        "recommendation": {
+          "title": "Recommendation Options",
+          "properties": {
+            "count": {
+              "properties": {
+                "minimum": {
+                  "title": "Min items",
+                  "type": "number"
+                },
+                "recommendations": {
+                  "type": "number",
+                  "title": "Max items"
+                }
+              }
+            },
+            "sort": {
+              "title": "Ordenation",
+              "properties": {
+                "field": {
+                  "title": "Order by",
+                  "$ref": "#/definitions/OrderBy"
+                },
+                "desc": {
+                  "title": "Descendent",
+                  "type": "boolean"
+                }
+              }
             }
           }
         }
@@ -38,25 +127,55 @@
     },
     "Strategy": {
       "enum": [
-        "most_viewed_store",
-        "most_viewed_user",
-        "most_viewed_products",
-        "best_sellers_store",
-        "best_sellers_user",
-        "best_sellers_products",
-        "offers_store",
-        "offers_user",
-        "offers_products",
-        "new_releases_store",
-        "new_releases_user",
-        "new_releases_products",
-        "click_history",
-        "navigation_history",
-        "order_history",
-        "cart_abandonment",
-        "bought_together",
-        "best_choice",
-        "similar_products"
+        "BEST_SELLERS",
+        "MOST_POPULAR",
+        "PRICE_REDUCTION",
+        "NEW_RELEASES",
+        "NAVIGATION_HISTORY",
+        "RECOMMENDATION_HISTORY",
+        "SIMILAR_PRODUCTS",
+        "BEST_CHOICE",
+        "BOUGHT_TOGETHER"
+      ],
+      "enumNames": [
+        "admin/strategy.best-sellers.label",
+        "admin/strategy.most-popular.label",
+        "admin/strategy.price-reduction.label",
+        "admin/strategy.new-releases.label",
+        "admin/strategy.navigation-history.label",
+        "admin/strategy.recommendation-history.label",
+        "admin/strategy.similar-products.label",
+        "admin/strategy.best-choice.label",
+        "admin/strategy.bought-together.label"
+      ]
+    },
+    "RefreshShelfStrategy": {
+      "enum": [
+        "RECOMMENDATION_HISTORY",
+        "CART_HISTORY",
+        "ORDER_HISTORY"
+      ],
+      "enumNames": [
+        "admin/strategy.recommendation-history.label",
+        "admin/strategy.cart-history.label",
+        "admin/strategy.order-history.label"
+      ]
+    },
+    "BuyTogetherStrategy": {
+      "enum": [
+        "BOUGHT_TOGETHER"
+      ],
+      "enumNames": [
+        "admin/strategy.bought-together.label"
+      ]
+    },
+    "OrderBy": {
+      "enum": [
+        "click",
+        "order",
+        "price",
+        "discount",
+        "release"
       ]
     }
   }

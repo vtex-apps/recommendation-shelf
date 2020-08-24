@@ -1,26 +1,23 @@
 {
-  "shelf.recommendation": {
-    "required": ["product-summary"],
-    "component": "RecommendationShelf",
-    "preview": {
-      "type": "grid",
-      "height": 550
-    },
-    "content": {
-      "properties": {
-        "productList": { "$ref": "app:vtex.shelf#/definitions/ProductList" }
-      }
-    }
-  },
   "recommendation-shelf": {
-    "required": ["product-summary"],
     "component": "RecommendationShelf",
-    "preview": {
-      "type": "grid",
-      "height": 550
-    },
+    "required": ["default-shelf"],
     "content": {
       "$ref": "#/definitions/RecommendationShelf"
+    }
+  },
+  "recommendation-refresh": {
+    "component": "RecommendationRefresh",
+    "required": ["refresh-shelf"],
+    "content": {
+      "$ref": "#/definitions/RecommendationRefresh"
+    }
+  },
+  "recommendation-buy-together": {
+    "component": "RecommendationBuyTogether",
+    "required": ["buy-together"],
+    "content": {
+      "$ref": "#/definitions/RecommendationBuyTogether"
     }
   }
 }

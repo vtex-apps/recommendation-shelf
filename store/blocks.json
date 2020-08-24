@@ -1,0 +1,11 @@
+{
+  "recommendation-shelf": {
+    "blocks": ["default-shelf"]
+  },
+  "recommendation-refresh": {
+    "blocks": ["refresh-shelf"]
+  },
+  "recommendation-buy-together": {
+    "blocks": ["buy-together"]
+  }
+}

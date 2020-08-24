@@ -1,11 +1,12 @@
 {
   "extends": "@vtex/tsconfig",
   "compilerOptions": {
+    "lib": ["dom"],
     "noEmitOnError": false,
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es2017",
-    "types": ["node", "jest", "graphql"]
+    "types": ["node", "jest"]
   },
   "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }

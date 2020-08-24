@@ -1,5 +1,22 @@
 {
-    "admin/editor.recommendationShelf.strategy.title": "Estratégia",
-    "admin/editor.recommendationShelf.secondaryStrategy.title": "Estrategia Secundaria",
-    "admin/editor.recommendationShelf.secondaryTitleText.title": "Título Secundario"
+  "admin/recommendation-shelf.title": "Escaparate con recomendación",
+  "admin/recommendation-refresh-shelf.title": "Escaparate actualizable con recomendación",
+  "admin/recommendation-buy-together.title": "Comprar juntos com recomendação",
+  "admin/shelf.title": "Título",
+  "admin/recommendation-shelf.strategy.title": "Estratégia",
+  "admin/recommendation-shelf.secondaryStrategy.title": "Estrategia Secundaria",
+  "admin/recommendation-shelf.secondaryTitleText.title": "Título Secundario",
+  "admin/refresh-shelf.base-product.label": "Título del producto base",
+  "admin/refresh-shelf.suggested-products.label": "Título de productos sugeridos",
+  "admin/strategy.best-sellers.label": "Más vendidos",
+  "admin/strategy.most-popular.label": "Más populares",
+  "admin/strategy.price-reduction.label": "Reducción de precio",
+  "admin/strategy.new-releases.label": "Lanzamientos",
+  "admin/strategy.navigation-history.label": "Historial de navegación",
+  "admin/strategy.recommendation-history.label": "Historial de recomendaciones",
+  "admin/strategy.similar-products.label": "Productos similares",
+  "admin/strategy.best-choice.label": "Mejor opción",
+  "admin/strategy.bought-together.label": "Comprados juntos",
+  "admin/strategy.cart-history.label": "Historial del carrito",
+  "admin/strategy.order-history.label": "Historial de pedidos"
 }
