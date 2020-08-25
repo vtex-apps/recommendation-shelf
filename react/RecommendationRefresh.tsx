@@ -4,7 +4,7 @@ import { ExtensionPoint } from 'vtex.render-runtime'
 interface Props {
   strategy?: string
   secondaryStrategy?: string
-  recommendation?: Recommendation
+  recommendation?: RecommendationOptions
 }
 
 const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({

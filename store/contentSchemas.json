@@ -12,34 +12,7 @@
           "$ref": "#/definitions/Strategy"
         },
         "recommendation": {
-          "title": "Recommendation Options",
-          "properties": {
-            "count": {
-              "properties": {
-                "minimum": {
-                  "title": "Min items",
-                  "type": "number"
-                },
-                "recommendations": {
-                  "type": "number",
-                  "title": "Max items"
-                }
-              }
-            },
-            "sort": {
-              "title": "Ordenation",
-              "properties": {
-                "field": {
-                  "title": "Order by",
-                  "$ref": "#/definitions/OrderBy"
-                },
-                "desc": {
-                  "title": "Descendent",
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/RecommendationOptions"
         }
       }
     },
@@ -55,34 +28,7 @@
           "$ref": "#/definitions/RefreshShelfStrategy"
         },
         "recommendation": {
-          "title": "Recommendation Options",
-          "properties": {
-            "count": {
-              "properties": {
-                "minimum": {
-                  "title": "Min items",
-                  "type": "number"
-                },
-                "recommendations": {
-                  "type": "number",
-                  "title": "Max items"
-                }
-              }
-            },
-            "sort": {
-              "title": "Ordenation",
-              "properties": {
-                "field": {
-                  "title": "Order by",
-                  "$ref": "#/definitions/OrderBy"
-                },
-                "desc": {
-                  "title": "Descendent",
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/RecommendationOptions"
         }
       }
     },
@@ -94,34 +40,7 @@
           "$ref": "#/definitions/BuyTogetherStrategy"
         },
         "recommendation": {
-          "title": "Recommendation Options",
-          "properties": {
-            "count": {
-              "properties": {
-                "minimum": {
-                  "title": "Min items",
-                  "type": "number"
-                },
-                "recommendations": {
-                  "type": "number",
-                  "title": "Max items"
-                }
-              }
-            },
-            "sort": {
-              "title": "Ordenation",
-              "properties": {
-                "field": {
-                  "title": "Order by",
-                  "$ref": "#/definitions/OrderBy"
-                },
-                "desc": {
-                  "title": "Descendent",
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/RecommendationOptions"
         }
       }
     },
@@ -169,6 +88,63 @@
         "admin/strategy.bought-together.label"
       ]
     },
+    "RecommendationOptions": {
+      "title": "admin/recommendation-options.label",
+      "properties": {
+        "count": {
+          "properties": {
+            "minimum": {
+              "title": "admin/recommendation-options.count.min-items",
+              "type": "number"
+            },
+            "recommendations": {
+              "type": "number",
+              "title": "admin/recommendation-options.count.recommendation-items"
+            }
+          }
+        },
+        "sort": {
+          "title": "admin/recommendation-options.sort.label",
+          "type": "array",
+          "items": {
+            "title": "admin/recommendation-options.sort.label",
+            "type": "object",
+            "properties": {
+              "field": {
+                "title": "admin/recommendation-options.sort.order-by.label",
+                "$ref": "#/definitions/OrderBy"
+              },
+              "desc": {
+                "title": "admin/recommendation-options.sort.desc.label",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "filter": {
+          "title": "admin/recommendation-options.filters.label",
+          "type": "array",
+          "items": {
+            "title": "admin/recommendation-options.filters.item.label",
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "admin/recommendation-options.filters.type.label",
+                "$ref": "#/definitions/FilterType"
+              },
+              "field": {
+                "title": "admin/recommendation-options.filters.field.label",
+                "$ref": "#/definitions/FilterField"
+              },
+              "value": {
+                "title": "admin/recommendation-options.filters.name.label",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "OrderBy": {
       "enum": [
         "click",
@@ -176,6 +152,37 @@
         "price",
         "discount",
         "release"
+      ],
+      "enumNames": [
+        "admin/order-by.clicks.label",
+        "admin/order-by.orders.label",
+        "admin/order-by.price.label",
+        "admin/order-by.discount.label",
+        "admin/order-by.release.label"
+      ]
+    },
+    "FilterType": {
+      "enum": [
+        "keep",
+        "remove"
+      ],
+      "enumNames": [
+        "admin/recommendation-options.filters.type.keep.label",
+        "admin/recommendation-options.filters.type.remove.label"
+      ]
+    },
+    "FilterField": {
+      "enum": [
+        "trade policy",
+        "seller",
+        "brand",
+        "category"
+      ],
+      "enumNames": [
+        "admin/recommendation-options.filters.field.trade-policy.label",
+        "admin/recommendation-options.filters.field.seller.label",
+        "admin/recommendation-options.filters.field.brand.label",
+        "admin/recommendation-options.filters.field.category.label"
       ]
     }
   }
