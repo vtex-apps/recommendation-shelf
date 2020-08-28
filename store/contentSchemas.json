@@ -69,11 +69,7 @@
       ]
     },
     "RefreshShelfStrategy": {
-      "enum": [
-        "RECOMMENDATION_HISTORY",
-        "CART_HISTORY",
-        "ORDER_HISTORY"
-      ],
+      "enum": ["RECOMMENDATION_HISTORY", "CART_HISTORY", "ORDER_HISTORY"],
       "enumNames": [
         "admin/strategy.recommendation-history.label",
         "admin/strategy.cart-history.label",
@@ -81,12 +77,8 @@
       ]
     },
     "BuyTogetherStrategy": {
-      "enum": [
-        "BOUGHT_TOGETHER"
-      ],
-      "enumNames": [
-        "admin/strategy.bought-together.label"
-      ]
+      "enum": ["BOUGHT_TOGETHER"],
+      "enumNames": ["admin/strategy.bought-together.label"]
     },
     "RecommendationOptions": {
       "title": "admin/recommendation-options.label",
@@ -95,11 +87,13 @@
           "properties": {
             "minimum": {
               "title": "admin/recommendation-options.count.min-items",
-              "type": "number"
+              "type": "number",
+              "default": 5
             },
             "recommendations": {
               "type": "number",
-              "title": "admin/recommendation-options.count.recommendation-items"
+              "title": "admin/recommendation-options.count.recommendation-items",
+              "default": 10
             }
           }
         },
@@ -116,10 +110,12 @@
               },
               "desc": {
                 "title": "admin/recommendation-options.sort.desc.label",
-                "type": "boolean"
+                "type": "boolean",
+                "default": false
               }
             }
-          }
+          },
+          "default": []
         },
         "filter": {
           "title": "admin/recommendation-options.filters.label",
@@ -146,13 +142,7 @@
       }
     },
     "OrderBy": {
-      "enum": [
-        "click",
-        "order",
-        "price",
-        "discount",
-        "release"
-      ],
+      "enum": ["click", "order", "price", "discount", "release"],
       "enumNames": [
         "admin/order-by.clicks.label",
         "admin/order-by.orders.label",
@@ -162,22 +152,14 @@
       ]
     },
     "FilterType": {
-      "enum": [
-        "keep",
-        "remove"
-      ],
+      "enum": ["keep", "remove"],
       "enumNames": [
         "admin/recommendation-options.filters.type.keep.label",
         "admin/recommendation-options.filters.type.remove.label"
       ]
     },
     "FilterField": {
-      "enum": [
-        "trade policy",
-        "seller",
-        "brand",
-        "category"
-      ],
+      "enum": ["trade policy", "seller", "brand", "category"],
       "enumNames": [
         "admin/recommendation-options.filters.field.trade-policy.label",
         "admin/recommendation-options.filters.field.seller.label",
