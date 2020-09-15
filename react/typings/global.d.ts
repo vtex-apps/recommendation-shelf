@@ -29,15 +29,13 @@ declare global {
   }
 
   interface Filter {
-    type: FilterType
-    field: FilterField
+    name: FilterField
+    mode: FilterType
     value: string
   }
 
   interface RecommendationOptions {
     count?: Count
-    sort?: Sort[]
-    filter?: Filter[]
   }
 
   enum RequestInputType {
@@ -53,7 +51,124 @@ declare global {
   }
 
   interface InputRecommendation {
-    type: RequestInputType
+    type: {
+      primary: RequestInputType
+    }
     values: string[]
+  }
+
+  interface Recommendation {
+    base: Product[]
+    recommended: Product[]
+  }
+
+  interface RecommendationResponse {
+    recommendations: Recommendation[]
+  }
+
+  interface RecommendationAPI {
+    variantId: string
+    response: RecommendationResponse
+  }
+
+  interface Image {
+    imageId?: string
+    imageLabel: string
+    imageTag?: string
+    imageUrl: string
+    imageText?: string
+  }
+
+  interface Property {
+    name: string
+    values: string[]
+  }
+
+  interface Reference {
+    Key: string
+    Value: string
+  }
+
+  interface Installment {
+    InterestRate: number
+    Name: string
+    NumberOfInstallments: number
+    TotalValuePlusInterestRate: number
+    Value: number
+  }
+
+  interface CommertialOffer {
+    AvailableQuantity: number
+    Installments: Installment[]
+    ListPrice: number
+    Price: number
+    PriceWithoutDiscount: number
+    Tax: number
+    taxPercentage: number
+  }
+
+  interface Seller {
+    addToCartLink?: string
+    commertialOffer: CommertialOffer
+    sellerId: string
+    sellerDefault?: boolean
+    sellerName?: string
+  }
+
+  interface SKU {
+    itemId: string
+    name: string
+    nameComplete?: string
+    complementName?: string
+    ean?: string
+    referenceId: Reference[]
+    measurementUnit: string
+    unitMultiplier?: number
+    images: Image[]
+    sellers: Seller[]
+    seller?: Seller
+    variations: Property[]
+  }
+
+  interface ProductPriceRange {
+    sellingPrice: PriceRange
+    listPrice: PriceRange
+  }
+
+  interface PriceRange {
+    highPrice: number
+    lowPrice: number
+  }
+
+  interface SpecificationGroupProperty {
+    originalName: string
+    name: string
+    values: string[]
+  }
+
+  interface SpecificationGroup {
+    name?: string
+    originalName?: string
+    specifications?: SpecificationGroupProperty[]
+  }
+
+  interface Product {
+    brand: string
+    brandId: number
+    cacheId: string
+    categories: string[]
+    categoryTree?: { slug: string }[]
+    categoriesIds?: string[]
+    description?: string
+    items: SKU[]
+    productId: string
+    productName: string
+    priceRange: ProductPriceRange
+    link: string
+    linkText: string
+    productReference: string
+    properties: string[]
+    sku?: SKU
+    specificationGroups?: SpecificationGroup[]
   }
 }

@@ -11,9 +11,7 @@
           "title": "admin/recommendation-shelf.secondaryStrategy.title",
           "$ref": "#/definitions/Strategy"
         },
-        "recommendation": {
-          "$ref": "#/definitions/RecommendationOptions"
-        }
+        "$ref": "#/definitions/RecommendationDetails"
       }
     },
     "RecommendationRefresh": {
@@ -27,9 +25,7 @@
           "title": "admin/recommendation-shelf.secondaryStrategy.title",
           "$ref": "#/definitions/RefreshShelfStrategy"
         },
-        "recommendation": {
-          "$ref": "#/definitions/RecommendationOptions"
-        }
+        "$ref": "#/definitions/RecommendationDetails"
       }
     },
     "RecommendationBuyTogether": {
@@ -39,9 +35,7 @@
           "title": "admin/recommendation-shelf.strategy.title",
           "$ref": "#/definitions/BuyTogetherStrategy"
         },
-        "recommendation": {
-          "$ref": "#/definitions/RecommendationOptions"
-        }
+        "$ref": "#/definitions/RecommendationDetails"
       }
     },
     "Strategy": {
@@ -66,7 +60,8 @@
         "admin/strategy.similar-products.label",
         "admin/strategy.best-choice.label",
         "admin/strategy.bought-together.label"
-      ]
+      ],
+      "default": "BEST_SELLERS"
     },
     "RefreshShelfStrategy": {
       "enum": ["RECOMMENDATION_HISTORY", "CART_HISTORY", "ORDER_HISTORY"],
@@ -74,70 +69,76 @@
         "admin/strategy.recommendation-history.label",
         "admin/strategy.cart-history.label",
         "admin/strategy.order-history.label"
-      ]
+      ],
+      "default": "RECOMMENDATION_HISTORY"
     },
     "BuyTogetherStrategy": {
       "enum": ["BOUGHT_TOGETHER"],
-      "enumNames": ["admin/strategy.bought-together.label"]
+      "enumNames": ["admin/strategy.bought-together.label"],
+      "default": "BOUGHT_TOGETHER"
     },
-    "RecommendationOptions": {
-      "title": "admin/recommendation-options.label",
-      "properties": {
-        "count": {
-          "properties": {
-            "minimum": {
-              "title": "admin/recommendation-options.count.min-items",
-              "type": "number",
-              "default": 5
-            },
-            "recommendations": {
-              "type": "number",
-              "title": "admin/recommendation-options.count.recommendation-items",
-              "default": 10
+    "RecommendationDetails": {
+      "recommendation": {
+        "title": "admin/recommendation-options.label",
+        "properties": {
+          "count": {
+            "properties": {
+              "minimum": {
+                "title": "admin/recommendation-options.count.min-items",
+                "type": "number",
+                "default": 5
+              },
+              "recommendations": {
+                "type": "number",
+                "title": "admin/recommendation-options.count.recommendation-items",
+                "default": 20
+              }
             }
           }
         },
-        "sort": {
+        "default": { "count": { "minimum": 5, "recommendations": 20 } }
+      },
+      "sort": {
+        "title": "admin/recommendation-options.sort.label",
+        "type": "array",
+        "items": {
           "title": "admin/recommendation-options.sort.label",
-          "type": "array",
-          "items": {
-            "title": "admin/recommendation-options.sort.label",
-            "type": "object",
-            "properties": {
-              "field": {
-                "title": "admin/recommendation-options.sort.order-by.label",
-                "$ref": "#/definitions/OrderBy"
-              },
-              "desc": {
-                "title": "admin/recommendation-options.sort.desc.label",
-                "type": "boolean",
-                "default": false
-              }
+          "type": "object",
+          "properties": {
+            "field": {
+              "title": "admin/recommendation-options.sort.order-by.label",
+              "$ref": "#/definitions/OrderBy"
+            },
+            "desc": {
+              "title": "admin/recommendation-options.sort.desc.label",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "default": []
+      },
+      "filter": {
+        "title": "admin/recommendation-options.filters.label",
+        "type": "array",
+        "items": {
+          "title": "admin/recommendation-options.filters.item.label",
+          "type": "object",
+          "properties": {
+            "type": {
+              "title": "admin/recommendation-options.filters.type.label",
+              "$ref": "#/definitions/FilterType"
+            },
+            "field": {
+              "title": "admin/recommendation-options.filters.field.label",
+              "$ref": "#/definitions/FilterField"
+            },
+            "value": {
+              "title": "admin/recommendation-options.filters.name.label",
+              "type": "string"
             }
           },
-          "default": []
-        },
-        "filter": {
-          "title": "admin/recommendation-options.filters.label",
-          "type": "array",
-          "items": {
-            "title": "admin/recommendation-options.filters.item.label",
-            "type": "object",
-            "properties": {
-              "type": {
-                "title": "admin/recommendation-options.filters.type.label",
-                "$ref": "#/definitions/FilterType"
-              },
-              "field": {
-                "title": "admin/recommendation-options.filters.field.label",
-                "$ref": "#/definitions/FilterField"
-              },
-              "value": {
-                "title": "admin/recommendation-options.filters.name.label",
-                "type": "string"
-              }
-            }
-          }
+          "required": ["type", "field", "value"]
         }
       }
     },

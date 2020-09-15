@@ -2,21 +2,40 @@ import { useQuery } from 'react-apollo'
 
 import recommendationQuery from '../graphql/recommendation.gql'
 
-// test Data
+enum FilterField {
+  TRADEPOLICY = 'trade policy',
+  SELLER = 'seller',
+  BRAND = 'brand',
+  CATEGORY = 'category',
+}
+
+enum FilterType {
+  KEEP = 'keep',
+  REMOVE = 'remove',
+}
+
 function useRecommendation<D = Data>(
   strategy: string,
   input: InputRecommendation,
   recommendation: RecommendationOptions
 ) {
+  // get trade policy
+  const filter = [
+    {
+      name: FilterField.TRADEPOLICY,
+      mode: FilterType.KEEP,
+      value: '1',
+    },
+  ]
+
   // get sessionId
   const variables = {
     input: {
-      sessionId: '1',
-      request: {
-        strategy,
-        input,
-        recommendation,
-      },
+      sessionId: 'session_123',
+      strategy,
+      input,
+      recommendation,
+      filter,
     },
   }
   const { error, data } = useQuery<D, Variables & {}>(recommendationQuery, {
@@ -26,20 +45,6 @@ function useRecommendation<D = Data>(
   return { error, data }
 }
 
-// create Product type
-interface Recommendation {
-  base: any[]
-  recommended: any[]
-}
-
-interface RecommendationResponse {
-  recommendations: Recommendation[]
-}
-
-interface RecommendationAPI {
-  response: RecommendationResponse
-}
-
 interface Data {
   recommendation: RecommendationAPI
 }
@@ -47,11 +52,11 @@ interface Data {
 interface Variables {
   input: {
     sessionId: string
-    request: {
-      strategy: string
-      input: InputRecommendation
-      recommendation: RecommendationOptions
-    }
+    strategy: string
+    input: InputRecommendation
+    recommendation: RecommendationOptions
+    sort?: Sort[]
+    filter?: Filter[]
   }
 }
 
