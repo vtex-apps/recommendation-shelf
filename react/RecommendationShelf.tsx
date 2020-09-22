@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
+import { useProduct } from 'vtex.product-context'
+
 import useRecommendation from './hooks/useRecommendation'
+import { useAnonymous } from './utils/useAnonymous'
+import { buildInputByStrategy } from './utils/buildInput'
 
 interface Props {
   strategy: string
@@ -8,31 +13,45 @@ interface Props {
   recommendation: RecommendationOptions
 }
 
-enum RequestInputType {
-  USER = 'USER',
-  CATEGORY = 'CATEGORY',
-  PRODUCT = 'PRODUCT',
-  TAG_GROUP = 'TAG_GROUP',
-  CAMPAIGN = 'CAMPAIGN',
-  GROUP = 'GROUP',
-  ANONYMOUS_USER = 'ANONYMOUS_USER',
-  BRAND = 'BRAND',
-  STORE = 'STORE',
-}
-
 const Shelf: StorefrontFunctionComponent<Props> = ({
   strategy,
   // secondaryStrategy,
   recommendation,
 }) => {
+  const { account } = useRuntime()
+  const { anonymous } = useAnonymous(account)
+  const { searchQuery } = useSearchPage()
+  const productContext = useProduct()
   const [products, setProducts] = useState<Product[]>([])
-  // resolver o input
-  const input = {
-    type: { primary: RequestInputType.PRODUCT },
-    values: ['903782'],
+
+  let productIds: string[] | undefined = undefined
+  let categories: string[] | undefined = undefined
+
+  if (productContext) {
+    const { product } = productContext
+    if (product) {
+      productIds = [product.productId]
+    }
   }
 
-  const { error, data } = useRecommendation(strategy, input, recommendation)
+  if (searchQuery) {
+    const category = searchQuery?.facets?.categoriesTrees?.[0]
+    const selected = category?.children.find((child: any) => child.selected)
+    categories = [selected ? selected.id : category.id]
+
+    productIds = searchQuery?.products
+      ?.slice(0, 5)
+      .map((product: Product) => product.productId)
+  }
+
+  const input = buildInputByStrategy(
+    strategy,
+    productIds,
+    categories,
+    anonymous
+  )
+
+  const { data } = useRecommendation(strategy, input, recommendation)
 
   useEffect(() => {
     const recommended =
@@ -42,8 +61,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [data?.recommendation.response.recommendations])
 
-  // eslint-disable-next-line no-console
-  console.log(error, data)
   return <ExtensionPoint id="default-shelf" products={products} />
 }
 

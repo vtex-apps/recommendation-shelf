@@ -5,4 +5,5 @@ declare module 'vtex.render-runtime' {
     navigate: (options: NavigationOptions) => void
   }
   export const ExtensionPoint
+  export const useSSR
 }

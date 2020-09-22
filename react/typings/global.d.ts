@@ -17,20 +17,20 @@ declare global {
   }
 
   enum FilterField {
-    TRADEPOLICY = 'trade policy',
+    TRADEPOLICY = 'trade_policy',
     SELLER = 'seller',
     BRAND = 'brand',
     CATEGORY = 'category',
   }
 
   enum FilterType {
-    KEEP = 'keep',
+    ONLY = 'only',
     REMOVE = 'remove',
   }
 
   interface Filter {
-    name: FilterField
-    mode: FilterType
+    field: FilterField
+    condition: FilterType
     value: string
   }
 

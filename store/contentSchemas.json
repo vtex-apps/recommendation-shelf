@@ -125,7 +125,7 @@
           "title": "admin/recommendation-options.filters.item.label",
           "type": "object",
           "properties": {
-            "type": {
+            "condition": {
               "title": "admin/recommendation-options.filters.type.label",
               "$ref": "#/definitions/FilterType"
             },
@@ -160,7 +160,7 @@
       ]
     },
     "FilterField": {
-      "enum": ["trade policy", "seller", "brand", "category"],
+      "enum": ["trade_policy", "seller", "brand", "category"],
       "enumNames": [
         "admin/recommendation-options.filters.field.trade-policy.label",
         "admin/recommendation-options.filters.field.seller.label",
