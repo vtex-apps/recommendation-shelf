@@ -69,8 +69,10 @@ query recommendation($input: RecommendationInput) {
           productReference
           specificationGroups {
             name
+            originalName
             specifications {
               name
+              originalName
               values
             }
           }
@@ -142,8 +144,10 @@ query recommendation($input: RecommendationInput) {
           productReference
           specificationGroups {
             name
+            originalName
             specifications {
               name
+              originalName
               values
             }
           }

@@ -23,7 +23,7 @@ export const buildInputByStrategy = (
   productIds?: string[],
   categories?: string[],
   anonymousId?: string
-) => {
+): InputRecommendation => {
   if (categoryStrategies.includes(strategy)) {
     if (categories) {
       return {
