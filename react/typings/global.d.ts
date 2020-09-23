@@ -54,7 +54,7 @@ declare global {
     type: {
       primary: RequestInputType
     }
-    values: string[]
+    values?: string[]
   }
 
   interface Recommendation {

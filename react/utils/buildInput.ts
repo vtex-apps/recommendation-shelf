@@ -31,9 +31,14 @@ export const buildInputByStrategy = (
         values: categories,
       }
     }
+    if (productIds) {
+      return {
+        type: { primary: RequestInputType.PRODUCT },
+        values: productIds,
+      }
+    }
     return {
-      type: { primary: RequestInputType.PRODUCT },
-      values: productIds ?? [],
+      type: { primary: RequestInputType.STORE },
     }
   }
 

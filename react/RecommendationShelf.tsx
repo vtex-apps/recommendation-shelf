@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
@@ -61,7 +61,11 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [data?.recommendation.response.recommendations])
 
-  return <ExtensionPoint id="default-shelf" products={products} />
+  return products && products.length > 0 ? (
+    <ExtensionPoint id="default-shelf" products={products} />
+  ) : (
+    <Fragment />
+  )
 }
 
 Shelf.schema = {
