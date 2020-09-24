@@ -34,9 +34,13 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   }
 
   if (searchQuery) {
-    const category = searchQuery?.facets?.categoriesTrees?.[0]
-    const selected = category?.children.find((child: any) => child.selected)
-    categories = [selected ? selected.id : category.id]
+    const category: FacetValue | undefined =
+      searchQuery?.facets?.categoriesTrees?.[0]
+
+    const selected = category?.children?.find(
+      (child: FacetValue) => child.selected
+    )
+    categories = category ? [selected ? selected.id : category.id] : undefined
 
     productIds = searchQuery?.products
       ?.slice(0, 5)

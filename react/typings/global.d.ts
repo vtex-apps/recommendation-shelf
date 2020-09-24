@@ -171,4 +171,18 @@ declare global {
     sku?: SKU
     specificationGroups?: SpecificationGroup[]
   }
+
+  interface FacetValue {
+    children?: FacetValue[]
+    href?: string
+    id: string
+    key?: string
+    link?: string
+    linkEncoded?: string
+    map: string
+    name: string
+    quantity?: number
+    selected: boolean
+    value: string
+  }
 }

@@ -6203,9 +6203,9 @@ verror@1.10.0:
   version "0.9.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.0/public/@types/vtex.product-context#1f871c3e155d4ec7f71ee03765bcc85135765fe5"
 
-"vtex.recommendation-graphql@https://rec--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-graphql@0.2.2-beta.0+build1600717195/public/_types/react":
+"vtex.recommendation-graphql@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-graphql@0.3.0/public/_types/react":
   version "0.0.0"
-  resolved "https://rec--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-graphql@0.2.2-beta.0+build1600717195/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-graphql@0.3.0/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
 
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.121.0/public/@types/vtex.render-runtime":
   version "8.121.0"
@@ -6215,9 +6215,9 @@ verror@1.10.0:
   version "0.0.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.0.3/public/_types/react#fa7a0347e046eab3dd768998fc9252b2c0dd5aef"
 
-"vtex.shelf-components@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.4.0/public/@types/vtex.shelf-components":
+"vtex.shelf-components@https://rec--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.shelf-components@0.4.0+build1600889908/public/@types/vtex.shelf-components":
   version "0.4.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.4.0/public/@types/vtex.shelf-components#2def596fac6e5724ef376c7c5f29e2794ea5ba99"
+  resolved "https://rec--storecomponents.myvtex.com/_v/private/typings/linked/v1/vtex.shelf-components@0.4.0+build1600889908/public/@types/vtex.shelf-components#b1e2d57ac85fb50ef204729e2c12b6dd95a26ed5"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
