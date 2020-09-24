@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useProduct } from 'vtex.product-context'
 import { buildInputByStrategy } from './utils/buildInput'
@@ -14,7 +14,6 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
   recommendation,
 }) => {
   const productContext = useProduct()
-  const [recommendations, setRecommendations] = useState<Product[][]>()
   const [productIds, setProductIds] = useState<string[]>()
 
   useEffect(() => {
@@ -28,17 +27,21 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
 
   const input = buildInputByStrategy(strategy, productIds, undefined, undefined)
 
-  const { data } = useRecommendation(strategy, input, recommendation)
+  const { data, error } = useRecommendation(strategy, input, recommendation)
 
-  useEffect(() => {
+  const recommendations = useMemo(() => {
+    if (error) {
+      return undefined
+    }
     const response = data?.recommendation?.response?.recommendations
     if (response) {
       const recommendedLists = response.map(
         (recommendation: Recommendation) => recommendation.recommended
       )
-      setRecommendations(recommendedLists)
+      return recommendedLists
     }
-  }, [data])
+    return undefined
+  }, [error, data])
 
   return recommendations && recommendations.length > 0 ? (
     <ExtensionPoint id="buy-together" suggestedProducts={recommendations} />

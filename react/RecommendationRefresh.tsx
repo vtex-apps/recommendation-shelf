@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 
 import { useAnonymous } from './utils/useAnonymous'
@@ -18,17 +18,20 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
 }) => {
   const { account } = useRuntime()
   const { anonymous } = useAnonymous(account)
-  const [recommendations, setRecommendations] = useState<Recommendation[]>()
   const input = buildInputByStrategy(strategy, undefined, undefined, anonymous)
 
-  const { data } = useRecommendation(strategy, input, recommendation)
+  const { data, error } = useRecommendation(strategy, input, recommendation)
 
-  useEffect(() => {
+  const recommendations = useMemo(() => {
+    if (error) {
+      return undefined
+    }
     const recommendations = data?.recommendation?.response?.recommendations
     if (recommendations) {
-      setRecommendations(recommendations)
+      return recommendations
     }
-  }, [data])
+    return undefined
+  }, [error, data])
 
   return recommendations ? (
     <ExtensionPoint id="refresh-shelf" recommendedLists={recommendations} />

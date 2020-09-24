@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
@@ -22,7 +22,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   const { anonymous } = useAnonymous(account)
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
-  const [products, setProducts] = useState<Product[]>([])
 
   let productIds: string[] | undefined = undefined
   let categories: string[] | undefined = undefined
@@ -51,15 +50,19 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     anonymous
   )
 
-  const { data } = useRecommendation(strategy, input, recommendation)
+  const { data, error } = useRecommendation(strategy, input, recommendation)
 
-  useEffect(() => {
+  const products = useMemo(() => {
+    if (error) {
+      return undefined
+    }
     const recommended =
       data?.recommendation?.response?.recommendations?.[0].recommended
-    if (recommended && recommended.length > 1) {
-      setProducts(recommended)
+    if (recommended && recommended.length > 0) {
+      return recommended
     }
-  }, [data?.recommendation.response.recommendations])
+    return undefined
+  }, [data?.recommendation.response.recommendations, error])
 
   return products && products.length > 0 ? (
     <ExtensionPoint id="default-shelf" products={products} />
