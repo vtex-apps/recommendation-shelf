@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useRuntime } from 'vtex.render-runtime'
 
@@ -6,27 +7,17 @@ import { buildInputByStrategy } from '../utils/buildInput'
 import { useAnonymous } from '../utils/useAnonymous'
 import { useSession } from '../utils/useSession'
 
-enum FilterField {
-  TRADEPOLICY = 'trade_policy',
-  SELLER = 'seller',
-  BRAND = 'brand',
-  CATEGORY = 'category',
-}
-
-enum FilterType {
-  ONLY = 'only',
-  REMOVE = 'remove',
-}
-
 function useRecommendation<D = Data>(
   strategy: string,
   recommendation: RecommendationOptions,
   productIds?: string[],
-  categories?: string[]
+  categories?: string[],
+  secondaryStrategy?: string
 ) {
   const { account } = useRuntime()
   const { sessionId } = useSession(account)
   const { anonymous } = useAnonymous(account)
+  const [useSecondary, setUseSecondary] = useState(false)
 
   const input = buildInputByStrategy(
     strategy,
@@ -35,31 +26,51 @@ function useRecommendation<D = Data>(
     anonymous
   )
 
-  // get trade policy
-  const filter = [
-    {
-      field: FilterField.TRADEPOLICY,
-      condition: FilterType.ONLY,
-      value: '1',
-    },
-  ]
-
   const variables = {
     input: {
       sessionId: sessionId ?? '',
       strategy,
       input,
       recommendation,
-      filter,
     },
   }
+
+  const secondaryVariables = {
+    input: {
+      sessionId: sessionId ?? '',
+      strategy: secondaryStrategy ?? '',
+      input,
+      recommendation,
+    },
+  }
+
   const { error, data } = useQuery<D, Variables & {}>(recommendationQuery, {
     variables,
     notifyOnNetworkStatusChange: true,
     skip: !sessionId,
   })
 
-  return { error, data }
+  const { error: secondaryError, data: secondaryData } = useQuery<
+    D,
+    Variables & {}
+  >(recommendationQuery, {
+    variables: secondaryVariables,
+    notifyOnNetworkStatusChange: true,
+    skip: !sessionId || !useSecondary,
+  })
+
+  useEffect(() => {
+    if (error && secondaryStrategy) {
+      setUseSecondary(true)
+    } else {
+      setUseSecondary(false)
+    }
+  }, [error, secondaryStrategy])
+
+  return {
+    error: useSecondary ? secondaryError : error,
+    data: useSecondary ? secondaryData : data,
+  }
 }
 
 interface Data {

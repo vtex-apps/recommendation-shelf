@@ -27,8 +27,7 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
   const { data, error } = useRecommendation(
     strategy,
     recommendation,
-    productIds,
-    undefined
+    productIds
   )
 
   const recommendations = useMemo(() => {

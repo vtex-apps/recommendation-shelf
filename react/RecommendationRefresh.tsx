@@ -11,14 +11,15 @@ interface Props {
 
 const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
   strategy,
-  // secondaryStrategy,
+  secondaryStrategy,
   recommendation,
 }) => {
   const { data, error } = useRecommendation(
     strategy,
     recommendation,
     undefined,
-    undefined
+    undefined,
+    secondaryStrategy
   )
 
   const recommendations = useMemo(() => {

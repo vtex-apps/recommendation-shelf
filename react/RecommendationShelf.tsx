@@ -13,7 +13,7 @@ interface Props {
 
 const Shelf: StorefrontFunctionComponent<Props> = ({
   strategy,
-  // secondaryStrategy,
+  secondaryStrategy,
   recommendation,
 }) => {
   const { searchQuery } = useSearchPage()
@@ -47,7 +47,8 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     strategy,
     recommendation,
     productIds,
-    categories
+    categories,
+    secondaryStrategy
   )
 
   const products = useMemo(() => {
