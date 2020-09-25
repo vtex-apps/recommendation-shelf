@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- New recommendation components.
+
+### Changed
+
+- Use new recommendation API.
+
 ## [0.1.0] - 2020-07-31
 
 ### Added
