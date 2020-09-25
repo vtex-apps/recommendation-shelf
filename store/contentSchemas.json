@@ -97,49 +97,6 @@
           }
         },
         "default": { "count": { "minimum": 5, "recommendations": 20 } }
-      },
-      "sort": {
-        "title": "admin/recommendation-options.sort.label",
-        "type": "array",
-        "items": {
-          "title": "admin/recommendation-options.sort.label",
-          "type": "object",
-          "properties": {
-            "field": {
-              "title": "admin/recommendation-options.sort.order-by.label",
-              "$ref": "#/definitions/OrderBy"
-            },
-            "desc": {
-              "title": "admin/recommendation-options.sort.desc.label",
-              "type": "boolean",
-              "default": false
-            }
-          }
-        },
-        "default": []
-      },
-      "filter": {
-        "title": "admin/recommendation-options.filters.label",
-        "type": "array",
-        "items": {
-          "title": "admin/recommendation-options.filters.item.label",
-          "type": "object",
-          "properties": {
-            "condition": {
-              "title": "admin/recommendation-options.filters.type.label",
-              "$ref": "#/definitions/FilterType"
-            },
-            "field": {
-              "title": "admin/recommendation-options.filters.field.label",
-              "$ref": "#/definitions/FilterField"
-            },
-            "value": {
-              "title": "admin/recommendation-options.filters.name.label",
-              "type": "string"
-            }
-          },
-          "required": ["type", "field", "value"]
-        }
       }
     },
     "OrderBy": {

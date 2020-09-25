@@ -2,6 +2,8 @@ import { useQuery } from 'react-apollo'
 import { useRuntime } from 'vtex.render-runtime'
 
 import recommendationQuery from '../graphql/recommendation.gql'
+import { buildInputByStrategy } from '../utils/buildInput'
+import { useAnonymous } from '../utils/useAnonymous'
 import { useSession } from '../utils/useSession'
 
 enum FilterField {
@@ -18,11 +20,20 @@ enum FilterType {
 
 function useRecommendation<D = Data>(
   strategy: string,
-  input: InputRecommendation,
-  recommendation: RecommendationOptions
+  recommendation: RecommendationOptions,
+  productIds?: string[],
+  categories?: string[]
 ) {
   const { account } = useRuntime()
   const { sessionId } = useSession(account)
+  const { anonymous } = useAnonymous(account)
+
+  const input = buildInputByStrategy(
+    strategy,
+    productIds,
+    categories,
+    anonymous
+  )
 
   // get trade policy
   const filter = [

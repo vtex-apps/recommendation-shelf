@@ -1,11 +1,9 @@
 import React, { Fragment, useMemo } from 'react'
-import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import { ExtensionPoint } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
 
 import useRecommendation from './hooks/useRecommendation'
-import { useAnonymous } from './utils/useAnonymous'
-import { buildInputByStrategy } from './utils/buildInput'
 
 interface Props {
   strategy: string
@@ -18,8 +16,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   // secondaryStrategy,
   recommendation,
 }) => {
-  const { account } = useRuntime()
-  const { anonymous } = useAnonymous(account)
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
 
@@ -47,14 +43,12 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       .map((product: Product) => product.productId)
   }
 
-  const input = buildInputByStrategy(
+  const { data, error } = useRecommendation(
     strategy,
+    recommendation,
     productIds,
-    categories,
-    anonymous
+    categories
   )
-
-  const { data, error } = useRecommendation(strategy, input, recommendation)
 
   const products = useMemo(() => {
     if (error) {

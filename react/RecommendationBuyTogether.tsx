@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useProduct } from 'vtex.product-context'
-import { buildInputByStrategy } from './utils/buildInput'
 import useRecommendation from './hooks/useRecommendation'
 
 interface Props {
@@ -25,9 +24,12 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
     }
   }, [productContext])
 
-  const input = buildInputByStrategy(strategy, productIds, undefined, undefined)
-
-  const { data, error } = useRecommendation(strategy, input, recommendation)
+  const { data, error } = useRecommendation(
+    strategy,
+    recommendation,
+    productIds,
+    undefined
+  )
 
   const recommendations = useMemo(() => {
     if (error) {

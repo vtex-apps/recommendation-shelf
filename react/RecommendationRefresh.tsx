@@ -1,8 +1,6 @@
 import React, { Fragment, useMemo } from 'react'
-import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import { ExtensionPoint } from 'vtex.render-runtime'
 
-import { useAnonymous } from './utils/useAnonymous'
-import { buildInputByStrategy } from './utils/buildInput'
 import useRecommendation from './hooks/useRecommendation'
 
 interface Props {
@@ -16,11 +14,12 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
   // secondaryStrategy,
   recommendation,
 }) => {
-  const { account } = useRuntime()
-  const { anonymous } = useAnonymous(account)
-  const input = buildInputByStrategy(strategy, undefined, undefined, anonymous)
-
-  const { data, error } = useRecommendation(strategy, input, recommendation)
+  const { data, error } = useRecommendation(
+    strategy,
+    recommendation,
+    undefined,
+    undefined
+  )
 
   const recommendations = useMemo(() => {
     if (error) {
