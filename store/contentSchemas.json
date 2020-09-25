@@ -45,7 +45,6 @@
         "PRICE_REDUCTION",
         "NEW_RELEASES",
         "NAVIGATION_HISTORY",
-        "RECOMMENDATION_HISTORY",
         "SIMILAR_PRODUCTS",
         "BEST_CHOICE",
         "BOUGHT_TOGETHER"
@@ -56,7 +55,6 @@
         "admin/strategy.price-reduction.label",
         "admin/strategy.new-releases.label",
         "admin/strategy.navigation-history.label",
-        "admin/strategy.recommendation-history.label",
         "admin/strategy.similar-products.label",
         "admin/strategy.best-choice.label",
         "admin/strategy.bought-together.label"
