@@ -36,6 +36,8 @@ declare global {
 
   interface RecommendationOptions {
     count?: Count
+    sort?: Sort[]
+    filter?: Filter[]
   }
 
   enum RequestInputType {

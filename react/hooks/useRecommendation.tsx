@@ -83,8 +83,6 @@ interface Variables {
     strategy: string
     input: InputRecommendation
     recommendation: RecommendationOptions
-    sort?: Sort[]
-    filter?: Filter[]
   }
 }
 
