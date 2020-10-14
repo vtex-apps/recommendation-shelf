@@ -94,7 +94,7 @@ Now, you are able to use all blocks exported by the `recommendation-shelf` app. 
 
 Possible values for the `strategy` and `secondaryStrategy` props:
 
-| Possible strategy         | Description                                                                    |
+| Strategy         | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ | 
 | `BEST_SELLERS`            | Fetches and displays the best sellers.          |
 | `MOST_POPULAR`            | Fetches and displays the most popular products. | 
