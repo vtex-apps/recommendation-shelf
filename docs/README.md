@@ -8,7 +8,7 @@
 
 The Recommendation Shelf app provides shelf components that show a collection of products using recommendation strategies.
 
-+ ADD MEDIA
+![recommendation-shelf-buy-together](https://user-images.githubusercontent.com/52087100/96002543-9c07fe80-0e0f-11eb-94c3-cac778eaf21c.png)
 
 ## Prerequisites
 
@@ -16,17 +16,18 @@ Most of recommendation strategies use user navigation as input to properly work.
 
 Since the Recommendation Shelf app does not fetch user data for itself, you must install the **Biggy pixel app** in your VTEX account (responsible for tracking user natigation) in order to properly use the app's components in your store.
 
-1. Using your terminal, install the `biggy.pixel` app: 
+1. Notify the VTEX team about your interest in installing the Recommendations Shelf and Biggy Pixel apps. You should expect as response an App Key. Save it with you for the 6th step of this tutorial.
+2. Using your terminal, install the `biggy.pixel` app: 
 
 ```
 vtex install biggy.pixel
 ```
 
-2. Access your VTEX account admin.
-3. Using the admin's sidebar, access the **Apps** section and select the **Biggy Pixel** app.
-4. Click on **Settings**.
-5. In the `apiKey` field, enter the key provided by the VTEX team.
-6. Save your changes.
+3. Access your VTEX account admin.
+4. Using the admin's sidebar, access the **Apps** section and select the **Biggy Pixel** app.
+5. Click on **Settings**.
+6. In the `apiKey` field, enter the key provided by the VTEX team.
+7. Save your changes.
 
 ## Configuration
 
@@ -44,8 +45,8 @@ Now, you are able to use all blocks exported by the `recommendation-shelf` app. 
 | Block name     | Description                                     |
 | -------------- | ----------------------------------------------- |
 | `recommendation-shelf` | Displays a list of recommended products on any store page.   |
-| `recommendation-buy-together` | Displays a list of recommended products to buy only on the product details page. |
-| `recommendation-refresh` | Displays a list of recommended products in your store only based on the user history. | 
+| `recommendation-buy-together` | Displays a list of recommended products to buy together on the product details page. |
+| `recommendation-refresh` | Displays a list of recommended products in your store based on the user history. | 
 
 2. Add the `recommendation-shelf` in any store template desired, such as the `store.home`. For example:
 
@@ -166,6 +167,84 @@ Possible values for `strategy` and `secondaryStrategy` props:
 | ----------------- | --------- | -------------------------------------------------------------- | ------------- |
 | `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
 | `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+### Advanced configuration
+
+When declared in your store theme code, the `recommendation-shelf` and `recommendation-refresh` blocks will render a default component according to their individual purposes and what was previously defined in terms of style by the VTEX team.  
+
+However, it is possible to **customize** your `recommendation-shelf` and `recommendation-refresh` blocks, building their components by your own using its children blocks `default-shelf` and `refresh-shelf`, respectively. 
+
+Below, you can find an implementation example for each one of them. If needed, use the `default-shelf` and `refresh-shelf` blocks in your store theme code and make the desired changes according to your needs:
+
+```json
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-shelf",
+    ]
+  },
+  "flex-layout.row#recommendation-shelf": {
+    "children": ["recommendation-shelf"]
+  },
+  "recommendation-shelf": {
+    "blocks": ["default-shelf"]
+  },
+  "default-shelf": {
+    "blocks": ["list-context.product-list"]
+  },
+  "list-context.product-list": {
+    "blocks": ["product-summary.shelf#demo1"],
+    "children": ["slider-layout#demo-products"]
+  },
+  "product-summary.shelf#demo1": {
+    "children": [
+      "stack-layout#prodsum",
+      "product-summary-name",
+      "product-rating-inline",
+      "product-summary-space",
+      "product-summary-price",
+      "product-summary-buy-button"
+    ]
+  },
+  "slider-layout#demo-products": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 5,
+        "tablet": 3,
+        "phone": 1
+      },
+      "infinite": true,
+      "fullWidth": false
+    }
+  }
+```
+
+```json
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-refresh",
+    ]
+  },
+  "flex-layout.row#recommendation-refresh": {
+    "children": ["recommendation-refresh"]
+  },
+  "recommendation-refresh": {
+    "blocks": ["refresh-shelf"]
+  },
+  "refresh-shelf": {
+    "blocks": ["product-summary.shelf"]
+  },
+  "product-summary.shelf": {
+    "children": [
+      "stack-layout#prodsum",
+      "product-summary-name",
+      "product-rating-inline",
+      "product-summary-space",
+      "product-summary-price",
+      "add-to-cart-button"
+    ]
+  }
+```
+
 
 ## Customization
 
