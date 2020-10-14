@@ -1,84 +1,175 @@
-> :warning: :hammer:
-> 
-> **WIP**: Hello! Thanks for checking this app, it's currently under development and research by the VTEX Search & Personalization team,
-> and during this phase this app should be only installed on selected accounts, **if you're not in contact with the** 
-> **VTEX Personalization team, installing this app on your workspace will not do anything.**
-> 
-> _Additional information: biggy@vtex.com.br_
+📢 Use this project, [contribute](https://github.com/vtex-apps/recommendation-shelf) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
-# VTEX Recommendation Shelf
+# Recommendation Shelf
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-## Description
+The Recommendation Shelf app provides shelf components that show a collection of products using recommendation strategies.
 
-The Recommendation Shelf app is an app that provides store components that can show a collection of products using recommendation strategies.
-
-:loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-  - [Blocks API](#blocks-api)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
++ ADD MEDIA
 
 ## Prerequisites
 
-Most of the recommendations use user navigation as input. Therefore, it is necessary to install `biggy.pixel` to make the `recommendation-shelf` work properly. `biggy.pixel` is app used to track user navigation.
+Most of recommendation strategies use user navigation as input to properly work. 
 
-First, install the `biggy.pixel`  app:
+Since the Recommendation Shelf app does not fetch user data for itself, you must install the **Biggy pixel app** in your VTEX account (responsible for tracking user natigation) in order to properly use the app's components in your store.
+
+1. Using your terminal, install the `biggy.pixel` app: 
+
 ```
 vtex install biggy.pixel
 ```
-Then go to `/admin/apps` and select the *Biggy Pixel* app. In the `apiKey` field, insert the key provided by our team.
 
-## Usage
+2. Access your VTEX account admin.
+3. Using the admin's sidebar, access the **Apps** section and select the **Biggy Pixel** app.
+4. Click on **Settings**.
+5. In the `apiKey` field, enter the key provided by the VTEX team.
+6. Save your changes.
 
-This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
+## Configuration
 
-To use this app you need to import it in your dependencies on the `manifest.json`.
+1. Add the `recommendation-shelf` app to your theme's dependencies on the `manifest.json`:
 
-```json
+
+```diff
   "dependencies": {
-    "vtex.recommendation-shelf": "1.x"
++   "vtex.recommendation-shelf": "1.x"
   }
-```
+````
 
-Then, you can add the `recommendation-shelf` blocks into your app theme.
+Now, you are able to use all blocks exported by the `recommendation-shelf` app. Check out the full list below:
 
-Now, you can change the behavior of the shelf blocks. See the README for each component to understand how to configure it:
+| Block name     | Description                                     |
+| -------------- | ----------------------------------------------- |
+| `recommendation-shelf` | Displays a list of recommended products on any store page.   |
+| `recommendation-buy-together` | Displays a list of recommended products to buy only on the product details page. |
+| `recommendation-refresh` | Displays a list of recommended products in your store only based on the user history. | 
 
-- [Recommendation Shelf](RecommendationShelf.md)
-- [Recommendation Shelf with Refresh](RecommendationRefresh.md)
-- [Recommendation Shelf Buy Together](BuyTogether.md)
-
-### Blocks API
-
-When implementing this app as a block, various inner blocks may be available.
-The following interface lists the available blocks within `recommendation-shelf`.
+2. Add the `recommendation-shelf` in any store template desired, such as the `store.home`. For example:
 
 ```json
-  "recommendation-shelf": {
-    "component": "RecommendationShelf"
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-shelf",
+    ]
   },
-  "recommendation-refresh": {
-    "component": "RecommendationRefresh"
-  },
-  "recommendation-buy-together": {
-    "component": "RecommendationBuyTogether"
+  "flex-layout.row#recommendation-shelf": {
+    "children": ["recommendation-shelf"]
   }
 ```
 
-## Troubleshooting
+:warning: *Notice you can also add the `recommendation-buy-together` and `recommendation-refresh` blocks if desired. For example:*
 
-You can check if others are passing through similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Also feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
+```json
+  "store.product": {
+    "blocks": [
+      "flex-layout.row#buy-together",
+    ]
+  },
+  "flex-layout.row#buy-together": {
+    "children": ["recommendation-buy-together"]
+  }
+```
 
-## Contributing
+```json
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-refresh",
+    ]
+  },
+  "flex-layout.row#recommendation-refresh": {
+    "children": ["recommendation-refresh"]
+  }
+```
 
-Check it out [how to contribute](https://github.com/vtex-apps/awesome-io#contributing) with this project.
+### `recommendation-shelf` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Possible values can be find in the table below.   | `BEST_SELLERS` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy that will be used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be find in the table below. | `BEST_SELLERS` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+Possible values for the `strategy` and `secondaryStrategy` props:
+
+| Possible strategy         | Description                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ | 
+| `BEST_SELLERS`            | Fetches and displays the best sellers.          |
+| `MOST_POPULAR`            | Fetches and displays the most popular products. | 
+| `PRICE_REDUCTION`         | Fetches and displays products with reduced prices. |
+| `NEW_RELEASES`            | Fetches and displays the latest releases.       | 
+| `NAVIGATION_HISTORY`      | Fetches and displays products based on the user's navigation history.                        | 
+| `SIMILAR_PRODUCTS`        | Fetches and displays products based on the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+| `BEST_CHOICE`             | Fetches and displays products with more visits or orders based on the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+| `BOUGHT_TOGETHER`         | Fetches and displays products bought together with the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`           |
+
+### `recommendation-buy-together` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Only possible value is `BOUGHT_TOGETHER` (returns products bought together with the first search products or the PDP product.)       | `BOUGHT_TOGETHER` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+### `recommendation-refresh` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Possible values can be find in the table below.   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy that will be used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be find in the table below. | `RECOMMENDATION_HISTORY` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+Possible values for `strategy` and `secondaryStrategy` props:
+
+| Possible strategy         | Description                                                                    | 
+| ------------------------- | ------------------------------------------------------------------------------ | 
+| `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
+| `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
+| `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+## Customization
+
+No CSS Handles are available yet for the app customization.
 
 <!-- DOCS-IGNORE:start -->
 ## Contributors ✨
