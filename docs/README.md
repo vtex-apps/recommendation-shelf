@@ -1,194 +1,268 @@
-> :warning: :hammer:
-> 
-> **WIP**: Hello! Thanks for checking this app, it's currently under development and research by the VTEX Personalization team,
-> and during this phase this app should be only installed on selected accounts, **if you're not in contact with the** 
-> **VTEX Personalization team, installing this app on your workspace will not do anything.**
-> 
-> _Additional information: biggy@vtex.com.br_
+📢 Use this project, [contribute](https://github.com/vtex-apps/recommendation-shelf) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
-# VTEX Recommendation Shelf
+# Recommendation Shelf
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-## Description
+The Recommendation Shelf app provides shelf components that show a collection of products using recommendation strategies.
 
-The VTEX Recommendation Shelf app is a store component that shows a collection of products using recommendation
-strategies.
-
-:loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-  - [Blocks API](#blocks-api)
-    - [Configuration](#configuration)
-- [Recommendation Strategies](#recommendation-strategies)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
+![recommendation-shelf-buy-together](https://user-images.githubusercontent.com/52087100/96002543-9c07fe80-0e0f-11eb-94c3-cac778eaf21c.png)
 
 ## Prerequisites
 
-Most of the recommendations use user navigation as input. Therefore, it is necessary to install `biggy.pixel` to make the `recommendation-shelf` work properly. `biggy.pixel` is app used to track user navigation.
+Most of recommendation strategies use user navigation as input to properly work. 
 
-First, install the `biggy.pixel`  app:
+Since the Recommendation Shelf app does not fetch user data for itself, you must install the **Biggy pixel app** in your VTEX account (responsible for tracking user natigation) in order to properly use the app's components in your store.
+
+1. Notify the VTEX team about your interest in installing the Recommendations Shelf and Biggy Pixel apps. You should expect as response an App Key. Save it with you for the 6th step of this tutorial.
+2. Using your terminal, install the `biggy.pixel` app: 
+
 ```
 vtex install biggy.pixel
 ```
-Then go to `/admin/apps` and select the *Biggy Pixel* app. In the `apiKey` field, insert the key provided by our team.
 
-## Usage
+3. Access your VTEX account admin.
+4. Using the admin's sidebar, access the **Apps** section and select the **Biggy Pixel** app.
+5. Click on **Settings**.
+6. In the `apiKey` field, enter the key provided by the VTEX team.
+7. Save your changes.
 
-This app uses our store builder with the blocks architecture. To know more about Store Builder [click here.](https://help.vtex.com/en/tutorial/understanding-storebuilder-and-stylesbuilder#structuring-and-configuring-our-store-with-object-object)
+## Configuration
 
-To use this app you need to import it in your dependencies on the `manifest.json`.
+1. Add the `recommendation-shelf` app to your theme's dependencies on the `manifest.json`:
+
+
+```diff
+  "dependencies": {
++   "vtex.recommendation-shelf": "1.x"
+  }
+````
+
+Now, you are able to use all blocks exported by the `recommendation-shelf` app. Check out the full list below:
+
+| Block name     | Description                                     |
+| -------------- | ----------------------------------------------- |
+| `recommendation-shelf` | Displays a list of recommended products on any store page.   |
+| `recommendation-buy-together` | Displays a list of recommended products to buy together on the product details page. |
+| `recommendation-refresh` | Displays a list of recommended products in your store based on the user history. | 
+
+2. Add the `recommendation-shelf` in any store template desired, such as the `store.home`. For example:
 
 ```json
-  "dependencies": {
-    "vtex.recommendation-shelf": "0.x"
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-shelf",
+    ]
+  },
+  "flex-layout.row#recommendation-shelf": {
+    "children": ["recommendation-shelf"]
   }
 ```
 
-Then, add the `recommendation-shelf` block into your app theme.
-
-Now, you can change the behavior of the shelf block. See an example of how to configure:
+:warning: *Notice you can also add the `recommendation-buy-together` and `recommendation-refresh` blocks if desired. For example:*
 
 ```json
-"recommendation-shelf": {
-  "props": {
-    "strategy": "most_viewed_user",
-    "secondaryStrategy": "most_viewed_store",
-    "productList": {
-      "maxItems": 10,
-      "itemsPerPage": 4,
-      "scroll": "BY_PAGE",
-      "arrows": true,
-      "titleText": "Most Viewed Products",
-      "hideUnavailableItems": true,
-      "summary": {
-        "isOneClickBuy": false,
-        "showBadge": true,
-        "badgeText": "OFF",
-        "buyButtonText": "Comprar",
-        "displayBuyButton": "displayButtonHover",
-        "showCollections": false,
-        "showListPrice": true,
-        "showLabels": false,
-        "showInstallments": true,
-        "showSavings": true,
-        "name": {
-          "showBrandName": false,
-          "showSku": false,
-          "showProductReference": false
-        }
-      }
+  "store.product": {
+    "blocks": [
+      "flex-layout.row#buy-together",
+    ]
+  },
+  "flex-layout.row#buy-together": {
+    "children": ["recommendation-buy-together"]
+  }
+```
+
+```json
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-refresh",
+    ]
+  },
+  "flex-layout.row#recommendation-refresh": {
+    "children": ["recommendation-refresh"]
+  }
+```
+
+### `recommendation-shelf` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Possible values can be find in the table below.   | `BEST_SELLERS` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy that will be used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be find in the table below. | `BEST_SELLERS` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+Possible values for the `strategy` and `secondaryStrategy` props:
+
+| Strategy         | Description                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ | 
+| `BEST_SELLERS`            | Fetches and displays the best sellers.          |
+| `MOST_POPULAR`            | Fetches and displays the most popular products. | 
+| `PRICE_REDUCTION`         | Fetches and displays products with reduced prices. |
+| `NEW_RELEASES`            | Fetches and displays the latest releases.       | 
+| `NAVIGATION_HISTORY`      | Fetches and displays products based on the user's navigation history.                        | 
+| `SIMILAR_PRODUCTS`        | Fetches and displays products based on the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+| `BEST_CHOICE`             | Fetches and displays products with more visits or orders based on the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+| `BOUGHT_TOGETHER`         | Fetches and displays products bought together with the user's search or the product being currently displayed. This prop only works in the theme template `store.product` and `store.search`. | 
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`           |
+
+### `recommendation-buy-together` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Only possible value is `BOUGHT_TOGETHER` (returns products bought together with the first search products or the PDP product.)       | `BOUGHT_TOGETHER` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+### `recommendation-refresh` props
+
+| Prop name            | Type      | Description                                                                      | Default value      |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
+| `strategy`           | `enum`    | Strategy that will be used to fetch and display the recommended products. Possible values can be find in the table below.   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy that will be used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be find in the table below. | `RECOMMENDATION_HISTORY` |
+| `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
+
+Possible values for `strategy` and `secondaryStrategy` props:
+
+| Possible strategy         | Description                                                                    | 
+| ------------------------- | ------------------------------------------------------------------------------ | 
+| `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
+| `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
+| `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |
+
+- `recommendation` object:
+
+| Prop name            | Type      | Description                                                                      | Default value |
+| -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+- `count` object:
+
+| Prop name         | Type      | Description                                                    | Default value |
+| ----------------- | --------- | -------------------------------------------------------------- | ------------- |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+### Advanced configuration
+
+When declared in your store theme code, the `recommendation-shelf` and `recommendation-refresh` blocks will render a default component according to their individual purposes and what was previously defined in terms of style by the VTEX team.  
+
+However, it is possible to **customize** your `recommendation-shelf` and `recommendation-refresh` blocks, building their components by your own using its children blocks `default-shelf` and `refresh-shelf`, respectively. 
+
+Below, you can find an implementation example for each one of them. If needed, use the `default-shelf` and `refresh-shelf` blocks in your store theme code and make the desired changes according to your needs:
+
+```json
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-shelf",
+    ]
+  },
+  "flex-layout.row#recommendation-shelf": {
+    "children": ["recommendation-shelf"]
+  },
+  "recommendation-shelf": {
+    "blocks": ["default-shelf"]
+  },
+  "default-shelf": {
+    "blocks": ["list-context.product-list"]
+  },
+  "list-context.product-list": {
+    "blocks": ["product-summary.shelf#demo1"],
+    "children": ["slider-layout#demo-products"]
+  },
+  "product-summary.shelf#demo1": {
+    "children": [
+      "stack-layout#prodsum",
+      "product-summary-name",
+      "product-rating-inline",
+      "product-summary-space",
+      "product-summary-price",
+      "product-summary-buy-button"
+    ]
+  },
+  "slider-layout#demo-products": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 5,
+        "tablet": 3,
+        "phone": 1
+      },
+      "infinite": true,
+      "fullWidth": false
     }
   }
-}
 ```
 
-## Blocks API
-
-When implementing this app as a block, various inner blocks may be available.
-The following interface lists the available blocks within `recommendation-shelf`.
-
 ```json
-  "recommendation-shelf": {
-    "required": ["product-summary"],
-    "component": "RecommendationShelf"
+  "store.home": {
+    "blocks": [
+      "flex-layout.row#recommendation-refresh",
+    ]
+  },
+  "flex-layout.row#recommendation-refresh": {
+    "children": ["recommendation-refresh"]
+  },
+  "recommendation-refresh": {
+    "blocks": ["refresh-shelf"]
+  },
+  "refresh-shelf": {
+    "blocks": ["product-summary.shelf"]
+  },
+  "product-summary.shelf": {
+    "children": [
+      "stack-layout#prodsum",
+      "product-summary-name",
+      "product-rating-inline",
+      "product-summary-space",
+      "product-summary-price",
+      "add-to-cart-button"
+    ]
   }
 ```
 
-### Configuration
 
-You can configure the `recommendation.shelf` block in your theme app using the following props:
+## Customization
 
-| Prop name                  | Type                         | Description                                                                                                                                                         | Default value |
-| -------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `strategy`                 | `Enum`                       | **(Required)** Recommendation strategy used to fetch product suggestions for a user. [`See Recommendation Strategies`](#recommendation-strategies)                  | -             |
-| `secondaryStrategy`        | `Enum`                       | Recommendation strategy to use if the first one provides no return. [`See Recommendation Strategies`](#recommendation-strategies)                                   | -             |
-| `paginationDotsVisibility` | `Enum`                       | Controls if pagination dots below the Shelf should be rendered or not. Possible values: `visible` (always show), `hidden` (never show), `desktopOnly`, `mobileOnly` | `visible`     |
-| `productList`              | `ProductListSchema`          | Product list schema. [`See ProductListSchema (on vtex-apps/shelf)`](https://github.com/vtex-apps/shelf/blob/master/docs/README.md#configuration)                    | -             |
-| `paidNavigationFilter`     | `PaidNavigationFilterSchema` | Paid Navigation Filter schema. `See PaidNavigationFilterSchema`                                                                                                     | -             |
+No CSS Handles are available yet for the app customization.
 
-Also, you can configure the product summary that is defined on shelf. See [here](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration) the Product Summary API.
-
-`PaidNavigationFilterSchema`:
-
-| Prop name         | Type            | Description                                                                       | Default value |
-| ----------------- | --------------- | --------------------------------------------------------------------------------- | ------------- |
-| `filterBingAds`   | `Boolean`       | If navigations coming from paid bing navigations should have products filtered.   | -             |
-| `filterGoogleAds` | `Boolean`       | If navigations coming from paid google navigations should have products filtered. | -             |
-| `categories`      | `Array(String)` | Which categories should not appear when recommendations are filtered.             | -             |
-
-When passing categories to `paidNavigationFilter`, the `Category Slug` should be used, only lowecase letters and numbers with all other characters being replaced by `-`.
-
-- Given the `Books & E-Books` category, the `paidNavigationFilter` object should look like:
-
-```json
-{
-  "paidNavigationFilter": {
-    "filterBingAds": true,
-    "filterGoogleAds": true,
-    "categories": ["books---e-books"]
-  }
-}
-```
-
-## Recommendation Strategies
-
-Below you can find all the available recommendation strategies that can be used to fetch product sugestions.
-
-| `strategy`              | Description                                                                                                       | Pages                           |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------- |
-| `most_viewed_store`     | Returns the most viewed products in the store                                                                     | Any                             |
-| `most_viewed_user`      | Returns the most viewed products based on the interest and navigation of a certain user.                          | Any                             |
-| `most_viewed_products`  | Returns the most viewed products from the same category of the current products.                                  | `store.search`, `store.product` |
-| `best_sellers_store`    | Returns the best-selling products in the store                                                                    | Any                             |
-| `best_sellers_user`     | Returns the best-selling products based on the interest and navigation of a certain user.                         | Any                             |
-| `best_sellers_products` | Returns the best-selling products from the same category of the current products.                                 | `store.search`, `store.product` |
-| `offers_store`          | Returns the main products in the store that have had a price reduction.                                           | Any                             |
-| `offers_user`           | Returns the main products based on the interest and navigation of a certain user that have had a price reduction. | Any                             |
-| `offers_products`       | Returns the main products from the same category of the current products that have had a price reduction.         | `store.search`, `store.product` |
-| `new_releases_store`    | Returns recently released products in the store                                                                   | Any                             |
-| `new_releases_user`     | Returns recently released products based on the interest and navigation of a certain user.                        | Any                             |
-| `new_releases_products` | Returns recently released products from the same category of the current products.                                | `store.search`, `store.product` |
-
-Some of the strategies are specifically based only on user interest and navigation.
-
-| `strategy`           | Description                                                                                                    | Pages |
-| -------------------- | -------------------------------------------------------------------------------------------------------------- | ----- |
-| `click_history`      | Returns the respective recommended products to the last products that were clicked by the user in the store.   | Any   |
-| `navigation_history` | Returns the last products that were clicked by the user in the store.                                          | Any   |
-| `order_history`      | Returns the respective recommended products to the products that were purchased by the user in the store.      | Any   |
-| `cart_abandonment`   | Returns the respective recommended products to the products that were abandoned in the store cart by the user. | Any   |
-
-And some are specifically based only on the current product (recommended to be used in `store.product` pages).
-
-| `strategy`         | Description                                                                                                      | Pages           |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------- | --------------- |
-| `bought_together`  | Returns the complementary products in relation to the current product.                                           | `store.product` |
-| `best_choice`      | Returns the products that were bought instead of the current product. (Ex.: Who clicked on this, bought this...) | `store.product` |
-| `similar_products` | Returns the products considered most similar to the current product.                                             | `store.product` |
-
-## Troubleshooting
-
-You can check if others are passing through similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Also feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
-
-## Contributing
-
-Check it out [how to contribute](https://github.com/vtex-apps/awesome-io#contributing) with this project.
-
+<!-- DOCS-IGNORE:start -->
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
+
+<!-- DOCS-IGNORE:end -->

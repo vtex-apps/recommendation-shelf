@@ -1,26 +1,158 @@
-query recommendation(
-  $store: String!
-  $strategy: String!
-  $secondaryStrategy: String
-  $user: String
-  $anonymousUser: String
-  $products: [String]
-  $categories: [String]
-  $userNavigationInfo: UserNavigationInfo
-  $settings: StoreFrontSettings
-) {
-  recommendation(
-    store: $store
-    strategy: $strategy
-    secondaryStrategy: $secondaryStrategy
-    user: $user
-    anonymousUser: $anonymousUser
-    products: $products
-    categories: $categories
-    userNavigationInfo: $userNavigationInfo
-    settings: $settings
-  ) {
-    recommendationIds
-    secondaryStrategy
+query recommendation($input: RecommendationInput) {
+  recommendation(input: $input) {
+    response {
+      recommendations {
+        base {
+          brand
+          brandId
+          cacheId
+          categories
+          description
+          items {
+            itemId
+            name
+            nameComplete
+            measurementUnit
+            unitMultiplier
+            ean
+            images {
+              imageId
+              imageLabel
+              imageTag
+              imageUrl
+              imageText
+            }
+            sellers {
+              sellerId
+              sellerName
+              sellerDefault
+              addToCartLink
+              commertialOffer {
+                AvailableQuantity
+                Installments {
+                  InterestRate
+                  Name
+                  NumberOfInstallments
+                  TotalValuePlusInterestRate
+                  Value
+                }
+                ListPrice
+                Price
+                PriceWithoutDiscount
+                Tax
+                taxPercentage
+              }
+            }
+            referenceId {
+              Key
+              Value
+            }
+            variations {
+              name
+              values
+            }
+          }
+          link
+          linkText
+          priceRange {
+            listPrice {
+              highPrice
+              lowPrice
+            }
+            sellingPrice {
+              highPrice
+              lowPrice
+            }
+          }
+          productId
+          productName
+          productReference
+          specificationGroups {
+            name
+            originalName
+            specifications {
+              name
+              originalName
+              values
+            }
+          }
+        }
+        recommended {
+          brand
+          brandId
+          cacheId
+          categories
+          description
+          items {
+            itemId
+            name
+            nameComplete
+            measurementUnit
+            unitMultiplier
+            ean
+            images {
+              imageId
+              imageLabel
+              imageTag
+              imageUrl
+              imageText
+            }
+            sellers {
+              sellerId
+              sellerName
+              sellerDefault
+              addToCartLink
+              commertialOffer {
+                AvailableQuantity
+                Installments {
+                  InterestRate
+                  Name
+                  NumberOfInstallments
+                  TotalValuePlusInterestRate
+                  Value
+                }
+                ListPrice
+                Price
+                PriceWithoutDiscount
+                Tax
+                taxPercentage
+              }
+            }
+            referenceId {
+              Key
+              Value
+            }
+            variations {
+              name
+              values
+            }
+          }
+          link
+          linkText
+          priceRange {
+            listPrice {
+              highPrice
+              lowPrice
+            }
+            sellingPrice {
+              highPrice
+              lowPrice
+            }
+          }
+          productId
+          productName
+          productReference
+          specificationGroups {
+            name
+            originalName
+            specifications {
+              name
+              originalName
+              values
+            }
+          }
+        }
+      }
+    }
   }
 }

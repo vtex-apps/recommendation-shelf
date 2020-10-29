@@ -2,38 +2,20 @@
   "name": "recommendation-shelf",
   "vendor": "vtex",
   "version": "0.1.0",
-  "title": "Recommendation Shelf",
+  "title": "Recommendation Shelf Components",
   "description": "Recommendation components and functionality for VTEX IO.",
-  "scripts": {
-    "prereleasy": "bash pre.sh"
-  },
   "builders": {
     "store": "0.x",
     "react": "3.x",
-    "graphql": "1.x",
-    "node": "4.x",
     "docs": "0.x",
     "messages": "1.x"
   },
   "dependencies": {
-    "vtex.shelf": "1.x",
-    "vtex.product-summary": "2.x",
-    "vtex.search-graphql": "0.x",
+    "vtex.shelf-components": "0.x",
+    "vtex.recommendation-graphql": "0.x",
     "vtex.product-context": "0.x",
     "vtex.search-page-context": "0.x",
     "vtex.device-detector": "0.x"
   },
-  "policies": [
-    {
-      "name": "vbase-read-write"
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "api.biggylabs.com.br",
-        "path": "/*"
-      }
-    }
-  ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

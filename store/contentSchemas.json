@@ -1,62 +1,126 @@
 {
   "definitions": {
-    "ProductList": {
-      "properties": {
-        "titleText": {
-          "title": "admin/editor.shelf.titleText.title",
-          "$ref": "app:vtex.native-types#/definitions/text",
-          "default": "store/shelf.title"
-        }
-      }
-    },
     "RecommendationShelf": {
+      "type": "object",
       "properties": {
         "strategy": {
-          "title": "admin/editor.recommendationShelf.strategy.title",
+          "title": "admin/recommendation-shelf.strategy.title",
           "$ref": "#/definitions/Strategy"
         },
         "secondaryStrategy": {
-          "title": "admin/editor.recommendationShelf.secondaryStrategy.title",
+          "title": "admin/recommendation-shelf.secondaryStrategy.title",
           "$ref": "#/definitions/Strategy"
         },
-        "productList": {
-          "properties": {
-            "$ref": "app:vtex.shelf#/definitions/ProductList/properties",
-            "titleText": {
-              "title": "admin/editor.shelf-properties.title.title",
-              "$ref": "app:vtex.native-types#/definitions/text",
-              "isLayout": false
-            },
-            "secondaryTitleText": {
-              "title": "admin/editor.recommendationShelf.secondaryTitleText.title",
-              "$ref": "app:vtex.native-types#/definitions/text",
-              "isLayout": false
-            }
-          }
-        }
+        "$ref": "#/definitions/RecommendationDetails"
+      }
+    },
+    "RecommendationRefresh": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "title": "admin/recommendation-shelf.strategy.title",
+          "$ref": "#/definitions/RefreshShelfStrategy"
+        },
+        "secondaryStrategy": {
+          "title": "admin/recommendation-shelf.secondaryStrategy.title",
+          "$ref": "#/definitions/RefreshShelfStrategy"
+        },
+        "$ref": "#/definitions/RecommendationDetails"
+      }
+    },
+    "RecommendationBuyTogether": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "title": "admin/recommendation-shelf.strategy.title",
+          "$ref": "#/definitions/BuyTogetherStrategy"
+        },
+        "$ref": "#/definitions/RecommendationDetails"
       }
     },
     "Strategy": {
       "enum": [
-        "most_viewed_store",
-        "most_viewed_user",
-        "most_viewed_products",
-        "best_sellers_store",
-        "best_sellers_user",
-        "best_sellers_products",
-        "offers_store",
-        "offers_user",
-        "offers_products",
-        "new_releases_store",
-        "new_releases_user",
-        "new_releases_products",
-        "click_history",
-        "navigation_history",
-        "order_history",
-        "cart_abandonment",
-        "bought_together",
-        "best_choice",
-        "similar_products"
+        "BEST_SELLERS",
+        "MOST_POPULAR",
+        "PRICE_REDUCTION",
+        "NEW_RELEASES",
+        "NAVIGATION_HISTORY",
+        "SIMILAR_PRODUCTS",
+        "BEST_CHOICE",
+        "BOUGHT_TOGETHER"
+      ],
+      "enumNames": [
+        "admin/strategy.best-sellers.label",
+        "admin/strategy.most-popular.label",
+        "admin/strategy.price-reduction.label",
+        "admin/strategy.new-releases.label",
+        "admin/strategy.navigation-history.label",
+        "admin/strategy.similar-products.label",
+        "admin/strategy.best-choice.label",
+        "admin/strategy.bought-together.label"
+      ],
+      "default": "BEST_SELLERS"
+    },
+    "RefreshShelfStrategy": {
+      "enum": ["RECOMMENDATION_HISTORY", "CART_HISTORY", "ORDER_HISTORY"],
+      "enumNames": [
+        "admin/strategy.recommendation-history.label",
+        "admin/strategy.cart-history.label",
+        "admin/strategy.order-history.label"
+      ],
+      "default": "RECOMMENDATION_HISTORY"
+    },
+    "BuyTogetherStrategy": {
+      "enum": ["BOUGHT_TOGETHER"],
+      "enumNames": ["admin/strategy.bought-together.label"],
+      "default": "BOUGHT_TOGETHER"
+    },
+    "RecommendationDetails": {
+      "recommendation": {
+        "title": "admin/recommendation-options.label",
+        "properties": {
+          "count": {
+            "properties": {
+              "minimum": {
+                "title": "admin/recommendation-options.count.min-items",
+                "type": "number",
+                "default": 5
+              },
+              "recommendations": {
+                "type": "number",
+                "title": "admin/recommendation-options.count.recommendation-items",
+                "default": 20
+              }
+            }
+          }
+        },
+        "default": { "count": { "minimum": 5, "recommendations": 20 } }
+      }
+    },
+    "OrderBy": {
+      "enum": ["click", "order", "price", "discount", "release"],
+      "enumNames": [
+        "admin/order-by.clicks.label",
+        "admin/order-by.orders.label",
+        "admin/order-by.price.label",
+        "admin/order-by.discount.label",
+        "admin/order-by.release.label"
+      ]
+    },
+    "FilterType": {
+      "enum": ["keep", "remove"],
+      "enumNames": [
+        "admin/recommendation-options.filters.type.keep.label",
+        "admin/recommendation-options.filters.type.remove.label"
+      ]
+    },
+    "FilterField": {
+      "enum": ["trade_policy", "seller", "brand", "category"],
+      "enumNames": [
+        "admin/recommendation-options.filters.field.trade-policy.label",
+        "admin/recommendation-options.filters.field.seller.label",
+        "admin/recommendation-options.filters.field.brand.label",
+        "admin/recommendation-options.filters.field.category.label"
       ]
     }
   }
