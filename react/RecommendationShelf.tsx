@@ -64,7 +64,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     return undefined
   }, [data?.recommendation.response.recommendations, error])
 
-  return products && products.length > 0 ? (
+  return products?.length ? (
     <RecommendationProvider shouldSendEvents>
       <ExtensionPoint id="default-shelf" products={products} />
     </RecommendationProvider>

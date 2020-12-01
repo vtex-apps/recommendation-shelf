@@ -46,7 +46,7 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
     return undefined
   }, [error, data])
 
-  return recommendations && recommendations.length > 0 ? (
+  return recommendations?.length ? (
     <RecommendationProvider shouldSendEvents>
       <ExtensionPoint id="buy-together" suggestedProducts={recommendations} />
     </RecommendationProvider>
