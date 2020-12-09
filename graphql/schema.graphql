@@ -12,7 +12,7 @@ type Query {
     categories: [String]
     userNavigationInfo: UserNavigationInfo
     settings: StoreFrontSettings
-  ): [ApiBasedRecommendation]
+  ): [ApiBasedRecommendation] @cacheControl(scope: PUBLIC)
 }
 
 input UserNavigationInfo {
