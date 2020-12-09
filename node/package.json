@@ -10,7 +10,7 @@
   "devDependencies": {
     "prettier": "^1.18.2",
     "tslint": "^5.18.0",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   },
   "scripts": {},
   "author": "",
