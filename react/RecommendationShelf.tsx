@@ -2,6 +2,7 @@ import React, { Fragment, useMemo } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
+import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
 
 import useRecommendation from './hooks/useRecommendation'
 
@@ -63,8 +64,10 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     return undefined
   }, [data?.recommendation.response.recommendations, error])
 
-  return products && products.length > 0 ? (
-    <ExtensionPoint id="default-shelf" products={products} />
+  return products?.length ? (
+    <RecommendationProvider shouldSendEvents>
+      <ExtensionPoint id="default-shelf" products={products} />
+    </RecommendationProvider>
   ) : (
     <Fragment />
   )

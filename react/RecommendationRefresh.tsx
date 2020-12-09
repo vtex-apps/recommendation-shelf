@@ -1,5 +1,6 @@
 import React, { Fragment, useMemo } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
+import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
 
 import useRecommendation from './hooks/useRecommendation'
 
@@ -34,7 +35,9 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
   }, [error, data])
 
   return recommendations ? (
-    <ExtensionPoint id="refresh-shelf" recommendedLists={recommendations} />
+    <RecommendationProvider shouldSendEvents>
+      <ExtensionPoint id="refresh-shelf" recommendedLists={recommendations} />
+    </RecommendationProvider>
   ) : (
     <Fragment />
   )

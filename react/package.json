@@ -12,7 +12,7 @@
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-apollo": "^3.1.5",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   },
   "scripts": {
     "test": "vtex-test-tools test"
@@ -38,10 +38,11 @@
     "prettier": "^1.19.1",
     "tslint": "^5.18.0",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.5/public/@types/vtex.device-detector",
-    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.2/public/@types/vtex.product-context",
+    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.4/public/@types/vtex.product-context",
+    "vtex.recommendation-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-context@0.1.0/public/@types/vtex.recommendation-context",
     "vtex.recommendation-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-graphql@0.3.1/public/_types/react",
-    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.124.2/public/@types/vtex.render-runtime",
-    "vtex.search-page-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.0.3/public/_types/react",
-    "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.5.1/public/@types/vtex.shelf-components"
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.126.1/public/@types/vtex.render-runtime",
+    "vtex.search-page-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.1.0/public/@types/vtex.search-page-context",
+    "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.6.0/public/@types/vtex.shelf-components"
   }
 }

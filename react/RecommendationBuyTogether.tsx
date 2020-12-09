@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useProduct } from 'vtex.product-context'
+import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
+
 import useRecommendation from './hooks/useRecommendation'
 
 interface Props {
@@ -44,8 +46,10 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
     return undefined
   }, [error, data])
 
-  return recommendations && recommendations.length > 0 ? (
-    <ExtensionPoint id="buy-together" suggestedProducts={recommendations} />
+  return recommendations?.length ? (
+    <RecommendationProvider shouldSendEvents>
+      <ExtensionPoint id="buy-together" suggestedProducts={recommendations} />
+    </RecommendationProvider>
   ) : (
     <Fragment />
   )
