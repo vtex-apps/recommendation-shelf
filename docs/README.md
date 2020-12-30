@@ -1,3 +1,5 @@
+:warning: **Do not use this app! It was an alpha version. We will replace it soon.**
+
 📢 Use this project, [contribute](https://github.com/vtex-apps/recommendation-shelf) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
 # Recommendation Shelf
