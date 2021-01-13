@@ -84,7 +84,7 @@
               "minimum": {
                 "title": "admin/recommendation-options.count.min-items",
                 "type": "number",
-                "default": 5
+                "default": 1
               },
               "recommendations": {
                 "type": "number",
@@ -94,7 +94,7 @@
             }
           }
         },
-        "default": { "count": { "minimum": 5, "recommendations": 20 } }
+        "default": { "count": { "minimum": 1, "recommendations": 20 } }
       }
     },
     "OrderBy": {

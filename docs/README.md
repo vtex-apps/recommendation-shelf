@@ -132,13 +132,13 @@ Possible values for the `strategy` and `secondaryStrategy` props:
 
 | Prop name            | Type      | Description                                                                      | Default value |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
-| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+| `count`              | `object`  | Defines the total and minimum number of recommendations that should be fetched. | `{minimum: 1, recommendations: 20}` |
 
 - `count` object:
 
 | Prop name         | Type      | Description                                                    | Default value |
 | ----------------- | --------- | -------------------------------------------------------------- | ------------- |
-| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
+| `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `1`             |
 | `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
 
 ### `recommendation-refresh` props
