@@ -40,12 +40,19 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
 
     const response = data?.recommendation?.response?.recommendations
 
-    if (response) {
-      const recommendedLists = response.map(
-        (rec: Recommendation) => rec.recommended
-      )
+    if (response?.length) {
+      const allRecommendations = response[0].recommended
 
-      return recommendedLists
+      if (!allRecommendations?.length) {
+        return undefined
+      }
+
+      const divider = allRecommendations.length / 2
+
+      return [
+        allRecommendations.slice(0, divider),
+        allRecommendations.slice(divider),
+      ]
     }
 
     return undefined

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useRuntime } from 'vtex.render-runtime'
 
@@ -7,6 +7,7 @@ import { buildInputByStrategy } from '../utils/buildInput'
 import { useAnonymous } from '../utils/useAnonymous'
 import { useSession } from '../utils/useSession'
 
+/* eslint-disable max-params */
 function useRecommendation<D = Data>(
   strategy: string,
   recommendation: RecommendationOptions,
@@ -18,6 +19,11 @@ function useRecommendation<D = Data>(
   const { sessionId } = useSession(account)
   const { anonymous } = useAnonymous(account)
   const [useSecondary, setUseSecondary] = useState(false)
+
+  const skipQuery = useMemo(
+    () => !sessionId || (strategy === 'BOUGHT_TOGETHER' && !productIds?.length),
+    [productIds, sessionId, strategy]
+  )
 
   const input = buildInputByStrategy(
     strategy,
@@ -44,20 +50,20 @@ function useRecommendation<D = Data>(
     },
   }
 
-  const { error, data } = useQuery<D, Variables & {}>(recommendationQuery, {
+  const { error, data } = useQuery<D, Variables>(recommendationQuery, {
     variables,
     notifyOnNetworkStatusChange: true,
-    skip: !sessionId,
+    skip: skipQuery,
   })
 
-  const { error: secondaryError, data: secondaryData } = useQuery<
-    D,
-    Variables & {}
-  >(recommendationQuery, {
-    variables: secondaryVariables,
-    notifyOnNetworkStatusChange: true,
-    skip: !sessionId || !useSecondary,
-  })
+  const { error: secondaryError, data: secondaryData } = useQuery<D, Variables>(
+    recommendationQuery,
+    {
+      variables: secondaryVariables,
+      notifyOnNetworkStatusChange: true,
+      skip: !sessionId || !useSecondary,
+    }
+  )
 
   useEffect(() => {
     if (error && secondaryStrategy) {

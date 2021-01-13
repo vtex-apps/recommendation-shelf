@@ -28,14 +28,14 @@ export const buildInputByStrategy = (
   anonymousId?: string
 ): InputRecommendation => {
   if (categoryStrategies.includes(strategy)) {
-    if (categories) {
+    if (categories && categories.length > 0) {
       return {
         type: { primary: RequestInputType.CATEGORY },
         values: categories,
       }
     }
 
-    if (productIds) {
+    if (productIds && productIds.length > 0) {
       return {
         type: { primary: RequestInputType.PRODUCT },
         values: productIds,
