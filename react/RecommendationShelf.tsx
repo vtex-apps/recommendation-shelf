@@ -20,11 +20,12 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
 
-  let productIds: string[] | undefined = undefined
-  let categories: string[] | undefined = undefined
+  let productIds: string[] | undefined
+  let categories: string[] | undefined
 
   if (productContext) {
     const { product } = productContext
+
     if (product) {
       productIds = [product.productId]
     }
@@ -37,6 +38,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     const selected = category?.children?.find(
       (child: FacetValue) => child.selected
     )
+
     categories = category ? [selected ? selected.id : category.id] : undefined
 
     productIds = searchQuery?.products
@@ -56,11 +58,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     if (error) {
       return undefined
     }
+
     const recommended =
       data?.recommendation?.response?.recommendations?.[0].recommended
+
     if (recommended && recommended.length > 0) {
       return recommended
     }
+
     return undefined
   }, [data?.recommendation.response.recommendations, error])
 
