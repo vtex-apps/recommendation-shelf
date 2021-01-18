@@ -20,6 +20,7 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
   useEffect(() => {
     if (productContext) {
       const { product } = productContext
+
       if (product) {
         setProductIds([product.productId])
       }
@@ -36,13 +37,24 @@ const RecommendationBuyTogether: StorefrontFunctionComponent<Props> = ({
     if (error) {
       return undefined
     }
+
     const response = data?.recommendation?.response?.recommendations
-    if (response) {
-      const recommendedLists = response.map(
-        (recommendation: Recommendation) => recommendation.recommended
-      )
-      return recommendedLists
+
+    if (response?.length) {
+      const allRecommendations = response[0].recommended
+
+      if (!allRecommendations?.length) {
+        return undefined
+      }
+
+      const divider = allRecommendations.length / 2
+
+      return [
+        allRecommendations.slice(0, divider),
+        allRecommendations.slice(divider),
+      ]
     }
+
     return undefined
   }, [error, data])
 

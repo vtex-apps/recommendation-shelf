@@ -4,8 +4,10 @@ const categoryStrategies = [
   'PRICE_REDUCTION',
   'NEW_RELEASES',
 ]
+
 const productStrategies = ['SIMILAR_PRODUCTS', 'BEST_CHOICE', 'BOUGHT_TOGETHER']
 
+/* eslint-disable no-restricted-syntax */
 enum RequestInputType {
   USER = 'USER',
   CATEGORY = 'CATEGORY',
@@ -18,6 +20,7 @@ enum RequestInputType {
   STORE = 'STORE',
 }
 
+/* eslint-disable max-params */
 export const buildInputByStrategy = (
   strategy: string,
   productIds?: string[],
@@ -25,18 +28,20 @@ export const buildInputByStrategy = (
   anonymousId?: string
 ): InputRecommendation => {
   if (categoryStrategies.includes(strategy)) {
-    if (categories) {
+    if (categories && categories.length > 0) {
       return {
         type: { primary: RequestInputType.CATEGORY },
         values: categories,
       }
     }
-    if (productIds) {
+
+    if (productIds && productIds.length > 0) {
       return {
         type: { primary: RequestInputType.PRODUCT },
         values: productIds,
       }
     }
+
     return {
       type: { primary: RequestInputType.STORE },
     }

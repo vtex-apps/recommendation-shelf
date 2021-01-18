@@ -27,10 +27,13 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
     if (error) {
       return undefined
     }
-    const recommendations = data?.recommendation?.response?.recommendations
-    if (recommendations) {
-      return recommendations
+
+    const rec = data?.recommendation?.response?.recommendations
+
+    if (rec) {
+      return rec
     }
+
     return undefined
   }, [error, data])
 

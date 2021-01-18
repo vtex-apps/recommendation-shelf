@@ -1,6 +1,7 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 declare global {
+  /* eslint-disable @typescript-eslint/ban-types */
   interface StorefrontFunctionComponent<P = {}> extends FunctionComponent<P> {
     schema?: object
     getSchema?(props?: P): object
@@ -16,6 +17,7 @@ declare global {
     desc?: boolean
   }
 
+  /* eslint-disable no-restricted-syntax */
   enum FilterField {
     TRADEPOLICY = 'trade_policy',
     SELLER = 'seller',
@@ -23,6 +25,7 @@ declare global {
     CATEGORY = 'category',
   }
 
+  /* eslint-disable no-restricted-syntax */
   enum FilterType {
     ONLY = 'only',
     REMOVE = 'remove',
@@ -40,6 +43,7 @@ declare global {
     filter?: Filter[]
   }
 
+  /* eslint-disable no-restricted-syntax */
   enum RequestInputType {
     USER = 'USER',
     CATEGORY = 'CATEGORY',
@@ -159,7 +163,7 @@ declare global {
     brandId: number
     cacheId: string
     categories: string[]
-    categoryTree?: { slug: string }[]
+    categoryTree?: Array<{ slug: string }>
     categoriesIds?: string[]
     description?: string
     items: SKU[]
