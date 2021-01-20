@@ -32,6 +32,19 @@ function useRecommendation<D = Data>(
     anonymous
   )
 
+  const secondaryInput = useMemo(() => {
+    if (!secondaryStrategy) {
+      return input
+    }
+
+    return buildInputByStrategy(
+      secondaryStrategy,
+      productIds,
+      categories,
+      anonymous
+    )
+  }, [anonymous, categories, input, productIds, secondaryStrategy])
+
   const variables = {
     input: {
       sessionId: sessionId ?? '',
@@ -45,7 +58,7 @@ function useRecommendation<D = Data>(
     input: {
       sessionId: sessionId ?? '',
       strategy: secondaryStrategy ?? '',
-      input,
+      input: secondaryInput,
       recommendation,
     },
   }
