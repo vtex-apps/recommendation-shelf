@@ -33,7 +33,13 @@ vtex install biggy.pixel
 
 ## Configuration
 
-1. Add the `recommendation-shelf` app to your theme's dependencies on the `manifest.json`:
+1. Install the `recommendation-resolver` app on your account. This app will solve the recommendation queries of your store shelves.
+
+```
+vtex install vtex.recommendation-resolver
+```
+
+2. Add the `recommendation-shelf` app to your theme's dependencies on the `manifest.json`:
 
 
 ```diff
@@ -50,7 +56,7 @@ Now, you are able to use all blocks exported by the `recommendation-shelf` app. 
 | `recommendation-buy-together` | Displays a list of recommended products to buy together on the product details page. |
 | `recommendation-refresh` | Displays a list of recommended products in your store based on the user history. | 
 
-2. Add the `recommendation-shelf` in any store template desired, such as the `store.home`. For example:
+3. Add the `recommendation-shelf` in any store template desired, such as the `store.home`. For example:
 
 ```json
   "store.home": {
@@ -172,11 +178,19 @@ Possible values for `strategy` and `secondaryStrategy` props:
 
 ### Advanced configuration
 
-When declared in your store theme code, the `recommendation-shelf` and `recommendation-refresh` blocks will render a default component according to their individual purposes and what was previously defined in terms of style by the VTEX team.  
+When declared in your store theme code, the blocks `recommendation-shelf`, `recommendation-refresh` and `recommendation-buy-together` will render a default component according to their individual purposes and what was previously defined in terms of style by the VTEX team.
 
-However, it is possible to **customize** your `recommendation-shelf` and `recommendation-refresh` blocks, building their components by your own using its children blocks `default-shelf` and `refresh-shelf`, respectively. 
+However, it is possible to **customize** these blocks, building their components by your own using its children blocks `default-shelf`, `refresh-shelf` and `buy-together`, respectively. 
 
-Below, you can find an implementation example for each one of them. If needed, use the `default-shelf` and `refresh-shelf` blocks in your store theme code and make the desired changes according to your needs:
+To do this, you'll need to add the `shelf-components` app to your theme's dependencies on the `manifest.json` file:
+
+```diff
+  "dependencies": {
++   "vtex.shelf-components": "0.x"
+  }
+````
+
+Below, you can find an implementation example for each one of them. If needed, use these blocks in your store theme code and make the desired changes according to your needs:
 
 ```json
   "store.home": {
@@ -191,9 +205,13 @@ Below, you can find an implementation example for each one of them. If needed, u
     "blocks": ["default-shelf"]
   },
   "default-shelf": {
-    "blocks": ["list-context.product-list"]
+    "blocks": ["list-context.product-list", "list-context.product-list-static"]
   },
   "list-context.product-list": {
+    "blocks": ["product-summary.shelf#demo1"],
+    "children": ["slider-layout#demo-products"]
+  },
+  "list-context.product-list-static": {
     "blocks": ["product-summary.shelf#demo1"],
     "children": ["slider-layout#demo-products"]
   },
@@ -243,6 +261,76 @@ Below, you can find an implementation example for each one of them. If needed, u
       "product-summary-space",
       "product-summary-price",
       "add-to-cart-button"
+    ]
+  }
+```
+
+```json
+  "store.product": {
+    "blocks": [
+      "flex-layout.row#buy-together",
+    ]
+  },
+  "flex-layout.row#buy-together": {
+    "children": ["recommendation-buy-together"]
+  },
+  "recommendation-buy-together": {
+    "blocks": ["buy-together"]
+  },
+  "buy-together": {
+    "blocks": ["product-summary.shelf#buy-together"],
+    "props": {
+      "BuyButton": "add-to-cart-button"
+    }
+  },
+  "product-summary.shelf#buy-together": {
+    "children": [
+      "responsive-layout.desktop#product-summary",
+      "responsive-layout.tablet#product-summary",
+      "responsive-layout.phone#product-summary"
+    ]
+  },
+  "responsive-layout.desktop#product-summary": {
+    "children": ["flex-layout.row#product-summary-desktop"]
+  },
+  "responsive-layout.tablet#product-summary": {
+    "children": ["flex-layout.row#product-summary-mobile"]
+  },
+  "responsive-layout.phone#product-summary": {
+    "children": ["flex-layout.row#product-summary-mobile"]
+  },
+  "flex-layout.row#product-summary-desktop": {
+    "children": ["flex-layout.col#product-summary-desktop"]
+  },
+  "flex-layout.col#product-summary-desktop": {
+    "children": [
+      "product-summary-image#shelf",
+      "product-summary-name",
+      "product-summary-space",
+      "product-list-price#summary",
+      "product-installments#summary",
+      "product-summary-sku-selector"
+    ]
+  },
+  "flex-layout.row#product-summary-mobile": {
+    "children": [
+      "flex-layout.col#product-image",
+      "flex-layout.col#product-summary-details"
+    ]
+  },
+  "flex-layout.col#product-image": {
+    "children": ["product-summary-image#shelf"]
+  },
+  "flex-layout.col#product-summary-details": {
+    "props": {
+      "marginLeft": 4
+    },
+    "children": [
+      "product-summary-name",
+      "product-summary-space",
+      "product-list-price#summary",
+      "product-installments#summary",
+      "product-summary-sku-selector"
     ]
   }
 ```
