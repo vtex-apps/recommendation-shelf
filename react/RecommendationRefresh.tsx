@@ -15,7 +15,7 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
   secondaryStrategy,
   recommendation,
 }) => {
-  const { data, error } = useRecommendation(
+  const { data, error, isSecondary } = useRecommendation(
     strategy,
     recommendation,
     undefined,
@@ -39,7 +39,11 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
 
   return recommendations ? (
     <RecommendationProvider shouldSendEvents>
-      <ExtensionPoint id="refresh-shelf" recommendedLists={recommendations} />
+      <ExtensionPoint
+        isSecondary={isSecondary}
+        id="refresh-shelf"
+        recommendedLists={recommendations}
+      />
     </RecommendationProvider>
   ) : (
     <Fragment />

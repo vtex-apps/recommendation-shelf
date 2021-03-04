@@ -89,6 +89,7 @@ function useRecommendation<D = Data>(
   return {
     error: useSecondary ? secondaryError : error,
     data: useSecondary ? secondaryData : data,
+    isSecondary: useSecondary,
   }
 }
 

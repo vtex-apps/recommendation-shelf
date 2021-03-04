@@ -46,7 +46,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       .map((product: Product) => product.productId)
   }
 
-  const { data, error } = useRecommendation(
+  const { data, error, isSecondary } = useRecommendation(
     strategy,
     recommendation,
     productIds,
@@ -71,7 +71,11 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 
   return products?.length ? (
     <RecommendationProvider shouldSendEvents>
-      <ExtensionPoint id="default-shelf" products={products} />
+      <ExtensionPoint
+        isSecondary={isSecondary}
+        id="default-shelf"
+        products={products}
+      />
     </RecommendationProvider>
   ) : (
     <Fragment />
