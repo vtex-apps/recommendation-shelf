@@ -187,7 +187,8 @@ For each `strategy` and `secondaryStrategy`, you can apply props to specific pag
 See the example below to know how to add it to your template:
  
 ```json
-"store.home": {
+{
+  "store.home": {
     "blocks": [
       "flex-layout.row#recommendation-shelf",
     ]
