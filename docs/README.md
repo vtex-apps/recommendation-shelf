@@ -139,7 +139,8 @@ To configure the `recommendation-shelf` you will need to add props to it. Check 
 See the example below to know how to add it to your template:
  
 ```json
-"store.home": {
+{
+  "store.home": {
     "blocks": [
       "flex-layout.row#recommendation-shelf",
     ]
