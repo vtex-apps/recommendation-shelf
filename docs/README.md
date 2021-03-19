@@ -205,7 +205,6 @@ See the example below to know how to add it to your template:
                 "minimum": 5,
                 "recommendations": 20
              }
-             
            }
        }
   }
@@ -444,4 +443,3 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 <!-- DOCS-IGNORE:end -->
  
  
-
