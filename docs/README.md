@@ -149,11 +149,9 @@ See the example below to know how to add it to your template:
   },
   "recommendation-shelf":{
       "props": {
-           "strategy": MOST_POPULAR,
-           "secondaryStrategy": NEW_RELEASES,
-           "recommendation":{
- 
-           }
+           "strategy": "MOST_POPULAR",
+           "secondaryStrategy": "NEW_RELEASES",
+           "recommendation": {}
        }
   }
 }
