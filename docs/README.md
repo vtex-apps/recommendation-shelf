@@ -8,7 +8,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
  
-The Product Recommendation app shows a selection of products using [recommendation strategies](link do header). For example, you can use the Product Recommendation to suggest often bought-together products to the one that the user is looking for.
+The Product Recommendation app shows a selection of products using [recommendation strategies](#`recommendation-shelf`-props). For example, you can use the Product Recommendation to suggest often bought-together products to the one that the user is looking for.
  
 ![recommendation-shelf-buy-together](https://user-images.githubusercontent.com/52087100/96002543-9c07fe80-0e0f-11eb-94c3-cac778eaf21c.png)
  
@@ -116,11 +116,11 @@ To configure the `recommendation-shelf` you will need to add props to it. Check 
  
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](link header) below.   | `BEST_SELLERS` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](link header) below. | `BEST_SELLERS` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](#`strategy`-and-`secondaryStrategy`-props) below.   | `BEST_SELLERS` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](#`strategy`-and-`secondaryStrategy`-props) below. | `BEST_SELLERS` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf component. Here you can define the total and the minimum number of recommendations that should be fetched  | Check the `recommendation` props  |
  
-### `strategy` and `secondaryStrategy` props:
+### `strategy` and `secondaryStrategy` props
  
 | Strategy         | Description                                                                    | 
 | ------------------------- | ------------------------------------------------------------------------------ | 
@@ -243,8 +243,8 @@ To configure the `recommendation-refresh` you will need to add props to it. Chec
  
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](link pra tabela de estratégias).   | `RECOMMENDATION_HISTORY` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](link pra tabela de estratégias). | `RECOMMENDATION_HISTORY` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props).   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props). | `RECOMMENDATION_HISTORY` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
  
  
