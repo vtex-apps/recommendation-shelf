@@ -243,11 +243,17 @@ To configure the `recommendation-refresh` you will need to add props to it. Chec
  
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props).   | `RECOMMENDATION_HISTORY` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props). | `RECOMMENDATION_HISTORY` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props-for-`recommendation-refresh`)  below.   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props-for-`recommendation-refresh`)  below. | `RECOMMENDATION_HISTORY` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
- 
- 
+
+### `strategy` and `secondaryStrategy` props for `recommendation-refresh`
+
+| Strategy         | Description                                                                    | 
+| ------------------------- | ------------------------------------------------------------------------------ | 
+| `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
+| `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
+| `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |  
  
 ### `recommendation` object
  
