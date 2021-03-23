@@ -141,19 +141,17 @@ See the example below to know how to add it to your template:
 ```json
 {
   "store.home": {
-    "blocks": [
-      "flex-layout.row#recommendation-shelf",
-    ]
+    "blocks": ["flex-layout.row#recommendation-shelf"]
   },
   "flex-layout.row#recommendation-shelf": {
     "children": ["recommendation-shelf"]
   },
-  "recommendation-shelf":{
-      "props": {
-           "strategy": "MOST_POPULAR",
-           "secondaryStrategy": "NEW_RELEASES",
-           "recommendation": {}
-       }
+  "recommendation-shelf": {
+    "props": {
+      "strategy": "MOST_POPULAR",
+      "secondaryStrategy": "NEW_RELEASES",
+      "recommendation": {}
+    }
   }
 }
 ```
