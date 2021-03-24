@@ -8,7 +8,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
  
-The Product Recommendation app shows a selection of products using [recommendation strategies](#`recommendation-shelf`-props). For example, you can use the Product Recommendation to suggest often bought-together products to the one that the user is looking for.
+The Product Recommendation app shows a selection of products using [recommendation strategies](#recommendation-shelf-props). For example, you can use the Product Recommendation to suggest often bought-together products to the one that the user is looking for.
  
 ![recommendation-shelf-buy-together](https://user-images.githubusercontent.com/52087100/96002543-9c07fe80-0e0f-11eb-94c3-cac778eaf21c.png)
  
@@ -49,12 +49,19 @@ vtex install vtex.recommendation-resolver
 ````
  
 Now, you can use all blocks exported by the `recommendation-shelf` app. Check out the complete list below:
- 
+\
+&nbsp;
+
+
 | Block name     | Description                                     |
 | -------------- | ----------------------------------------------- |
 | `recommendation-shelf` | Displays a list of recommended products on any store page.   |
 | `recommendation-buy-together` | Displays a list of recommended products to buy together on the product details page. |
 | `recommendation-refresh` | Displays a list of recommended products based on the user history on your store pages. |
+
+\
+&nbsp;
+
 `recommendation-shelf`
  
 ![recommendation-shelf](https://raw.githubusercontent.com/vtex-apps/recommendation-shelf/master/docs/image%20(31).png)
@@ -113,15 +120,22 @@ Now, you can use all blocks exported by the `recommendation-shelf` app. Check ou
 To configure the `recommendation-shelf` you will need to add props to it. Check the following tables to know what props that the app includes and how to configure them. 
  
 ### `recommendation-shelf` props
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](#`strategy`-and-`secondaryStrategy`-props) below.   | `BEST_SELLERS` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](#`strategy`-and-`secondaryStrategy`-props) below. | `BEST_SELLERS` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](#strategy-and-secondaryStrategy-props) below.   | `BEST_SELLERS` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](#strategy-and-secondaryStrategy-props) below. | `BEST_SELLERS` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf component. Here you can define the total and the minimum number of recommendations that should be fetched  | Check the `recommendation` props  |
- 
+
+\
+&nbsp;
+
 ### `strategy` and `secondaryStrategy` props
- 
+\
+&nbsp;
+
 | Strategy         | Description                                                                    | 
 | ------------------------- | ------------------------------------------------------------------------------ | 
 | `BEST_SELLERS`            | Fetches and displays the best seller products.          |
@@ -135,7 +149,10 @@ To configure the `recommendation-shelf` you will need to add props to it. Check 
 | `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
 | `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
 | `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |
- 
+
+\
+&nbsp;
+
 See the example below to know how to add it to your template:
  
 ```json
@@ -158,7 +175,10 @@ See the example below to know how to add it to your template:
  
  
 For each `strategy` and `secondaryStrategy`, you can apply props to specific pages. The possible page types are in the table below:
- 
+
+\
+&nbsp;
+
 | Page type        | Description                                                                    |  Available to the `strategy` and `secondaryStrategy`|
 | ------------------------- | ------------------------------------------------------------------------------ | ------------|
 | `HOME`            |  Recommendations are displayed on the Home page. This context selects the recommended products based on the last categories viewed by the user. If there is no past data from the user, it returns the store data.          | `BEST_SELLERS`, `MOST_POPULAR`, `PRICE_REDUCTION`, `NEW_RELEASES`, `NAVIGATION_HISTORY`, `RECOMMENDATION_HISTORY`, `ORDER_HISTORY` |
@@ -167,21 +187,32 @@ For each `strategy` and `secondaryStrategy`, you can apply props to specific pag
 | `CART`            | Recommendations are displayed on the Cart page. This context uses the product category in the cart as a param to select the recommended products.      | `CART_HISTORY`, `SIMILAR_PRODUCTS`|
 | `OTHERS`      | Recommendations are displayed on the other store pages, such as My Account. This context will return the store data or user’s navigation history.                        | `BEST_SELLERS`, `MOST_POPULAR`, `PRICE_REDUCTION`, `NEW_RELEASES`, `NAVIGATION_HISTORY`, `RECOMMENDATION_HISTORY`, `ORDER_HISTORY`|
  
- 
- 
+\
+&nbsp;
+  
 ### `recommendation` props
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
 | `count`              | `object`  | Defines the total and the minimum number of recommendations that should be fetched. | `{"minimum": 5, "recommendations": 20}` |
  
+\
+&nbsp;
+
 ### `count` object
- 
+\
+&nbsp;
+
 | Prop name         | Type      | Description                                                    | Default value |
 | ----------------- | --------- | -------------------------------------------------------------- | ------------- |
 | `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
 | `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`           |
  
+\
+&nbsp;
+
 See the example below to know how to add it to your template:
  
 ```json
@@ -211,59 +242,91 @@ See the example below to know how to add it to your template:
 To configure the `recommendation-buy-together` you will need to add props to it. Check the following tables to know what props that the app allows and how to configure them.
  
 ### `recommendation-buy-together` props
- 
+
 >ℹ️ The only possible value for `strategy` is `BOUGHT_TOGETHER`.
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
 | `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
- 
+
+\
+&nbsp;
+
 ### `recommendation` object
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
 | `count`              | `object`  | Defines the total and the minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
+
+\
+&nbsp;
  
 ### `count` object
- 
+\
+&nbsp;
+
 | Prop name         | Type      | Description                                                    | Default value |
 | ----------------- | --------- | -------------------------------------------------------------- | ------------- |
 | `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
 | `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
+
+\
+&nbsp;
  
+
 ## Setting up the `recommendation-refresh`
  
 To configure the `recommendation-refresh` you will need to add props to it. Check the following tables to know what props that the app allows and how to configure them.
  
 ### `recommendation-refresh` props
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props-for-`recommendation-refresh`)  below.   | `RECOMMENDATION_HISTORY` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#`strategy`-and-`secondaryStrategy`-props-for-`recommendation-refresh`)  below. | `RECOMMENDATION_HISTORY` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#strategy-and-secondaryStrategy-props-for-recommendation-refresh)  below.   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#strategy-and-secondaryStrategy-props-for-recommendation-refresh)  below. | `RECOMMENDATION_HISTORY` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
 
 ### `strategy` and `secondaryStrategy` props for `recommendation-refresh`
+\
+&nbsp;
 
 | Strategy         | Description                                                                    | 
 | ------------------------- | ------------------------------------------------------------------------------ | 
 | `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
 | `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
 | `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |  
- 
+
+\
+&nbsp;
+
 ### `recommendation` object
- 
+\
+&nbsp;
+
 | Prop name            | Type      | Description                                                                      | Default value |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ----- |
 | `count`              | `object`  | Defines the total and the minimum number of recommendations that should be fetched. | `{minimum: 5, recommendations: 20}` |
- 
+
+\
+&nbsp;
+
 ### `count` object:
- 
+\
+&nbsp;
+
 | Prop name         | Type      | Description                                                    | Default value |
 | ----------------- | --------- | -------------------------------------------------------------- | ------------- |
 | `minimum`         | `number`  | Defines the minimum recommendations that should be fetched.   | `5`             |
 | `recommendations` | `number`  | Defines the total number of recommendations that should be fetched. | `20`            |
- 
+
+\
+&nbsp;
  
 ## Advanced configuration
  
