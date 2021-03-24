@@ -125,8 +125,8 @@ To configure the `recommendation-shelf` you will need to add props to it. Check 
 
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](#strategy-and-secondaryStrategy-props) below.   | `BEST_SELLERS` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](#strategy-and-secondaryStrategy-props) below. | `BEST_SELLERS` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Check all possible values in the [table](#strategy-and-secondarystrategy-props) below.   | `BEST_SELLERS` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. This prop is optional. Check all possible values in the [table](#strategy-and-secondarystrategy-props) below. | `BEST_SELLERS` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf component. Here you can define the total and the minimum number of recommendations that should be fetched  | Check the `recommendation` props  |
 
 \
@@ -288,8 +288,8 @@ To configure the `recommendation-refresh` you will need to add props to it. Chec
 
 | Prop name            | Type      | Description                                                                      | Default value      |
 | -------------------- | --------- | -------------------------------------------------------------------------------- | ------------------ |
-| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#strategy-and-secondaryStrategy-props-for-recommendation-refresh)  below.   | `RECOMMENDATION_HISTORY` |
-| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#strategy-and-secondaryStrategy-props-for-recommendation-refresh)  below. | `RECOMMENDATION_HISTORY` |
+| `strategy`           | `enum`    | Strategy used to fetch and display the recommended products. Possible values can be found in the [table](#strategy-and-secondarystrategy-props-for-recommendation-refresh)  below.   | `RECOMMENDATION_HISTORY` |
+| `secondaryStrategy`  | `enum`    | Secondary strategy used to fetch and display the recommended products if the initial strategy does not return results. Possible values can be found in the [table](#strategy-and-secondarystrategy-props-for-recommendation-refresh)  below. | `RECOMMENDATION_HISTORY` |
 | `recommendation`     | `object`  | Settings for the recommendation shelf.  | `undefined` |
 
 ### `strategy` and `secondaryStrategy` props for `recommendation-refresh`
