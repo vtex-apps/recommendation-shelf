@@ -146,7 +146,7 @@ To configure the `recommendation-shelf` you will need to add props to it. Check 
 | `SIMILAR_PRODUCTS`        | Fetches and displays recommendations based on the similarity of products on the currently displayed product. This prop only works in the theme template `store.product` and `store.search`. | 
 | `BEST_CHOICE`             | Fetches and displays the most visited and ordered products based on the similarity of products on the currently displayed product page. This prop only works in the theme template `store.product` and `store.search`. | 
 | `BOUGHT_TOGETHER`         | Fetches and displays recommendations for products often bought together based on the similarity of products on the currently displayed product page. This prop only works in the theme template `store.product` and `store.search`. | 
-| `RECOMMENDATION_HISTORY` | Fetches and displays products based on the user's navigation history.   |
+| `RECOMMENDATION_HISTORY` | Fetches and displays the most relevant products based on a specific customer history.   |
 | `CART_HISTORY`           | Fetches and displays products based on the user's cart history.         | 
 | `ORDER_HISTORY`          | Fetches and displays products based on the user's order history.        |
 
