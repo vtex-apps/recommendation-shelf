@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- `teasers`, `discountHighligh` and properties to the `recommendation` query.
+- `teasers`, `discountHighlights` and properties to the `recommendation` query.
 
 ## [1.3.3] - 2021-03-24
 
