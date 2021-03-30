@@ -29,6 +29,25 @@ query recommendation($input: RecommendationInput) {
               addToCartLink
               commertialOffer {
                 AvailableQuantity
+                discountHighlights {
+                  name
+                }
+                teasers {
+                  name
+                  conditions {
+                    minimumQuantity
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                  effects {
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                }
                 Installments {
                   InterestRate
                   Name
@@ -104,6 +123,25 @@ query recommendation($input: RecommendationInput) {
               addToCartLink
               commertialOffer {
                 AvailableQuantity
+                discountHighlights {
+                  name
+                }
+                teasers {
+                  name
+                  conditions {
+                    minimumQuantity
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                  effects {
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                }
                 Installments {
                   InterestRate
                   Name
@@ -150,6 +188,10 @@ query recommendation($input: RecommendationInput) {
               originalName
               values
             }
+          }
+          properties {
+            name
+            values
           }
         }
       }
