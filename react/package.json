@@ -1,6 +1,6 @@
 {
   "name": "search-bar",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "private": true,
   "dependencies": {
     "@types/node": "12.6.8",
