@@ -19,6 +19,7 @@ function useRecommendation<D = Data>(
   const { sessionId } = useSession(account)
   const { anonymous } = useAnonymous(account)
   const [useSecondary, setUseSecondary] = useState(false)
+  const [useFallback, setUseFallback] = useState(false)
 
   const skipQuery = useMemo(
     () => !sessionId || (strategy === 'BOUGHT_TOGETHER' && !productIds?.length),
@@ -29,7 +30,8 @@ function useRecommendation<D = Data>(
     strategy,
     productIds,
     categories,
-    anonymous
+    anonymous,
+    useFallback
   )
 
   const secondaryInput = useMemo(() => {
@@ -41,9 +43,10 @@ function useRecommendation<D = Data>(
       secondaryStrategy,
       productIds,
       categories,
-      anonymous
+      anonymous,
+      useFallback
     )
-  }, [anonymous, categories, input, productIds, secondaryStrategy])
+  }, [anonymous, categories, input, productIds, secondaryStrategy, useFallback])
 
   const variables = {
     input: {
@@ -67,6 +70,9 @@ function useRecommendation<D = Data>(
     variables,
     notifyOnNetworkStatusChange: true,
     skip: skipQuery,
+    onError: () => {
+      setUseSecondary(!!secondaryStrategy)
+    },
   })
 
   const { error: secondaryError, data: secondaryData } = useQuery<D, Variables>(
@@ -79,12 +85,24 @@ function useRecommendation<D = Data>(
   )
 
   useEffect(() => {
-    if (error && secondaryStrategy) {
-      setUseSecondary(true)
-    } else {
-      setUseSecondary(false)
+    // Use fallback when secondaryStrategy is not set
+    if (error && !secondaryStrategy) {
+      setUseFallback(true)
     }
-  }, [error, secondaryStrategy])
+
+    // Use fallback when secondaryStrategy is set
+    if (error && secondaryError && !useFallback) {
+      setUseSecondary(false)
+      setUseFallback(true)
+    }
+  }, [
+    error,
+    secondaryError,
+    secondaryStrategy,
+    useFallback,
+    useSecondary,
+    strategy,
+  ])
 
   return {
     error: useSecondary ? secondaryError : error,
