@@ -2,6 +2,7 @@
 declare module 'vtex.render-runtime' {
   export const useRuntime: () => {
     account: string
+    page: string
     navigate: (options: NavigationOptions) => void
   }
   export const ExtensionPoint

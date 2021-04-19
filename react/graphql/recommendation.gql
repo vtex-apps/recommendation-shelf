@@ -12,6 +12,7 @@ query recommendation($input: RecommendationInput) {
             itemId
             name
             nameComplete
+            complementName
             measurementUnit
             unitMultiplier
             ean
@@ -60,100 +61,7 @@ query recommendation($input: RecommendationInput) {
                 PriceWithoutDiscount
                 Tax
                 taxPercentage
-              }
-            }
-            referenceId {
-              Key
-              Value
-            }
-            variations {
-              name
-              values
-            }
-          }
-          link
-          linkText
-          priceRange {
-            listPrice {
-              highPrice
-              lowPrice
-            }
-            sellingPrice {
-              highPrice
-              lowPrice
-            }
-          }
-          productId
-          productName
-          productReference
-          specificationGroups {
-            name
-            originalName
-            specifications {
-              name
-              originalName
-              values
-            }
-          }
-        }
-        recommended {
-          brand
-          brandId
-          cacheId
-          categories
-          description
-          items {
-            itemId
-            name
-            nameComplete
-            measurementUnit
-            unitMultiplier
-            ean
-            images {
-              imageId
-              imageLabel
-              imageTag
-              imageUrl
-              imageText
-            }
-            sellers {
-              sellerId
-              sellerName
-              sellerDefault
-              addToCartLink
-              commertialOffer {
-                AvailableQuantity
-                discountHighlights {
-                  name
-                }
-                teasers {
-                  name
-                  conditions {
-                    minimumQuantity
-                    parameters {
-                      name
-                      value
-                    }
-                  }
-                  effects {
-                    parameters {
-                      name
-                      value
-                    }
-                  }
-                }
-                Installments {
-                  InterestRate
-                  Name
-                  NumberOfInstallments
-                  TotalValuePlusInterestRate
-                  Value
-                }
-                ListPrice
-                Price
-                PriceWithoutDiscount
-                Tax
-                taxPercentage
+                spotPrice
               }
             }
             referenceId {
@@ -192,6 +100,122 @@ query recommendation($input: RecommendationInput) {
           properties {
             name
             values
+          }
+          clusterHighlights {
+            id
+            name
+          }
+          productClusters {
+            id
+            name
+          }
+        }
+        recommended {
+          brand
+          brandId
+          cacheId
+          categories
+          description
+          items {
+            itemId
+            name
+            nameComplete
+            complementName
+            measurementUnit
+            unitMultiplier
+            ean
+            images {
+              imageId
+              imageLabel
+              imageTag
+              imageUrl
+              imageText
+            }
+            sellers {
+              sellerId
+              sellerName
+              sellerDefault
+              addToCartLink
+              commertialOffer {
+                AvailableQuantity
+                discountHighlights {
+                  name
+                }
+                teasers {
+                  name
+                  conditions {
+                    minimumQuantity
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                  effects {
+                    parameters {
+                      name
+                      value
+                    }
+                  }
+                }
+                Installments {
+                  InterestRate
+                  Name
+                  NumberOfInstallments
+                  TotalValuePlusInterestRate
+                  Value
+                }
+                ListPrice
+                Price
+                PriceWithoutDiscount
+                Tax
+                taxPercentage
+                spotPrice
+              }
+            }
+            referenceId {
+              Key
+              Value
+            }
+            variations {
+              name
+              values
+            }
+          }
+          link
+          linkText
+          priceRange {
+            listPrice {
+              highPrice
+              lowPrice
+            }
+            sellingPrice {
+              highPrice
+              lowPrice
+            }
+          }
+          productId
+          productName
+          productReference
+          specificationGroups {
+            name
+            originalName
+            specifications {
+              name
+              originalName
+              values
+            }
+          }
+          properties {
+            name
+            values
+          }
+          clusterHighlights {
+            id
+            name
+          }
+          productClusters {
+            id
+            name
           }
         }
       }
