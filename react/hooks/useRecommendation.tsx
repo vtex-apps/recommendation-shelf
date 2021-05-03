@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { useRuntime } from 'vtex.render-runtime'
+import recommendationQuery from 'vtex.store-resources/QueryRecommendationShelf'
 
-import recommendationQuery from '../graphql/recommendation.gql'
 import { buildInputByStrategy } from '../utils/buildInput'
 import { useAnonymous } from '../utils/useAnonymous'
 import { useSession } from '../utils/useSession'
