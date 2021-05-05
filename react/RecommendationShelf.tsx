@@ -1,8 +1,9 @@
 import React, { Fragment, useMemo } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
 import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import useRecommendation from './hooks/useRecommendation'
 
@@ -19,6 +20,10 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 }) => {
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
+  const { page } = useRuntime()
+  const {
+    orderForm: { items: orderFormItems },
+  } = useOrderForm()
 
   let productIds: string[] | undefined
   let categories: string[] | undefined
@@ -44,6 +49,8 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     productIds = searchQuery?.products
       ?.slice(0, 5)
       .map((product: Product) => product.productId)
+  } else if (orderFormItems && page === 'store.checkout.cart') {
+    productIds = orderFormItems?.map((item: any) => item.id)
   }
 
   const { data, error, isSecondary } = useRecommendation(
