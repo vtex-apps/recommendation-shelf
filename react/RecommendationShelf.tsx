@@ -67,7 +67,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
 
     const recommended =
-      data?.recommendation?.response?.recommendations?.[0].recommended
+      data?.recommendation?.response?.recommendations?.[0]?.recommended
 
     if (recommended && recommended.length > 0) {
       return recommended
