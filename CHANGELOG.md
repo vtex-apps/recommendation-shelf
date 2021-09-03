@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.1] - 2021-09-03
+
+### Fixed
+- Error when recommendation response is `undefined`.
+
 ## [1.6.0] - 2021-05-05
 
 ### Added
