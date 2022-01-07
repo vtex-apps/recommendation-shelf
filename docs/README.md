@@ -1,6 +1,6 @@
 >⚠️ Warning
 >
-> This app is on alpha version, which means we are working to improve it. If you have any questions, please contact [our Support](https://support.vtex.com/hc/en-us/requests).
+> This app is on alpha version, which means we are working to improve it and it is not possible to add other accounts for tests. If you have any questions, please contact [our Support](https://support.vtex.com/hc/en-us/requests).
  
 📢 Use this project, [contribute](https://github.com/vtex-apps/recommendation-shelf) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
  
