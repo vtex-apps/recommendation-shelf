@@ -1,4 +1,4 @@
->⚠️ Warning
+> ⚠️ Warning
 >
 > This app is on alpha version, which means we are working to improve it and it is not possible to add other accounts for tests. If you have any questions, please contact [our Support](https://support.vtex.com/hc/en-us/requests).
  
