@@ -70,6 +70,13 @@ function useRecommendation<D = Data>(
     variables,
     notifyOnNetworkStatusChange: true,
     skip: skipQuery,
+    onCompleted: (result: unknown) => {
+      if (
+        !(result as Data)?.recommendation?.response?.recommendations?.length
+      ) {
+        setUseSecondary(!!secondaryStrategy)
+      }
+    },
     onError: () => {
       setUseSecondary(!!secondaryStrategy)
     },
