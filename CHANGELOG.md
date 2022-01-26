@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Error on `RecommendationRefresh` when `recommendations` array is empty.
+
 ## [1.6.3] - 2022-01-28
 
 ### Fixed
