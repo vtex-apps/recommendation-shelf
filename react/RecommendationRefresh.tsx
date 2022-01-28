@@ -30,7 +30,7 @@ const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
 
     const rec = data?.recommendation?.response?.recommendations
 
-    if (rec) {
+    if (rec?.length) {
       return rec
     }
 
