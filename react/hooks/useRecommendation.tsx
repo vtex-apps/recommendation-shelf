@@ -6,6 +6,7 @@ import recommendationQuery from 'vtex.store-resources/QueryRecommendationShelf'
 import { buildInputByStrategy } from '../utils/buildInput'
 import { useAnonymous } from '../utils/useAnonymous'
 import { useSession } from '../utils/useSession'
+import useProfile from './useProfile'
 
 /* eslint-disable max-params */
 function useRecommendation<D = Data>(
@@ -18,12 +19,16 @@ function useRecommendation<D = Data>(
   const { account } = useRuntime()
   const { sessionId } = useSession(account)
   const { anonymous } = useAnonymous(account)
+  const { isProfileLoading, profile } = useProfile()
   const [useSecondary, setUseSecondary] = useState(false)
   const [useFallback, setUseFallback] = useState(false)
 
   const skipQuery = useMemo(
-    () => !sessionId || (strategy === 'BOUGHT_TOGETHER' && !productIds?.length),
-    [productIds, sessionId, strategy]
+    () =>
+      !sessionId ||
+      (strategy === 'BOUGHT_TOGETHER' && !productIds?.length) ||
+      isProfileLoading,
+    [productIds, sessionId, strategy, isProfileLoading]
   )
 
   const input = buildInputByStrategy(
@@ -31,7 +36,8 @@ function useRecommendation<D = Data>(
     productIds,
     categories,
     anonymous,
-    useFallback
+    useFallback,
+    profile?.id?.value
   )
 
   const secondaryInput = useMemo(() => {
@@ -44,9 +50,18 @@ function useRecommendation<D = Data>(
       productIds,
       categories,
       anonymous,
-      useFallback
+      useFallback,
+      profile?.id?.value
     )
-  }, [anonymous, categories, input, productIds, secondaryStrategy, useFallback])
+  }, [
+    anonymous,
+    profile,
+    categories,
+    input,
+    productIds,
+    secondaryStrategy,
+    useFallback,
+  ])
 
   const variables = {
     input: {
