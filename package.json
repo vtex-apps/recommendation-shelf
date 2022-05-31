@@ -25,15 +25,15 @@
     ]
   },
   "devDependencies": {
-    "@vtex/intl-equalizer": "^2.4.2",
-    "@vtex/prettier-config": "^0.1.4",
-    "eslint": "^6.8.0",
-    "eslint-config-vtex": "^12.3.2",
-    "eslint-config-vtex-react": "^6.3.2",
-    "eslint-plugin-lodash": "^7.1.0",
+    "@vtex/intl-equalizer": "^2.5.1",
+    "@vtex/prettier-config": "^1.0.0",
+    "eslint": "^7",
+    "eslint-config-vtex": "^15.0.1",
+    "eslint-config-vtex-react": "^9.0.1",
+    "eslint-plugin-lodash": "^7.4.0",
     "husky": "^4.2.3",
     "lint-staged": "^10.1.1",
-    "prettier": "^2.0.2",
-    "typescript": "^3.8.3"
+    "prettier": "^2.6.2",
+    "typescript": "^4.7.2"
   }
 }
