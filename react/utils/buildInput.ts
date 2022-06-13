@@ -26,7 +26,8 @@ export const buildInputByStrategy = (
   productIds?: string[],
   categories?: string[],
   anonymousId?: string,
-  useFallback?: boolean
+  useFallback?: boolean,
+  userId?: string
 ): InputRecommendation => {
   if (categoryStrategies.includes(strategy)) {
     if (categories && categories.length > 0) {
@@ -59,8 +60,10 @@ export const buildInputByStrategy = (
     type: {
       primary: useFallback
         ? RequestInputType.STORE
+        : userId
+        ? RequestInputType.USER
         : RequestInputType.ANONYMOUS_USER,
     },
-    values: [anonymousId ?? ''],
+    values: [userId ?? anonymousId ?? ''],
   }
 }
