@@ -1,8 +1,4 @@
-import React, { Fragment, useMemo } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
-import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
-
-import useRecommendation from './hooks/useRecommendation'
+import React, { Fragment } from 'react'
 
 interface Props {
   strategy: string
@@ -10,44 +6,12 @@ interface Props {
   recommendation: RecommendationOptions
 }
 
-const RecommendationRefresh: StorefrontFunctionComponent<Props> = ({
-  strategy,
-  secondaryStrategy,
-  recommendation,
-}) => {
-  const { data, error, isSecondary } = useRecommendation(
-    strategy,
-    recommendation,
-    undefined,
-    undefined,
-    secondaryStrategy
+const RecommendationRefresh: StorefrontFunctionComponent<Props> = () => {
+  console.warn(
+    `"RecommendationRefreshShelf" is deprecated, please do not use it.`
   )
 
-  const recommendations = useMemo(() => {
-    if (error) {
-      return undefined
-    }
-
-    const rec = data?.recommendation?.response?.recommendations
-
-    if (rec?.length) {
-      return rec
-    }
-
-    return undefined
-  }, [error, data])
-
-  return recommendations ? (
-    <RecommendationProvider shouldSendEvents>
-      <ExtensionPoint
-        isSecondary={isSecondary}
-        id="refresh-shelf"
-        recommendedLists={recommendations}
-      />
-    </RecommendationProvider>
-  ) : (
-    <Fragment />
-  )
+  return <Fragment />
 }
 
 RecommendationRefresh.schema = {
