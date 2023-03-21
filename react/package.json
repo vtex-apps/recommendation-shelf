@@ -34,11 +34,8 @@
     "husky": "^3.1.0",
     "prettier": "^1.19.1",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector",
-    "vtex.order-manager": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.11.0/public/@types/vtex.order-manager",
-    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.9.9/public/@types/vtex.product-context",
-    "vtex.recommendation-graphql": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-graphql@0.5.0/public/@types/vtex.recommendation-graphql",
-    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.128.4/public/@types/vtex.render-runtime",
-    "vtex.search-page-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.2.0/public/@types/vtex.search-page-context",
-    "vtex.store-resources": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.store-resources@0.80.0/public/@types/vtex.store-resources"
+    "vtex.recommendation-shelf": "https://removeshelf--tododia.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.7.1+build1677866391/public/@types/vtex.recommendation-shelf",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime",
+    "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components"
   }
 }
