@@ -4,7 +4,7 @@
 
 > ⚠️ **Warning**
 >
-> This app is deprecated, please do not use it. If you have any questions, please contact [our Support](https://support.vtex.com/hc/en-us/requests).
+> This app is on alpha version, which means we are working to improve it and it is not possible to add other accounts for tests. If you have any questions, please contact [our Support](https://support.vtex.com/hc/en-us/requests).
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
