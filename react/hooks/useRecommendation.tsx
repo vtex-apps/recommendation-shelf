@@ -1,12 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from 'react-apollo'
-import { useRuntime } from 'vtex.render-runtime'
+import { canUseDOM, useRuntime } from 'vtex.render-runtime'
 import recommendationQuery from 'vtex.store-resources/QueryRecommendationShelf'
 
 import { buildInputByStrategy } from '../utils/buildInput'
+import { getCookie } from '../utils/dom-utils'
+import setCookie from '../utils/setCookie'
 import { useAnonymous } from '../utils/useAnonymous'
-import { useSession } from '../utils/useSession'
 import useProfile from './useProfile'
+import useVariant from './useVariant'
 
 /* eslint-disable max-params */
 function useRecommendation<D = Data>(
@@ -14,22 +16,17 @@ function useRecommendation<D = Data>(
   recommendation: RecommendationOptions,
   productIds?: string[],
   categories?: string[],
-  secondaryStrategy?: string
+  secondaryStrategy?: string,
+  campaignId?: string
 ) {
   const { account } = useRuntime()
-  const { sessionId } = useSession(account)
   const { anonymous } = useAnonymous(account)
-  const { isProfileLoading, profile } = useProfile()
+  const { profile } = useProfile()
   const [useSecondary, setUseSecondary] = useState(false)
-  const [useFallback, setUseFallback] = useState(false)
+  const [useFallback] = useState(false)
+  const { variant } = useVariant()
 
-  const skipQuery = useMemo(
-    () =>
-      !sessionId ||
-      (strategy === 'BOUGHT_TOGETHER' && !productIds?.length) ||
-      isProfileLoading,
-    [productIds, sessionId, strategy, isProfileLoading]
-  )
+  const uuid = canUseDOM ? getCookie('_snrs_uuid')! : ''
 
   const input = buildInputByStrategy(
     strategy,
@@ -40,56 +37,26 @@ function useRecommendation<D = Data>(
     profile?.id?.value
   )
 
-  const secondaryInput = useMemo(() => {
-    if (!secondaryStrategy) {
-      return input
-    }
-
-    return buildInputByStrategy(
-      secondaryStrategy,
-      productIds,
-      categories,
-      anonymous,
-      useFallback,
-      profile?.id?.value
-    )
-  }, [
-    anonymous,
-    profile,
-    categories,
-    input,
-    productIds,
-    secondaryStrategy,
-    useFallback,
-  ])
-
   const variables = {
     input: {
-      sessionId: sessionId ?? '',
-      strategy,
+      uuid,
+      campaignId: campaignId!,
+      jwt: canUseDOM ? getCookie('_snrs_jwt_shelf')! : undefined,
       input,
       recommendation,
-    },
-  }
-
-  const secondaryVariables = {
-    input: {
-      sessionId: sessionId ?? '',
-      strategy: secondaryStrategy ?? '',
-      input: secondaryInput,
-      recommendation,
+      variant,
     },
   }
 
   const { error, data } = useQuery<D, Variables>(recommendationQuery, {
     variables,
+    skip: !canUseDOM || !campaignId || !uuid,
     notifyOnNetworkStatusChange: true,
-    skip: skipQuery,
     onCompleted: (result: unknown) => {
-      if (
-        !(result as Data)?.recommendation?.response?.recommendations?.length
-      ) {
+      if (!(result as any)?.recommendation?.products?.length) {
         setUseSecondary(!!secondaryStrategy)
+      } else {
+        setCookie('_snrs_jwt_shelf', (result as any).recommendation.jwt)
       }
     },
     onError: () => {
@@ -97,38 +64,9 @@ function useRecommendation<D = Data>(
     },
   })
 
-  const { error: secondaryError, data: secondaryData } = useQuery<D, Variables>(
-    recommendationQuery,
-    {
-      variables: secondaryVariables,
-      notifyOnNetworkStatusChange: true,
-      skip: !sessionId || !useSecondary,
-    }
-  )
-
-  useEffect(() => {
-    // Use fallback when secondaryStrategy is not set
-    if (error && !secondaryStrategy) {
-      setUseFallback(true)
-    }
-
-    // Use fallback when secondaryStrategy is set
-    if (error && secondaryError && !useFallback) {
-      setUseSecondary(false)
-      setUseFallback(true)
-    }
-  }, [
-    error,
-    secondaryError,
-    secondaryStrategy,
-    useFallback,
-    useSecondary,
-    strategy,
-  ])
-
   return {
-    error: useSecondary ? secondaryError : error,
-    data: useSecondary ? secondaryData : data,
+    error,
+    data,
     isSecondary: useSecondary,
   }
 }
@@ -139,8 +77,9 @@ interface Data {
 
 interface Variables {
   input: {
-    sessionId: string
-    strategy: string
+    uuid: string
+    campaignId: string
+    jwt?: string
     input: InputRecommendation
     recommendation: RecommendationOptions
   }

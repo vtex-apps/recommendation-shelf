@@ -11,12 +11,14 @@ interface Props {
   strategy: string
   secondaryStrategy?: string
   recommendation: RecommendationOptions
+  campaignId: string
 }
 
 const Shelf: StorefrontFunctionComponent<Props> = ({
   strategy,
   secondaryStrategy,
   recommendation,
+  campaignId,
 }) => {
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
@@ -58,7 +60,8 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     recommendation,
     productIds,
     categories,
-    secondaryStrategy
+    secondaryStrategy,
+    campaignId
   )
 
   const products = useMemo(() => {
@@ -66,15 +69,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       return undefined
     }
 
-    const recommended =
-      data?.recommendation?.response?.recommendations?.[0]?.recommended
+    const recommended = (data as any)?.recommendation?.products
 
     if (recommended && recommended.length > 0) {
       return recommended
     }
 
     return undefined
-  }, [data?.recommendation.response.recommendations, error])
+  }, [data, error])
 
   return products?.length ? (
     <RecommendationProvider shouldSendEvents>

@@ -4925,10 +4925,6 @@ verror@1.10.0:
   version "0.2.6"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector#3219242fa5c2f14023d33c3549c2d8de93c76d1f"
 
-"vtex.recommendation-shelf@https://removeshelf--tododia.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.7.1+build1677866391/public/@types/vtex.recommendation-shelf":
-  version "1.7.1"
-  resolved "https://removeshelf--tododia.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.7.1+build1677866391/public/@types/vtex.recommendation-shelf#0546d7574b92b02423300d68dcf4f4f4902d322f"
-
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime":
   version "8.132.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime#66bb41bd4d342e37c9d85172aad5f7eefebfb6dc"
