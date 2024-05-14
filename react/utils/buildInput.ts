@@ -1,10 +1,3 @@
-const categoryStrategies = [
-  'BEST_SELLERS',
-  'MOST_POPULAR',
-  'PRICE_REDUCTION',
-  'NEW_RELEASES',
-]
-
 const productStrategies = ['SIMILAR_PRODUCTS', 'BEST_CHOICE', 'BOUGHT_TOGETHER']
 
 /* eslint-disable no-restricted-syntax */
@@ -29,24 +22,22 @@ export const buildInputByStrategy = (
   useFallback?: boolean,
   userId?: string
 ): InputRecommendation => {
-  if (categoryStrategies.includes(strategy)) {
-    if (categories && categories.length > 0) {
-      return {
-        type: { primary: RequestInputType.CATEGORY },
-        values: categories,
-      }
-    }
-
-    if (productIds && productIds.length > 0) {
-      return {
-        type: { primary: RequestInputType.PRODUCT },
-        values: productIds,
-      }
-    }
-
+  if (categories && categories.length > 0) {
     return {
-      type: { primary: RequestInputType.STORE },
+      type: { primary: RequestInputType.CATEGORY },
+      values: categories,
     }
+  }
+
+  if (productIds && productIds.length > 0) {
+    return {
+      type: { primary: RequestInputType.PRODUCT },
+      values: productIds,
+    }
+  }
+
+  return {
+    type: { primary: RequestInputType.STORE },
   }
 
   if (productStrategies.includes(strategy)) {

@@ -3,15 +3,10 @@
     "RecommendationShelf": {
       "type": "object",
       "properties": {
-        "strategy": {
-          "title": "admin/recommendation-shelf.strategy.title",
-          "$ref": "#/definitions/Strategy"
-        },
-        "secondaryStrategy": {
-          "title": "admin/recommendation-shelf.secondaryStrategy.title",
-          "$ref": "#/definitions/Strategy"
-        },
-        "$ref": "#/definitions/RecommendationDetails"
+        "campaignId": {
+          "title": "Campaign ID",
+          "type": "string"
+        }
       }
     },
     "RecommendationRefresh": {

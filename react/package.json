@@ -34,7 +34,6 @@
     "husky": "^3.1.0",
     "prettier": "^1.19.1",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector",
-    "vtex.recommendation-shelf": "https://removeshelf--tododia.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.7.1+build1677866391/public/@types/vtex.recommendation-shelf",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime",
     "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components"
   }
