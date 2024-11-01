@@ -14,7 +14,7 @@
     "vtex.device-detector": "0.x",
     "vtex.product-context": "0.x",
     "vtex.recommendation-context": "0.x",
-    "vtex.recommendation-graphql": "0.x",
+    "vtex.recommendation-graphql": "1.x",
     "vtex.search-page-context": "0.x",
     "vtex.shelf-components": "0.x",
     "vtex.order-manager": "0.x",
