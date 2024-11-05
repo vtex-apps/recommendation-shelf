@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.10.0] - 2024-11-05
+
 ### Changed
 
 - Replaced `vtex.store-resources` with `vtex.recommendation-graphql` to allow direct queries and enable modifications without impacting other stores.
