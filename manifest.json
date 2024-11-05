@@ -17,7 +17,7 @@
     "vtex.search-page-context": "0.x",
     "vtex.shelf-components": "0.x",
     "vtex.order-manager": "0.x",
-    "vtex.store-resources": "0.x"
+    "vtex.recommendation-graphql": "1.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
