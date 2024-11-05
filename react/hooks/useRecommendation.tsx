@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useQuery } from 'react-apollo'
 import { canUseDOM, useRuntime } from 'vtex.render-runtime'
-import recommendationQuery from 'vtex.store-resources/QueryRecommendationShelf'
 
+import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
 import { buildInputByStrategy } from '../utils/buildInput'
 import { getCookie } from '../utils/dom-utils'
 import setCookie from '../utils/setCookie'
