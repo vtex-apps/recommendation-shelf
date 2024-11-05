@@ -35,6 +35,8 @@
     "prettier": "^1.19.1",
     "vtex.device-detector": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.device-detector@0.2.6/public/@types/vtex.device-detector",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime",
-    "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components"
+    "vtex.shelf-components": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components",
+    "vtex.order-manager": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.1/public/@types/vtex.order-manager",
+    "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context"
   }
 }
