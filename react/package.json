@@ -36,7 +36,6 @@
     "vtex.css-handles": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles",
     "vtex.order-manager": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.0/public/@types/vtex.order-manager",
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context",
-    "vtex.recommendation-bff": "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.3.0+build1734529027/public/@types/vtex.recommendation-bff",
     "vtex.recommendation-shelf": "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.11.0+build1734529202/public/@types/vtex.recommendation-shelf",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.135.1/public/@types/vtex.render-runtime",
     "vtex.search-page-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.2.0/public/@types/vtex.search-page-context"

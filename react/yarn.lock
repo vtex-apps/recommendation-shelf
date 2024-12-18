@@ -4933,10 +4933,6 @@ verror@1.10.0:
   version "0.10.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context#86ceba68085420edcf54749f07e51a257d2e5d94"
 
-"vtex.recommendation-bff@https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.3.0+build1734529027/public/@types/vtex.recommendation-bff":
-  version "0.3.0"
-  resolved "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.3.0+build1734529027/public/@types/vtex.recommendation-bff#5d12901eb47ab07d3e078b2da37cf408fb0e1c3b"
-
 "vtex.recommendation-shelf@https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.11.0+build1734529202/public/@types/vtex.recommendation-shelf":
   version "1.11.0"
   resolved "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.11.0+build1734529202/public/@types/vtex.recommendation-shelf#55e06582c128131a0e81c100272153f0495a798a"
