@@ -63,18 +63,8 @@ declare global {
     values?: string[]
   }
 
-  interface Recommendation {
-    base: Product[]
-    recommended: Product[]
-  }
-
-  interface RecommendationResponse {
-    recommendations: Recommendation[]
-  }
-
-  interface RecommendationAPI {
-    variantId: string
-    response: RecommendationResponse
+  type RecommendationResponse = {
+    products: Product[]
   }
 
   interface Image {

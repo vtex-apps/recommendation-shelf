@@ -1,6 +1,13 @@
-query recommendation($input: RecommendationInput) {
-  recommendation(input: $input)
-    @context(provider: "vtex.recommendation-graphql") {
+query FetchRecommendations(
+  $synUserId: String!
+  $campaignId: String!
+  $productId: String
+) {
+  syneriseRecommendationV1(
+    synUserId: $synUserId
+    campaignId: $campaignId
+    productId: $productId
+  ) @context(provider: "vtex.recommendation-bff") {
     products {
       cacheId
       productId
@@ -131,6 +138,5 @@ query recommendation($input: RecommendationInput) {
         }
       }
     }
-    jwt
   }
 }

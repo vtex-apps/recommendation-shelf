@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Using `vtex.recommendation-bff` instead of `vtex.recommendation-resolver`.
+
+### Removed
+
+- `RecommendationRefresh` component.
+- `RecommendationBuyTogether` component.
+
+
 ## [1.11.0] - 2024-11-22
 
 ### Added
