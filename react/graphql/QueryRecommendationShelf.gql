@@ -138,6 +138,5 @@ query FetchRecommendations(
         }
       }
     }
-    jwt
   }
 }
