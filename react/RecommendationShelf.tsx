@@ -1,17 +1,21 @@
 import React, { Fragment, useMemo } from 'react'
-import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import { useRuntime } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
-import { RecommendationProvider } from 'vtex.recommendation-context/RecommendationContext'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import useRecommendation from './hooks/useRecommendation'
+import Shelf from './Shelf'
 
 type Props = {
   campaignId: string
+  title?: string
 }
 
-const Shelf: StorefrontFunctionComponent<Props> = ({ campaignId }) => {
+const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
+  campaignId,
+  title,
+}) => {
   const { searchQuery } = useSearchPage()
   const productContext = useProduct()
   const { page } = useRuntime()
@@ -52,16 +56,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({ campaignId }) => {
   }, [data, error])
 
   return products?.length ? (
-    <RecommendationProvider shouldSendEvents>
-      <ExtensionPoint id="default-shelf" products={products} />
-    </RecommendationProvider>
+    <Shelf products={products} title={title} />
   ) : (
     <Fragment />
   )
 }
 
-Shelf.schema = {
+RecommendationShelf.schema = {
   title: 'admin/recommendation-shelf.title',
 }
 
-export default Shelf
+export default RecommendationShelf
