@@ -1,4 +1,5 @@
 import React, { Fragment, useMemo } from 'react'
+import { defineMessages } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
@@ -6,6 +7,13 @@ import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import useRecommendation from './hooks/useRecommendation'
 import Shelf from './Shelf'
+
+defineMessages({
+  title: {
+    id: 'admin/recommendation-shelf.title',
+    defaultMessage: 'Recommendation Shelf',
+  },
+})
 
 type Props = {
   campaignId: string
