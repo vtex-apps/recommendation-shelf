@@ -11,10 +11,9 @@
     "messages": "1.x"
   },
   "dependencies": {
+    "vtex.css-handles": "0.x",
     "vtex.product-context": "0.x",
-    "vtex.recommendation-context": "0.x",
     "vtex.search-page-context": "0.x",
-    "vtex.shelf-components": "0.x",
     "vtex.order-manager": "0.x",
     "vtex.recommendation-bff": "0.x"
   },

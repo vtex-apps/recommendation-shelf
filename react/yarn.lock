@@ -4921,21 +4921,33 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-"vtex.order-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.1/public/@types/vtex.order-manager":
-  version "0.12.1"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.1/public/@types/vtex.order-manager#7a963c6d2a4a4bbb006d0bbd1778c59f4ab817f9"
+"vtex.css-handles@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles":
+  version "0.4.4"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.css-handles@0.4.4/public/@types/vtex.css-handles#8c45c6decf9acd2b944e07261686decff93d6422"
+
+"vtex.order-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.0/public/@types/vtex.order-manager":
+  version "0.12.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.order-manager@0.12.0/public/@types/vtex.order-manager#2cf6a9d2a31bc503b783c257695b0d17c09b5696"
 
 "vtex.product-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context":
   version "0.10.1"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context#86ceba68085420edcf54749f07e51a257d2e5d94"
 
-"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime":
-  version "8.132.4"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime#66bb41bd4d342e37c9d85172aad5f7eefebfb6dc"
+"vtex.recommendation-bff@https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.3.0+build1734529027/public/@types/vtex.recommendation-bff":
+  version "0.3.0"
+  resolved "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.3.0+build1734529027/public/@types/vtex.recommendation-bff#5d12901eb47ab07d3e078b2da37cf408fb0e1c3b"
 
-"vtex.shelf-components@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components":
-  version "0.10.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.shelf-components@0.10.0/public/@types/vtex.shelf-components#624a21712a167d6e6e95b4cf6188d3bf2dab29cd"
+"vtex.recommendation-shelf@https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.11.0+build1734529202/public/@types/vtex.recommendation-shelf":
+  version "1.11.0"
+  resolved "https://felipe2--extrafarmav2.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@1.11.0+build1734529202/public/@types/vtex.recommendation-shelf#55e06582c128131a0e81c100272153f0495a798a"
+
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.135.1/public/@types/vtex.render-runtime":
+  version "8.135.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.135.1/public/@types/vtex.render-runtime#357ddee2f9249db4209de73b26c43997a5ca4422"
+
+"vtex.search-page-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.2.0/public/@types/vtex.search-page-context":
+  version "0.2.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.2.0/public/@types/vtex.search-page-context#1b37f20648d8e4ff062ae9fffb0aa2718f172af7"
 
 w3c-hr-time@^1.0.1:
   version "1.0.2"
