@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.13.0] - 2024-12-19 [Deprecated]
+
+### Changed
+
+- Remove `vtex.shelf-components` dependency and implement it internally.
+
+### Removed
+
+- Remove `default-shelf` block.
+
+## [1.12.0] - 2024-12-18 [Deprecated]
+
+### Changed
+
+- Using `vtex.recommendation-bff` instead of `vtex.recommendation-resolver`.
+
+### Removed
+
+- `RecommendationRefresh` component.
+- `RecommendationBuyTogether` component.
+
 ## [1.11.0] - 2024-11-22
 
 ### Added
