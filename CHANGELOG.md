@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Remove `vtex.shelf-components` dependency and implement it internally.
+
+### Removed
+
+- Remove `default-shelf` block.
+
 ## [1.12.0] - 2024-12-18
 
 ### Changed

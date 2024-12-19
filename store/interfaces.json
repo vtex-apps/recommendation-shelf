@@ -1,7 +1,7 @@
 {
   "recommendation-shelf": {
     "component": "RecommendationShelf",
-    "required": ["default-shelf"],
+    "required": ["list-context.product-list-static"],
     "content": {
       "$ref": "#/definitions/RecommendationShelf"
     }
