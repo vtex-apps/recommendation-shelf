@@ -1,0 +1,20 @@
+.slide--shelf {
+  margin-bottom: 1.563rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.layoutContainer--shelf {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  max-width: 96rem;
+}
+
+.sliderTrackContainer {
+  padding-bottom: 1.25rem;
+}
+
+.slide {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
