@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.13.1] - 2025-01-02
+
 ### Changed
 
 - Mark app as deprecated in the docs and removed implementation instructions.
