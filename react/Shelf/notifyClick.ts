@@ -1,6 +1,6 @@
 import { canUseDOM } from 'vtex.render-runtime'
 
-import { getCookie } from '../utils/dom-utils'
+import { getCookie } from '../utils/dom'
 
 type NotifyParams = {
   campaignId: string

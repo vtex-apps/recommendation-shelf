@@ -3,7 +3,7 @@ import { canUseDOM } from 'vtex.render-runtime'
 
 import type { Args, Response } from '../graphql/QueryRecommendationShelf.gql'
 import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
-import { getCookie } from '../utils/dom-utils'
+import { getCookie } from '../utils/dom'
 
 function useRecommendation(campaignId: string, productId?: string) {
   const uuid = canUseDOM ? getCookie('_snrs_uuid') : ''
