@@ -64,7 +64,11 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   }, [data, error])
 
   return products?.length ? (
-    <Shelf products={products} title={title} />
+    <Shelf
+      products={products}
+      title={title}
+      correlationId={data?.syneriseRecommendationV1.correlationId ?? ''}
+    />
   ) : (
     <Fragment />
   )
