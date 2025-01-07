@@ -2,18 +2,35 @@ import React from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 
+import type { Product } from '../graphql/QueryRecommendationShelf.gql'
 import styles from './styles.css'
+import { notifyClick } from './notifyClick'
 
 type Props = {
+  campaignId: string
+  correlationId: string
   products: Product[]
   title?: string
 }
 
 const CSS_HANDLES = ['shelfTitleContainer', 'shelfTitle']
 
-const Shelf: StorefrontFunctionComponent<Props> = ({ title, products }) => {
+const Shelf: StorefrontFunctionComponent<Props> = ({
+  title,
+  products,
+  correlationId,
+  campaignId,
+}) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const onProductClick = () => {}
+  const onProductClick = (p: Product) => {
+    let itemId = p.productId ?? ''
+
+    if (p.items?.[0]?.itemId) {
+      itemId = p.items[0].itemId
+    }
+
+    notifyClick({ itemId, campaignId, correlationId })
+  }
 
   return (
     <div className="flex-none tc">

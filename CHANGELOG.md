@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Notify product/campaigns clicks.
+
 ## [2.0.1] - 2024-12-20
 
 ### Fixed
