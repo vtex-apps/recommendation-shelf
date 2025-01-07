@@ -68,6 +68,7 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
       products={products}
       title={title}
       correlationId={data?.syneriseRecommendationV1.correlationId ?? ''}
+      campaignId={campaignId}
     />
   ) : (
     <Fragment />
