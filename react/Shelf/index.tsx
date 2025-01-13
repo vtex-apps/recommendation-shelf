@@ -23,11 +23,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const onProductClick = (p: Product) => {
-    let itemId = p.productId ?? ''
-
-    if (p.items?.[0]?.itemId) {
-      itemId = p.items[0].itemId
-    }
+    const itemId = p.productId ?? ''
 
     notifyClick({ itemId, campaignId, correlationId })
   }
