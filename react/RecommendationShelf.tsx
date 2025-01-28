@@ -7,6 +7,7 @@ import useRecommendation from './hooks/useRecommendation'
 import Shelf from './Shelf'
 import type { RecommendationVrnType } from './utils/vrn'
 import { parseCampaignVrn } from './utils/vrn'
+import { withRecommendationShelfErrorBoundary } from './errors/RecommendationShelfErrorBoundary'
 
 defineMessages({
   title: {
@@ -93,4 +94,4 @@ RecommendationShelf.schema = {
   title: 'admin/recommendation-shelf.title',
 }
 
-export default RecommendationShelf
+export default withRecommendationShelfErrorBoundary<Props>(RecommendationShelf)
