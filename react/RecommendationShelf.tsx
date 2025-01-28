@@ -1,7 +1,7 @@
 import React from 'react'
 import { defineMessages } from 'react-intl'
 
-import { RecommendationShelfErrorBoundary } from './errors/RecommendationShelfErrorBoundary'
+import { RecommendationShelfErrorBoundary } from './components/RecommendationShelfErrorBoundary'
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
 
 defineMessages({
