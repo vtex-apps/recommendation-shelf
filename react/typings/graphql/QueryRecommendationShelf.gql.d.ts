@@ -1,11 +1,9 @@
 declare module '*/QueryRecommendationShelf.gql' {
   import type { DocumentNode } from 'graphql'
-  import type { Query } from 'vtex.recommendation-bff'
+  import type { Query, Product } from 'vtex.recommendation-bff'
 
   type Response = {
-    recommendationsV1: Query['syneriseRecommendationV1'] & {
-      correlationId: string
-    }
+    recommendationsV1: Query['syneriseRecommendationV1']
   }
 
   type Args = {
@@ -13,8 +11,6 @@ declare module '*/QueryRecommendationShelf.gql' {
     userId: string
     products?: string[]
   }
-
-  type Product = Response['syneriseRecommendationV1']['products'][0]
 
   export { Response, Args, Product }
 
