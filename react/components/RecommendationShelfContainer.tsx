@@ -44,7 +44,9 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }, [campaignVrn])
 
   const productSource: Record<ProductContext, string[]> = {
-    cart: orderFormItems?.map((item: any) => item.id) ?? [],
+    cart:
+      orderFormItems?.map((item: { productId: string }) => item.productId) ??
+      [],
     productPage: [productContext?.product?.productId ?? ''],
     empty: [],
   }
