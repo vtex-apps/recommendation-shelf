@@ -1,7 +1,7 @@
 query FetchRecommendations(
   $userId: String!
   $campaignVrn: String!
-  $products: String
+  $products: [String!]
 ) {
   recommendationsV1(
     userId: $userId
