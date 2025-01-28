@@ -1,6 +1,6 @@
 import { canUseDOM } from 'vtex.render-runtime'
 
-import { getCookie } from '../utils/dom'
+import { getUserId } from '../utils/user'
 
 type NotifyParams = {
   campaignVrn: string
@@ -9,7 +9,7 @@ type NotifyParams = {
 }
 
 export async function notifyClick(params: NotifyParams) {
-  const uuid = canUseDOM ? getCookie('_snrs_uuid') : ''
+  const uuid = getUserId(canUseDOM)
   const path = `/_v/api/recommendation-bff/campaign-click/v1`
 
   try {
