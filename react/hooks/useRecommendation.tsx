@@ -3,26 +3,25 @@ import { canUseDOM } from 'vtex.render-runtime'
 
 import type { Args, Response } from '../graphql/QueryRecommendationShelf.gql'
 import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
-import { getCookie } from '../utils/dom'
 
 function useRecommendation({
   campaignVrn,
   products,
+  userId,
 }: {
   campaignVrn?: string
   products: string[]
+  userId: string
 }) {
-  const uuid = canUseDOM ? getCookie('_snrs_uuid') : ''
-
   const variables = {
-    userId: uuid ?? '',
+    userId,
     campaignVrn: campaignVrn ?? '',
     products,
   }
 
   const { error, data } = useQuery<Response, Args>(recommendationQuery, {
     variables,
-    skip: !canUseDOM || !campaignVrn || !uuid,
+    skip: !canUseDOM || !campaignVrn || !userId,
     notifyOnNetworkStatusChange: true,
   })
 

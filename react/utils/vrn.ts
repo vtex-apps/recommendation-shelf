@@ -14,7 +14,7 @@ export function parseCampaignVrn(campaignVrn?: string): {
   campaignType: RecommendationVrnType
 } {
   if (!campaignVrn || !vrnPattern.test(campaignVrn)) {
-    throw new Error(`Invalid campaign VRN: ${campaignVrn}`)
+    return { campaignId: '', campaignType: 'rec-top-items-v1' }
   }
 
   const list = campaignVrn.split(':')

@@ -1,11 +1,13 @@
 import React, { Fragment, useMemo } from 'react'
 import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import { canUseDOM } from 'vtex.render-runtime'
 
 import useRecommendation from '../hooks/useRecommendation'
 import Shelf from './Shelf'
 import type { RecommendationVrnType } from '../utils/vrn'
 import { parseCampaignVrn } from '../utils/vrn'
+import { getUserIdFromCookie } from '../utils/user'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
 
@@ -47,10 +49,13 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     empty: [],
   }
 
+  const userId = canUseDOM ? getUserIdFromCookie() : ''
+
   const productsIds =
     productSource[RecommendationToProductMapping[campaignType]]
 
   const { data, error } = useRecommendation({
+    userId,
     campaignVrn,
     products: productsIds,
   })
@@ -75,6 +80,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       title={title}
       correlationId={data?.recommendationsV1.correlationId ?? ''}
       campaignVrn={campaignVrn}
+      userId={userId}
     />
   ) : (
     <Fragment />
