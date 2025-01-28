@@ -1,12 +1,12 @@
 import React, { Fragment, useMemo } from 'react'
 import { defineMessages } from 'react-intl'
-import { useRuntime } from 'vtex.render-runtime'
-import { useSearchPage } from 'vtex.search-page-context/SearchPageContext'
 import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 
 import useRecommendation from './hooks/useRecommendation'
 import Shelf from './Shelf'
+import type { RecommendationVrnType } from './utils/vrn'
+import { parseCampaignVrn } from './utils/vrn'
 
 defineMessages({
   title: {
@@ -15,46 +15,60 @@ defineMessages({
   },
 })
 
+type ProductContext = 'empty' | 'cart' | 'productPage'
+
+const RecommendationToProductMapping: Record<
+  RecommendationVrnType,
+  ProductContext
+> = {
+  'rec-cross-v1': 'cart',
+  'rec-similar-v1': 'productPage',
+  'rec-cart-v1': 'cart',
+  'rec-persona-v1': 'empty',
+  'rec-last-v1': 'empty',
+  'rec-top-items-v1': 'empty',
+}
+
 type Props = {
-  campaignId: string
+  campaignVrn?: string
   title?: string
 }
 
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
-  campaignId,
+  campaignVrn,
   title,
 }) => {
-  const { searchQuery } = useSearchPage()
   const productContext = useProduct()
-  const { page } = useRuntime()
   const {
     orderForm: { items: orderFormItems },
   } = useOrderForm()
 
-  let productId: string | undefined
+  const { campaignType } = useMemo(() => {
+    const result = parseCampaignVrn(campaignVrn)
 
-  if (productContext) {
-    const { product } = productContext
+    return { campaignId: result.campaignId, campaignType: result.campaignType }
+  }, [campaignVrn])
 
-    if (product) {
-      productId = product.productId
-    }
+  const productSource: Record<ProductContext, string[]> = {
+    cart: orderFormItems?.map((item: any) => item.id) ?? [],
+    productPage: [productContext?.product?.productId ?? ''],
+    empty: [],
   }
 
-  if (searchQuery) {
-    productId = searchQuery?.products[0]?.productId
-  } else if (orderFormItems && page === 'store.checkout.cart') {
-    productId = orderFormItems?.map((item: any) => item.id)[0]
-  }
+  const productsIds =
+    productSource[RecommendationToProductMapping[campaignType]]
 
-  const { data, error } = useRecommendation(campaignId, productId)
+  const { data, error } = useRecommendation({
+    campaignVrn,
+    products: productsIds,
+  })
 
   const products = useMemo(() => {
     if (error || !data) {
       return undefined
     }
 
-    const recommended = data.syneriseRecommendationV1.products
+    const recommended = data.recommendationsV1.products
 
     if (recommended && recommended.length > 0) {
       return recommended
@@ -63,12 +77,12 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
     return undefined
   }, [data, error])
 
-  return products?.length ? (
+  return products?.length && campaignVrn ? (
     <Shelf
       products={products}
       title={title}
-      correlationId={data?.syneriseRecommendationV1.correlationId ?? ''}
-      campaignId={campaignId}
+      correlationId={data?.recommendationsV1.correlationId ?? ''}
+      campaignVrn={campaignVrn}
     />
   ) : (
     <Fragment />

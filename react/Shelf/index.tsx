@@ -7,7 +7,7 @@ import styles from './styles.css'
 import { notifyClick } from './notifyClick'
 
 type Props = {
-  campaignId: string
+  campaignVrn: string
   correlationId: string
   products: Product[]
   title?: string
@@ -19,13 +19,13 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
   products,
   correlationId,
-  campaignId,
+  campaignVrn,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const onProductClick = (p: Product) => {
     const itemId = p.productId ?? ''
 
-    notifyClick({ itemId, campaignId, correlationId })
+    notifyClick({ productId: itemId, campaignVrn, correlationId })
   }
 
   return (

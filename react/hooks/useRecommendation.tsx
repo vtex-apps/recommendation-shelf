@@ -5,12 +5,18 @@ import type { Args, Response } from '../graphql/QueryRecommendationShelf.gql'
 import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
 import { getCookie } from '../utils/dom'
 
-function useRecommendation(campaignVrn: string, products?: string[]) {
+function useRecommendation({
+  campaignVrn,
+  products,
+}: {
+  campaignVrn?: string
+  products: string[]
+}) {
   const uuid = canUseDOM ? getCookie('_snrs_uuid') : ''
 
   const variables = {
     userId: uuid ?? '',
-    campaignVrn,
+    campaignVrn: campaignVrn ?? '',
     products,
   }
 
