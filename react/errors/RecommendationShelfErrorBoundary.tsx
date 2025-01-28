@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 
-class RecommendationShelfErrorBoundary extends Component<
+export class RecommendationShelfErrorBoundary extends Component<
   any,
   { hasError: boolean }
 > {
@@ -24,22 +24,4 @@ class RecommendationShelfErrorBoundary extends Component<
 
     return this.props.children
   }
-}
-
-export function withRecommendationShelfErrorBoundary<P extends object>(
-  WrappedComponent: React.ComponentType<P>
-) {
-  const WithErrorBoundary = (props: P) => {
-    return (
-      <RecommendationShelfErrorBoundary>
-        <WrappedComponent {...props} />
-      </RecommendationShelfErrorBoundary>
-    )
-  }
-
-  WithErrorBoundary.displayName = `WithRecommendationShelfErrorBoundary(${
-    (WrappedComponent.displayName ?? WrappedComponent.name) || 'Component'
-  })`
-
-  return WithErrorBoundary
 }
