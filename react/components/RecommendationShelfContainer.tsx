@@ -6,7 +6,7 @@ import { canUseDOM } from 'vtex.render-runtime'
 import useRecommendation from '../hooks/useRecommendation'
 import Shelf from './Shelf'
 import type { RecommendationVrnType } from '../utils/vrn'
-import { parseCampaignVrn } from '../utils/vrn'
+import { isValidVrn, parseCampaignVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
@@ -81,6 +81,26 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
     return undefined
   }, [data, error])
+
+  if (!userId) {
+    console.warn('Shelf not displayed due to missing userId', {
+      userId,
+      campaignVrn,
+    })
+  }
+
+  if (!campaignVrn || !isValidVrn(campaignVrn)) {
+    console.warn('Shelf not displayed due to invalid campaignVrn', {
+      campaignVrn,
+    })
+  }
+
+  if (!products?.length) {
+    console.warn('Shelf not displayed due to missing products or an error', {
+      products,
+      error,
+    })
+  }
 
   return products?.length && campaignVrn ? (
     <Shelf
