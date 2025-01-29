@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Handling for `rec-recent-int-v1` vrn type.
+
 ## [2.2.0] - 2025-01-29
 
 ### Changed
