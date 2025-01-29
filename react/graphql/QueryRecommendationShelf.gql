@@ -1,12 +1,12 @@
 query FetchRecommendations(
-  $synUserId: String!
-  $campaignId: String!
-  $productId: String
+  $userId: String!
+  $campaignVrn: String!
+  $products: [String!]
 ) {
-  syneriseRecommendationV1(
-    synUserId: $synUserId
-    campaignId: $campaignId
-    productId: $productId
+  recommendationsV1(
+    userId: $userId
+    campaignVrn: $campaignVrn
+    products: $products
   ) @context(provider: "vtex.recommendation-bff") {
     products {
       cacheId

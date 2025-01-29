@@ -5117,9 +5117,9 @@ verror@1.10.0:
   version "2.90.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.90.2/public/@types/vtex.product-summary#e0b1cb6d94fcdccb833cdb91fdf24376545dcc98"
 
-"vtex.recommendation-bff@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.3.0/public/@types/vtex.recommendation-bff":
-  version "0.3.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.3.0/public/@types/vtex.recommendation-bff#5d12901eb47ab07d3e078b2da37cf408fb0e1c3b"
+"vtex.recommendation-bff@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.6.0/public/@types/vtex.recommendation-bff":
+  version "0.6.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.6.0/public/@types/vtex.recommendation-bff#21746ceb22dc2efa73da2425da0d01a1c4527636"
 
 "vtex.recommendation-shelf@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-shelf@2.0.0/public/@types/vtex.recommendation-shelf":
   version "2.0.0"

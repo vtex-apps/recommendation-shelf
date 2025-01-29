@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Move the calls to use the white-label and points
+- Use VRN details to decide from where to fetch the products context.
+- Add ErrorBoundary to our Component.
+- Fetch userId from our own cookie vtex-recommendation-user
+
 ## [2.1.1] - 2025-01-13
 
 ### Fixed
