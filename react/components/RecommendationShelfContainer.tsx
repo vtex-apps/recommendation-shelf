@@ -62,7 +62,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
   const productsIds = productSource[getContextFromType(campaignType)]
 
-  const { data, error } = useRecommendation({
+  const { data, error, loading } = useRecommendation({
     userId,
     campaignVrn,
     products: productsIds,
@@ -95,9 +95,10 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     })
   }
 
-  if (!products?.length) {
+  if (!products?.length && loading === false) {
     console.warn('Shelf not displayed due to missing products or an error', {
       products,
+      campaignVrn,
       error,
     })
   }

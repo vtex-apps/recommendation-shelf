@@ -19,15 +19,19 @@ function useRecommendation({
     products,
   }
 
-  const { error, data } = useQuery<Response, Args>(recommendationQuery, {
-    variables,
-    skip: !canUseDOM || !campaignVrn || !userId,
-    notifyOnNetworkStatusChange: true,
-  })
+  const { error, data, loading } = useQuery<Response, Args>(
+    recommendationQuery,
+    {
+      variables,
+      skip: !canUseDOM || !campaignVrn || !userId,
+      notifyOnNetworkStatusChange: true,
+    }
+  )
 
   return {
     error,
     data,
+    loading,
   }
 }
 
