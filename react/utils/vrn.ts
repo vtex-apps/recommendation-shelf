@@ -4,10 +4,11 @@ export type RecommendationVrnType =
   | 'rec-cart-v1'
   | 'rec-persona-v1'
   | 'rec-last-v1'
+  | 'rec-recent-int-v1'
   | 'rec-top-items-v1'
 
 const vrnPattern =
-  /^vrn:recommendations:[^:]+:(rec-cross-v1|rec-similar-v1|rec-cart-v1|rec-persona-v1|rec-last-v1|rec-top-items-v1):[^:]+$/
+  /^vrn:recommendations:[^:]+:(rec-cross-v1|rec-similar-v1|rec-cart-v1|rec-persona-v1|rec-last-v1|rec-recent-int-v1|rec-top-items-v1):[^:]+$/
 
 export function parseCampaignVrn(campaignVrn?: string): {
   campaignId: string
