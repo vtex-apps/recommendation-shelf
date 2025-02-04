@@ -1,7 +1,7 @@
 {
   "name": "recommendation-shelf",
   "vendor": "vtex",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "title": "Recommendation Shelf Components",
   "description": "Recommendation components and functionality for VTEX IO.",
   "builders": {
