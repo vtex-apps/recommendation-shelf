@@ -12,6 +12,7 @@ export async function notifyClick(params: NotifyParams) {
     await fetch(path, {
       method: 'POST',
       body: JSON.stringify({
+        campaignVrn: params.campaignVrn,
         userId: params.userId,
         correlationId: params.correlationId,
         productId: params.productId,
