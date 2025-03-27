@@ -47,9 +47,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   }, [shelfDivRef, campaignVrn, products, userId, correlationId])
 
   return (
-    <div className="flex-none tc" ref={shelfDivRef}>
+    <div ref={shelfDivRef}>
       {title && (
-        <div className={`mv4 v-mid ${handles.shelfTitleContainer}`}>
+        <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>
             {title}
           </span>
