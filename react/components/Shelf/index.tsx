@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 
 import type { Product } from '../graphql/QueryRecommendationShelf.gql'
 import styles from './styles.css'
 import { notifyClick } from './notifyClick'
+import { notifyView } from './notifyView'
+import { attachViewEvent } from '../../utils/attachViewEvent'
 
 type Props = {
   userId: string
@@ -23,17 +25,44 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   campaignVrn,
   userId,
 }) => {
+  const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
-  const onProductClick = (p: Product) => {
-    const itemId = p.productId ?? ''
 
-    notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
-  }
+  const onProductClick = useCallback(
+    (p: Product) => {
+      const itemId = p.productId ?? ''
+
+      notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
+    },
+    [campaignVrn, correlationId, userId]
+  )
+
+  const onView = useCallback(() => {
+    notifyView({
+      userId,
+      correlationId,
+      products: products.map((p) => p.productId ?? ''),
+    })
+  }, [products, userId, correlationId])
+
+  useEffect(() => {
+    const currentShelfDiv = shelfDivRef.current
+
+    if (!currentShelfDiv) return
+
+    attachViewEvent(currentShelfDiv, `${campaignVrn}-${correlationId}`)
+    currentShelfDiv.addEventListener('view', onView)
+
+    return () => {
+      // Remove listener on unmount to avoid multiple calls
+      currentShelfDiv.removeEventListener('view', onView)
+    }
+  }, [shelfDivRef, campaignVrn, products, userId, correlationId, onView])
 
   return (
-    <div className="flex-none tc">
+    <div ref={shelfDivRef}>
       {title && (
-        <div className={`mv4 v-mid ${handles.shelfTitleContainer}`}>
+        <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>
             {title}
           </span>
