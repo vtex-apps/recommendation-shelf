@@ -54,6 +54,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     currentShelfDiv.addEventListener('view', onView)
 
     return () => {
+      // Remove listener on unmount to avoid multiple calls
       currentShelfDiv.removeEventListener('view', onView)
     }
   }, [shelfDivRef, campaignVrn, products, userId, correlationId, onView])
