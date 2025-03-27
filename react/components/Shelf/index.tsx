@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 
 import type { Product } from '../graphql/QueryRecommendationShelf.gql'
 import styles from './styles.css'
 import { notifyClick } from './notifyClick'
+import { notifyView } from './notifyView'
+import { attachViewEvent } from '../../utils/attachViewEvent'
 
 type Props = {
   userId: string
@@ -23,6 +25,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   campaignVrn,
   userId,
 }) => {
+  const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
   const onProductClick = (p: Product) => {
     const itemId = p.productId ?? ''
@@ -30,8 +33,21 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
   }
 
+  useEffect(() => {
+    if (!shelfDivRef.current) return
+
+    attachViewEvent(shelfDivRef.current, campaignVrn)
+    shelfDivRef.current.addEventListener('view', () =>
+      notifyView({
+        userId,
+        correlationId,
+        products: products.map((p) => p.productId ?? ''),
+      })
+    )
+  }, [shelfDivRef, campaignVrn, products, userId, correlationId])
+
   return (
-    <div className="flex-none tc">
+    <div className="flex-none tc" ref={shelfDivRef}>
       {title && (
         <div className={`mv4 v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>
