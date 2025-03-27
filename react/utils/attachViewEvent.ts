@@ -3,8 +3,8 @@
 /**
  * IMPORTANT
  *
- * The following logic was extracted from https://github.com/vtex/analytics-activity-flow-script/blob/4694e60b36ef15f852a16d87abb5270dc62f71c3/scripts/web/src/ads/utils/attachViewEvent.ts
- * We just copied the code here to avoid the dependency on the analytics-activity-flow-script package.
+ * The following logic was extracted from "https://github.com/vtex/analytics-activity-flow-script/blob/4694e60b36ef15f852a16d87abb5270dc62f71c3/scripts/web/src/ads/utils/attachViewEvent.ts"
+ * We just copied the code here since we don't have a straight forward way to re-use it in both places. In the future this will be removed when we consolidate all the analytics logic to be done via activity-flow.
  *
  */
 
