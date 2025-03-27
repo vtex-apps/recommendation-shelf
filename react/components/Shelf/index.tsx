@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useCallback } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 
@@ -27,24 +27,36 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
-  const onProductClick = (p: Product) => {
-    const itemId = p.productId ?? ''
 
-    notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
-  }
+  const onProductClick = useCallback(
+    (p: Product) => {
+      const itemId = p.productId ?? ''
+
+      notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
+    },
+    [campaignVrn, correlationId, userId]
+  )
+
+  const onView = useCallback(() => {
+    notifyView({
+      userId,
+      correlationId,
+      products: products.map((p) => p.productId ?? ''),
+    })
+  }, [products, userId, correlationId])
 
   useEffect(() => {
-    if (!shelfDivRef.current) return
+    const currentShelfDiv = shelfDivRef.current
 
-    attachViewEvent(shelfDivRef.current, campaignVrn)
-    shelfDivRef.current.addEventListener('view', () =>
-      notifyView({
-        userId,
-        correlationId,
-        products: products.map((p) => p.productId ?? ''),
-      })
-    )
-  }, [shelfDivRef, campaignVrn, products, userId, correlationId])
+    if (!currentShelfDiv) return
+
+    attachViewEvent(currentShelfDiv, `${campaignVrn}-${correlationId}`)
+    currentShelfDiv.addEventListener('view', onView)
+
+    return () => {
+      currentShelfDiv.removeEventListener('view', onView)
+    }
+  }, [shelfDivRef, campaignVrn, products, userId, correlationId, onView])
 
   return (
     <div ref={shelfDivRef}>
