@@ -15,7 +15,7 @@ const RecommendationToProductMapping: Record<
   RecommendationVrnType,
   ProductContext
 > = {
-  'rec-cross-v1': 'cart',
+  'rec-cross-v1': 'productPage',
   'rec-similar-v1': 'productPage',
   'rec-cart-v1': 'cart',
   'rec-persona-v1': 'empty',
