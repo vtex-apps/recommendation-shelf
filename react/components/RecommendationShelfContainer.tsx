@@ -5,27 +5,24 @@ import { canUseDOM } from 'vtex.render-runtime'
 
 import useRecommendation from '../hooks/useRecommendation'
 import Shelf from './Shelf'
-import type { RecommendationVrnType } from '../utils/vrn'
-import { isValidVrn, parseCampaignVrn } from '../utils/vrn'
+import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
 
 const RecommendationToProductMapping: Record<
-  RecommendationVrnType,
+  RecommendationType,
   ProductContext
 > = {
-  'rec-cross-v1': 'productPage',
-  'rec-similar-v1': 'productPage',
-  'rec-cart-v1': 'cart',
-  'rec-persona-v1': 'empty',
-  'rec-last-v1': 'empty',
-  'rec-recent-int-v1': 'empty',
-  'rec-top-items-v1': 'empty',
+  SIMILAR_ITEMS: 'productPage',
+  PERSONALIZED: 'empty',
+  CROSS_SELL: 'productPage',
+  LAST_SEEN: 'empty',
+  TOP_ITEMS: 'empty',
 }
 
-function getContextFromType(type: string) {
-  const result = RecommendationToProductMapping[type as RecommendationVrnType]
+function getContextFromType(type: RecommendationType) {
+  const result = RecommendationToProductMapping[type]
 
   return result ?? 'empty'
 }
@@ -33,9 +30,11 @@ function getContextFromType(type: string) {
 type Props = {
   campaignVrn?: string
   title?: string
+  recommendationType: RecommendationType
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
+  recommendationType,
   campaignVrn,
   title,
 }) => {
@@ -45,10 +44,12 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   } = useOrderForm()
 
   const { campaignType } = useMemo(() => {
-    const result = parseCampaignVrn(campaignVrn)
+    if (campaignVrn) {
+      return { campaignType: getTypeFromVrn(campaignVrn) }
+    }
 
-    return { campaignId: result.campaignId, campaignType: result.campaignType }
-  }, [campaignVrn])
+    return { campaignType: recommendationType }
+  }, [campaignVrn, recommendationType])
 
   const productSource: Record<ProductContext, string[]> = {
     cart:
