@@ -5,6 +5,15 @@ import { RecommendationShelfErrorBoundary } from './components/RecommendationShe
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
 
 defineMessages({
+  shelf: {
+    id: 'admin/editor.recommendation-shelf',
+    defaultMessage: 'Recommendation Shelf',
+  },
+  description: {
+    id: 'admin/editor.recommendation-shelf.description',
+    defaultMessage:
+      'Recommendation Shelf is a component that displays a collection of items that are recommended to the user based on various algorithms and context data.',
+  },
   title: {
     id: 'admin/recommendation-shelf.title',
     defaultMessage: 'Shelf title',

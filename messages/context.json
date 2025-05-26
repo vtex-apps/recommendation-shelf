@@ -1,4 +1,6 @@
 {
+  "admin/editor.recommendation-shelf": "Recommendation Shelf",
+  "admin/editor.recommendation-shelf.description": "Recommendation Shelf is a component that displays a collection of items that are recommended to the user based on various algorithms and context data.",
   "admin/editor.recommendation-shelf.title": "Shelf title",
   "admin/editor.recommendation-shelf.campaign-vrn": "Campaign VRN",
   "admin/editor.recommendation-shelf.recommendation-type": "Recommendation Type",
