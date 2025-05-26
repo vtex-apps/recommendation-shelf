@@ -73,7 +73,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       return undefined
     }
 
-    const recommended = data.recommendationsV1.products
+    const recommended = data.recommendationsV2.products
 
     if (recommended && recommended.length > 0) {
       return recommended
@@ -107,7 +107,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     <Shelf
       products={products}
       title={title}
-      correlationId={data?.recommendationsV1.correlationId ?? ''}
+      correlationId={data?.recommendationsV2.correlationId ?? ''}
       campaignVrn={campaignVrn}
       userId={userId}
     />

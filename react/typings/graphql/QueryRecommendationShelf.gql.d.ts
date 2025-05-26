@@ -3,7 +3,7 @@ declare module '*/QueryRecommendationShelf.gql' {
   import type { Query, Product } from 'vtex.recommendation-bff'
 
   type Response = {
-    recommendationsV1: Query['syneriseRecommendationV1']
+    recommendationsV2: Query['recommendationsV2']
   }
 
   type Args = {
