@@ -20,7 +20,6 @@ export function isValidVrn(campaignVrn: string): boolean {
 }
 
 function parseCampaignVrn(campaignVrn: string) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, __, accountName, campaignType, campaignId] = campaignVrn.split(':')
 
   return {
