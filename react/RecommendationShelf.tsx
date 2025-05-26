@@ -15,7 +15,7 @@ defineMessages({
       'Recommendation Shelf is a component that displays a collection of items that are recommended to the user based on various algorithms and context data.',
   },
   title: {
-    id: 'admin/recommendation-shelf.title',
+    id: 'admin/editor.recommendation-shelf.title',
     defaultMessage: 'Shelf title',
   },
   campaignVrn: {
@@ -25,6 +25,26 @@ defineMessages({
   recommendationType: {
     id: 'admin/editor.recommendation-shelf.recommendation-type',
     defaultMessage: 'Recommendation type',
+  },
+  topItems: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.top-items',
+    defaultMessage: 'Top Items',
+  },
+  similar: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.similar-items',
+    defaultMessage: 'Similar Items',
+  },
+  cross: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.cross-sell',
+    defaultMessage: 'Cross-sell',
+  },
+  last: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.last-seen',
+    defaultMessage: 'Last Seen',
+  },
+  personalized: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.personalized',
+    defaultMessage: 'Personalized',
   },
 })
 
