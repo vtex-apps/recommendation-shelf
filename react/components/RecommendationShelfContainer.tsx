@@ -66,6 +66,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   const { data, error, loading } = useRecommendation({
     userId,
     campaignVrn,
+    recommendationType,
     products: productsIds,
   })
 

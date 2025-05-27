@@ -1,12 +1,14 @@
 query FetchRecommendations(
   $userId: String
   $campaignVrn: String
+  $campaignType: CampaignType
   $products: [String!]
 ) {
   recommendationsV2(
     userId: $userId
     campaignVrn: $campaignVrn
     products: $products
+    campaignType: $campaignType
   ) @context(provider: "vtex.recommendation-bff") {
     campaign {
       id

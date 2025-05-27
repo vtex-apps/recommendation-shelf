@@ -7,8 +7,9 @@ declare module '*/QueryRecommendationShelf.gql' {
   }
 
   type Args = {
-    campaignVrn: string
-    userId: string
+    campaignType?: string
+    campaignVrn?: string
+    userId?: string
     products?: string[]
   }
 
