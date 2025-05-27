@@ -5117,13 +5117,13 @@ verror@1.10.0:
   version "2.90.4"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.90.4/public/@types/vtex.product-summary#fd8e1c455dc9363d86cfa957503d511d43458178"
 
-"vtex.recommendation-bff@https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.21.0+build1748284365/public/@types/vtex.recommendation-bff":
-  version "0.21.0"
-  resolved "https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.21.0+build1748284365/public/@types/vtex.recommendation-bff#fa4f2c974b2a0d988a6bd917d4a2a10a53fd9fc3"
+"vtex.recommendation-bff@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.22.0/public/@types/vtex.recommendation-bff":
+  version "0.22.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.22.0/public/@types/vtex.recommendation-bff#ae0636ed65c21f571a350950c94ee994cb63f9e7"
 
-"vtex.recommendation-shelf@https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@2.3.0+build1747680802/public/@types/vtex.recommendation-shelf":
-  version "2.3.0"
-  resolved "https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@2.3.0+build1747680802/public/@types/vtex.recommendation-shelf#764c893fa0c9b1f6af8ea24e0bb189db392e338c"
+"vtex.recommendation-shelf@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-shelf@2.3.1/public/@types/vtex.recommendation-shelf":
+  version "2.3.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-shelf@2.3.1/public/@types/vtex.recommendation-shelf#7cb5f5e67c6ee103935ca0851fc59e8c61cefdbb"
 
 "vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.136.1/public/@types/vtex.render-runtime":
   version "8.136.1"

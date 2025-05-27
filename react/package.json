@@ -34,8 +34,8 @@
     "vtex.product-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-context@0.10.1/public/@types/vtex.product-context",
     "vtex.product-price": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-price@1.31.2/public/@types/vtex.product-price",
     "vtex.product-summary": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.90.4/public/@types/vtex.product-summary",
-    "vtex.recommendation-bff": "https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-bff@0.21.0+build1748284365/public/@types/vtex.recommendation-bff",
-    "vtex.recommendation-shelf": "https://felipe2--amobeleza.myvtex.com/_v/private/typings/linked/v1/vtex.recommendation-shelf@2.3.0+build1747680802/public/@types/vtex.recommendation-shelf",
+    "vtex.recommendation-bff": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-bff@0.22.0/public/@types/vtex.recommendation-bff",
+    "vtex.recommendation-shelf": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.recommendation-shelf@2.3.1/public/@types/vtex.recommendation-shelf",
     "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.136.1/public/@types/vtex.render-runtime",
     "vtex.search-page-context": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.search-page-context@0.2.0/public/@types/vtex.search-page-context",
     "vtex.slider-layout": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.slider-layout@0.24.7/public/@types/vtex.slider-layout"
