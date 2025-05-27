@@ -5,19 +5,27 @@ import type { Args, Response } from '../graphql/QueryRecommendationShelf.gql'
 import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
 
 function useRecommendation({
+  recommendationType,
   campaignVrn,
   products,
   userId,
 }: {
+  recommendationType: RecommendationType
   campaignVrn?: string
   products: string[]
   userId: string
 }) {
-  const variables = {
-    userId,
-    campaignVrn: campaignVrn ?? '',
-    products,
-  }
+  const variables: Args = campaignVrn
+    ? {
+        userId,
+        campaignVrn,
+        products,
+      }
+    : {
+        userId,
+        campaignType: recommendationType,
+        products,
+      }
 
   const { error, data, loading } = useQuery<Response, Args>(
     recommendationQuery,

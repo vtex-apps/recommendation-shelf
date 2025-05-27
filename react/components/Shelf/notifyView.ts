@@ -5,7 +5,7 @@ type NotifyView = {
 }
 
 export async function notifyView(params: NotifyView) {
-  const path = '/_v/api/recommendation-bff/recommendation-view/v1'
+  const path = '/_v/api/recommendation-bff/events/recommendation-view/v2'
 
   try {
     await fetch(path, {

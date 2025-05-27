@@ -32,9 +32,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     (p: Product) => {
       const itemId = p.productId ?? ''
 
-      notifyClick({ productId: itemId, campaignVrn, correlationId, userId })
+      notifyClick({ productId: itemId, correlationId, userId })
     },
-    [campaignVrn, correlationId, userId]
+    [correlationId, userId]
   )
 
   const onView = useCallback(() => {

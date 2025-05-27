@@ -1,21 +1,19 @@
 type NotifyParams = {
-  campaignVrn: string
   correlationId: string
   productId: string
   userId: string
 }
 
 export async function notifyClick(params: NotifyParams) {
-  const path = `/_v/api/recommendation-bff/campaign-click/v1`
+  const path = `/_v/api/recommendation-bff/events/recommendation-click/v2`
 
   try {
     await fetch(path, {
       method: 'POST',
       body: JSON.stringify({
-        campaignVrn: params.campaignVrn,
         userId: params.userId,
         correlationId: params.correlationId,
-        productId: params.productId,
+        product: params.productId,
       }),
     })
   } catch (err) {

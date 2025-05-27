@@ -1,3 +1,12 @@
 {
-  "admin/recommendation-shelf.title": "Vitrine com recomendação"
+  "admin/editor.recommendation-shelf": "Vitrine de Recomendação",
+  "admin/editor.recommendation-shelf.description": "A Vitrine de Recomendação é um componente que exibe uma coleção de itens recomendados ao usuário com base em diversos algoritmos e dados de contexto.",
+  "admin/editor.recommendation-shelf.title": "Título da Vitrine",
+  "admin/editor.recommendation-shelf.campaign-vrn": "VRN da Campanha",
+  "admin/editor.recommendation-shelf.recommendation-type": "Tipo de Recomendação",
+  "admin/editor.recommendation-shelf.recommendation-type.top-items": "Principais",
+  "admin/editor.recommendation-shelf.recommendation-type.similar-items": "Itens Similares",
+  "admin/editor.recommendation-shelf.recommendation-type.cross-sell": "Complementares",
+  "admin/editor.recommendation-shelf.recommendation-type.last-seen": "Últimos vistos",
+  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalizado"
 }

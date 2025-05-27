@@ -7,7 +7,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es2017",
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "noUnusedLocals": false
   },
   "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }

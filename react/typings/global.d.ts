@@ -6,4 +6,11 @@ declare global {
     schema?: object
     getSchema?(props?: P): object
   }
+
+  export type RecommendationType =
+    | 'CROSS_SELL'
+    | 'SIMILAR_ITEMS'
+    | 'PERSONALIZED'
+    | 'TOP_ITEMS'
+    | 'LAST_SEEN'
 }
