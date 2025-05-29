@@ -66,7 +66,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   const { data, error, loading } = useRecommendation({
     userId,
     campaignVrn,
-    recommendationType,
+    campaignType,
     products: productsIds,
   })
 
@@ -85,32 +85,42 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }, [data, error])
 
   if (!userId) {
-    console.warn('Shelf not displayed due to missing userId', {
-      userId,
-      campaignVrn,
-    })
+    console.warn(
+      '[vtex.recommendation-shelf@2.x] Shelf might not displayed due to missing userId',
+      {
+        userId,
+        campaignVrn,
+        campaignType,
+      }
+    )
   }
 
-  if (!campaignVrn || !isValidVrn(campaignVrn)) {
-    console.warn('Shelf not displayed due to invalid campaignVrn', {
-      campaignVrn,
-    })
+  if (campaignVrn && !isValidVrn(campaignVrn)) {
+    console.warn(
+      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to invalid campaignVrn',
+      {
+        campaignVrn,
+        campaignType,
+      }
+    )
   }
 
   if (!products?.length && loading === false) {
-    console.warn('Shelf not displayed due to missing products or an error', {
-      products,
-      campaignVrn,
-      error,
-    })
+    console.warn(
+      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to missing products or an error',
+      {
+        products,
+        campaignVrn,
+        error,
+      }
+    )
   }
 
-  return products?.length && campaignVrn ? (
+  return products?.length ? (
     <Shelf
       products={products}
-      title={title}
+      title={title ?? data?.recommendationsV2.campaign.title ?? ''}
       correlationId={data?.recommendationsV2.correlationId ?? ''}
-      campaignVrn={campaignVrn}
       userId={userId}
     />
   ) : (

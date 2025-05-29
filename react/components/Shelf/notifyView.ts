@@ -17,6 +17,9 @@ export async function notifyView(params: NotifyView) {
       }),
     })
   } catch (err) {
-    console.error('Error while notifying recommendation view', err)
+    console.error(
+      '[vtex.recommendation-shelf@2.x] Error while notifying recommendation view',
+      err
+    )
   }
 }

@@ -10,19 +10,21 @@ import { attachViewEvent } from '../../utils/attachViewEvent'
 
 type Props = {
   userId: string
-  campaignVrn: string
   correlationId: string
   products: Product[]
   title?: string
 }
 
-const CSS_HANDLES = ['shelfTitleContainer', 'shelfTitle']
+const CSS_HANDLES = [
+  'recommendationShelfContainer',
+  'shelfTitleContainer',
+  'shelfTitle',
+]
 
 const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
   products,
   correlationId,
-  campaignVrn,
   userId,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
@@ -50,17 +52,20 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 
     if (!currentShelfDiv) return
 
-    attachViewEvent(currentShelfDiv, `${campaignVrn}-${correlationId}`)
+    attachViewEvent(currentShelfDiv, `${correlationId}`)
     currentShelfDiv.addEventListener('view', onView)
 
     return () => {
       // Remove listener on unmount to avoid multiple calls
       currentShelfDiv.removeEventListener('view', onView)
     }
-  }, [shelfDivRef, campaignVrn, products, userId, correlationId, onView])
+  }, [shelfDivRef, products, userId, correlationId, onView])
 
   return (
-    <div ref={shelfDivRef}>
+    <div
+      className={`${handles.recommendationShelfContainer}`}
+      ref={shelfDivRef}
+    >
       {title && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>

@@ -14,7 +14,11 @@ export class RecommendationShelfErrorBoundary extends Component<
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error while rendering RecommendationShelf', error, errorInfo)
+    console.error(
+      '[vtex.recommendation-shelf@2.x] Error while rendering RecommendationShelf',
+      error,
+      errorInfo
+    )
   }
 
   public render() {

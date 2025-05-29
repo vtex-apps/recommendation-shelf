@@ -17,6 +17,9 @@ export async function notifyClick(params: NotifyParams) {
       }),
     })
   } catch (err) {
-    console.error('Error while notifying campaign click', err)
+    console.error(
+      '[vtex.recommendation-shelf@2.x] Error while notifying campaign click',
+      err
+    )
   }
 }
