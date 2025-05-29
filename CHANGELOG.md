@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Recommendation fetch via `recommendationType`. 
-
+- Recommendation fetch via `recommendationType`.
 
 ## [2.4.0] - 2025-05-27
 
