@@ -46,7 +46,6 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
       }
       break
     default:
-      args = {}
       break
   }
 
