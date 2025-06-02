@@ -8,6 +8,7 @@ import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
 import { getWithRetry } from '../utils/getWithRetry'
+import { ShelfSkeleton } from './ShelfSkeleton'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
 
@@ -44,7 +45,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     orderForm: { items: orderFormItems },
   } = useOrderForm()
 
-  const [userId, setUserId] = useState<string | null>(null)
+  const [userId, setUserId] = useState<string | null | undefined>(undefined)
 
   const { campaignType } = useMemo(() => {
     if (campaignVrn) {
@@ -81,6 +82,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
           error,
           campaignType
         )
+        setUserId(null)
       })
   }
 
@@ -106,6 +108,10 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
     return undefined
   }, [data, error])
+
+  if (loading || userId === undefined) {
+    return <ShelfSkeleton />
+  }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {
     console.warn(
