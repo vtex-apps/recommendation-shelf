@@ -15,12 +15,18 @@ type RecommendationInput = {
 function getRecommendationArguments(input: RecommendationInput): Args | null {
   const { campaignType, userId, products } = input
 
+  if (!userId) {
+    return null
+  }
+
   let args: Args = input.campaignVrn
     ? ({
         campaignVrn: input.campaignVrn,
+        userId,
       } as Args)
     : {
         campaignType: input.campaignType,
+        userId,
       }
 
   switch (campaignType) {
@@ -34,16 +40,6 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
         products: [products[0]],
       }
 
-      break
-    case 'LAST_SEEN':
-    case 'PERSONALIZED':
-      if (!userId) {
-        return null
-      }
-      args = {
-        ...args,
-        userId,
-      }
       break
     default:
       break
