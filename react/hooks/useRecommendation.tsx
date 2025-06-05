@@ -9,7 +9,7 @@ type RecommendationInput = {
   campaignType: RecommendationType
   campaignVrn?: string
   products: string[]
-  userId?: string
+  userId?: string | null
 }
 
 function getRecommendationArguments(input: RecommendationInput): Args | null {
@@ -46,7 +46,6 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
       }
       break
     default:
-      args = {}
       break
   }
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo } from 'react'
+import React, { Fragment, useMemo, useState } from 'react'
 import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { canUseDOM } from 'vtex.render-runtime'
@@ -7,6 +7,8 @@ import useRecommendation from '../hooks/useRecommendation'
 import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
+import { getWithRetry } from '../utils/getWithRetry'
+import { ShelfSkeleton } from './ShelfSkeleton'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
 
@@ -43,6 +45,8 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     orderForm: { items: orderFormItems },
   } = useOrderForm()
 
+  const [userId, setUserId] = useState<string | null | undefined>(undefined)
+
   const { campaignType } = useMemo(() => {
     if (campaignVrn) {
       return { campaignType: getTypeFromVrn(campaignVrn) }
@@ -59,7 +63,28 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     empty: [],
   }
 
-  const userId = canUseDOM ? getUserIdFromCookie() : ''
+  if (canUseDOM && !userId) {
+    // The pixel might take a while to load and set the userId cookie,
+    // so we use a retry mechanism to ensure we get the userId if available.
+    getWithRetry<string>(() => {
+      if (canUseDOM && !userId) {
+        return getUserIdFromCookie()
+      }
+
+      return ''
+    })
+      .then((value) => {
+        setUserId(value)
+      })
+      .catch((error) => {
+        console.error(
+          '[vtex.recommendation-shelf@2.x] Error retrieving userId from cookie',
+          error,
+          campaignType
+        )
+        setUserId(null)
+      })
+  }
 
   const productsIds = productSource[getContextFromType(campaignType)]
 
@@ -84,15 +109,8 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     return undefined
   }, [data, error])
 
-  if (!userId) {
-    console.warn(
-      '[vtex.recommendation-shelf@2.x] Shelf might not displayed due to missing userId',
-      {
-        userId,
-        campaignVrn,
-        campaignType,
-      }
-    )
+  if (loading || userId === undefined) {
+    return <ShelfSkeleton />
   }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {
@@ -116,7 +134,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     )
   }
 
-  return products?.length ? (
+  return products?.length && userId ? (
     <Shelf
       products={products}
       title={title ?? data?.recommendationsV2.campaign.title ?? ''}

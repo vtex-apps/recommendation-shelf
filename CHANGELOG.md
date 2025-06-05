@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Shelf render for first time users.
+
+### Added
+
+- Looader for the Shelf.
+
 ## [2.4.1] - 2025-05-29
 
 ### Fixed
