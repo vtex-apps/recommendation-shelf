@@ -8,5 +8,6 @@
   "admin/editor.recommendation-shelf.recommendation-type.similar-items": "Similar Items",
   "admin/editor.recommendation-shelf.recommendation-type.cross-sell": "Cross-sell",
   "admin/editor.recommendation-shelf.recommendation-type.last-seen": "Last Seen",
-  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalized"
+  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalized",
+  "admin/editor.recommendation-shelf.recommendation-type.visual-similarity": "Visual Similarity"
 }
