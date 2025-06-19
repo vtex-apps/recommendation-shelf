@@ -8,5 +8,6 @@
   "admin/editor.recommendation-shelf.recommendation-type.similar-items": "Artículos similares",
   "admin/editor.recommendation-shelf.recommendation-type.cross-sell": "Venta cruzada",
   "admin/editor.recommendation-shelf.recommendation-type.last-seen": "Visto recientemente",
-  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalizado"
+  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalizado",
+  "admin/editor.recommendation-shelf.recommendation-type.visual-similarity": "Visualmente similar"
 }

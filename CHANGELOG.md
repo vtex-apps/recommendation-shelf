@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Visual Similarity campaign strategy.
+
 ## [2.5.1] - 2025-06-05
 
 ### Fixed

@@ -21,6 +21,7 @@ const RecommendationToProductMapping: Record<
   CROSS_SELL: 'productPage',
   LAST_SEEN: 'empty',
   TOP_ITEMS: 'empty',
+  VISUAL_SIMILARITY: 'productPage',
 }
 
 function getContextFromType(type: RecommendationType) {

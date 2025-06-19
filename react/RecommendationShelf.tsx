@@ -46,6 +46,10 @@ defineMessages({
     id: 'admin/editor.recommendation-shelf.recommendation-type.personalized',
     defaultMessage: 'Personalized',
   },
+  visualSimilarity: {
+    id: 'admin/editor.recommendation-shelf.recommendation-type.visual-similarity',
+    defaultMessage: 'Visual Similarity',
+  },
 })
 
 type Props = {
@@ -92,6 +96,7 @@ RecommendationShelf.schema = {
         'PERSONALIZED',
         'TOP_ITEMS',
         'LAST_SEEN',
+        'VISUAL_SIMILARITY',
       ],
       default: 'TOP_ITEMS',
       enumNames: [
@@ -100,6 +105,7 @@ RecommendationShelf.schema = {
         'admin/editor.recommendation-shelf.recommendation-type.personalized',
         'admin/editor.recommendation-shelf.recommendation-type.top-items',
         'admin/editor.recommendation-shelf.recommendation-type.last-seen',
+        'admin/editor.recommendation-shelf.recommendation-type.visual-similarity',
       ],
     },
   },

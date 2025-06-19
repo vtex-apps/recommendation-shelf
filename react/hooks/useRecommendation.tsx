@@ -30,6 +30,7 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
       }
 
   switch (campaignType) {
+    case 'VISUAL_SIMILARITY':
     case 'CROSS_SELL':
     case 'SIMILAR_ITEMS':
       if (products.length === 0) {

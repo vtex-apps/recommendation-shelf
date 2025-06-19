@@ -13,4 +13,5 @@ declare global {
     | 'PERSONALIZED'
     | 'TOP_ITEMS'
     | 'LAST_SEEN'
+    | 'VISUAL_SIMILARITY'
 }
