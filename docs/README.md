@@ -31,7 +31,7 @@ To use this app, you need to import it in your store-theme dependencies in the `
 
 ```json
   "dependencies": {
-  "vtex.recommendation-shelf": "2.x"
+    "vtex.recommendation-shelf": "2.x"
   }
 ```
 
@@ -41,29 +41,29 @@ Now, you can change the behavior of the shelf block. See an example of how to co
 
 ```json
   "recommendation-shelf#visual-similarity": {
-  "blocks": ["list-context.product-list-static"],
-  "props": {
-    "recommendationType": "VISUAL_SIMILARITY",
-    "title": "Similar items"
-  }
+    "blocks": ["list-context.product-list-static"],
+    "props": {
+      "recommendationType": "VISUAL_SIMILARITY",
+      "title": "Similar items"
+    }
   },
   "list-context.product-list-static": {
-  "blocks": [
-    "product-summary.shelf"
-  ],
-  "children": [
-    "slider-layout#recommendation-slider"
-  ]
+    "blocks": [
+      "product-summary.shelf"
+    ],
+    "children": [
+      "slider-layout#recommendation-slider"
+    ]
   },
   "slider-layout#recommendation-slider": {
-  "props": {
-    "itemsPerPage": {
-    "desktop": 5,
-    "tablet": 3,
-    "phone": 2
-    },
-    "infinite": true
-  }
+    "props": {
+      "itemsPerPage": {
+      "desktop": 5,
+      "tablet": 3,
+      "phone": 2
+      },
+      "infinite": true
+    }
   }
 ```
 
@@ -79,7 +79,7 @@ Our component relies on two other VTEX components: `slider-layout` and `product-
     "product-summary-sku-selector",
     "product-summary-buy-button"
   ]
-  }
+}
 ```
 
 For more information, see the [Product Summary API configuration](https://github.com/vtex-apps/product-summary/blob/master/README.md#configuration).
