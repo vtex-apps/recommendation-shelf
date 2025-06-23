@@ -10,6 +10,8 @@
 
 The VTEX Recommendation Shelf app is a store component that displays a collection of products using recommendation strategies.
 
+![recommendation-shelf](./shelf.png)
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
