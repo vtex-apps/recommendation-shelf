@@ -123,7 +123,7 @@ Check if others have encountered similar issues [here](https://github.com/vtex-a
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Contributors ✨
  
@@ -140,3 +140,5 @@ Thanks goes to these wonderful people:
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
  
 <!-- DOCS-IGNORE:end -->
+ 
+ 
