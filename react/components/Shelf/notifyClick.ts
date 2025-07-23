@@ -1,4 +1,5 @@
 import { generateRecOriginHeader } from '../../utils/requests'
+import { logger } from '../../utils/logger'
 
 type NotifyParams = {
   account: string
@@ -24,9 +25,9 @@ export async function notifyClick(params: NotifyParams) {
       }),
     })
   } catch (err) {
-    console.error(
-      '[vtex.recommendation-shelf@2.x] Error while notifying campaign click',
-      err
-    )
+    logger.error({
+      message: 'Error while notifying campaign click',
+      data: err,
+    })
   }
 }

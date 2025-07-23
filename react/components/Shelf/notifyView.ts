@@ -1,4 +1,5 @@
 import { generateRecOriginHeader } from '../../utils/requests'
+import { logger } from '../../utils/logger'
 
 type NotifyView = {
   account: string
@@ -24,9 +25,9 @@ export async function notifyView(params: NotifyView) {
       }),
     })
   } catch (err) {
-    console.error(
-      '[vtex.recommendation-shelf@2.x] Error while notifying recommendation view',
-      err
-    )
+    logger.error({
+      message: 'Error while notifying recommendation view',
+      data: err,
+    })
   }
 }

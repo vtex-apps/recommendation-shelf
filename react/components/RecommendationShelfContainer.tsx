@@ -8,6 +8,7 @@ import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
 import { getWithRetry } from '../utils/getWithRetry'
+import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
@@ -84,11 +85,10 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
         setUserId(value)
       })
       .catch((error) => {
-        console.error(
-          '[vtex.recommendation-shelf@2.x] Error retrieving userId from cookie',
-          error,
-          campaignType
-        )
+        logger.error({
+          message: 'Error retrieving userId from cookie',
+          data: { error, campaignType },
+        })
         setUserId(null)
       })
   }
@@ -121,24 +121,17 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {
-    console.warn(
-      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to invalid campaignVrn',
-      {
-        campaignVrn,
-        campaignType,
-      }
-    )
+    logger.warn({
+      message: 'Shelf not displayed due to invalid campaignVrn',
+      data: { campaignVrn, campaignType },
+    })
   }
 
   if (!products?.length && loading === false) {
-    console.warn(
-      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to missing products or an error',
-      {
-        products,
-        campaignVrn,
-        error,
-      }
-    )
+    logger.warn({
+      message: 'Shelf not displayed due to missing products or an error',
+      data: { products, campaignVrn, error },
+    })
   }
 
   return products?.length && userId ? (
