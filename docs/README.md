@@ -10,7 +10,7 @@
 
 The VTEX Recommendation Shelf app is a store component that displays a collection of products using recommendation strategies.
 
-![recommendation-shelf](./shelf.png)
+![recommendation-shelf](https://raw.githubusercontent.com/vtex-apps/recommendation-shelf/refs/heads/master/docs/shelf.png)
 
 ## Table of Contents
 
@@ -45,7 +45,7 @@ Now, you can change the behavior of the shelf block. See an example of how to co
   "recommendation-shelf#visual-similarity": {
     "blocks": ["list-context.product-list-static"],
     "props": {
-      "recommendationType": "VISUAL_SIMILARITY",
+      "campaignVrn": "vrn:recommendations:biggy:rec-similar-v2:00318b68-cb1b-4d5a-8b0f-cc7fbcdd014b",
       "title": "Similar items"
     }
   },
@@ -90,57 +90,58 @@ For more information, see the [Product Summary API configuration](https://github
 
 You can configure the `recommendation-shelf` block in your theme app using the following props:
 
-| Prop name            | Type     | Description                                                                                                                                      | Default value |
-|----------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `recommendationType` | `Enum`   | Recommendation strategy used to fetch product suggestions for a user. [See Recommendation Strategies](#recommendation-strategies)                | TOP_ITEMS     |
-| `title`              | `string` | Title to be displayed with the shelf.                                                                                                            | -             |
-| `campaignVrn`        | `string` | VRN identifier for an existing campaign. Takes precedence over **recommendationType**.                                                           | -             |
+| Prop name      | Type      | Description                                                       | Default value |
+| -------------- | --------- | ----------------------------------------------------------------- | ------------- |
+| `title`        | `string`  | Title to be displayed with the shelf.                             | -             |
+| `campaignVrn`  | `string`  | VRN identifier for an existing campaign.                          | -             |
+| `displayTitle` | `boolean` | Decides wether the title should be displayed along side the shelf | true          |
 
 ## Recommendation Strategies
 
 Below are the available recommendation strategies that can be used to fetch product suggestions:
 
-| `strategy`   | Description                                              | Pages |
-|--------------|----------------------------------------------------------|-------|
-| `TOP_ITEMS`  | Returns the most bought products in the store            | Any   |
+| `strategy`  | Description                                   | Pages |
+| ----------- | --------------------------------------------- | ----- |
+| `TOP_ITEMS` | Returns the most bought products in the store | Any   |
 
 Some strategies are based on user interest and navigation:
 
-| `strategy`     | Description                                                                                                 | Pages |
-|----------------|-------------------------------------------------------------------------------------------------------------|-------|
-| `PERSONALIZED` | Returns products recommended based on the last products clicked by the user in the store.                   | Any   |
-| `LAST_SEEN`    | Returns products recommended based on the last products viewed by the user in the store.                    | Any   |
+| `strategy`     | Description                                                                               | Pages |
+| -------------- | ----------------------------------------------------------------------------------------- | ----- |
+| `PERSONALIZED` | Returns products recommended based on the last products clicked by the user in the store. | Any   |
+| `LAST_SEEN`    | Returns products recommended based on the last products viewed by the user in the store.  | Any   |
 
 Others are based on the current product (recommended for use on `store.product` pages):
 
-| `strategy`          | Description                                                                                   | Pages           |
-|---------------------|-----------------------------------------------------------------------------------------------|-----------------|
-| `CROSS_SELL`        | Returns complementary products related to the current product.                                | `store.product` |
-| `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product.                          | `store.product` |
-| `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.                              | `store.product` |
+| `strategy`          | Description                                                          | Pages           |
+| ------------------- | -------------------------------------------------------------------- | --------------- |
+| `CROSS_SELL`        | Returns complementary products related to the current product.       | `store.product` |
+| `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product. | `store.product` |
+| `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.     | `store.product` |
 
 ## Troubleshooting
 
 Check if others have encountered similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Contributors ✨
- 
+
 Thanks goes to these wonderful people:
- 
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
  
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
- 
+
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
- 
+
 <!-- DOCS-IGNORE:end -->
- 
- 
