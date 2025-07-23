@@ -56,7 +56,7 @@ function getRecommendationArguments(
   return args
 }
 
-function useRecommendation(args: RecommendationInput) {
+function useRecommendations(args: RecommendationInput) {
   const runtime = useRuntime()
   const { account } = runtime
 
@@ -116,4 +116,4 @@ function useRecommendation(args: RecommendationInput) {
   }
 }
 
-export default useRecommendation
+export default useRecommendations

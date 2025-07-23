@@ -3,7 +3,7 @@ import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { canUseDOM } from 'vtex.render-runtime'
 
-import useRecommendation from '../hooks/useRecommendation'
+import useRecommendations from '../hooks/useRecommendations'
 import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
@@ -89,7 +89,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
   const productsIds = productSource[getContextFromType(campaignType)]
 
-  const { data, error, loading } = useRecommendation({
+  const { data, error, loading } = useRecommendations({
     userId,
     campaignVrn,
     recommendationType: campaignType,
