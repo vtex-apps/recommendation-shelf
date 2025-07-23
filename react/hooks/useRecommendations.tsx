@@ -72,7 +72,7 @@ function useRecommendations(args: RecommendationInput) {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    if (!shouldSkip) return
+    if (shouldSkip) return
 
     setLoading(true)
     setError(null)
