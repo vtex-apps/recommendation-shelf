@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
+import type { Product } from 'recommend-bff'
 
-import type { Product } from '../graphql/QueryRecommendationShelf.gql'
 import styles from './styles.css'
 import { notifyClick } from './notifyClick'
 import { notifyView } from './notifyView'

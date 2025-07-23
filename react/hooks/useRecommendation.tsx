@@ -1,19 +1,22 @@
-/* eslint-disable padding-line-between-statements */
-import { useQuery } from 'react-apollo'
-import { canUseDOM } from 'vtex.render-runtime'
-
-import type { Args, Response } from '../graphql/QueryRecommendationShelf.gql'
-import recommendationQuery from '../graphql/QueryRecommendationShelf.gql'
+import { useEffect, useState } from 'react'
+import { canUseDOM, useRuntime } from 'vtex.render-runtime'
+import type {
+  RecommendationsV2RequestQuery as Args,
+  RecommendationsV2Response as Response,
+} from 'recommend-bff'
 
 type RecommendationInput = {
-  campaignType: RecommendationType
+  recommendationType: RecommendationType
   campaignVrn?: string
   products: string[]
   userId?: string | null
 }
 
-function getRecommendationArguments(input: RecommendationInput): Args | null {
-  const { campaignType, userId, products } = input
+function getRecommendationArguments(
+  input: RecommendationInput,
+  account: string
+): Args | null {
+  const { recommendationType, userId, products } = input
 
   if (!userId) {
     return null
@@ -21,15 +24,18 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
 
   let args: Args = input.campaignVrn
     ? ({
+        an: account,
         campaignVrn: input.campaignVrn,
         userId,
       } as Args)
     : {
-        campaignType: input.campaignType,
+        an: account,
+        recommendationType,
         userId,
       }
 
-  switch (campaignType) {
+  /* eslint-disable padding-line-between-statements */
+  switch (input.recommendationType) {
     case 'VISUAL_SIMILARITY':
     case 'CROSS_SELL':
     case 'SIMILAR_ITEMS':
@@ -38,7 +44,8 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
       }
       args = {
         ...args,
-        products: [products[0]],
+        an: account,
+        products: products[0],
       }
 
       break
@@ -50,16 +57,57 @@ function getRecommendationArguments(input: RecommendationInput): Args | null {
 }
 
 function useRecommendation(args: RecommendationInput) {
-  const variables = getRecommendationArguments(args)
+  const runtime = useRuntime()
+  const { account } = runtime
 
-  const { error, data, loading } = useQuery<Response, Args>(
-    recommendationQuery,
-    {
-      variables: variables as Args,
-      skip: !canUseDOM || !variables,
-      notifyOnNetworkStatusChange: true,
+  const variables = getRecommendationArguments(args, account)
+  const shouldSkip = !canUseDOM || !variables
+  const userId = variables?.userId
+  const products = variables?.products
+  const campaignVrn = variables?.campaignVrn
+  const recommendationType = variables?.recommendationType
+
+  const [data, setData] = useState<Response | null>(null)
+  const [error, setError] = useState<Error | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!shouldSkip) return
+
+    setLoading(true)
+    setError(null)
+
+    const params: Record<string, string> = {
+      an: account,
     }
-  )
+    if (userId) params.userId = userId
+    if (recommendationType) params.recommendationType = recommendationType
+    if (products) params.products = products
+    if (campaignVrn) params.campaignVrn = campaignVrn
+
+    const queryParams = new URLSearchParams(params).toString()
+
+    fetch(`/api/recommend-bff/recommendations/v2?${queryParams}`, {
+      method: 'GET',
+      headers: {
+        'x-vtex-rec-origin': `${account}/storefront/vtex.recommendation-shelf@2.x`,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const result = await response.json()
+        setData(result)
+      })
+      .catch((err) => {
+        setError(err)
+        setData(null)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [account, shouldSkip, userId, products, campaignVrn, recommendationType])
 
   return {
     error,
