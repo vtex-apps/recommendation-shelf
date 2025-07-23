@@ -5,6 +5,8 @@ import type {
   RecommendationsV2Response as Response,
 } from 'recommend-bff'
 
+import { generateRecOriginHeader } from '../utils/requests'
+
 type RecommendationInput = {
   recommendationType: RecommendationType
   campaignVrn?: string
@@ -90,7 +92,7 @@ function useRecommendations(args: RecommendationInput) {
     fetch(`/api/recommend-bff/recommendations/v2?${queryParams}`, {
       method: 'GET',
       headers: {
-        'x-vtex-rec-origin': `${account}/storefront/vtex.recommendation-shelf@2.x`,
+        ...generateRecOriginHeader(account),
       },
     })
       .then(async (response) => {

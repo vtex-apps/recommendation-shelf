@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
 
@@ -29,14 +29,15 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
+  const { account } = useRuntime()
 
   const onProductClick = useCallback(
     (p: Product) => {
       const itemId = p.productId ?? ''
 
-      notifyClick({ productId: itemId, correlationId, userId })
+      notifyClick({ productId: itemId, correlationId, userId, account })
     },
-    [correlationId, userId]
+    [correlationId, userId, account]
   )
 
   const onView = useCallback(() => {
@@ -44,8 +45,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       userId,
       correlationId,
       products: products.map((p) => p.productId ?? ''),
+      account,
     })
-  }, [products, userId, correlationId])
+  }, [products, userId, correlationId, account])
 
   useEffect(() => {
     const currentShelfDiv = shelfDivRef.current
