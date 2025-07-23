@@ -15,10 +15,11 @@ export class RecommendationShelfErrorBoundary extends Component<
     return { hasError: true }
   }
 
-  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  public componentDidCatch(error: Error) {
     logger.error({
       message: 'Error while rendering RecommendationShelf',
-      data: { error, errorInfo },
+      data: { error },
+      sendLog: true,
     })
   }
 

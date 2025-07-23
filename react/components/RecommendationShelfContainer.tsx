@@ -88,6 +88,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
         logger.error({
           message: 'Error retrieving userId from cookie',
           data: { error, campaignType },
+          sendLog: true,
         })
         setUserId(null)
       })
