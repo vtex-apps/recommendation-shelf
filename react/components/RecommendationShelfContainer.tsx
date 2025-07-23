@@ -24,7 +24,11 @@ const RecommendationToProductMapping: Record<
   VISUAL_SIMILARITY: 'productPage',
 }
 
-function getContextFromType(type: RecommendationType) {
+function getContextFromType(type?: RecommendationType) {
+  if (!type) {
+    return 'empty'
+  }
+
   const result = RecommendationToProductMapping[type]
 
   return result ?? 'empty'
@@ -33,13 +37,15 @@ function getContextFromType(type: RecommendationType) {
 type Props = {
   campaignVrn?: string
   title?: string
-  recommendationType: RecommendationType
+  recommendationType?: RecommendationType
+  displayTitle: boolean
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
   recommendationType,
   campaignVrn,
   title,
+  displayTitle,
 }) => {
   const productContext = useProduct()
   const {
@@ -141,6 +147,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       title={title ?? data?.campaign.title ?? ''}
       correlationId={data?.correlationId ?? ''}
       userId={userId}
+      displayTitle={displayTitle}
     />
   ) : (
     <Fragment />

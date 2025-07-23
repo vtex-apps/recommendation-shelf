@@ -12,6 +12,7 @@ type Props = {
   userId: string
   correlationId: string
   products: Product[]
+  displayTitle: boolean
   title?: string
 }
 
@@ -26,6 +27,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   products,
   correlationId,
   userId,
+  displayTitle,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -68,7 +70,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       className={`${handles.recommendationShelfContainer}`}
       ref={shelfDivRef}
     >
-      {title && (
+      {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>
             {title}

@@ -8,7 +8,7 @@ import type {
 import { generateRecOriginHeader } from '../utils/requests'
 
 type RecommendationInput = {
-  recommendationType: RecommendationType
+  recommendationType?: RecommendationType
   campaignVrn?: string
   products: string[]
   userId?: string | null
