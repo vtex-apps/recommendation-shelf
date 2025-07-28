@@ -11,24 +11,10 @@
           "title": "admin/editor.recommendation-shelf.campaign-vrn",
           "$ref": "app:vtex.native-types#/definitions/text"
         },
-        "recommendationType": {
-          "title": "admin/editor.recommendation-shelf.recommendation-type",
-          "type": "string",
-          "enum": [
-            "CROSS_SELL",
-            "SIMILAR_ITEMS",
-            "PERSONALIZED",
-            "TOP_ITEMS",
-            "LAST_SEEN"
-          ],
-          "default": "TOP_ITEMS",
-          "enumNames": [
-            "admin/editor.recommendation-shelf.recommendation-type.cross-sell",
-            "admin/editor.recommendation-shelf.recommendation-type.similar-items",
-            "admin/editor.recommendation-shelf.recommendation-type.personalized",
-            "admin/editor.recommendation-shelf.recommendation-type.top-items",
-            "admin/editor.recommendation-shelf.recommendation-type.last-seen"
-          ]
+        "displayTitle": {
+          "title": "admin/editor.recommendation-shelf.display-title",
+          "type": "boolean",
+          "default": true
         }
       }
     }

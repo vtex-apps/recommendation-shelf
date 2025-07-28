@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
+import type { Product } from 'recommend-bff'
 
-import type { Product } from '../graphql/QueryRecommendationShelf.gql'
 import styles from './styles.css'
 import { notifyClick } from './notifyClick'
 import { notifyView } from './notifyView'
@@ -12,6 +12,7 @@ type Props = {
   userId: string
   correlationId: string
   products: Product[]
+  displayTitle: boolean
   title?: string
 }
 
@@ -26,17 +27,19 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   products,
   correlationId,
   userId,
+  displayTitle,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
+  const { account } = useRuntime()
 
   const onProductClick = useCallback(
     (p: Product) => {
       const itemId = p.productId ?? ''
 
-      notifyClick({ productId: itemId, correlationId, userId })
+      notifyClick({ productId: itemId, correlationId, userId, account })
     },
-    [correlationId, userId]
+    [correlationId, userId, account]
   )
 
   const onView = useCallback(() => {
@@ -44,8 +47,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       userId,
       correlationId,
       products: products.map((p) => p.productId ?? ''),
+      account,
     })
-  }, [products, userId, correlationId])
+  }, [products, userId, correlationId, account])
 
   useEffect(() => {
     const currentShelfDiv = shelfDivRef.current
@@ -66,7 +70,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       className={`${handles.recommendationShelfContainer}`}
       ref={shelfDivRef}
     >
-      {title && (
+      {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
           <span className={`${styles.shelfTitle} ${handles.shelfTitle}`}>
             {title}
