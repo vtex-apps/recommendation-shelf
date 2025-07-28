@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- RecommendationSkeletonPieces to be customizable via css by adding the `recommendationSkeletonPiece` css handle.
+
 ## [2.8.0] - 2025-07-28
 
 ### Added

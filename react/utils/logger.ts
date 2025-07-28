@@ -64,6 +64,7 @@ class Logger {
           app: 'vtex.recommendation-shelf',
           message: args.message,
           level,
+          url: window.document.URL,
           ...args.data,
         }),
       })

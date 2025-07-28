@@ -1,12 +1,16 @@
 import './style.css'
 
 import React from 'react'
+import { useCssHandles } from 'vtex.css-handles'
+
+const CSS_HANDLES = ['recommendationSkeletonPiece']
 
 export function SkeletonPiece() {
+  const handles = useCssHandles(CSS_HANDLES)
+
   return (
     <div
-      className="bg-muted-5 br3 center"
-      style={{ height: '550px', width: '300px' }}
+      className={`${handles.recommendationSkeletonPiece} bg-muted-5 br3 center`}
     >
       <div className="shimmer" />
     </div>
