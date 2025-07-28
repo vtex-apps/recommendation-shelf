@@ -37,7 +37,7 @@ export function ShelfSkeleton() {
 
   return (
     <div
-      className={`${handles.recommendationShelfContainer} w-100 flex flex-wrap justify-center`}
+      className={`${handles.recommendationShelfContainer} w-100 flex justify-center`}
     >
       {skeletonPieces}
     </div>
