@@ -3,11 +3,5 @@
   "admin/editor.recommendation-shelf.description": "La estantería de recomendaciones es un componente que muestra una colección de artículos recomendados al usuario según varios algoritmos y datos de contexto.",
   "admin/editor.recommendation-shelf.title": "Título de la estantería",
   "admin/editor.recommendation-shelf.campaign-vrn": "Campaña VRN",
-  "admin/editor.recommendation-shelf.recommendation-type": "Tipo de recomendación",
-  "admin/editor.recommendation-shelf.recommendation-type.top-items": "Artículos principales",
-  "admin/editor.recommendation-shelf.recommendation-type.similar-items": "Artículos similares",
-  "admin/editor.recommendation-shelf.recommendation-type.cross-sell": "Venta cruzada",
-  "admin/editor.recommendation-shelf.recommendation-type.last-seen": "Visto recientemente",
-  "admin/editor.recommendation-shelf.recommendation-type.personalized": "Personalizado",
-  "admin/editor.recommendation-shelf.recommendation-type.visual-similarity": "Visualmente similar"
+  "admin/editor.recommendation-shelf.display-title": "Mostrar título"
 }

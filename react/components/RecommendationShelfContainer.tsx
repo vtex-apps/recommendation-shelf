@@ -3,11 +3,12 @@ import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { canUseDOM } from 'vtex.render-runtime'
 
-import useRecommendation from '../hooks/useRecommendation'
+import useRecommendations from '../hooks/useRecommendations'
 import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie } from '../utils/user'
 import { getWithRetry } from '../utils/getWithRetry'
+import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
 
 type ProductContext = 'empty' | 'cart' | 'productPage'
@@ -24,7 +25,11 @@ const RecommendationToProductMapping: Record<
   VISUAL_SIMILARITY: 'productPage',
 }
 
-function getContextFromType(type: RecommendationType) {
+function getContextFromType(type?: RecommendationType) {
+  if (!type) {
+    return 'empty'
+  }
+
   const result = RecommendationToProductMapping[type]
 
   return result ?? 'empty'
@@ -33,13 +38,15 @@ function getContextFromType(type: RecommendationType) {
 type Props = {
   campaignVrn?: string
   title?: string
-  recommendationType: RecommendationType
+  recommendationType?: RecommendationType
+  displayTitle: boolean
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
   recommendationType,
   campaignVrn,
   title,
+  displayTitle,
 }) => {
   const productContext = useProduct()
   const {
@@ -78,21 +85,21 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
         setUserId(value)
       })
       .catch((error) => {
-        console.error(
-          '[vtex.recommendation-shelf@2.x] Error retrieving userId from cookie',
-          error,
-          campaignType
-        )
+        logger.error({
+          message: 'Error retrieving userId from cookie',
+          data: { error, campaignType },
+          sendLog: true,
+        })
         setUserId(null)
       })
   }
 
   const productsIds = productSource[getContextFromType(campaignType)]
 
-  const { data, error, loading } = useRecommendation({
+  const { data, error, loading } = useRecommendations({
     userId,
     campaignVrn,
-    campaignType,
+    recommendationType: campaignType,
     products: productsIds,
   })
 
@@ -101,7 +108,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       return undefined
     }
 
-    const recommended = data.recommendationsV2.products
+    const recommended = data.products
 
     if (recommended && recommended.length > 0) {
       return recommended
@@ -115,32 +122,26 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {
-    console.warn(
-      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to invalid campaignVrn',
-      {
-        campaignVrn,
-        campaignType,
-      }
-    )
+    logger.warn({
+      message: 'Shelf not displayed due to invalid campaignVrn',
+      data: { campaignVrn, campaignType },
+    })
   }
 
   if (!products?.length && loading === false) {
-    console.warn(
-      '[vtex.recommendation-shelf@2.x] Shelf not displayed due to missing products or an error',
-      {
-        products,
-        campaignVrn,
-        error,
-      }
-    )
+    logger.warn({
+      message: 'Shelf not displayed due to missing products or an error',
+      data: { products, campaignVrn, error },
+    })
   }
 
   return products?.length && userId ? (
     <Shelf
       products={products}
-      title={title ?? data?.recommendationsV2.campaign.title ?? ''}
-      correlationId={data?.recommendationsV2.correlationId ?? ''}
+      title={title ?? data?.campaign.title ?? ''}
+      correlationId={data?.correlationId ?? ''}
       userId={userId}
+      displayTitle={displayTitle}
     />
   ) : (
     <Fragment />

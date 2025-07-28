@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 
+import { logger } from '../utils/logger'
+
 export class RecommendationShelfErrorBoundary extends Component<
   any,
   { hasError: boolean }
@@ -13,12 +15,12 @@ export class RecommendationShelfErrorBoundary extends Component<
     return { hasError: true }
   }
 
-  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error(
-      '[vtex.recommendation-shelf@2.x] Error while rendering RecommendationShelf',
-      error,
-      errorInfo
-    )
+  public componentDidCatch(error: Error) {
+    logger.error({
+      message: 'Error while rendering RecommendationShelf',
+      data: { error },
+      sendLog: true,
+    })
   }
 
   public render() {

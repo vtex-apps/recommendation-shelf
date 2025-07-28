@@ -30,7 +30,6 @@ Follow these steps to use the Recommendation Shelf app in your store:
 
 2. Add the `recommendation-shelf` block into your app theme where you want the shelf to appear.
 
-
 3. Customize the behavior of the shelf block.
 
    The example below shows the following configuration of the `recommendation-shelf` block and its supporting blocks:
@@ -45,7 +44,7 @@ Follow these steps to use the Recommendation Shelf app in your store:
    "recommendation-shelf#visual-similarity": {
      "blocks": ["list-context.product-list-static"],
      "props": {
-       "recommendationType": "VISUAL_SIMILARITY",
+       "campaignVrn": "vrn:recommendations:biggy:rec-similar-v2:00318b68-cb1b-4d5a-8b0f-cc7fbcdd014b",
        "title": "Similar items"
      }
    },
@@ -92,46 +91,48 @@ Follow these steps to use the Recommendation Shelf app in your store:
 
 You can configure the `recommendation-shelf` block in your theme app using the following props:
 
-| Prop name            | Type     | Description                                                                                                                                      | Default value |
-|----------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `recommendationType` | `enum`   | Recommendation strategy used to fetch product suggestions for a user. See [Recommendation strategies](#recommendation-strategies) for all possible values.             | TOP_ITEMS     |
-| `title`              | `string` | Title to be displayed with the shelf.                                                                                                            | -             |
-| `campaignVrn`        | `string` | VRN identifier for an existing campaign. Takes precedence over `recommendationType`.                                                           | -             |
+| Prop name      | Type      | Description                                                                                  | Default value |
+| -------------- | --------- | -------------------------------------------------------------------------------------------- | ------------- |
+| `title`        | `string`  | Title to be displayed with the shelf.                                                        | -             |
+| `campaignVrn`  | `string`  | VRN identifier for an existing campaign.                                                     | -             |
+| `displayTitle` | `boolean` | Decides whether the title should be displayed alongside the shelf (`true`) or not (`false`). | true          |
 
 ## Recommendation strategies
 
 Below are the available recommendation strategies that can be used to fetch product suggestions:
 
-| `strategy`   | Description                                              | Pages |
-|--------------|----------------------------------------------------------|-------|
-| `TOP_ITEMS`  | Returns the most bought products in the store.            | Any   |
-| `PERSONALIZED` | Returns recommended products based on the last products clicked by the user in the store.                   | Any   |
-| `LAST_SEEN`    | Returns recommended products based on the last products viewed by the user in the store.                    | Any   |
-| `CROSS_SELL`        | Returns complementary products related to the current product.                                | `store.product` |
-| `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product.                          | `store.product` |
-| `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.                              | `store.product` |
+| `strategy`          | Description                                                                               | Pages           |
+|---------------------|-------------------------------------------------------------------------------------------|-----------------|
+| `TOP_ITEMS`         | Returns the most bought products in the store.                                            | Any             |
+| `PERSONALIZED`      | Returns recommended products based on the last products clicked by the user in the store. | Any             |
+| `LAST_SEEN`         | Returns recommended products based on the last products viewed by the user in the store.  | Any             |
+| `CROSS_SELL`        | Returns complementary products related to the current product.                            | `store.product` |
+| `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product.                      | `store.product` |
+| `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.                          | `store.product` |
 
 ## Troubleshooting
 
 Check if others have encountered similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Contributors ✨
- 
+
 Thanks goes to these wonderful people:
- 
+
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
  
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
- 
+
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
- 
+
 <!-- DOCS-IGNORE:end -->
- 

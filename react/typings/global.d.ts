@@ -7,6 +7,13 @@ declare global {
     getSchema?(props?: P): object
   }
 
+  interface Window {
+    __RUNTIME__?: {
+      account?: string
+      // add other properties if needed
+    }
+  }
+
   export type RecommendationType =
     | 'CROSS_SELL'
     | 'SIMILAR_ITEMS'

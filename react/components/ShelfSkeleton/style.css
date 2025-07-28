@@ -8,6 +8,11 @@
   }
 }
 
+.recommendationSkeletonPiece {
+  height: 550px;
+  width: 300px;
+}
+
 .shimmer {
   width: 200%;
   height: 100%;

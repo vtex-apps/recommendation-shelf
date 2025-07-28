@@ -1,7 +1,7 @@
 {
   "name": "recommendation-shelf",
   "vendor": "vtex",
-  "version": "2.7.0",
+  "version": "2.9.0",
   "title": "Recommendation Shelf Components",
   "description": "Recommendation components and functionality for VTEX IO.",
   "builders": {
@@ -20,8 +20,7 @@
     "vtex.product-summary": "2.x",
     "vtex.search-page-context": "0.x",
     "vtex.slider-layout": "0.x",
-    "vtex.order-manager": "0.x",
-    "vtex.recommendation-bff": "0.x"
+    "vtex.order-manager": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

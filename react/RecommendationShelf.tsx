@@ -22,46 +22,24 @@ defineMessages({
     id: 'admin/editor.recommendation-shelf.campaign-vrn',
     defaultMessage: 'Campaign VRN',
   },
-  recommendationType: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type',
-    defaultMessage: 'Recommendation type',
-  },
-  topItems: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.top-items',
-    defaultMessage: 'Top Items',
-  },
-  similar: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.similar-items',
-    defaultMessage: 'Similar Items',
-  },
-  cross: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.cross-sell',
-    defaultMessage: 'Cross-sell',
-  },
-  last: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.last-seen',
-    defaultMessage: 'Last Seen',
-  },
-  personalized: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.personalized',
-    defaultMessage: 'Personalized',
-  },
-  visualSimilarity: {
-    id: 'admin/editor.recommendation-shelf.recommendation-type.visual-similarity',
-    defaultMessage: 'Visual Similarity',
+  displayTitle: {
+    id: 'admin/editor.recommendation-shelf.display-title',
+    defaultMessage: 'Display Title',
   },
 })
 
 type Props = {
   campaignVrn?: string
   title?: string
-  recommendationType: RecommendationType
+  recommendationType?: RecommendationType // Deprecated, use campaignVrn instead
+  displayTitle: boolean
 }
 
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   campaignVrn,
   title,
   recommendationType,
+  displayTitle,
 }) => {
   return (
     <RecommendationShelfErrorBoundary>
@@ -69,6 +47,7 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
         campaignVrn={campaignVrn}
         title={title}
         recommendationType={recommendationType}
+        displayTitle={displayTitle}
       />
     </RecommendationShelfErrorBoundary>
   )
@@ -87,26 +66,10 @@ RecommendationShelf.schema = {
       title: 'admin/editor.recommendation-shelf.campaign-vrn',
       type: 'string',
     },
-    recommendationType: {
-      title: 'admin/editor.recommendation-shelf.recommendation-type',
-      type: 'string',
-      enum: [
-        'CROSS_SELL',
-        'SIMILAR_ITEMS',
-        'PERSONALIZED',
-        'TOP_ITEMS',
-        'LAST_SEEN',
-        'VISUAL_SIMILARITY',
-      ],
-      default: 'TOP_ITEMS',
-      enumNames: [
-        'admin/editor.recommendation-shelf.recommendation-type.cross-sell',
-        'admin/editor.recommendation-shelf.recommendation-type.similar-items',
-        'admin/editor.recommendation-shelf.recommendation-type.personalized',
-        'admin/editor.recommendation-shelf.recommendation-type.top-items',
-        'admin/editor.recommendation-shelf.recommendation-type.last-seen',
-        'admin/editor.recommendation-shelf.recommendation-type.visual-similarity',
-      ],
+    displayTitle: {
+      title: 'admin/editor.recommendation-shelf.display-title',
+      type: 'boolean',
+      default: true,
     },
   },
 }
