@@ -6,7 +6,7 @@
 
 The Recommendation Shelf app is a store component that displays a collection of products using recommendation strategies.
 
-![recommendation-shelf](https://raw.githubusercontent.com/vtex-apps/recommendation-shelf/refs/heads/master/docs/shelf.png)
+![recommendation-shelf](https://cdn.jsdelivr.net/gh/vtex-apps/recommendation-shelf@master/docs/shelf.png)
 
 > ℹ️ Learn more about [Product Recommendations](https://help.vtex.com/en/tutorial/product-recommendations-beta--2QIexbD2FSXBxELUnFtg7g).
 
