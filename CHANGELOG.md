@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- CSS and Styles builder to avoid affecting stores while adding recommendation shelfs.
+
 ## [2.9.1] - 2025-07-28
 
 ### Changed
