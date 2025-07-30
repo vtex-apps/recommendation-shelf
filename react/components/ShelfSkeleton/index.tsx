@@ -23,7 +23,7 @@ function checkDevice(): 'DESKTOP' | 'MOBILE' | 'TABLET' {
 
 const DEVICE_MAP = {
   DESKTOP: 4,
-  MOBILE: 1,
+  MOBILE: 2,
   TABLET: 3,
 }
 
