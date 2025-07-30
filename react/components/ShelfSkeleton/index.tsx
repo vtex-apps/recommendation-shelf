@@ -7,7 +7,7 @@ const CSS_HANDLES = ['recommendationShelfContainer']
 
 function checkDevice(): 'DESKTOP' | 'MOBILE' | 'TABLET' {
   if (typeof window === 'undefined') {
-    return 'DESKTOP'
+    return 'MOBILE'
   }
 
   if (window.innerWidth <= 768) {
