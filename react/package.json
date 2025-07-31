@@ -1,6 +1,6 @@
 {
   "name": "search-bar",
-  "version": "2.9.2",
+  "version": "2.10.0",
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
