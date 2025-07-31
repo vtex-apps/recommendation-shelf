@@ -128,7 +128,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     })
   }
 
-  if (!products?.length && loading === false) {
+  if ((products && products.length === 0 && loading === false) || error) {
     logger.warn({
       message: 'Shelf not displayed due to missing products or an error',
       data: { products, campaignVrn, error },

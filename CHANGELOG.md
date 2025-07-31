@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Loader to have a css handle and use a different animation.
+
+### Fixed
+
+- Logs and title style.
+- Increase cookie retrieval retries to fix behaviour fo first time users.
+
 ## [2.9.2] - 2025-07-30
 
 ### Removed
