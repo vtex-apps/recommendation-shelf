@@ -6,7 +6,7 @@ function getCookie(name: string): string | null {
 }
 
 export function getUserIdFromCookie(): string {
-  const recommendationUser = getCookie('vtex-recommendation-user')
+  const recommendationUser = getCookie('vtex-rec-user-id')
   const syneryUser = getCookie('_snrs_uuid')
 
   return recommendationUser ?? syneryUser ?? ''
