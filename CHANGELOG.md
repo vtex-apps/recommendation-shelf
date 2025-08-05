@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Increase retries while trying to fetch the user id cookie.
+
 ## [2.10.0] - 2025-07-31
 
 ### Changed
