@@ -1,7 +1,7 @@
 export function getWithRetry<T>(
   getFn: () => T,
-  retries = 20,
-  delay = 100
+  retries = 30,
+  delay = 200
 ): Promise<T> {
   return new Promise((resolve, reject) => {
     const attempt = (n: number) => {
