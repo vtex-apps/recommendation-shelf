@@ -21,4 +21,5 @@ declare global {
     | 'TOP_ITEMS'
     | 'LAST_SEEN'
     | 'VISUAL_SIMILARITY'
+    | 'SEARCH_BASED'
 }

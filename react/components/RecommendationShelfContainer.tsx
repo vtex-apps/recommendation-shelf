@@ -23,6 +23,7 @@ const RecommendationToProductMapping: Record<
   LAST_SEEN: 'empty',
   TOP_ITEMS: 'empty',
   VISUAL_SIMILARITY: 'productPage',
+  SEARCH_BASED: 'empty',
 }
 
 function getContextFromType(type?: RecommendationType) {
