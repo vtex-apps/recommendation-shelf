@@ -72,7 +72,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     empty: [],
   }
 
-  if (canUseDOM && !userId) {
+  if (canUseDOM && !userId && userId !== null) {
     // The pixel might take a while to load and set the userId cookie,
     // so we use a retry mechanism to ensure we get the userId if available.
     getWithRetry<string>(() => {
