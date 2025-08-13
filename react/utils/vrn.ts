@@ -11,9 +11,10 @@ type RecommendationVrnType =
   | 'rec-persona-v2'
   | 'rec-last-v2'
   | 'rec-top-items-v2'
+  | 'rec-search-v2'
 
 const vrnPattern =
-  /^vrn:recommendations:[^:]+:(rec-cross-v1|rec-similar-v1|rec-persona-v1|rec-last-v1|rec-top-items-v1|rec-cross-v2|rec-similar-v2|rec-persona-v2|rec-last-v2|rec-top-items-v2):[^:]+$/
+  /^vrn:recommendations:[^:]+:(rec-cross-v1|rec-similar-v1|rec-persona-v1|rec-last-v1|rec-top-items-v1|rec-cross-v2|rec-similar-v2|rec-persona-v2|rec-last-v2|rec-top-items-v2|rec-search-v2):[^:]+$/
 
 export function isValidVrn(campaignVrn: string): boolean {
   return vrnPattern.test(campaignVrn)
@@ -59,6 +60,9 @@ export function getTypeFromVrn(campaignVrn: string): RecommendationType {
     case 'rec-top-items-v1':
     case 'rec-top-items-v2':
       return 'TOP_ITEMS'
+
+    case 'rec-search-v2':
+      return 'SEARCH_BASED'
 
     default:
       throw new Error(`Unknown campaign type: ${campaignVrnType}`)
