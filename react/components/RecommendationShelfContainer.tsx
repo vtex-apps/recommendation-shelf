@@ -11,7 +11,7 @@ import { getWithRetry } from '../utils/getWithRetry'
 import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
 
-type ProductContext = 'empty' | 'cart' | 'productPage'
+type ProductContext = 'empty' | 'cross' | 'productPage'
 
 const RecommendationToProductMapping: Record<
   RecommendationType,
@@ -19,7 +19,7 @@ const RecommendationToProductMapping: Record<
 > = {
   SIMILAR_ITEMS: 'productPage',
   PERSONALIZED: 'empty',
-  CROSS_SELL: 'productPage',
+  CROSS_SELL: 'cross',
   LAST_SEEN: 'empty',
   TOP_ITEMS: 'empty',
   VISUAL_SIMILARITY: 'productPage',
@@ -64,11 +64,16 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     return { campaignType: recommendationType }
   }, [campaignVrn, recommendationType])
 
+  const cartItems: string[] =
+    orderFormItems?.map((item: { productId: string }) => item.productId) ?? []
+
+  const currentProduct = productContext?.product?.productId
+
   const productSource: Record<ProductContext, string[]> = {
-    cart:
-      orderFormItems?.map((item: { productId: string }) => item.productId) ??
-      [],
-    productPage: [productContext?.product?.productId ?? ''],
+    cross: [currentProduct, ...cartItems].filter(Boolean) as string[],
+    productPage: productContext?.product?.productId
+      ? [productContext.product.productId]
+      : [],
     empty: [],
   }
 
