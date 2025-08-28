@@ -21,7 +21,7 @@ This app uses our store builder with the blocks architecture. To learn more abou
 Follow these steps to use the Recommendation Shelf app in your store:
 
 1. Add the app as a dependency in your store theme. In your `manifest.json` file, add the following to the `dependencies` section:
-   
+
    ```json
    "dependencies": {
      "vtex.recommendation-shelf": "2.x"
@@ -69,9 +69,9 @@ Follow these steps to use the Recommendation Shelf app in your store:
    ```
 
 4. Customize the product summary (optional).
-   
+
    The Recommendation Shelf relies on the `slider-layout` and `product-summary.shelf` components. You can further customize the shelf by creating a custom product summary, for example:
-   
+
    ```json
    "product-summary.shelf#custom": {
      "children": [
@@ -91,22 +91,27 @@ Follow these steps to use the Recommendation Shelf app in your store:
 
 You can configure the `recommendation-shelf` block in your theme app using the following props:
 
-| Prop name      | Type      | Description                                                                                  | Default value |
-| -------------- | --------- | -------------------------------------------------------------------------------------------- | ------------- |
-| `title`        | `string`  | Title to be displayed with the shelf.                                                        | -             |
-| `campaignVrn`  | `string`  | VRN identifier for an existing campaign.                                                     | -             |
-| `displayTitle` | `boolean` | Decides whether the title should be displayed alongside the shelf (`true`) or not (`false`). | true          |
+### Props
+
+Configure the `recommendation-shelf` block using the following properties:
+
+| Prop name      | Type      | Description                                                                                                                               | Default value |
+| -------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `title`        | `string`  | Shelf title displayed to users.                                                                                                           | -             |
+| `campaignVrn`  | `string`  | VRN identifier for the recommendation campaign.                                                                                           | -             |
+| `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`).                                                                            | `true`        |
+| `itemsContext` | `array`   | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']`     |
 
 ## Recommendation strategies
 
 Below are the available recommendation strategies that can be used to fetch product suggestions:
 
 | `strategy`          | Description                                                                               | Pages           |
-|---------------------|-------------------------------------------------------------------------------------------|-----------------|
+| ------------------- | ----------------------------------------------------------------------------------------- | --------------- |
 | `TOP_ITEMS`         | Returns the most bought products in the store.                                            | Any             |
 | `PERSONALIZED`      | Returns recommended products based on the last products clicked by the user in the store. | Any             |
 | `LAST_SEEN`         | Returns recommended products based on the last products viewed by the user in the store.  | Any             |
-| `CROSS_SELL`        | Returns complementary products related to the current product.                            | `store.product` |
+| `CROSS_SELL`        | Returns complementary products related to the current product or the items in the cart.   | Any             |
 | `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product.                      | `store.product` |
 | `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.                          | `store.product` |
 
