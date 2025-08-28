@@ -49,7 +49,7 @@ type Props = {
   title?: string
   recommendationType?: RecommendationType // Deprecated, use campaignVrn instead
   displayTitle: boolean
-  itemsContext: Array<'PDP' | 'CART'>
+  itemsContext: ItemContextType[]
 }
 
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
@@ -57,6 +57,7 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   title,
   recommendationType,
   displayTitle,
+  itemsContext,
 }) => {
   return (
     <RecommendationShelfErrorBoundary>
@@ -65,6 +66,7 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
         title={title}
         recommendationType={recommendationType}
         displayTitle={displayTitle}
+        itemsContext={itemsContext}
       />
     </RecommendationShelfErrorBoundary>
   )

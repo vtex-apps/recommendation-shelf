@@ -11,36 +11,12 @@ import { getWithRetry } from '../utils/getWithRetry'
 import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
 
-type ProductContext = 'empty' | 'cross' | 'productPage'
-
-const RecommendationToProductMapping: Record<
-  RecommendationType,
-  ProductContext
-> = {
-  SIMILAR_ITEMS: 'productPage',
-  PERSONALIZED: 'empty',
-  CROSS_SELL: 'cross',
-  LAST_SEEN: 'empty',
-  TOP_ITEMS: 'empty',
-  VISUAL_SIMILARITY: 'productPage',
-  SEARCH_BASED: 'empty',
-}
-
-function getContextFromType(type?: RecommendationType) {
-  if (!type) {
-    return 'empty'
-  }
-
-  const result = RecommendationToProductMapping[type]
-
-  return result ?? 'empty'
-}
-
 type Props = {
   campaignVrn?: string
   title?: string
   recommendationType?: RecommendationType
   displayTitle: boolean
+  itemsContext: ItemContextType[]
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
@@ -48,6 +24,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   campaignVrn,
   title,
   displayTitle,
+  itemsContext = ['PDP'],
 }) => {
   const productContext = useProduct()
   const {
@@ -69,13 +46,19 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
   const currentProduct = productContext?.product?.productId
 
-  const productSource: Record<ProductContext, string[]> = {
-    cross: [currentProduct, ...cartItems].filter(Boolean) as string[],
-    productPage: productContext?.product?.productId
-      ? [productContext.product.productId]
-      : [],
-    empty: [],
+  // Compose product IDs based on itemsContext
+  let productsIds: string[] = []
+
+  if (itemsContext.includes('PDP') && currentProduct) {
+    productsIds.push(currentProduct)
   }
+
+  if (itemsContext.includes('CART')) {
+    productsIds = productsIds.concat(cartItems)
+  }
+
+  // Remove duplicates and falsy values
+  productsIds = Array.from(new Set(productsIds)).filter(Boolean)
 
   if (canUseDOM && !userId && userId !== null) {
     // The pixel might take a while to load and set the userId cookie,
@@ -99,8 +82,6 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
         setUserId(null)
       })
   }
-
-  const productsIds = productSource[getContextFromType(campaignType)]
 
   const { data, error, loading } = useRecommendations({
     userId,
