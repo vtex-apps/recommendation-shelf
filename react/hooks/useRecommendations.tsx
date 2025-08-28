@@ -39,7 +39,6 @@ function getRecommendationArguments(
   /* eslint-disable padding-line-between-statements */
   switch (input.recommendationType) {
     case 'VISUAL_SIMILARITY':
-    case 'CROSS_SELL':
     case 'SIMILAR_ITEMS':
       if (products.length === 0) {
         return null
@@ -50,6 +49,16 @@ function getRecommendationArguments(
         products: products[0],
       }
 
+      break
+    case 'CROSS_SELL':
+      if (products.length === 0) {
+        return null
+      }
+      args = {
+        ...args,
+        an: account,
+        products: products.join(';'),
+      }
       break
     default:
       break
