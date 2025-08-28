@@ -32,15 +32,16 @@ defineMessages({
   },
   itemsContextDescription: {
     id: 'admin/editor.recommendation-shelf.items-context.description',
-    defaultMessage: 'Items Context',
+    defaultMessage:
+      'From where to retrieve the items that will be used as context in the Recommendation request',
   },
   itemsContextCart: {
     id: 'admin/editor.recommendation-shelf.items-context.cart',
-    defaultMessage: 'Items Context',
+    defaultMessage: 'Cart',
   },
   itemsContextPdp: {
     id: 'admin/editor.recommendation-shelf.items-context.pdp',
-    defaultMessage: 'Items Context',
+    defaultMessage: 'Product Page',
   },
 })
 
