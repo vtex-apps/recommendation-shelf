@@ -18,11 +18,15 @@ function checkDevice(): 'DESKTOP' | 'MOBILE' | 'TABLET' {
     return 'TABLET'
   }
 
-  return 'DESKTOP'
+  if (window.innerWidth > 1024) {
+    return 'DESKTOP'
+  }
+
+  return 'MOBILE'
 }
 
 const DEVICE_MAP = {
-  DESKTOP: 4,
+  DESKTOP: 5,
   MOBILE: 2,
   TABLET: 3,
 }

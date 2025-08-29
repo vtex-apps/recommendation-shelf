@@ -15,6 +15,20 @@
           "title": "admin/editor.recommendation-shelf.display-title",
           "type": "boolean",
           "default": true
+        },
+        "itemsContext": {
+          "title": "admin/editor.recommendation-shelf.items-context",
+          "type": "array",
+          "default": ["PDP"],
+          "items": {
+            "title": "admin/editor.recommendation-shelf.items-context",
+            "type": "string",
+            "enum": ["PDP", "CART"],
+            "enumNames": [
+              "admin/editor.recommendation-shelf.items-context.pdp",
+              "admin/editor.recommendation-shelf.items-context.cart"
+            ]
+          }
         }
       }
     }

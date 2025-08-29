@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- `itemsContext` prop, now its possible to specify from where we should extract the items passed in the recommendation request.
+
+### Changed
+
+- Passing multiple products in the recommendation request if the itemsContext is `CART`.
+
+### Fixed
+
+- Loading shimmer gaps.
+
 ## [2.11.0] - 2025-08-13
 
 ### Changed

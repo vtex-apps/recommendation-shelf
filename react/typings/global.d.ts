@@ -22,4 +22,6 @@ declare global {
     | 'LAST_SEEN'
     | 'VISUAL_SIMILARITY'
     | 'SEARCH_BASED'
+
+  export type ItemContextType = 'PDP' | 'CART'
 }

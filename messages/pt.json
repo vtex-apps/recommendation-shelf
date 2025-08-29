@@ -3,5 +3,9 @@
   "admin/editor.recommendation-shelf.description": "A Vitrine de Recomendação é um componente que exibe uma coleção de itens recomendados ao usuário com base em diversos algoritmos e dados de contexto.",
   "admin/editor.recommendation-shelf.title": "Título da Vitrine",
   "admin/editor.recommendation-shelf.campaign-vrn": "VRN da Campanha",
-  "admin/editor.recommendation-shelf.display-title": "Mostrar Título"
+  "admin/editor.recommendation-shelf.display-title": "Mostrar Título",
+  "admin/editor.recommendation-shelf.items-context": "Contexto dos Itens",
+  "admin/editor.recommendation-shelf.items-context.description": "De onde recuperar os itens que serão usados como contexto na requisição de recomendação",
+  "admin/editor.recommendation-shelf.items-context.cart": "Carrinho",
+  "admin/editor.recommendation-shelf.items-context.pdp": "Página de Produto"
 }
