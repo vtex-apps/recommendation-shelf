@@ -9,7 +9,7 @@ type NotifyParams = {
 }
 
 export async function notifyClick(params: NotifyParams) {
-  const path = `/api/recommend-bff/events/recommendation-click/v2?an=${params.account}`
+  const path = `/api/recommend-bff/v2/events/recommendation-click?an=${params.account}`
 
   try {
     await fetch(path, {

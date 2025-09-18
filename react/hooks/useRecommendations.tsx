@@ -98,7 +98,7 @@ function useRecommendations(args: RecommendationInput) {
 
     const queryParams = new URLSearchParams(params).toString()
 
-    fetch(`/api/recommend-bff/recommendations/v2?${queryParams}`, {
+    fetch(`/api/recommend-bff/v2/recommendations?${queryParams}`, {
       method: 'GET',
       headers: {
         ...generateRecOriginHeader(account),
