@@ -46,9 +46,8 @@ defineMessages({
 })
 
 type Props = {
-  campaignVrn?: string
+  campaignVrn: string
   title?: string
-  recommendationType?: RecommendationType // Deprecated, use campaignVrn instead
   displayTitle: boolean
   itemsContext: ItemContextType[]
 }
@@ -56,7 +55,6 @@ type Props = {
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   campaignVrn,
   title,
-  recommendationType,
   displayTitle,
   itemsContext,
 }) => {
@@ -65,7 +63,6 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
       <RecommendationShelfContainer
         campaignVrn={campaignVrn}
         title={title}
-        recommendationType={recommendationType}
         displayTitle={displayTitle}
         itemsContext={itemsContext}
       />

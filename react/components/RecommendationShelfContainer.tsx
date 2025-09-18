@@ -12,15 +12,13 @@ import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
 
 type Props = {
-  campaignVrn?: string
+  campaignVrn: string
   title?: string
-  recommendationType?: RecommendationType
   displayTitle: boolean
   itemsContext: ItemContextType[]
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
-  recommendationType,
   campaignVrn,
   title,
   displayTitle,
@@ -33,13 +31,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
   const [userId, setUserId] = useState<string | null | undefined>(undefined)
 
-  const { campaignType } = useMemo(() => {
-    if (campaignVrn) {
-      return { campaignType: getTypeFromVrn(campaignVrn) }
-    }
-
-    return { campaignType: recommendationType }
-  }, [campaignVrn, recommendationType])
+  const campaignType = getTypeFromVrn(campaignVrn)
 
   const cartItems: string[] =
     orderFormItems?.map((item: { productId: string }) => item.productId) ?? []
