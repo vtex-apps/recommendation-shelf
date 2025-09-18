@@ -9,8 +9,7 @@ declare module 'recommend-bff' {
   export type RecommendationsV2RequestQuery = {
     an: string
     userId: string
-    recommendationType?: RecommendationType
-    campaignVrn?: string
+    campaignVrn: string
     products?: string
   }
 

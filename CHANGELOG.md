@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Using the new bff routes.
+
+### Removed
+
+- Deprecated `recommendationType` prop from RecommendationShelf component.
+
 ## [2.12.0] - 2025-08-29
 
 ### Added

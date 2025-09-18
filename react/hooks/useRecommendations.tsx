@@ -6,10 +6,10 @@ import type {
 } from 'recommend-bff'
 
 import { generateRecOriginHeader } from '../utils/requests'
+import { getTypeFromVrn } from '../utils/vrn'
 
 type RecommendationInput = {
-  recommendationType?: RecommendationType
-  campaignVrn?: string
+  campaignVrn: string
   products: string[]
   userId?: string | null
 }
@@ -18,26 +18,22 @@ function getRecommendationArguments(
   input: RecommendationInput,
   account: string
 ): Args | null {
-  const { recommendationType, userId, products } = input
+  const { userId, products, campaignVrn } = input
+
+  const recommendationType = getTypeFromVrn(campaignVrn)
 
   if (!userId) {
     return null
   }
 
-  let args: Args = input.campaignVrn
-    ? ({
-        an: account,
-        campaignVrn: input.campaignVrn,
-        userId,
-      } as Args)
-    : {
-        an: account,
-        recommendationType,
-        userId,
-      }
+  let args: Args = {
+    an: account,
+    campaignVrn,
+    userId,
+  }
 
   /* eslint-disable padding-line-between-statements */
-  switch (input.recommendationType) {
+  switch (recommendationType) {
     case 'VISUAL_SIMILARITY':
     case 'SIMILAR_ITEMS':
       if (products.length === 0) {
@@ -76,7 +72,6 @@ function useRecommendations(args: RecommendationInput) {
   const userId = variables?.userId
   const products = variables?.products
   const campaignVrn = variables?.campaignVrn
-  const recommendationType = variables?.recommendationType
 
   const [data, setData] = useState<Response | null>(null)
   const [error, setError] = useState<Error | null>(null)
@@ -92,13 +87,12 @@ function useRecommendations(args: RecommendationInput) {
       an: account,
     }
     if (userId) params.userId = userId
-    if (recommendationType) params.recommendationType = recommendationType
     if (products) params.products = products
     if (campaignVrn) params.campaignVrn = campaignVrn
 
     const queryParams = new URLSearchParams(params).toString()
 
-    fetch(`/api/recommend-bff/recommendations/v2?${queryParams}`, {
+    fetch(`/api/recommend-bff/v2/recommendations?${queryParams}`, {
       method: 'GET',
       headers: {
         ...generateRecOriginHeader(account),
@@ -118,7 +112,7 @@ function useRecommendations(args: RecommendationInput) {
       .finally(() => {
         setLoading(false)
       })
-  }, [account, shouldSkip, userId, products, campaignVrn, recommendationType])
+  }, [account, shouldSkip, userId, products, campaignVrn])
 
   return {
     error,
