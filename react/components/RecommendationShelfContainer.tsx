@@ -120,6 +120,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       correlationId={data?.correlationId ?? ''}
       userId={userId}
       displayTitle={displayTitle}
+      campaignVrn={campaignVrn}
     />
   ) : (
     <Fragment />

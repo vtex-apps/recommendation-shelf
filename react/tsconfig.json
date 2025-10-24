@@ -8,7 +8,8 @@
     "moduleResolution": "node",
     "target": "es2017",
     "types": ["node", "jest"],
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"]
 }
