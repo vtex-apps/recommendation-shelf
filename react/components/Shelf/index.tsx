@@ -14,6 +14,7 @@ type Props = {
   products: Product[]
   displayTitle: boolean
   title?: string
+  campaignVrn: string
 }
 
 const CSS_HANDLES = [
@@ -28,6 +29,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   correlationId,
   userId,
   displayTitle,
+  campaignVrn,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -65,10 +67,22 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
 
+  const productsIds = products.map((p) => p.productId).join(', ')
+  const productsAfDataAttributes = products.map((p) => ({
+    'data-af-product-id': p.productId,
+  }))
+
+  const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds)
+
   return (
     <div
       className={`${handles.recommendationShelfContainer}`}
       ref={shelfDivRef}
+      data-af-element="recommendation-shelf"
+      data-af-onimpression={shouldAddAFAttr}
+      data-af-correlation-id={shouldAddAFAttr && correlationId}
+      data-af-campaign-vrn={shouldAddAFAttr && campaignVrn}
+      data-af-products={shouldAddAFAttr && productsIds}
     >
       {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
@@ -81,6 +95,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         id="list-context.product-list-static"
         products={products}
         actionOnProductClick={onProductClick}
+        afDataAttributesList={productsAfDataAttributes}
       />
     </div>
   )
