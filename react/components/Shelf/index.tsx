@@ -72,16 +72,17 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     [products]
   )
 
-  const productsAfDataAttributes = useMemo(
-    () =>
-      products.map((product, index) => ({
-        'data-af-element': 'recommendation-shelf-product',
-        'data-af-product-id': product.productId,
-        'data-af-onclick': !!product.productId,
-        'data-af-product-position': index + 1,
-      })),
-    [products]
-  )
+  function buildProductAfDataAttributes(
+    product?: Record<string, string>,
+    index?: number
+  ) {
+    return {
+      'data-af-element': 'recommendation-shelf-product',
+      'data-af-product-id': product && product.productId,
+      'data-af-onclick': product && !!product.productId,
+      'data-af-product-position': index ?? Number(index) + 1,
+    }
+  }
 
   const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds)
 
@@ -106,7 +107,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         id="list-context.product-list-static"
         products={products}
         actionOnProductClick={onProductClick}
-        afDataAttributesList={productsAfDataAttributes}
+        buildProductAfDataAttributes={buildProductAfDataAttributes as any}
       />
     </div>
   )
