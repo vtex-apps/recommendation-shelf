@@ -48,7 +48,7 @@ function insertIframeAfterCheckoutContainer() {
       !iframe.contentWindow.location.pathname.endsWith('/p') // it should allow redirects to pdp
     ) {
       iframe.contentWindow.location.href =
-      iframe.contentWindow.location.origin + iframeUrl
+        iframe.contentWindow.location.origin + iframeUrl
     }
   }, 1000)
   // Syncronize the iframe url with the parent window to allow some navigations...

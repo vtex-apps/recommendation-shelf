@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback, useMemo } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
@@ -14,6 +14,7 @@ type Props = {
   products: Product[]
   displayTitle: boolean
   title?: string
+  campaignVrn: string
 }
 
 const CSS_HANDLES = [
@@ -28,6 +29,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   correlationId,
   userId,
   displayTitle,
+  campaignVrn,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -65,10 +67,36 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
 
+  const productsIds = useMemo(
+    () => products.map((p) => p.productId).join(', '),
+    [products]
+  )
+
+  function buildExtraProductProps(
+    product?: Record<string, string>,
+    index?: number
+  ) {
+    return {
+      'data-af-element': 'recommendation-shelf-product',
+      'data-af-correlation-id': correlationId,
+      'data-af-campaign-vrn': campaignVrn,
+      'data-af-product-id': product && product.productId,
+      'data-af-onclick': product && !!product.productId,
+      'data-af-product-position': index ?? Number(index) + 1,
+    }
+  }
+
+  const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds.length)
+
   return (
     <div
       className={`${handles.recommendationShelfContainer}`}
       ref={shelfDivRef}
+      data-af-element="recommendation-shelf"
+      data-af-onimpression={shouldAddAFAttr}
+      data-af-correlation-id={shouldAddAFAttr && correlationId}
+      data-af-campaign-vrn={shouldAddAFAttr && campaignVrn}
+      data-af-products={shouldAddAFAttr && productsIds}
     >
       {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
@@ -81,6 +109,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         id="list-context.product-list-static"
         products={products}
         actionOnProductClick={onProductClick}
+        buildExtraProductProps={
+          shouldAddAFAttr && (buildExtraProductProps as any)
+        }
       />
     </div>
   )
