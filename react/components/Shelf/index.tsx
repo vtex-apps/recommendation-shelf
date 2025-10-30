@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react'
+import React, { useEffect, useRef, useCallback, useMemo } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
@@ -67,10 +67,21 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
 
-  const productsIds = products.map((p) => p.productId).join(', ')
-  const productsAfDataAttributes = products.map((p) => ({
-    'data-af-product-id': p.productId,
-  }))
+  const productsIds = useMemo(
+    () => products.map((p) => p.productId).join(', '),
+    [products]
+  )
+
+  const productsAfDataAttributes = useMemo(
+    () =>
+      products.map((product, index) => ({
+        'data-af-element': 'recommendation-shelf-product',
+        'data-af-product-id': product.productId,
+        'data-af-onclick': !!product.productId,
+        'data-af-product-position': index + 1,
+      })),
+    [products]
+  )
 
   const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds)
 
