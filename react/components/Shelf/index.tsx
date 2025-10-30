@@ -79,19 +79,21 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     [products]
   )
 
-  function buildProductAfDataAttributes(
+  function buildExtraProductProps(
     product?: Record<string, string>,
     index?: number
   ) {
     return {
       'data-af-element': 'recommendation-shelf-product',
+      'data-af-correlation-id': correlationId,
+      'data-af-campaign-vrn': campaignVrn,
       'data-af-product-id': product && product.productId,
       'data-af-onclick': product && !!product.productId,
       'data-af-product-position': index ?? Number(index) + 1,
     }
   }
 
-  const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds)
+  const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds.length)
 
   return (
     <div
@@ -114,7 +116,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         id="list-context.product-list-static"
         products={products}
         actionOnProductClick={onProductClick}
-        buildProductAfDataAttributes={buildProductAfDataAttributes as any}
+        buildExtraProductProps={
+          shouldAddAFAttr && (buildExtraProductProps as any)
+        }
       />
     </div>
   )
