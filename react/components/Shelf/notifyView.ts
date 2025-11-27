@@ -6,6 +6,7 @@ type NotifyView = {
   correlationId: string
   products: string[]
   userId: string
+  campaignId: string
 }
 
 export async function notifyView(params: NotifyView) {
@@ -22,6 +23,7 @@ export async function notifyView(params: NotifyView) {
         userId: params.userId,
         correlationId: params.correlationId,
         products: params.products,
+        campaignId: params.campaignId,
       }),
     })
   } catch (err) {
