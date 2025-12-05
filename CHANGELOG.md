@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.0] - 2025-12-05
+
 ### Changed
 
 - `campaignId` field is now sent on recommendation view and click events.
