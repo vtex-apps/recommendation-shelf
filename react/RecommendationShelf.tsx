@@ -58,6 +58,8 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   displayTitle,
   itemsContext,
 }) => {
+  if (!campaignVrn) return null
+
   return (
     <RecommendationShelfErrorBoundary>
       <RecommendationShelfContainer
