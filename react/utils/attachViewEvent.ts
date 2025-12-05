@@ -22,7 +22,7 @@ type TrackedViewStatus = Record<string, ViewStatus>
  * A map of the timeout functions by unique ID. It's done to prevent
  * multiple timeout running at once.
  */
-type TimeoutFunctions = Record<string, NodeJS.Timeout>
+type TimeoutFunctions = Record<string, ReturnType<typeof setTimeout>>
 
 /**
  * Arguments passed to the onIntersectionChange function.
@@ -156,6 +156,9 @@ function clearTimeoutFunction(id: string) {
 /**
  * Store the timeout function by ID.
  */
-function setTimeoutFunction(id: string, timeout: NodeJS.Timeout) {
+function setTimeoutFunction(
+  id: string,
+  timeout: ReturnType<typeof setTimeout>
+) {
   timeoutFunctions[id] = timeout
 }
