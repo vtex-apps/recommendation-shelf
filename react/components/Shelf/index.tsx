@@ -14,6 +14,7 @@ type Props = {
   products: Product[]
   displayTitle: boolean
   title?: string
+  campaignId: string
 }
 
 const CSS_HANDLES = [
@@ -28,6 +29,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   correlationId,
   userId,
   displayTitle,
+  campaignId,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -37,9 +39,15 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     (p: Product) => {
       const itemId = p.productId ?? ''
 
-      notifyClick({ productId: itemId, correlationId, userId, account })
+      notifyClick({
+        productId: itemId,
+        correlationId,
+        userId,
+        account,
+        campaignId,
+      })
     },
-    [correlationId, userId, account]
+    [correlationId, userId, account, campaignId]
   )
 
   const onView = useCallback(() => {
@@ -48,8 +56,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       correlationId,
       products: products.map((p) => p.productId ?? ''),
       account,
+      campaignId,
     })
-  }, [products, userId, correlationId, account])
+  }, [products, userId, correlationId, account, campaignId])
 
   useEffect(() => {
     const currentShelfDiv = shelfDivRef.current

@@ -6,6 +6,7 @@ type NotifyParams = {
   correlationId: string
   productId: string
   userId: string
+  campaignId: string
 }
 
 export async function notifyClick(params: NotifyParams) {
@@ -22,6 +23,7 @@ export async function notifyClick(params: NotifyParams) {
         userId: params.userId,
         correlationId: params.correlationId,
         product: params.productId,
+        campaignId: params.campaignId,
       }),
     })
   } catch (err) {
