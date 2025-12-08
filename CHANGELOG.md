@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.14.2] - 2025-12-08
+
 ### Fixed
 
 - Fixed userId cookie creation for first-time users by ensuring `_snrs_uuid` and `vtex-rec-user-id` cookies are created from `VtexRCMacIdv7` cookie with retry mechanism. This prevents delays in loading recommendation shelves when Synerise pixel hasn't created the userId cookie yet.
