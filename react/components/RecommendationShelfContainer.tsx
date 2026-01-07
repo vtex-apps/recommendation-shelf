@@ -1,4 +1,4 @@
-import React, { Fragment, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { canUseDOM } from 'vtex.render-runtime'
@@ -6,7 +6,7 @@ import { canUseDOM } from 'vtex.render-runtime'
 import useRecommendations from '../hooks/useRecommendations'
 import Shelf from './Shelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
-import { getUserIdFromCookie } from '../utils/user'
+import { getUserIdFromCookie, ensureUserIdCookies } from '../utils/user'
 import { getWithRetry } from '../utils/getWithRetry'
 import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
@@ -32,6 +32,18 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   const [userId, setUserId] = useState<string | null | undefined>(undefined)
 
   const campaignType = getTypeFromVrn(campaignVrn)
+  // Ensure userId cookies exist when component mounts
+
+  useEffect(() => {
+    if (canUseDOM) {
+      ensureUserIdCookies().catch((error) => {
+        console.error(
+          '[vtex.recommendation-shelf@2.x] Error ensuring userId cookies',
+          error
+        )
+      })
+    }
+  }, [])
 
   const cartItems: string[] =
     orderFormItems?.map((item: { productId: string }) => item.productId) ?? []

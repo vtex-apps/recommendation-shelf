@@ -11,6 +11,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Implements ActivityFlow data attibutes
 
+## [2.14.2] - 2025-12-08
+
+### Fixed
+
+- Fixed userId cookie creation for first-time users by ensuring `_snrs_uuid` and `vtex-rec-user-id` cookies are created from `VtexRCMacIdv7` cookie with retry mechanism. This prevents delays in loading recommendation shelves when Synerise pixel hasn't created the userId cookie yet.
+
+## [2.14.1] - 2025-12-05
+
+### Fixed
+
+- Disable shelf if no id is provided.
+
+## [2.14.0] - 2025-12-05
+
+### Changed
+
+- `campaignId` field is now sent on recommendation view and click events.
+
 ## [2.13.0] - 2025-09-18
 
 ### Changed
