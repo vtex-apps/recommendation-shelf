@@ -74,7 +74,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
 
-  const productsIds = useMemo(
+  const productIds = useMemo(
     () => products.map((p) => p.productId).join(', '),
     [products]
   )
@@ -93,7 +93,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     }
   }
 
-  const shouldAddAFAttr = !!(correlationId && campaignVrn && productsIds.length)
+  const shouldAddAFAttr = !!(correlationId && campaignVrn && productIds.length)
 
   return (
     <div
@@ -103,7 +103,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       data-af-onimpression={shouldAddAFAttr}
       data-af-correlation-id={shouldAddAFAttr && correlationId}
       data-af-campaign-vrn={shouldAddAFAttr && campaignVrn}
-      data-af-products={shouldAddAFAttr && productsIds}
+      data-af-products={shouldAddAFAttr && productIds}
     >
       {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
