@@ -44,10 +44,10 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         correlationId,
         userId,
         account,
-        campaignId,
+        campaignId: campaignVrn,
       })
     },
-    [correlationId, userId, account, campaignId]
+    [correlationId, userId, account, campaignVrn]
   )
 
   const onView = useCallback(() => {
@@ -56,9 +56,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       correlationId,
       products: products.map((p) => p.productId ?? ''),
       account,
-      campaignId,
+      campaignId: campaignVrn,
     })
-  }, [products, userId, correlationId, account, campaignId])
+  }, [products, userId, correlationId, account, campaignVrn])
 
   useEffect(() => {
     const currentShelfDiv = shelfDivRef.current
