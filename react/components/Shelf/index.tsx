@@ -89,7 +89,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       'data-af-campaign-vrn': campaignVrn,
       'data-af-product-id': product && product.productId,
       'data-af-onclick': product && !!product.productId,
-      'data-af-product-position': index ?? Number(index) + 1,
+      'data-af-product-position': (index ?? 0) + 1,
     }
   }
 
