@@ -14,7 +14,7 @@ type Props = {
   products: Product[]
   displayTitle: boolean
   title?: string
-  campaignVrn: string
+  campaignId: string
 }
 
 const CSS_HANDLES = [
@@ -29,7 +29,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   correlationId,
   userId,
   displayTitle,
-  campaignVrn,
+  campaignId,
 }) => {
   const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -44,10 +44,10 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         correlationId,
         userId,
         account,
-        campaignId: campaignVrn,
+        campaignId,
       })
     },
-    [correlationId, userId, account, campaignVrn]
+    [correlationId, userId, account, campaignId]
   )
 
   const onView = useCallback(() => {
@@ -56,9 +56,9 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       correlationId,
       products: products.map((p) => p.productId ?? ''),
       account,
-      campaignId: campaignVrn,
+      campaignId,
     })
-  }, [products, userId, correlationId, account, campaignVrn])
+  }, [products, userId, correlationId, account, campaignId])
 
   useEffect(() => {
     const currentShelfDiv = shelfDivRef.current
@@ -86,14 +86,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
     return {
       'data-af-element': 'recommendation-shelf-product',
       'data-af-correlation-id': correlationId,
-      'data-af-campaign-vrn': campaignVrn,
-      'data-af-product-id': product && product.productId,
-      'data-af-onclick': product && !!product.productId,
+      'data-af-campaign-id': campaignId,
+      'data-af-product-id': product?.productId,
+      'data-af-onclick': !!product?.productId,
       'data-af-product-position': (index ?? 0) + 1,
     }
   }
 
-  const shouldAddAFAttr = !!(correlationId && campaignVrn && productIds.length)
+  const shouldAddAFAttr = !!(correlationId && campaignId && productIds.length)
 
   return (
     <div
@@ -102,7 +102,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       data-af-element="recommendation-shelf"
       data-af-onimpression={shouldAddAFAttr}
       data-af-correlation-id={shouldAddAFAttr && correlationId}
-      data-af-campaign-vrn={shouldAddAFAttr && campaignVrn}
+      data-af-campaign-id={shouldAddAFAttr && campaignId}
       data-af-products={shouldAddAFAttr && productIds}
     >
       {title && displayTitle && (
