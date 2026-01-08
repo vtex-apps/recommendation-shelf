@@ -117,7 +117,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
         products={products}
         actionOnProductClick={onProductClick}
         buildExtraProductProps={
-          shouldAddAFAttr && (buildExtraProductProps as any)
+          shouldAddAFAttr ? buildExtraProductProps : undefined
         }
       />
     </div>
