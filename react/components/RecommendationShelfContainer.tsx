@@ -51,18 +51,18 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   const currentProduct = productContext?.product?.productId
 
   // Compose product IDs based on itemsContext
-  let productsIds: string[] = []
+  let productIds: string[] = []
 
   if (itemsContext.includes('PDP') && currentProduct) {
-    productsIds.push(currentProduct)
+    productIds.push(currentProduct)
   }
 
   if (itemsContext.includes('CART')) {
-    productsIds = productsIds.concat(cartItems)
+    productIds = productIds.concat(cartItems)
   }
 
   // Remove duplicates and falsy values
-  productsIds = Array.from(new Set(productsIds)).filter(Boolean)
+  productIds = Array.from(new Set(productIds)).filter(Boolean)
 
   if (canUseDOM && !userId && userId !== null) {
     // The pixel might take a while to load and set the userId cookie,
@@ -90,7 +90,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   const { data, error, loading } = useRecommendations({
     userId,
     campaignVrn,
-    products: productsIds,
+    products: productIds,
   })
 
   const products = useMemo(() => {
