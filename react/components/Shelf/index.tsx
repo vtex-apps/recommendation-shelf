@@ -101,6 +101,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       ref={shelfDivRef}
       data-af-element="recommendation-shelf"
       data-af-onimpression={shouldAddAFAttr}
+      data-af-onview={shouldAddAFAttr}
       data-af-correlation-id={shouldAddAFAttr && correlationId}
       data-af-campaign-id={shouldAddAFAttr && campaignId}
       data-af-products={shouldAddAFAttr && productIds}
