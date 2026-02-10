@@ -7,6 +7,7 @@ import styles from './styles.css'
 import { notifyClick } from './notifyClick'
 import { notifyView } from './notifyView'
 import { attachViewEvent } from '../../utils/attachViewEvent'
+import { getCookie, startSession } from '../../utils/user'
 
 type Props = {
   userId: string
@@ -73,6 +74,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       currentShelfDiv.removeEventListener('view', onView)
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
+
+  useEffect(() => {
+    const vtexRCMacId = getCookie('VtexRCMacIdv7')
+
+    if (vtexRCMacId && account) {
+      startSession({ userId: vtexRCMacId, account })
+    }
+  }, [account])
 
   const productIds = useMemo(
     () => products.map((p) => p.productId).join(', '),

@@ -22,4 +22,12 @@ declare module 'recommend-bff' {
       type: RecommendationType
     }
   }
+
+  export type StartSessionRequestBody = {
+    userId?: string
+  }
+
+  export type StartSessionResponse = {
+    recommendationsUserId: string
+  }
 }

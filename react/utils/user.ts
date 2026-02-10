@@ -1,6 +1,13 @@
-import { getWithRetry } from './getWithRetry'
+import type {
+  StartSessionRequestBody,
+  StartSessionResponse,
+} from 'recommend-bff'
 
-function getCookie(name: string): string | null {
+import { getWithRetry } from './getWithRetry'
+import { generateRecOriginHeader } from './requests'
+import { logger } from './logger'
+
+export function getCookie(name: string): string | null {
   const regex = new RegExp(`(^|;)[ ]*${name}=([^;]*)`)
   const match = regex.exec(document.cookie)
 
@@ -144,4 +151,53 @@ export async function ensureUserIdCookies(): Promise<void> {
     cookieState.vtexRCMacId,
     expiration ?? undefined
   )
+}
+
+export async function startSession({
+  account,
+  userId,
+}: {
+  account: string
+  userId: string
+}): Promise<StartSessionResponse | null> {
+  if (typeof document === 'undefined') {
+    return null
+  }
+
+  try {
+    const body: StartSessionRequestBody = { userId }
+
+    const response = await fetch(
+      `/api/recommend-bff/v2/users/start-session?an=${account}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...generateRecOriginHeader(account),
+        },
+        body: JSON.stringify(body),
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    const result: StartSessionResponse = await response.json()
+
+    logger.info({
+      message: 'Session started successfully',
+      data: { ...result },
+    })
+
+    return result
+  } catch (error) {
+    logger.error({
+      message: 'Error starting session',
+      data: { error, account, userId },
+      sendLog: true,
+    })
+
+    return null
+  }
 }
