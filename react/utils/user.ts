@@ -158,7 +158,7 @@ export async function startSession({
   userId,
 }: {
   account: string
-  userId: string
+  userId?: string
 }): Promise<StartSessionResponse | null> {
   if (typeof document === 'undefined') {
     return null

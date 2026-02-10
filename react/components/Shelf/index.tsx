@@ -24,6 +24,8 @@ const CSS_HANDLES = [
   'shelfTitle',
 ]
 
+const USER_START_SESSION_COOKIE = 'vtex-rec-user-start-session'
+
 const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
   products,
@@ -76,10 +78,10 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   }, [shelfDivRef, products, userId, correlationId, onView])
 
   useEffect(() => {
-    const vtexRCMacId = getCookie('VtexRCMacIdv7')
+    const sessionCookie = getCookie(USER_START_SESSION_COOKIE)
 
-    if (vtexRCMacId && account) {
-      startSession({ userId: vtexRCMacId, account })
+    if (!sessionCookie) {
+      startSession({ account })
     }
   }, [account])
 
