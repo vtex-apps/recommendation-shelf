@@ -185,11 +185,6 @@ export async function startSession({
 
     const result: StartSessionResponse = await response.json()
 
-    logger.info({
-      message: 'Session started successfully',
-      data: { ...result },
-    })
-
     return result
   } catch (error) {
     logger.error({
