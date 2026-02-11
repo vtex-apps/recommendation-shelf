@@ -7,6 +7,7 @@ import styles from './styles.css'
 import { notifyClick } from './notifyClick'
 import { notifyView } from './notifyView'
 import { attachViewEvent } from '../../utils/attachViewEvent'
+import { getCookie, startSession } from '../../utils/user'
 
 type Props = {
   userId: string
@@ -22,6 +23,8 @@ const CSS_HANDLES = [
   'shelfTitleContainer',
   'shelfTitle',
 ]
+
+const USER_START_SESSION_COOKIE = 'vtex-rec-user-start-session'
 
 const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
@@ -73,6 +76,14 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       currentShelfDiv.removeEventListener('view', onView)
     }
   }, [shelfDivRef, products, userId, correlationId, onView])
+
+  useEffect(() => {
+    const sessionCookie = getCookie(USER_START_SESSION_COOKIE)
+
+    if (!sessionCookie) {
+      startSession({ account })
+    }
+  }, [account])
 
   const productIds = useMemo(
     () => products.map((p) => p.productId).join(', '),
