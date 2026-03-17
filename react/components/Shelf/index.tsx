@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useCallback, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
 
 import styles from './styles.css'
-import { notifyClick } from './notifyClick'
-import { notifyView } from './notifyView'
-import { attachViewEvent } from '../../utils/attachViewEvent'
 import { getCookie, startSession } from '../../utils/user'
 
 type Props = {
@@ -30,52 +27,11 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
   products,
   correlationId,
-  userId,
   displayTitle,
   campaignId,
 }) => {
-  const shelfDivRef = useRef<HTMLDivElement>(null)
   const handles = useCssHandles(CSS_HANDLES)
   const { account } = useRuntime()
-
-  const onProductClick = useCallback(
-    (p: Product) => {
-      const itemId = p.productId ?? ''
-
-      notifyClick({
-        productId: itemId,
-        correlationId,
-        userId,
-        account,
-        campaignId,
-      })
-    },
-    [correlationId, userId, account, campaignId]
-  )
-
-  const onView = useCallback(() => {
-    notifyView({
-      userId,
-      correlationId,
-      products: products.map((p) => p.productId ?? ''),
-      account,
-      campaignId,
-    })
-  }, [products, userId, correlationId, account, campaignId])
-
-  useEffect(() => {
-    const currentShelfDiv = shelfDivRef.current
-
-    if (!currentShelfDiv) return
-
-    attachViewEvent(currentShelfDiv, `${correlationId}`)
-    currentShelfDiv.addEventListener('view', onView)
-
-    return () => {
-      // Remove listener on unmount to avoid multiple calls
-      currentShelfDiv.removeEventListener('view', onView)
-    }
-  }, [shelfDivRef, products, userId, correlationId, onView])
 
   useEffect(() => {
     const sessionCookie = getCookie(USER_START_SESSION_COOKIE)
@@ -109,7 +65,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   return (
     <div
       className={`${handles.recommendationShelfContainer}`}
-      ref={shelfDivRef}
       data-af-element="recommendation-shelf"
       data-af-onimpression={shouldAddAFAttr}
       data-af-onview={shouldAddAFAttr}
@@ -127,7 +82,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       <ExtensionPoint
         id="list-context.product-list-static"
         products={products}
-        actionOnProductClick={onProductClick}
         buildExtraProductProps={
           shouldAddAFAttr ? buildExtraProductProps : undefined
         }
