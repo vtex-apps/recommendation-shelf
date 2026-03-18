@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.18.0] - 2026-03-18
+
 ### Removed
 
 - Removed custom product click and view tracking logic, including notifyClick, notifyView, attachViewEvent, and related event handlers and props from Shelf component.
