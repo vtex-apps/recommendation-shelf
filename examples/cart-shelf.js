@@ -517,10 +517,20 @@
         })
       })
       .then(function (ctx) {
-        var items = (ctx.orderForm.items || []).map(function (it) {
-          return String(it.productId)
-        })
-        var productIds = Array.from(new Set(items.filter(Boolean)))
+        // Use every item in the orderForm as product context for the recommendations
+        // request. We filter out items without a productId first to avoid the
+        // String(undefined) === "undefined" pitfall, then dedupe to keep a single
+        // entry per product even when multiple SKUs of the same product are in the cart.
+        var orderFormItems = ctx.orderForm.items || []
+        var productIds = Array.from(
+          new Set(
+            orderFormItems
+              .map(function (it) {
+                return it && it.productId ? String(it.productId) : ''
+              })
+              .filter(Boolean)
+          )
+        )
         return fetchRecommendations(account, ctx.userId, campaignVrn, productIds)
           .then(function (data) {
             return {
