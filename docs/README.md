@@ -104,7 +104,7 @@ Configure the `recommendation-shelf` block using the following properties:
 
 ### Obtaining the VRN
 
-The `campaignVrn` prop expects the **recommendation list ID** from VTEX Admin, the same value you get when you copy the list identifier after creating a recommendation list (that string is your VRN for the shelf).
+The campaignVrn prop takes the recommendation list ID from VTEX Admin. This is the identifier string shown after you create a recommendation list, also referred to as the shelf's VRN.
 
 #### Copying the list ID
 
@@ -129,14 +129,14 @@ The **`campaignVrn`** string must match `vrn:recommendations:<account>:<campaign
 
 | VRN `campaign-type` | Resolved `RecommendationType` | Description |
 | ------------------- | ------------------------------ | ----------- |
-| `rec-cross-v1`, `rec-cross-v2` | `CROSS_SELL` | Complementary products (often bought together); use `itemsContext` `CART` on the cart page when needed. |
+| `rec-cross-v1`, `rec-cross-v2` | `CROSS_SELL` | Complementary products (often bought together). Use `itemsContext` `CART` on the cart page when needed. |
 | `rec-similar-v1`, `rec-similar-v2` | `SIMILAR_ITEMS` | Similar-item recommendations for the current product context. |
 | `rec-persona-v1`, `rec-persona-v2` | `PERSONALIZED` | Personalized recommendations from shopper behavior. |
 | `rec-last-v1`, `rec-last-v2` | `LAST_SEEN` | Recently viewed products for the shopper. |
 | `rec-top-items-v1`, `rec-top-items-v2` | `TOP_ITEMS` | Popular / top-performing products in the store. |
 | `rec-search-v2` | `SEARCH_BASED` | Search-driven recommendations. |
 
-`v1` and `v2` denote different generations of the same strategy kind; use the **`campaignVrn`** copied from Admin for your list.
+`v1` and `v2` denote different generations of the same strategy kind. Use the **`campaignVrn`** copied from Admin for your list.
 
 ## Troubleshooting
 
