@@ -106,22 +106,14 @@ Configure the `recommendation-shelf` block using the following properties:
 
 The campaignVrn prop takes the recommendation list ID from VTEX Admin. This is the identifier string shown after you create a recommendation list, also referred to as the shelf's VRN.
 
-#### Copying the list ID
+Once you create a list using the steps described in [Creating recommendation lists](https://help.vtex.com/en/docs/tutorials/creating-recommendation-lists), you can obtain the ID in the confirmation screen by clicking **Copy ID**.
 
-After creating the list, copy the ID using either path below:
+If you need to copy the list ID of a list that already exists, follow these steps:
 
-- On the confirmation screen **List created successfully**, click **Copy ID**. The ID is copied to your clipboard.
-- Or copy it later from the [Recommendations dashboard](https://help.vtex.com/en/docs/tutorials/recommendations-dashboard):
-
-  1. Go to **Storefront > Recommendations**.
-  2. Find the desired list in the shelf table.
-  3. Click the ⋮ menu on the shelf row.
-  4. Select **Copy ID**.
-
-See also:
-
-* [Creating recommendation lists](https://help.vtex.com/en/docs/tutorials/creating-recommendation-lists)
-* [Product Recommendations](https://help.vtex.com/docs/tutorials/product-recommendations-beta)
+1. Go to **Storefront > Recommendations**.
+2. Find the desired list in the shelf table.
+3. Click the ⋮ menu on the shelf row.
+4. Select **Copy ID**.
 
 ## Recommendation strategies
 
