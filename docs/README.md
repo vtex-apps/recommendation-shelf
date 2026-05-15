@@ -34,14 +34,14 @@ Follow these steps to use the Recommendation Shelf app in your store:
 
    The example below shows the following configuration of the `recommendation-shelf` block and its supporting blocks:
 
-   - It creates a `recommendation-shelf#visual-similarity` block that uses the "VISUAL_SIMILARITY" recommendation strategy and sets the shelf title to "Similar items".
+   - It creates a `recommendation-shelf#similar-items` block that uses a list whose VRN contains `rec-similar-v2` (similar items) and sets the shelf title to "Similar items".
    - It defines a `list-context.product-list-static` block, which includes the `product-summary.shelf` block and a child slider layout.
    - It configures the `slider-layout#recommendation-slider` block to control how many items are shown per page on desktop, tablet, and phone, and enables infinite scrolling.
 
    Example:
 
    ```json
-   "recommendation-shelf#visual-similarity": {
+   "recommendation-shelf#similar-items": {
      "blocks": ["list-context.product-list-static"],
      "props": {
        "campaignVrn": "vrn:recommendations:biggy:rec-similar-v2:00318b68-cb1b-4d5a-8b0f-cc7fbcdd014b",
@@ -89,31 +89,46 @@ Follow these steps to use the Recommendation Shelf app in your store:
 
 ### Configuration
 
-You can configure the `recommendation-shelf` block in your theme app using the following props:
+Configure the `recommendation-shelf` block in your theme app using the following props:
 
 ### Props
 
 Configure the `recommendation-shelf` block using the following properties:
 
-| Prop name      | Type      | Description                                                                                                                               | Default value |
-| -------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `title`        | `string`  | Shelf title displayed to users.                                                                                                           | -             |
-| `campaignVrn`  | `string`  | VRN identifier for the recommendation campaign.                                                                                           | -             |
-| `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`).                                                                            | `true`        |
-| `itemsContext` | `array`   | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']`     |
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `title` | `string` | Shelf title displayed to users. | - |
+| `campaignVrn` | `string` | VRN for the recommendation campaign (the recommendation **list ID** from Admin. See [Obtaining the VRN](#obtaining-the-vrn)). | - |
+| `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`). | `true` |
+| `itemsContext` | `array` | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']` |
+
+### Obtaining the VRN
+
+The campaignVrn prop takes the recommendation list ID from VTEX Admin. This is the identifier string shown after you create a recommendation list, also referred to as the shelf's VRN.
+
+Once you create a list using the steps described in [Creating recommendation lists](https://help.vtex.com/en/docs/tutorials/creating-recommendation-lists), you can obtain the ID in the confirmation screen by clicking **Copy ID**.
+
+If you need to copy the list ID of a list that already exists, follow these steps:
+
+1. Go to **Storefront > Recommendations**.
+2. Find the desired list in the shelf table.
+3. Click the ⋮ menu on the shelf row.
+4. Select **Copy ID**.
 
 ## Recommendation strategies
 
-Below are the available recommendation strategies that can be used to fetch product suggestions:
+The **`campaignVrn`** string must match `vrn:recommendations:<account>:<campaign-type>:<campaign-id>`. The **`campaign-type`** segment maps to an internal **`RecommendationType`** used when calling recommendations:
 
-| `strategy`          | Description                                                                               | Pages           |
-| ------------------- | ----------------------------------------------------------------------------------------- | --------------- |
-| `TOP_ITEMS`         | Returns the most bought products in the store.                                            | Any             |
-| `PERSONALIZED`      | Returns recommended products based on the last products clicked by the user in the store. | Any             |
-| `LAST_SEEN`         | Returns recommended products based on the last products viewed by the user in the store.  | Any             |
-| `CROSS_SELL`        | Returns complementary products related to the current product or the items in the cart.   | Any             |
-| `VISUAL_SIMILARITY` | Returns products considered visually similar to the current product.                      | `store.product` |
-| `SIMILAR_ITEMS`     | Returns products considered most similar to the current product.                          | `store.product` |
+| VRN `campaign-type` | Resolved `RecommendationType` | Description |
+| ------------------- | ------------------------------ | ----------- |
+| `rec-cross-v1`, `rec-cross-v2` | `CROSS_SELL` | Complementary products (often bought together). Use `itemsContext` `CART` on the cart page when needed. |
+| `rec-similar-v1`, `rec-similar-v2` | `SIMILAR_ITEMS` | Similar-item recommendations for the current product context. |
+| `rec-persona-v1`, `rec-persona-v2` | `PERSONALIZED` | Personalized recommendations from shopper behavior. |
+| `rec-last-v1`, `rec-last-v2` | `LAST_SEEN` | Recently viewed products for the shopper. |
+| `rec-top-items-v1`, `rec-top-items-v2` | `TOP_ITEMS` | Popular / top-performing products in the store. |
+| `rec-search-v2` | `SEARCH_BASED` | Search-driven recommendations. |
+
+`v1` and `v2` denote different generations of the same strategy kind. Use the **`campaignVrn`** copied from Admin for your list.
 
 ## Troubleshooting
 

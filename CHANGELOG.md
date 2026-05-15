@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Added information about how to obtain the VRN in README.md.
+
 ## [2.19.0] - 2026-03-18
 
 ## [2.18.0] - 2026-03-18
