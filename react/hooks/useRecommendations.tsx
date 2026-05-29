@@ -34,6 +34,7 @@ function getRecommendationArguments(
 
   /* eslint-disable padding-line-between-statements */
   switch (recommendationType) {
+    case 'NEXT_INTERACTION':
     case 'VISUAL_SIMILARITY':
     case 'SIMILAR_ITEMS':
       if (products.length === 0) {
