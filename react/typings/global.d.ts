@@ -22,6 +22,7 @@ declare global {
     | 'LAST_SEEN'
     | 'VISUAL_SIMILARITY'
     | 'SEARCH_BASED'
+    | 'NEXT_INTERACTION'
 
   export type ItemContextType = 'PDP' | 'CART'
 }

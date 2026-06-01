@@ -140,12 +140,19 @@
         return 'TOP_ITEMS'
       case 'rec-search-v2':
         return 'SEARCH_BASED'
+      case 'rec-next-v2':
+        return 'NEXT_INTERACTION'
       default:
         throw new Error('Unknown campaign type: ' + campaignVrnType)
     }
   }
 
-  function getRecommendationQueryParams(account, userId, campaignVrn, productIds) {
+  function getRecommendationQueryParams(
+    account,
+    userId,
+    campaignVrn,
+    productIds
+  ) {
     if (!userId) return null
     var recommendationType
     try {
@@ -163,7 +170,8 @@
     var productsParam
     if (
       recommendationType === 'VISUAL_SIMILARITY' ||
-      recommendationType === 'SIMILAR_ITEMS'
+      recommendationType === 'SIMILAR_ITEMS' ||
+      recommendationType === 'NEXT_INTERACTION'
     ) {
       if (!productIds.length) return null
       productsParam = productIds[0]
@@ -180,12 +188,18 @@
 
   function recOriginHeader(account) {
     return {
-      'x-vtex-rec-origin': account + '/storefront/vtex.recommendation-shelf@2.x',
+      'x-vtex-rec-origin':
+        account + '/storefront/vtex.recommendation-shelf@2.x',
     }
   }
 
   function fetchRecommendations(account, userId, campaignVrn, productIds) {
-    var params = getRecommendationQueryParams(account, userId, campaignVrn, productIds)
+    var params = getRecommendationQueryParams(
+      account,
+      userId,
+      campaignVrn,
+      productIds
+    )
     if (!params) {
       return Promise.reject(new Error('Missing recommendation query params'))
     }
@@ -207,7 +221,8 @@
     }
     var body = {}
     return fetch(
-      '/api/recommend-bff/v2/users/start-session?an=' + encodeURIComponent(account),
+      '/api/recommend-bff/v2/users/start-session?an=' +
+        encodeURIComponent(account),
       {
         method: 'POST',
         headers: Object.assign(
@@ -238,13 +253,17 @@
 
   function addToCart(orderFormId, skuId, seller) {
     return fetch(
-      '/api/checkout/pub/orderForm/' + encodeURIComponent(orderFormId) + '/items',
+      '/api/checkout/pub/orderForm/' +
+        encodeURIComponent(orderFormId) +
+        '/items',
       {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          orderItems: [{ id: String(skuId), quantity: 1, seller: String(seller) }],
+          orderItems: [
+            { id: String(skuId), quantity: 1, seller: String(seller) },
+          ],
         }),
       }
     ).then(function (response) {
@@ -531,14 +550,18 @@
               .filter(Boolean)
           )
         )
-        return fetchRecommendations(account, ctx.userId, campaignVrn, productIds)
-          .then(function (data) {
-            return {
-              orderForm: ctx.orderForm,
-              userId: ctx.userId,
-              data: data,
-            }
-          })
+        return fetchRecommendations(
+          account,
+          ctx.userId,
+          campaignVrn,
+          productIds
+        ).then(function (data) {
+          return {
+            orderForm: ctx.orderForm,
+            userId: ctx.userId,
+            data: data,
+          }
+        })
       })
       .then(function (ctx) {
         var data = ctx.data
@@ -598,7 +621,10 @@
     outer.style.width = '100%'
     outer.style.boxSizing = 'border-box'
 
-    renderSkeleton(outer, SHELF_CONFIG.itemsPerPage || { desktop: 5, tablet: 3, phone: 2 })
+    renderSkeleton(
+      outer,
+      SHELF_CONFIG.itemsPerPage || { desktop: 5, tablet: 3, phone: 2 }
+    )
     container.parentNode.insertBefore(outer, container.nextSibling)
 
     runPipeline(outer)
