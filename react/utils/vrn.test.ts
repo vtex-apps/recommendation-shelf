@@ -1,6 +1,7 @@
 import { getTypeFromVrn, isValidVrn } from './vrn'
 
-const buildVrn = (type: string) => `vrn:recommendations:myaccount:${type}:campaign-123`
+const buildVrn = (type: string) =>
+  `vrn:recommendations:myaccount:${type}:campaign-123`
 
 describe('isValidVrn', () => {
   const validV2Types = [
@@ -27,9 +28,12 @@ describe('isValidVrn', () => {
     'rec-top-items-v1',
   ]
 
-  it.each(deprecatedV1Types)('returns false for a deprecated v1 VRN (%s)', (type) => {
-    expect(isValidVrn(buildVrn(type))).toBe(false)
-  })
+  it.each(deprecatedV1Types)(
+    'returns false for a deprecated v1 VRN (%s)',
+    (type) => {
+      expect(isValidVrn(buildVrn(type))).toBe(false)
+    }
+  )
 
   it('returns false for an unknown campaign type', () => {
     expect(isValidVrn(buildVrn('rec-unknown-v2'))).toBe(false)
