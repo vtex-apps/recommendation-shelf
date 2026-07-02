@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add support to VisualSimilarity campaigns.
+- Add tests for the VRN parsing utils (`isValidVrn` and `getTypeFromVrn`).
+
+### Changed
+
+- Bump dependencies from open Dependabot PRs (`form-data`, `minimatch`, `@babel/plugin-transform-modules-systemjs`, `lodash`, `picomatch`, `flatted`).
+
+### Removed
+
+- Remove deprecated `-v1` recommendation VRN types from VRN parsing.
+
 ## [2.20.0] - 2026-06-01
 
 ### Changed
