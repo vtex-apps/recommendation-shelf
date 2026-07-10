@@ -1,8 +1,10 @@
 import React from 'react'
 import { defineMessages } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { RecommendationShelfErrorBoundary } from './components/RecommendationShelfErrorBoundary'
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
+import { isPathHidden } from './utils/hiddenPaths'
 
 defineMessages({
   shelf: {
@@ -43,6 +45,15 @@ defineMessages({
     id: 'admin/editor.recommendation-shelf.items-context.pdp',
     defaultMessage: 'Product Page',
   },
+  hiddenPaths: {
+    id: 'admin/editor.recommendation-shelf.hidden-paths',
+    defaultMessage: 'Hidden paths',
+  },
+  hiddenPathsDescription: {
+    id: 'admin/editor.recommendation-shelf.hidden-paths.description',
+    defaultMessage:
+      'URL paths where the shelf should not be displayed. Use exact paths (e.g. /checkout/cart) or prefix wildcards with * (e.g. /produto/*).',
+  },
 })
 
 type Props = {
@@ -50,6 +61,7 @@ type Props = {
   title?: string
   displayTitle: boolean
   itemsContext: ItemContextType[]
+  hiddenPaths?: string[]
 }
 
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
@@ -57,8 +69,15 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   title,
   displayTitle,
   itemsContext,
+  hiddenPaths,
 }) => {
+  const { route } = useRuntime()
+
   if (!campaignVrn) return null
+
+  const currentPath = route?.canonicalPath ?? route?.path ?? '/'
+
+  if (isPathHidden(currentPath, hiddenPaths)) return null
 
   return (
     <RecommendationShelfErrorBoundary>
@@ -104,6 +123,15 @@ RecommendationShelf.schema = {
         ],
       },
       default: ['PDP'],
+    },
+    hiddenPaths: {
+      title: 'admin/editor.recommendation-shelf.hidden-paths',
+      description: 'admin/editor.recommendation-shelf.hidden-paths.description',
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+      default: [],
     },
   },
 }
