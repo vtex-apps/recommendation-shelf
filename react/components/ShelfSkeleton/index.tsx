@@ -1,40 +1,28 @@
 import React from 'react'
 import { useCssHandles } from 'vtex.css-handles'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { SkeletonPiece } from './SkeletonPiece'
 
 const CSS_HANDLES = ['recommendationShelfContainer']
 
-function checkDevice(): 'DESKTOP' | 'MOBILE' | 'TABLET' {
-  if (typeof window === 'undefined') {
-    return 'MOBILE'
-  }
-
-  if (window.innerWidth <= 768) {
-    return 'MOBILE'
-  }
-
-  if (window.innerWidth <= 1024) {
-    return 'TABLET'
-  }
-
-  if (window.innerWidth > 1024) {
-    return 'DESKTOP'
-  }
-
-  return 'MOBILE'
-}
-
+// Number of skeleton tiles per device type. The device is resolved by
+// render-runtime from the User-Agent on the server, so it is consistent
+// across SSR and client hydration (unlike window.innerWidth).
 const DEVICE_MAP = {
-  DESKTOP: 5,
-  MOBILE: 2,
-  TABLET: 3,
-}
+  phone: 2,
+  tablet: 3,
+  desktop: 5,
+} as const
 
 export function ShelfSkeleton() {
   const handles = useCssHandles(CSS_HANDLES)
-  const device = checkDevice()
-  const skeletonCount = DEVICE_MAP[device] || DEVICE_MAP.DESKTOP
+  const { deviceInfo } = useRuntime()
+
+  const skeletonCount =
+    DEVICE_MAP[deviceInfo?.type as keyof typeof DEVICE_MAP] ??
+    DEVICE_MAP.desktop
+
   const skeletonPieces = Array.from({ length: skeletonCount }, (_, index) => (
     <SkeletonPiece key={index} />
   ))
