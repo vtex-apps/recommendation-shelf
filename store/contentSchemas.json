@@ -29,6 +29,16 @@
               "admin/editor.recommendation-shelf.items-context.cart"
             ]
           }
+        },
+        "hiddenPaths": {
+          "title": "admin/editor.recommendation-shelf.hidden-paths",
+          "description": "admin/editor.recommendation-shelf.hidden-paths.description",
+          "type": "array",
+          "default": [],
+          "items": {
+            "title": "admin/editor.recommendation-shelf.hidden-paths",
+            "$ref": "app:vtex.native-types#/definitions/text"
+          }
         }
       }
     }

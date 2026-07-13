@@ -7,5 +7,7 @@
   "admin/editor.recommendation-shelf.items-context": "Contexto de los artículos",
   "admin/editor.recommendation-shelf.items-context.description": "Contexto de los artículos",
   "admin/editor.recommendation-shelf.items-context.cart": "Carrito",
-  "admin/editor.recommendation-shelf.items-context.pdp": "Página de producto"
+  "admin/editor.recommendation-shelf.items-context.pdp": "Página de producto",
+  "admin/editor.recommendation-shelf.hidden-paths": "Rutas ocultas",
+  "admin/editor.recommendation-shelf.hidden-paths.description": "Rutas de URL donde la estantería no debe mostrarse. Use rutas exactas (p. ej. /checkout/cart) o comodines de prefijo con * (p. ej. /produto/*)."
 }

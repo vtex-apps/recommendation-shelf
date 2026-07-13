@@ -45,7 +45,8 @@ Follow these steps to use the Recommendation Shelf app in your store:
      "blocks": ["list-context.product-list-static"],
      "props": {
        "campaignVrn": "vrn:recommendations:biggy:rec-similar-v2:00318b68-cb1b-4d5a-8b0f-cc7fbcdd014b",
-       "title": "Similar items"
+       "title": "Similar items",
+       "hiddenPaths": ["/checkout/cart", "/produto/*"]
      }
    },
    "list-context.product-list-static": {
@@ -101,6 +102,7 @@ Configure the `recommendation-shelf` block using the following properties:
 | `campaignVrn` | `string` | VRN for the recommendation campaign (the recommendation **list ID** from Admin. See [Obtaining the VRN](#obtaining-the-vrn)). | - |
 | `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`). | `true` |
 | `itemsContext` | `array` | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']` |
+| `hiddenPaths` | `array` | URL paths where the shelf should not be displayed. Supports exact paths (e.g. `/checkout/cart`) and prefix wildcards with `*` (e.g. `/produto/*`). Useful when the shelf is placed in a global section (such as the footer) but should be hidden on specific pages. | `[]` |
 
 ### Obtaining the VRN
 

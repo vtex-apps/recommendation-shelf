@@ -7,5 +7,7 @@
   "admin/editor.recommendation-shelf.items-context": "Items Context",
   "admin/editor.recommendation-shelf.items-context.description": "From where to retrieve the items that will be used as context in the Recommendation request",
   "admin/editor.recommendation-shelf.items-context.cart": "Cart",
-  "admin/editor.recommendation-shelf.items-context.pdp": "Product Page"
+  "admin/editor.recommendation-shelf.items-context.pdp": "Product Page",
+  "admin/editor.recommendation-shelf.hidden-paths": "Hidden paths",
+  "admin/editor.recommendation-shelf.hidden-paths.description": "URL paths where the shelf should not be displayed. Use exact paths (e.g. /checkout/cart) or prefix wildcards with * (e.g. /produto/*)."
 }

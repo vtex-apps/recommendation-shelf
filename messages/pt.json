@@ -7,5 +7,7 @@
   "admin/editor.recommendation-shelf.items-context": "Contexto dos Itens",
   "admin/editor.recommendation-shelf.items-context.description": "De onde recuperar os itens que serão usados como contexto na requisição de recomendação",
   "admin/editor.recommendation-shelf.items-context.cart": "Carrinho",
-  "admin/editor.recommendation-shelf.items-context.pdp": "Página de Produto"
+  "admin/editor.recommendation-shelf.items-context.pdp": "Página de Produto",
+  "admin/editor.recommendation-shelf.hidden-paths": "Caminhos ocultos",
+  "admin/editor.recommendation-shelf.hidden-paths.description": "Caminhos de URL onde a vitrine não deve ser exibida. Use caminhos exatos (ex.: /checkout/cart) ou curingas de prefixo com * (ex.: /produto/*)."
 }
