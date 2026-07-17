@@ -11,6 +11,14 @@
 .recommendationSkeletonPiece {
   height: 550px;
   width: 300px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1024px) {
+  .recommendationSkeletonPiece {
+    width: 178px;
+    height: 392px;
+  }
 }
 
 .recommendationSkeletonPieceShimmer {

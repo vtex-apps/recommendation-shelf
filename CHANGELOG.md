@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Skeleton shimmer animation overflow that produced a horizontal scrollbar.
+
+### Changed
+
+- Responsive skeleton piece sizing on screens 1024px and smaller.
+
 ## [2.22.0] - 2026-07-13
 
 ### Added
