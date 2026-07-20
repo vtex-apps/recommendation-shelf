@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- Skeleton shimmer animation to reduce rendering cost, keeping the static gray placeholder.
+
 ## [2.22.1] - 2026-07-17
 
 ### Fixed
