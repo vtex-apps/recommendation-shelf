@@ -18,7 +18,13 @@ function getRecommendationArguments(
   input: RecommendationInput,
   account: string
 ): Args | null {
-  const { userId, products, campaignVrn } = input
+  const { userId, campaignVrn } = input
+
+  // Sort and de-duplicate the products so the generated args are stable
+  // regardless of the input order, improving cache hits and consistency.
+  const products = Array.from(new Set(input.products)).sort((a, b) =>
+    a.localeCompare(b)
+  )
 
   const recommendationType = getTypeFromVrn(campaignVrn)
 
