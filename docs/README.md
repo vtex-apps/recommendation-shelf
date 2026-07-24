@@ -103,6 +103,16 @@ Configure the `recommendation-shelf` block using the following properties:
 | `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`). | `true` |
 | `itemsContext` | `array` | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']` |
 | `hiddenPaths` | `array` | URL paths where the shelf should not be displayed. Supports exact paths (e.g. `/checkout/cart`) and prefix wildcards with `*` (e.g. `/produto/*`). Useful when the shelf is placed in a global section (such as the footer) but should be hidden on specific pages. | `[]` |
+| `displayLoading` | `boolean` | Whether to display a loading placeholder while the shelf is loading (`true`) or render nothing until it is ready (`false`). | `true` |
+| `loadingItemsPerPage` | `object` | The number of loading placeholders to display per device type while loading. See the [`loadingItemsPerPage` object](#loadingitemsperpage-object) section below. | `{ desktop: 5, tablet: 3, phone: 2 }` |
+
+#### `loadingItemsPerPage` object
+
+| Prop name | Type | Description | Default value |
+| - | - | - | - |
+| `desktop` | `number` | Number of loading placeholders shown on desktop devices. | `5` |
+| `tablet` | `number` | Number of loading placeholders shown on tablet devices. | `3` |
+| `phone` | `number` | Number of loading placeholders shown on phone devices. | `2` |
 
 ### Obtaining the VRN
 

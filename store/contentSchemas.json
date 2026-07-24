@@ -39,6 +39,34 @@
             "title": "admin/editor.recommendation-shelf.hidden-paths",
             "$ref": "app:vtex.native-types#/definitions/text"
           }
+        },
+        "displayLoading": {
+          "title": "admin/editor.recommendation-shelf.display-loading",
+          "description": "admin/editor.recommendation-shelf.display-loading.description",
+          "type": "boolean",
+          "default": true
+        },
+        "loadingItemsPerPage": {
+          "title": "admin/editor.recommendation-shelf.loading-items-per-page",
+          "description": "admin/editor.recommendation-shelf.loading-items-per-page.description",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.desktop",
+              "type": "number",
+              "default": 5
+            },
+            "tablet": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.tablet",
+              "type": "number",
+              "default": 3
+            },
+            "phone": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.phone",
+              "type": "number",
+              "default": 2
+            }
+          }
         }
       }
     }

@@ -16,6 +16,8 @@ type Props = {
   title?: string
   displayTitle: boolean
   itemsContext: ItemContextType[]
+  displayLoading?: boolean
+  loadingItemsPerPage?: LoadingItemsPerPage
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
@@ -23,6 +25,8 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   title,
   displayTitle,
   itemsContext = ['PDP'],
+  displayLoading = true,
+  loadingItemsPerPage,
 }) => {
   const productContext = useProduct()
   const {
@@ -116,7 +120,11 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }, [data, error])
 
   if (loading || userId === undefined) {
-    return <ShelfSkeleton />
+    return displayLoading ? (
+      <ShelfSkeleton itemsPerPage={loadingItemsPerPage} />
+    ) : (
+      <Fragment />
+    )
   }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {

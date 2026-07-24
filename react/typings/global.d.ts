@@ -25,4 +25,10 @@ declare global {
     | 'NEXT_INTERACTION'
 
   export type ItemContextType = 'PDP' | 'CART'
+
+  export type LoadingItemsPerPage = {
+    desktop?: number
+    tablet?: number
+    phone?: number
+  }
 }

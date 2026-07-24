@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- `displayLoading` prop to toggle whether the loading placeholder is rendered while the shelf loads.
+- `loadingItemsPerPage` prop to customize the number of loading placeholders per device type (`desktop`, `tablet`, `phone`), replacing the previously hardcoded device map.
+
 ### Fixed
 
 - React "state update on a component that hasn't mounted yet" warning by moving the asynchronous userId retrieval from the render body into a `useEffect` with an unmount guard.
