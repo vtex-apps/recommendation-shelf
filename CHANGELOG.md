@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- React "state update on a component that hasn't mounted yet" warning by moving the asynchronous userId retrieval from the render body into a `useEffect` with an unmount guard.
+
 ## [2.22.2] - 2026-07-20
 
 ### Removed
