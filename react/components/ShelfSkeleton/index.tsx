@@ -6,26 +6,35 @@ import { SkeletonPiece } from './SkeletonPiece'
 
 const CSS_HANDLES = ['recommendationShelfContainer']
 
-// Number of skeleton tiles per device type. The device is resolved by
+// Default number of skeleton tiles per device type. The device is resolved by
 // render-runtime from the User-Agent on the server, so it is consistent
 // across SSR and client hydration (unlike window.innerWidth).
-const DEVICE_MAP = {
+const DEFAULT_ITEMS_PER_PAGE: Required<LoadingItemsPerPage> = {
   phone: 2,
   tablet: 3,
   desktop: 5,
-} as const
+}
 
-export function ShelfSkeleton() {
+type Props = {
+  itemsPerPage?: LoadingItemsPerPage
+}
+
+export function ShelfSkeleton({ itemsPerPage }: Props) {
   const handles = useCssHandles(CSS_HANDLES)
   const { deviceInfo } = useRuntime()
 
-  const skeletonCount =
-    DEVICE_MAP[deviceInfo?.type as keyof typeof DEVICE_MAP] ??
-    DEVICE_MAP.desktop
+  const deviceType =
+    (deviceInfo?.type as keyof LoadingItemsPerPage) ?? 'desktop'
 
-  const skeletonPieces = Array.from({ length: skeletonCount }, (_, index) => (
-    <SkeletonPiece key={index} />
-  ))
+  const skeletonCount =
+    itemsPerPage?.[deviceType] ??
+    DEFAULT_ITEMS_PER_PAGE[deviceType] ??
+    DEFAULT_ITEMS_PER_PAGE.desktop
+
+  const skeletonPieces = Array.from(
+    { length: Math.max(0, skeletonCount) },
+    (_, index) => <SkeletonPiece key={index} />
+  )
 
   return (
     <div

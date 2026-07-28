@@ -54,6 +54,36 @@ defineMessages({
     defaultMessage:
       'URL paths where the shelf should not be displayed. Use exact paths (e.g. /checkout/cart) or prefix wildcards with * (e.g. /produto/*).',
   },
+  displayLoading: {
+    id: 'admin/editor.recommendation-shelf.display-loading',
+    defaultMessage: 'Display loading',
+  },
+  displayLoadingDescription: {
+    id: 'admin/editor.recommendation-shelf.display-loading.description',
+    defaultMessage:
+      'Whether to display a loading placeholder while the shelf is loading.',
+  },
+  loadingItemsPerPage: {
+    id: 'admin/editor.recommendation-shelf.loading-items-per-page',
+    defaultMessage: 'Loading items per page',
+  },
+  loadingItemsPerPageDescription: {
+    id: 'admin/editor.recommendation-shelf.loading-items-per-page.description',
+    defaultMessage:
+      'The number of loading placeholders to display per device type while loading.',
+  },
+  loadingItemsPerPageDesktop: {
+    id: 'admin/editor.recommendation-shelf.loading-items-per-page.desktop',
+    defaultMessage: 'Desktop',
+  },
+  loadingItemsPerPageTablet: {
+    id: 'admin/editor.recommendation-shelf.loading-items-per-page.tablet',
+    defaultMessage: 'Tablet',
+  },
+  loadingItemsPerPagePhone: {
+    id: 'admin/editor.recommendation-shelf.loading-items-per-page.phone',
+    defaultMessage: 'Phone',
+  },
 })
 
 type Props = {
@@ -62,6 +92,8 @@ type Props = {
   displayTitle: boolean
   itemsContext: ItemContextType[]
   hiddenPaths?: string[]
+  displayLoading?: boolean
+  loadingItemsPerPage?: LoadingItemsPerPage
 }
 
 const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
@@ -70,6 +102,8 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   displayTitle,
   itemsContext,
   hiddenPaths,
+  displayLoading,
+  loadingItemsPerPage,
 }) => {
   const { route } = useRuntime()
 
@@ -86,6 +120,8 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
         title={title}
         displayTitle={displayTitle}
         itemsContext={itemsContext}
+        displayLoading={displayLoading}
+        loadingItemsPerPage={loadingItemsPerPage}
       />
     </RecommendationShelfErrorBoundary>
   )
@@ -132,6 +168,39 @@ RecommendationShelf.schema = {
         type: 'string',
       },
       default: [],
+    },
+    displayLoading: {
+      title: 'admin/editor.recommendation-shelf.display-loading',
+      description:
+        'admin/editor.recommendation-shelf.display-loading.description',
+      type: 'boolean',
+      default: true,
+    },
+    loadingItemsPerPage: {
+      title: 'admin/editor.recommendation-shelf.loading-items-per-page',
+      description:
+        'admin/editor.recommendation-shelf.loading-items-per-page.description',
+      type: 'object',
+      properties: {
+        desktop: {
+          title:
+            'admin/editor.recommendation-shelf.loading-items-per-page.desktop',
+          type: 'number',
+          default: 5,
+        },
+        tablet: {
+          title:
+            'admin/editor.recommendation-shelf.loading-items-per-page.tablet',
+          type: 'number',
+          default: 3,
+        },
+        phone: {
+          title:
+            'admin/editor.recommendation-shelf.loading-items-per-page.phone',
+          type: 'number',
+          default: 2,
+        },
+      },
     },
   },
 }

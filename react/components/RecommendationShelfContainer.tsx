@@ -16,6 +16,8 @@ type Props = {
   title?: string
   displayTitle: boolean
   itemsContext: ItemContextType[]
+  displayLoading?: boolean
+  loadingItemsPerPage?: LoadingItemsPerPage
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
@@ -23,6 +25,8 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   title,
   displayTitle,
   itemsContext = ['PDP'],
+  displayLoading = true,
+  loadingItemsPerPage,
 }) => {
   const productContext = useProduct()
   const {
@@ -45,6 +49,37 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     }
   }, [])
 
+  // The pixel might take a while to load and set the userId cookie,
+  // so we use a retry mechanism to ensure we get the userId if available.
+  useEffect(() => {
+    if (!canUseDOM) {
+      return undefined
+    }
+
+    let isMounted = true
+
+    getWithRetry<string>(() => getUserIdFromCookie())
+      .then((value) => {
+        if (isMounted) {
+          setUserId(value)
+        }
+      })
+      .catch((error) => {
+        if (isMounted) {
+          logger.error({
+            message: 'Error retrieving userId from cookie',
+            data: { error, campaignType },
+            sendLog: true,
+          })
+          setUserId(null)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [campaignType])
+
   const cartItems: string[] =
     orderFormItems?.map((item: { productId: string }) => item.productId) ?? []
 
@@ -63,29 +98,6 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
 
   // Remove duplicates and falsy values
   productIds = Array.from(new Set(productIds)).filter(Boolean)
-
-  if (canUseDOM && !userId && userId !== null) {
-    // The pixel might take a while to load and set the userId cookie,
-    // so we use a retry mechanism to ensure we get the userId if available.
-    getWithRetry<string>(() => {
-      if (canUseDOM && !userId) {
-        return getUserIdFromCookie()
-      }
-
-      return ''
-    })
-      .then((value) => {
-        setUserId(value)
-      })
-      .catch((error) => {
-        logger.error({
-          message: 'Error retrieving userId from cookie',
-          data: { error, campaignType },
-          sendLog: true,
-        })
-        setUserId(null)
-      })
-  }
 
   const { data, error, loading } = useRecommendations({
     userId,
@@ -108,7 +120,11 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }, [data, error])
 
   if (loading || userId === undefined) {
-    return <ShelfSkeleton />
+    return displayLoading ? (
+      <ShelfSkeleton itemsPerPage={loadingItemsPerPage} />
+    ) : (
+      <Fragment />
+    )
   }
 
   if (campaignVrn && !isValidVrn(campaignVrn)) {
