@@ -10,11 +10,11 @@
   "admin/editor.recommendation-shelf.items-context.pdp": "Página de Produto",
   "admin/editor.recommendation-shelf.hidden-paths": "Caminhos ocultos",
   "admin/editor.recommendation-shelf.hidden-paths.description": "Caminhos de URL onde a vitrine não deve ser exibida. Use caminhos exatos (ex.: /checkout/cart) ou curingas de prefixo com * (ex.: /produto/*).",
-  "admin/editor.recommendation-shelf.display-loading": "Exibir carregamento",
-  "admin/editor.recommendation-shelf.display-loading.description": "Define se um placeholder de carregamento deve ser exibido enquanto a vitrine é carregada.",
+  "admin/editor.recommendation-shelf.display-loading": "Exibir placeholder de carregamento",
+  "admin/editor.recommendation-shelf.display-loading.description": "Mostra um placeholder de carregamento enquanto a prateleira carrega",
   "admin/editor.recommendation-shelf.loading-items-per-page": "Itens de carregamento por página",
-  "admin/editor.recommendation-shelf.loading-items-per-page.description": "O número de placeholders de carregamento a exibir por tipo de dispositivo durante o carregamento.",
-  "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Desktop",
+  "admin/editor.recommendation-shelf.loading-items-per-page.description": "O número de placeholders de carregamento a serem exibidos por tipo de dispositivo enquanto a prateleira está carregando",
+  "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Computador",
   "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tablet",
   "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Celular"
 }

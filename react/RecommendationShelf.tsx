@@ -56,12 +56,11 @@ defineMessages({
   },
   displayLoading: {
     id: 'admin/editor.recommendation-shelf.display-loading',
-    defaultMessage: 'Display loading',
+    defaultMessage: 'Display loading placeholder',
   },
   displayLoadingDescription: {
     id: 'admin/editor.recommendation-shelf.display-loading.description',
-    defaultMessage:
-      'Whether to display a loading placeholder while the shelf is loading.',
+    defaultMessage: 'Shows a loading placeholder while the shelf loads',
   },
   loadingItemsPerPage: {
     id: 'admin/editor.recommendation-shelf.loading-items-per-page',
@@ -70,7 +69,7 @@ defineMessages({
   loadingItemsPerPageDescription: {
     id: 'admin/editor.recommendation-shelf.loading-items-per-page.description',
     defaultMessage:
-      'The number of loading placeholders to display per device type while loading.',
+      'The number of loading placeholders to display per device type while the shelf is loading',
   },
   loadingItemsPerPageDesktop: {
     id: 'admin/editor.recommendation-shelf.loading-items-per-page.desktop',
