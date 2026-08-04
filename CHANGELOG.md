@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.23.1] - 2026-08-04
+
 ### Fixed
 Review EN, ES and PT translations related to customizable loading placeholders and stable recommendation args. 
 
