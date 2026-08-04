@@ -10,11 +10,11 @@
   "admin/editor.recommendation-shelf.items-context.pdp": "Página de producto",
   "admin/editor.recommendation-shelf.hidden-paths": "Rutas ocultas",
   "admin/editor.recommendation-shelf.hidden-paths.description": "Rutas de URL donde la estantería no debe mostrarse. Use rutas exactas (p. ej. /checkout/cart) o comodines de prefijo con * (p. ej. /produto/*).",
-  "admin/editor.recommendation-shelf.display-loading": "Mostrar carga",
-  "admin/editor.recommendation-shelf.display-loading.description": "Define si se debe mostrar un placeholder de carga mientras se carga la estantería.",
-  "admin/editor.recommendation-shelf.loading-items-per-page": "Elementos de carga por página",
-  "admin/editor.recommendation-shelf.loading-items-per-page.description": "El número de placeholders de carga a mostrar por tipo de dispositivo durante la carga.",
+  "admin/editor.recommendation-shelf.display-loading": "Mostrar marcador de posición de carga",
+  "admin/editor.recommendation-shelf.display-loading.description": "Muestra un marcador de posición mientras se carga la estantería de productos",
+  "admin/editor.recommendation-shelf.loading-items-per-page": "Ítems de carga por página",
+  "admin/editor.recommendation-shelf.loading-items-per-page.description": "El número de marcadores de posición de carga que se mostrarán por tipo de dispositivo mientras se carga la estantería de productos",
   "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Escritorio",
-  "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tableta",
+  "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tablet",
   "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Teléfono"
 }
