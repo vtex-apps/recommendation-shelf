@@ -4,7 +4,10 @@ import { useRuntime } from 'vtex.render-runtime'
 
 import { SkeletonPiece } from './SkeletonPiece'
 
-const CSS_HANDLES = ['recommendationShelfContainer']
+const CSS_HANDLES = [
+  'recommendationShelfContainer',
+  'recommendationShelfContainerLoading',
+]
 
 // Default number of skeleton tiles per device type. The device is resolved by
 // render-runtime from the User-Agent on the server, so it is consistent
@@ -38,7 +41,7 @@ export function ShelfSkeleton({ itemsPerPage }: Props) {
 
   return (
     <div
-      className={`${handles.recommendationShelfContainer} w-100 flex justify-center`}
+      className={`${handles.recommendationShelfContainer} ${handles.recommendationShelfContainerLoading} w-100 flex justify-center`}
     >
       {skeletonPieces}
     </div>

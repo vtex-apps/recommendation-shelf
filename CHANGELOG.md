@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.24.0] - 2026-08-10
+
+### Added
+
+- `recommendationShelfContainerLoading` CSS handle to the shelf skeleton container so the loading state can be styled independently.
+
 ## [2.23.1] - 2026-08-04
 
 ### Fixed
