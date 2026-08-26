@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Updated EN, ES, PT translations and `defaultMessage` values in `RecommendationShelf.tsx`.
+
 ## [2.24.0] - 2026-08-10
 
 ### Added

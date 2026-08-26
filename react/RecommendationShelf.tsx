@@ -14,7 +14,7 @@ defineMessages({
   description: {
     id: 'admin/editor.recommendation-shelf.description',
     defaultMessage:
-      'Recommendation Shelf is a component that displays a collection of items that are recommended to the user based on various algorithms and context data.',
+      'Recommendation Shelf is a component that displays a collection of items recommended to the user based on different algorithms and contextual data.',
   },
   title: {
     id: 'admin/editor.recommendation-shelf.title',
@@ -30,12 +30,12 @@ defineMessages({
   },
   itemsContext: {
     id: 'admin/editor.recommendation-shelf.items-context',
-    defaultMessage: 'Items Context',
+    defaultMessage: 'Item context',
   },
   itemsContextDescription: {
     id: 'admin/editor.recommendation-shelf.items-context.description',
     defaultMessage:
-      'From where to retrieve the items that will be used as context in the Recommendation request',
+      'The source from which items are retrieved for use as context in the recommendation request',
   },
   itemsContextCart: {
     id: 'admin/editor.recommendation-shelf.items-context.cart',
@@ -43,7 +43,7 @@ defineMessages({
   },
   itemsContextPdp: {
     id: 'admin/editor.recommendation-shelf.items-context.pdp',
-    defaultMessage: 'Product Page',
+    defaultMessage: 'Product page',
   },
   hiddenPaths: {
     id: 'admin/editor.recommendation-shelf.hidden-paths',
@@ -52,7 +52,7 @@ defineMessages({
   hiddenPathsDescription: {
     id: 'admin/editor.recommendation-shelf.hidden-paths.description',
     defaultMessage:
-      'URL paths where the shelf should not be displayed. Use exact paths (e.g. /checkout/cart) or prefix wildcards with * (e.g. /produto/*).',
+      "URL paths where the shelf shouldn't be displayed. Use exact paths (example: /checkout/cart) or prefix wildcards with * (example: /produto/*).",
   },
   displayLoading: {
     id: 'admin/editor.recommendation-shelf.display-loading',
@@ -69,7 +69,7 @@ defineMessages({
   loadingItemsPerPageDescription: {
     id: 'admin/editor.recommendation-shelf.loading-items-per-page.description',
     defaultMessage:
-      'The number of loading placeholders to display per device type while the shelf is loading',
+      'Number of loading placeholders to display per device type while the shelf loads',
   },
   loadingItemsPerPageDesktop: {
     id: 'admin/editor.recommendation-shelf.loading-items-per-page.desktop',
