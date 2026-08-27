@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Documentation for placing the `recommendation-shelf` block inside the Mini-Cart (`minicart.v2`).
+
 ## [2.24.1] - 2026-08-26
 
 ### Fixed
