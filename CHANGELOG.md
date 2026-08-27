@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Documentation for placing the `recommendation-shelf` block inside the Mini-Cart (`minicart.v2`).
+- Documentation for placing the `recommendation-shelf` block inside the Mini-Cart (`minicart.v2`) and on the Cart page (Checkout), plus a recommended-placement guide covering PDP, Mini-Cart, Cart page, and global sections.
+
+### Fixed
+
+- Corrected the recommendation strategies table: removed unsupported `v1` VRN types and added the missing `VISUAL_SIMILARITY` (`rec-visual-v2`) and `NEXT_INTERACTION` (`rec-next-v2`) strategies.
 
 ## [2.24.1] - 2026-08-26
 

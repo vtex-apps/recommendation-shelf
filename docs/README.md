@@ -101,7 +101,7 @@ Configure the `recommendation-shelf` block using the following properties:
 | `title` | `string` | Shelf title displayed to users. | - |
 | `campaignVrn` | `string` | VRN for the recommendation campaign (the recommendation **list ID** from Admin. See [Obtaining the VRN](#obtaining-the-vrn)). | - |
 | `displayTitle` | `boolean` | Whether to show the shelf title (`true`) or hide it (`false`). | `true` |
-| `itemsContext` | `array` | Context source for items in the recommendation request (`PDP` or `CART`). Useful for enabling shelves on the cart page with `CROSS_SELL`. | `['PDP']` |
+| `itemsContext` | `array` | Context source for items in the recommendation request (`PDP` or `CART`). See [Recommended placement](#recommended-placement) for which value to use where. | `['PDP']` |
 | `hiddenPaths` | `array` | URL paths where the shelf should not be displayed. Supports exact paths (e.g. `/checkout/cart`) and prefix wildcards with `*` (e.g. `/produto/*`). Useful when the shelf is placed in a global section (such as the footer) but should be hidden on specific pages. | `[]` |
 | `displayLoading` | `boolean` | Whether to display a loading placeholder while the shelf is loading (`true`) or render nothing until it is ready (`false`). | `true` |
 | `loadingItemsPerPage` | `object` | The number of loading placeholders to display per device type while loading. See the [`loadingItemsPerPage` object](#loadingitemsperpage-object) section below. | `{ desktop: 5, tablet: 3, phone: 2 }` |
@@ -126,6 +126,34 @@ If you need to copy the list ID of a list that already exists, follow these step
 2. Find the desired list in the shelf table.
 3. Click the ⋮ menu on the shelf row.
 4. Select **Copy ID**.
+
+## Recommendation strategies
+
+The **`campaignVrn`** string must match `vrn:recommendations:<account>:<campaign-type>:<campaign-id>`. The **`campaign-type`** segment maps to an internal **`RecommendationType`** used when calling recommendations. Only `v2` campaign types are currently valid; requests using a `v1` type are rejected.
+
+| VRN `campaign-type` | Resolved `RecommendationType` | Requires product context | Description |
+| -------------------- | ------------------------------- | :-----------------------: | ----------- |
+| `rec-cross-v2` | `CROSS_SELL` | Yes | Complementary products (often bought together). |
+| `rec-similar-v2` | `SIMILAR_ITEMS` | Yes | Similar-item recommendations for the current product context. |
+| `rec-visual-v2` | `VISUAL_SIMILARITY` | Yes | Visually similar products to the current product context. |
+| `rec-next-v2` | `NEXT_INTERACTION` | Yes | Predicted next product the shopper is likely to interact with. |
+| `rec-persona-v2` | `PERSONALIZED` | No | Personalized recommendations from shopper behavior. |
+| `rec-last-v2` | `LAST_SEEN` | No | Recently viewed products for the shopper. |
+| `rec-top-items-v2` | `TOP_ITEMS` | No | Popular / top-performing products in the store. |
+| `rec-search-v2` | `SEARCH_BASED` | No | Search-driven recommendations. |
+
+Campaigns marked **Requires product context** need at least one anchor product from `itemsContext` (the current PDP's product, an item in the cart, or both) to generate recommendations; the shelf skips the request and renders nothing when no anchor product is available. Campaigns that don't require context ignore `itemsContext` and can be placed anywhere.
+
+### Recommended placement
+
+| Placement | How to add it | `itemsContext` |
+| --------- | -------------- | --------------- |
+| Product Detail Page (PDP) | Add the block as described in [Installation](#installation). | `['PDP']` |
+| Product Listing Pages (PLP) | Add the block as described in [Installation](#installation). | Not applicable: use context-free campaigns (`PERSONALIZED`, `LAST_SEEN`, `TOP_ITEMS`, `SEARCH_BASED`). |
+| Home and institutional pages | Add the block as described in [Installation](#installation). | Not applicable: use context-free campaigns (`PERSONALIZED`, `LAST_SEEN`, `TOP_ITEMS`, `SEARCH_BASED`). |
+| [Mini-Cart](#placing-the-shelf-on-the-mini-cart) | Nest the block inside `minicart.v2`. | `['CART']` |
+| [Cart page (Checkout)](#placing-the-shelf-on-the-cart-page-checkout) | Not a block: add a custom script to Checkout, since Checkout isn't part of the blocks architecture. | Not applicable; the script reads the order form directly. |
+| Global section (e.g. footer) | Add the block outside a specific page context and use `hiddenPaths` to hide it on routes where it shouldn't render. | Depends on the campaign: context-free campaigns (`PERSONALIZED`, `LAST_SEEN`, `TOP_ITEMS`, `SEARCH_BASED`) work anywhere; context-required campaigns still need `PDP` and/or `CART` and only render where that context is available. |
 
 ## Placing the shelf on the Mini-Cart
 
@@ -158,20 +186,17 @@ Example:
 }
 ```
 
-## Recommendation strategies
+## Placing the shelf on the Cart page (Checkout)
 
-The **`campaignVrn`** string must match `vrn:recommendations:<account>:<campaign-type>:<campaign-id>`. The **`campaign-type`** segment maps to an internal **`RecommendationType`** used when calling recommendations:
+Checkout isn't part of the Store Builder blocks architecture, so `recommendation-shelf` can't be nested there like it can on the Mini-Cart or a themed page. Instead, use [`examples/cart-shelf.js`](https://github.com/vtex-apps/recommendation-shelf/blob/master/examples/cart-shelf.js), a vanilla JavaScript script that fetches recommendations directly from the Recommendations API and renders them after the checkout container.
 
-| VRN `campaign-type` | Resolved `RecommendationType` | Description |
-| ------------------- | ------------------------------ | ----------- |
-| `rec-cross-v1`, `rec-cross-v2` | `CROSS_SELL` | Complementary products (often bought together). Use `itemsContext` `CART` on the cart page when needed. |
-| `rec-similar-v1`, `rec-similar-v2` | `SIMILAR_ITEMS` | Similar-item recommendations for the current product context. |
-| `rec-persona-v1`, `rec-persona-v2` | `PERSONALIZED` | Personalized recommendations from shopper behavior. |
-| `rec-last-v1`, `rec-last-v2` | `LAST_SEEN` | Recently viewed products for the shopper. |
-| `rec-top-items-v1`, `rec-top-items-v2` | `TOP_ITEMS` | Popular / top-performing products in the store. |
-| `rec-search-v2` | `SEARCH_BASED` | Search-driven recommendations. |
+To use it:
 
-`v1` and `v2` denote different generations of the same strategy kind. Use the **`campaignVrn`** copied from Admin for your list.
+1. Copy the contents of [`examples/cart-shelf.js`](https://github.com/vtex-apps/recommendation-shelf/blob/master/examples/cart-shelf.js).
+2. Edit the `SHELF_CONFIG` object at the top of the script with your `account`, `campaignVrn`, and optional `title`, `displayTitle`, and `itemsPerPage` values.
+3. Add the edited script to your Checkout custom scripts.
+
+> ℹ️ `examples/cart.js` is a previous, iframe-based approach to the same integration, kept in the repository for reference. Use `cart-shelf.js` for new integrations.
 
 ## Troubleshooting
 
