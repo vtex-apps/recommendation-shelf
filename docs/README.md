@@ -127,6 +127,37 @@ If you need to copy the list ID of a list that already exists, follow these step
 3. Click the ⋮ menu on the shelf row.
 4. Select **Copy ID**.
 
+## Placing the shelf on the Mini-Cart
+
+The `recommendation-shelf` block can also be rendered inside the Mini-Cart, surfacing recommendations right where shoppers are already reviewing their cart.
+
+![minicart-shelf](https://cdn.jsdelivr.net/gh/vtex-apps/recommendation-shelf@master/docs/minicart-shelf.png) ![minicart-shelf-2](https://cdn.jsdelivr.net/gh/vtex-apps/recommendation-shelf@master/docs/minicart-shelf-2.png)
+
+The example below shows the following configuration:
+
+- It nests a `recommendation-shelf#minicart` block alongside `minicart-base-content` inside the `minicart.v2` block.
+- It sets `itemsContext` to `['CART']`, so the shelf recommends products based on what's already in the cart. Because `itemsContext: ['CART']` reads cart items from the shopper's order form directly (not from the current page), the shelf receives the same cart-based recommendations whether it's rendered on the cart page or inside the Mini-Cart drawer.
+- It configures its supporting blocks (`list-context.product-list-static`, `product-summary.shelf`, `slider-layout`) the same way described in [Installation](#installation).
+
+Example:
+
+```json
+"minicart.v2": {
+  "children": [
+    "minicart-base-content",
+    "recommendation-shelf#minicart"
+  ]
+},
+"recommendation-shelf#minicart": {
+  "blocks": ["list-context.product-list-static"],
+  "props": {
+    "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
+    "title": "You might also like",
+    "itemsContext": ["CART"]
+  }
+}
+```
+
 ## Recommendation strategies
 
 The **`campaignVrn`** string must match `vrn:recommendations:<account>:<campaign-type>:<campaign-id>`. The **`campaign-type`** segment maps to an internal **`RecommendationType`** used when calling recommendations:
