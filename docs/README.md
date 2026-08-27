@@ -196,8 +196,6 @@ To use it:
 2. Edit the `SHELF_CONFIG` object at the top of the script with your `account`, `campaignVrn`, and optional `title`, `displayTitle`, and `itemsPerPage` values.
 3. Add the edited script to your Checkout custom scripts.
 
-> ℹ️ `examples/cart.js` is a previous, iframe-based approach to the same integration, kept in the repository for reference. Use `cart-shelf.js` for new integrations.
-
 ## Troubleshooting
 
 Check if others have encountered similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
