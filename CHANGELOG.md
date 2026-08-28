@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.24.2] - 2026-08-28
+
 ### Added
 
 - Documentation for placing the `recommendation-shelf` block inside the Mini-Cart (`minicart.v2`) and on the Cart page (Checkout), plus a recommended-placement guide covering PDP, Mini-Cart, Cart page, and global sections.
