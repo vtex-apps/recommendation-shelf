@@ -196,6 +196,19 @@ To use it:
 2. Edit the `SHELF_CONFIG` object at the top of the script with your `account`, `campaignVrn`, and optional `title`, `displayTitle`, and `itemsPerPage` values.
 3. Add the edited script to your Checkout custom scripts.
 
+## Control group
+
+To measure the shelf's impact, you can keep a control group of sessions that never see the shelf. When a session belongs to the control group, the `recommendation-shelf` block renders nothing at all — not even its loading placeholder.
+
+The control group is defined by an external split script (managed outside this app) that assigns each session to a variant and tags the page accordingly:
+
+- A `data-test-snrs-vtwo` attribute on the `<body>` element (checked first).
+- A `test-snrs-vtwo` value in `localStorage` (used as a fallback).
+
+Sessions whose variant matches the control group value (`B`) don't render the shelf; every other session renders normally. Because the check runs before anything is displayed, the control group never sees the loading skeleton.
+
+> ℹ️ This behavior is automatic and has no block props to configure. It only takes effect on stores where the external split script is installed; without it, the shelf always renders normally.
+
 ## Troubleshooting
 
 Check if others have encountered similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.
