@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Control group support: sessions assigned to the control group (identified by the `data-test-snrs-vtwo` body attribute / `test-snrs-vtwo` localStorage value set by an external split script) no longer render the shelf, including its loading placeholder.
+
 ## [2.24.2] - 2026-08-28
 
 ### Added
