@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.0-hkignore] - 2026-10-01
+
 ### Added
 
 - Control group support: sessions assigned to the control group (identified by the `data-test-snrs-vtwo` body attribute / `test-snrs-vtwo` localStorage value set by an external split script) no longer render the shelf, including its loading placeholder.
+
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
 
 ## [2.24.2] - 2026-08-28
 
