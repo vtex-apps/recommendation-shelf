@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.1-hkignore] - 2026-10-05
+
+### Changed
+
+- Renamed the control group identifiers to the `data-rec-control-group` body attribute and the `rec-control-group` localStorage key, so the experiment does not inherit group assignments from previous tests.
+
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
+
 ## [2.25.0-hkignore] - 2026-10-01
 
 ### Added
