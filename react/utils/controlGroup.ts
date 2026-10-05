@@ -1,13 +1,13 @@
 // Control group handling.
 //
 // An external script splits traffic and tags the current session by setting a
-// `data-test-snrs-vtwo` attribute on <body> (and mirroring it in localStorage
-// under `test-snrs-vtwo`). Sessions assigned to the control group must not see
+// `data-rec-control-group` attribute on <body> (and mirroring it in
+// localStorage under `rec-control-group`). Sessions assigned to the control group must not see
 // the shelf at all (not even its loading placeholder), while every other
 // session renders normally.
 
-export const CONTROL_GROUP_BODY_ATTRIBUTE = 'data-test-snrs-vtwo'
-export const CONTROL_GROUP_STORAGE_KEY = 'test-snrs-vtwo'
+export const CONTROL_GROUP_BODY_ATTRIBUTE = 'data-rec-control-group'
+export const CONTROL_GROUP_STORAGE_KEY = 'rec-control-group'
 
 // Variant value that identifies the control group. Change here if the external
 // script starts using a different value.

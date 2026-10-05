@@ -202,8 +202,8 @@ To measure the shelf's impact, you can keep a control group of sessions that nev
 
 The control group is defined by an external split script (managed outside this app) that assigns each session to a variant and tags the page accordingly:
 
-- A `data-test-snrs-vtwo` attribute on the `<body>` element (checked first).
-- A `test-snrs-vtwo` value in `localStorage` (used as a fallback).
+- A `data-rec-control-group` attribute on the `<body>` element (checked first).
+- A `rec-control-group` value in `localStorage` (used as a fallback).
 
 Sessions whose variant matches the control group value (`B`) don't render the shelf; every other session renders normally. Because the check runs before anything is displayed, the control group never sees the loading skeleton.
 
