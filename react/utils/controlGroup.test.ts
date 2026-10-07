@@ -16,19 +16,19 @@ describe('getAssignedVariant', () => {
   })
 
   it('reads the variant from the body attribute', () => {
-    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'B')
-    expect(getAssignedVariant()).toBe('B')
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'control')
+    expect(getAssignedVariant()).toBe('control')
   })
 
   it('falls back to localStorage when the body attribute is absent', () => {
-    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'A')
-    expect(getAssignedVariant()).toBe('A')
+    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'base')
+    expect(getAssignedVariant()).toBe('base')
   })
 
   it('prefers the body attribute over localStorage', () => {
-    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'A')
-    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'B')
-    expect(getAssignedVariant()).toBe('A')
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'base')
+    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'control')
+    expect(getAssignedVariant()).toBe('base')
   })
 })
 
@@ -41,10 +41,10 @@ describe('isControlGroup', () => {
   it('flags the session as control group only for the control variant', () => {
     expect(isControlGroup()).toBe(false)
 
-    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'A')
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'base')
     expect(isControlGroup()).toBe(false)
 
-    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'B')
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'control')
     expect(isControlGroup()).toBe(true)
   })
 

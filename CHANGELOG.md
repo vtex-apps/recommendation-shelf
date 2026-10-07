@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Renamed the control group identifiers to the `data-rec-control-group` body attribute and the `rec-control-group` localStorage key, so the experiment does not inherit group assignments from previous tests.
+- Renamed the control group identifiers to the `data-vtex-rec-control-group` body attribute and the `vtex-rec-control-group` localStorage key, so the experiment does not inherit group assignments from previous tests.
+- Group values are now `base` (sees the shelf) and `control` (shelf hidden) instead of `A` and `B`.
 
 > This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
 
