@@ -5,6 +5,7 @@ import { useRuntime } from 'vtex.render-runtime'
 import { RecommendationShelfErrorBoundary } from './components/RecommendationShelfErrorBoundary'
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
 import { isPathHidden } from './utils/hiddenPaths'
+import { isControlGroup } from './utils/controlGroup'
 
 defineMessages({
   shelf: {
@@ -111,6 +112,10 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   const currentPath = route?.canonicalPath ?? route?.path ?? '/'
 
   if (isPathHidden(currentPath, hiddenPaths)) return null
+
+  // Control group: hide the shelf entirely (including its loading
+  // placeholder). Every other session renders normally.
+  if (isControlGroup()) return null
 
   return (
     <RecommendationShelfErrorBoundary>
