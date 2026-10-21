@@ -32,3 +32,34 @@
   bottom: 0;
   z-index: 1;
 }
+
+/*
+ * Compact defaults for the default product summary. Scoped under the
+ * MiniShelf container (and its `mini-shelf` block class) so they win over
+ * theme styles for the regular shelf without touching them.
+ */
+.container :global(.vtex-product-summary-2-x-nameContainer--mini-shelf) {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.container :global(.vtex-product-summary-2-x-brandName--mini-shelf) {
+  font-size: 0.875rem;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+.container :global(.vtex-product-price-1-x-sellingPriceValue--mini-shelf) {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-info) {
+  min-width: 0;
+}
+
+.container
+  :global(.vtex-add-to-cart-button-0-x-buttonDataContainer--mini-shelf) {
+  min-width: 0;
+}
