@@ -55,11 +55,12 @@
 
 /*
  * Product name: at most 2 lines, truncated with an ellipsis.
- * Autoprefixer is turned off for this rule because it strips the legacy
- * `display: -webkit-box` / `-webkit-box-orient` that line clamping needs.
+ * The control comment inside the rule turns autoprefixer off for this rule
+ * only, because it strips the legacy `display: -webkit-box` and
+ * `-webkit-box-orient` that line clamping needs.
  */
-/* autoprefixer: off */
 .container :global(.vtex-product-summary-2-x-nameWrapper--mini-shelf) {
+  /* autoprefixer: off */
   display: -webkit-box;
   min-width: 0;
   overflow: hidden;
@@ -69,7 +70,6 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-/* autoprefixer: on */
 
 .container :global(.vtex-product-summary-2-x-brandName--mini-shelf) {
   font-size: 0.875rem;
