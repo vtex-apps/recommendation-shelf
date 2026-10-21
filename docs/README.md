@@ -195,7 +195,7 @@ The `recommendation-mini-shelf` block is a compact, collapsible version of the s
 - Starts expanded. Tapping the title bar collapses it into a thin bar (title and arrow) that stays above the Mini-Cart total, and tapping again expands it. The state is kept in memory only: it isn't persisted, so it resets whenever the component is mounted again.
 - It doesn't change the Mini-Cart structure, and `recommendation-shelf` keeps working as before.
 
-It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. It works with a single block and no extra configuration:
+It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. Like `recommendation-shelf`, each instance must declare the `list-context.product-list-static#mini-shelf` block, which brings the default carousel and product summary:
 
 ```json
 "minicart.v2": {
@@ -205,6 +205,7 @@ It accepts the same props as `recommendation-shelf`, except that `loadingItemsPe
   ]
 },
 "recommendation-mini-shelf#minicart": {
+  "blocks": ["list-context.product-list-static#mini-shelf"],
   "props": {
     "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
     "title": "You might also like",
