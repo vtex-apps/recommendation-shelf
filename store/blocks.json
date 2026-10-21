@@ -151,7 +151,7 @@
   },
   "flex-layout.col#mini-shelf-image": {
     "props": {
-      "width": "72px",
+      "width": "25%",
       "blockClass": "mini-shelf-image",
       "preventVerticalStretch": true
     },
@@ -159,7 +159,7 @@
   },
   "flex-layout.col#mini-shelf-action": {
     "props": {
-      "width": "48px",
+      "width": "auto",
       "blockClass": "mini-shelf-action",
       "preventVerticalStretch": true
     },
