@@ -12,7 +12,7 @@
   box-sizing: border-box;
   height: 48px;
   min-height: 48px;
-  padding: 0 16px;
+  /* padding: 0 16px; */
   text-align: left;
 }
 
@@ -139,7 +139,7 @@
 
 .container :global(.vtex-slider-layout-0-x-sliderArrows) {
   /* Vertically centered on the 48px header, regardless of the arrow's own size */
-  top: 24px;
+  top: 32px;
   bottom: auto;
   z-index: 1;
   box-sizing: border-box;
@@ -153,12 +153,12 @@
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderLeftArrow) {
-  right: 48px;
+  right: 55px;
   left: auto;
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderRightArrow) {
-  right: 12px;
+  right: 15px;
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderArrows):disabled {
