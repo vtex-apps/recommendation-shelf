@@ -161,6 +161,8 @@
     "props": {
       "width": "20%",
       "blockClass": "mini-shelf-action",
+      "verticalAlign": "middle",
+      "horizontalAlign": "center",
       "preventVerticalStretch": true
     },
     "children": ["add-to-cart-button#mini-shelf"]

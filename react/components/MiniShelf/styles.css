@@ -58,3 +58,34 @@
 .container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-info) {
   min-width: 0;
 }
+
+/* Add to cart: circular, secondary (outlined) button centered in the row */
+.container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action) button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  background-color: transparent;
+  color: inherit;
+  line-height: 1;
+}
+
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  button:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-button__label) {
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+}
