@@ -263,6 +263,8 @@ You can also point the shelf at another summary block by overriding `list-contex
 | `miniShelfToggleIcon` |
 | `miniShelfContent` |
 | `miniShelfSkeletonPiece` |
+| `miniShelfSkeletonTitle` |
+| `miniShelfSkeletonTitlePiece` |
 
 The carousel and the add-to-cart button use the `mini-shelf` block class (for example, `.sliderLayoutContainer--mini-shelf`).
 
