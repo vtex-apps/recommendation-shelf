@@ -7,3 +7,11 @@
   flex: 1 1 0;
   height: 72px;
 }
+
+/* Fixed space for the title: 14px + 20px + 14px = 48px, the header height */
+.title {
+  width: 45%;
+  max-width: 220px;
+  height: 20px;
+  margin: 14px 16px;
+}

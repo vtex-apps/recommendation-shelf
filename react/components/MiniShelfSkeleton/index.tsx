@@ -8,6 +8,7 @@ const CSS_HANDLES = [
   'miniShelfContainer',
   'miniShelfContainerLoading',
   'miniShelfSkeletonPiece',
+  'miniShelfSkeletonTitle',
 ]
 
 const DEFAULT_ITEMS_PER_PAGE: Required<LoadingItemsPerPage> = {
@@ -34,14 +35,19 @@ export function MiniShelfSkeleton({ itemsPerPage }: Props) {
 
   return (
     <div
-      className={`${handles.miniShelfContainer} ${handles.miniShelfContainerLoading} ${styles.container} w-100 flex`}
+      className={`${handles.miniShelfContainer} ${handles.miniShelfContainerLoading} w-100`}
     >
-      {Array.from({ length: Math.max(0, count) }, (_, index) => (
-        <div
-          key={index}
-          className={`${styles.piece} ${handles.miniShelfSkeletonPiece} bg-muted-4 br3`}
-        />
-      ))}
+      <div
+        className={`${styles.title} ${handles.miniShelfSkeletonTitle} bg-muted-4 br3`}
+      />
+      <div className={`${styles.container} flex`}>
+        {Array.from({ length: Math.max(0, count) }, (_, index) => (
+          <div
+            key={index}
+            className={`${styles.piece} ${handles.miniShelfSkeletonPiece} bg-muted-4 br3`}
+          />
+        ))}
+      </div>
     </div>
   )
 }
