@@ -53,7 +53,12 @@
   margin: 0;
 }
 
-/* Product name: at most 2 lines, truncated with an ellipsis */
+/*
+ * Product name: at most 2 lines, truncated with an ellipsis.
+ * Autoprefixer is turned off for this rule because it strips the legacy
+ * `display: -webkit-box` / `-webkit-box-orient` that line clamping needs.
+ */
+/* autoprefixer: off */
 .container :global(.vtex-product-summary-2-x-nameWrapper--mini-shelf) {
   display: -webkit-box;
   min-width: 0;
@@ -62,9 +67,9 @@
   overflow-wrap: anywhere;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-  /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
 }
+/* autoprefixer: on */
 
 .container :global(.vtex-product-summary-2-x-brandName--mini-shelf) {
   font-size: 0.875rem;
