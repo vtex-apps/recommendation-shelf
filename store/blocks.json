@@ -131,7 +131,7 @@
       "showNavigationArrows": "always",
       "showPaginationDots": "never",
       "infinite": false,
-      "fullWidth": false,
+      "fullWidth": true,
       "navigationStep": 1,
       "blockClass": "mini-shelf",
       "arrowSize": 16
