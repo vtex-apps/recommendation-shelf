@@ -5,11 +5,13 @@ import { canUseDOM } from 'vtex.render-runtime'
 
 import useRecommendations from '../hooks/useRecommendations'
 import Shelf from './Shelf'
+import MiniShelf from './MiniShelf'
 import { getTypeFromVrn, isValidVrn } from '../utils/vrn'
 import { getUserIdFromCookie, ensureUserIdCookies } from '../utils/user'
 import { getWithRetry } from '../utils/getWithRetry'
 import { logger } from '../utils/logger'
 import { ShelfSkeleton } from './ShelfSkeleton'
+import { MiniShelfSkeleton } from './MiniShelfSkeleton'
 
 type Props = {
   campaignVrn: string
@@ -18,6 +20,7 @@ type Props = {
   itemsContext: ItemContextType[]
   displayLoading?: boolean
   loadingItemsPerPage?: LoadingItemsPerPage
+  variant?: 'default' | 'mini'
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
@@ -27,6 +30,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   itemsContext = ['PDP'],
   displayLoading = true,
   loadingItemsPerPage,
+  variant = 'default',
 }) => {
   const productContext = useProduct()
   const {
@@ -120,10 +124,14 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   }, [data, error])
 
   if (loading || userId === undefined) {
-    return displayLoading ? (
-      <ShelfSkeleton itemsPerPage={loadingItemsPerPage} />
+    if (!displayLoading) {
+      return <Fragment />
+    }
+
+    return variant === 'mini' ? (
+      <MiniShelfSkeleton itemsPerPage={loadingItemsPerPage} />
     ) : (
-      <Fragment />
+      <ShelfSkeleton itemsPerPage={loadingItemsPerPage} />
     )
   }
 
@@ -141,8 +149,10 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
     })
   }
 
+  const ShelfView = variant === 'mini' ? MiniShelf : Shelf
+
   return products?.length && userId ? (
-    <Shelf
+    <ShelfView
       products={products}
       title={title ?? data?.campaign.title ?? ''}
       correlationId={data?.correlationId ?? ''}

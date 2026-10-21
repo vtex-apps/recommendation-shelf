@@ -69,6 +69,76 @@
           }
         }
       }
+    },
+    "RecommendationMiniShelf": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "admin/editor.recommendation-shelf.title",
+          "$ref": "app:vtex.native-types#/definitions/text"
+        },
+        "campaignVrn": {
+          "title": "admin/editor.recommendation-shelf.campaign-vrn",
+          "$ref": "app:vtex.native-types#/definitions/text"
+        },
+        "displayTitle": {
+          "title": "admin/editor.recommendation-shelf.display-title",
+          "type": "boolean",
+          "default": true
+        },
+        "itemsContext": {
+          "title": "admin/editor.recommendation-shelf.items-context",
+          "type": "array",
+          "default": ["PDP"],
+          "items": {
+            "title": "admin/editor.recommendation-shelf.items-context",
+            "type": "string",
+            "enum": ["PDP", "CART"],
+            "enumNames": [
+              "admin/editor.recommendation-shelf.items-context.pdp",
+              "admin/editor.recommendation-shelf.items-context.cart"
+            ]
+          }
+        },
+        "hiddenPaths": {
+          "title": "admin/editor.recommendation-shelf.hidden-paths",
+          "description": "admin/editor.recommendation-shelf.hidden-paths.description",
+          "type": "array",
+          "default": [],
+          "items": {
+            "title": "admin/editor.recommendation-shelf.hidden-paths",
+            "$ref": "app:vtex.native-types#/definitions/text"
+          }
+        },
+        "displayLoading": {
+          "title": "admin/editor.recommendation-shelf.display-loading",
+          "description": "admin/editor.recommendation-shelf.display-loading.description",
+          "type": "boolean",
+          "default": true
+        },
+        "loadingItemsPerPage": {
+          "title": "admin/editor.recommendation-shelf.loading-items-per-page",
+          "description": "admin/editor.recommendation-shelf.loading-items-per-page.description",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.desktop",
+              "type": "number",
+              "default": 2
+            },
+            "tablet": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.tablet",
+              "type": "number",
+              "default": 2
+            },
+            "phone": {
+              "title": "admin/editor.recommendation-shelf.loading-items-per-page.phone",
+              "type": "number",
+              "default": 1
+            }
+          }
+        }
+      }
     }
   }
 }

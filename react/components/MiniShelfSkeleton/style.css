@@ -1,0 +1,9 @@
+.container {
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.piece {
+  flex: 1 1 0;
+  height: 72px;
+}

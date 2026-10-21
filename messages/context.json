@@ -16,5 +16,9 @@
   "admin/editor.recommendation-shelf.loading-items-per-page.description": "Number of loading placeholders to display per device type while the shelf loads",
   "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Desktop",
   "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tablet",
-  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Phone"
+  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Phone",
+  "admin/editor.recommendation-mini-shelf": "Name of the compact recommendation shelf block shown in Site Editor",
+  "admin/editor.recommendation-mini-shelf.description": "Description of the compact recommendation shelf block shown in Site Editor",
+  "store/recommendation-mini-shelf.collapse": "Accessible label of the button that collapses the MiniShelf",
+  "store/recommendation-mini-shelf.expand": "Accessible label of the button that expands the MiniShelf"
 }

@@ -16,5 +16,9 @@
   "admin/editor.recommendation-shelf.loading-items-per-page.description": "Número de placeholders de carregamento a serem exibidos por tipo de dispositivo enquanto a prateleira carrega",
   "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Desktop",
   "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tablet",
-  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Celular"
+  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Celular",
+  "admin/editor.recommendation-mini-shelf": "Recommendation MiniShelf",
+  "admin/editor.recommendation-mini-shelf.description": "Prateleira de recomendações compacta e recolhível, pensada para espaços pequenos como o minicart.",
+  "store/recommendation-mini-shelf.collapse": "Recolher recomendações",
+  "store/recommendation-mini-shelf.expand": "Expandir recomendações"
 }

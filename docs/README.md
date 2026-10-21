@@ -186,6 +186,85 @@ Example:
 }
 ```
 
+## MiniShelf
+
+The `recommendation-mini-shelf` block is a compact, collapsible version of the shelf, designed for small spaces such as the Mini-Cart on small devices. It frees space for the cart items without hiding the recommendation.
+
+- Shows each product in a compact horizontal card (image, name, price, and a `+` add-to-cart button).
+- Carousel with navigation arrows, with the next product partially visible at the edge. There is no autoplay, so products never change unless the shopper navigates.
+- Starts expanded. Tapping the title bar collapses it into a thin bar (title and arrow) that stays above the Mini-Cart total, and tapping again expands it. The state is kept in memory only: it isn't persisted, so it resets whenever the component is mounted again.
+- It doesn't change the Mini-Cart structure, and `recommendation-shelf` keeps working as before.
+
+It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. It works with a single block and no extra configuration:
+
+```json
+"minicart.v2": {
+  "children": [
+    "minicart-base-content",
+    "recommendation-mini-shelf#minicart"
+  ]
+},
+"recommendation-mini-shelf#minicart": {
+  "props": {
+    "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
+    "title": "You might also like",
+    "itemsContext": ["CART"]
+  }
+}
+```
+
+### Customizing the MiniShelf
+
+The MiniShelf is composed of Store Framework blocks that ship with default definitions. To customize the displayed `ProductSummary`, redefine the block in your theme:
+
+| Block | Purpose |
+| - | - |
+| `list-context.product-list-static#mini-shelf` | Receives the products. Its `blocks` sets the product summary, and its `children` sets the layout. |
+| `slider-layout#mini-shelf` | The carousel (`centerMode: "to-the-left"` shows the next product, no autoplay). |
+| `product-summary.shelf#mini-shelf` | The product summary. Override its `children` to change the card. |
+
+For example, to show the list price and a member price in the card:
+
+```json
+"product-summary.shelf#mini-shelf": {
+  "children": [
+    "flex-layout.row#mini-shelf-summary"
+  ]
+},
+"flex-layout.col#mini-shelf-info": {
+  "children": [
+    "product-summary-name#mini-shelf",
+    "product-list-price#summary",
+    "product-selling-price#summary"
+  ]
+}
+```
+
+You can also point the shelf at another summary block by overriding `list-context.product-list-static#mini-shelf`:
+
+```json
+"list-context.product-list-static#mini-shelf": {
+  "blocks": ["product-summary.shelf#my-summary"],
+  "children": ["slider-layout#mini-shelf"]
+}
+```
+
+### CSS handles
+
+| CSS handle |
+| - |
+| `miniShelfContainer` |
+| `miniShelfContainerLoading` |
+| `miniShelfCollapsed` |
+| `miniShelfHeader` |
+| `miniShelfTitle` |
+| `miniShelfToggle` |
+| `miniShelfToggleIcon` |
+| `miniShelfContent` |
+| `miniShelfSkeletonPiece` |
+
+The carousel and the add-to-cart button use the `mini-shelf` block class (for example, `.sliderLayoutContainer--mini-shelf`).
+
 ## Placing the shelf on the Cart page (Checkout)
 
 Checkout isn't part of the Store Builder blocks architecture, so `recommendation-shelf` can't be nested there like it can on the Mini-Cart or a themed page. Instead, use [`examples/cart-shelf.js`](https://github.com/vtex-apps/recommendation-shelf/blob/master/examples/cart-shelf.js), a vanilla JavaScript script that fetches recommendations directly from the Recommendations API and renders them after the checkout container.

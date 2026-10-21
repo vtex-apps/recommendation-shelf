@@ -16,5 +16,9 @@
   "admin/editor.recommendation-shelf.loading-items-per-page.description": "Number of loading placeholders to display per device type while the shelf loads",
   "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Desktop",
   "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tablet",
-  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Phone"
+  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Phone",
+  "admin/editor.recommendation-mini-shelf": "Recommendation MiniShelf",
+  "admin/editor.recommendation-mini-shelf.description": "Compact, collapsible recommendation shelf designed for small spaces such as the Mini-Cart.",
+  "store/recommendation-mini-shelf.collapse": "Collapse recommendations",
+  "store/recommendation-mini-shelf.expand": "Expand recommendations"
 }
