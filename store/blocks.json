@@ -74,7 +74,7 @@
       "showBadge": false,
       "aspectRatio": "1:1",
       "maxHeight": 72,
-      "width": 72
+      "blockClass": "mini-shelf"
     }
   },
   "product-summary-name#mini-shelf": {
@@ -92,26 +92,28 @@
     "props": {
       "width": "grow",
       "rowGap": 1,
-      "blockClass": "mini-shelf"
+      "blockClass": "mini-shelf-info"
     },
     "children": [
       "product-summary-name#mini-shelf",
-      "product-selling-price#summary"
+      "product-selling-price#mini-shelf"
     ]
   },
   "flex-layout.row#mini-shelf-summary": {
     "props": {
-      "colGap": 3,
+      "colGap": 2,
       "preserveLayoutOnMobile": true,
       "verticalAlign": "middle",
       "paddingTop": 2,
       "paddingBottom": 2,
-      "blockClass": "mini-shelf"
+      "blockClass": "mini-shelf",
+      "paddingLeft": 1,
+      "paddingRight": 1
     },
     "children": [
-      "product-summary-image#mini-shelf",
+      "flex-layout.col#mini-shelf-image",
       "flex-layout.col#mini-shelf-info",
-      "add-to-cart-button#mini-shelf"
+      "flex-layout.col#mini-shelf-action"
     ]
   },
   "product-summary.shelf#mini-shelf": {
@@ -129,9 +131,10 @@
       "showNavigationArrows": "always",
       "showPaginationDots": "never",
       "infinite": false,
-      "fullWidth": true,
+      "fullWidth": false,
       "navigationStep": 1,
-      "blockClass": "mini-shelf"
+      "blockClass": "mini-shelf",
+      "arrowSize": 16
     }
   },
   "list-context.product-list-static#mini-shelf": {
@@ -140,5 +143,26 @@
   },
   "recommendation-mini-shelf": {
     "blocks": ["list-context.product-list-static#mini-shelf"]
+  },
+  "product-selling-price#mini-shelf": {
+    "props": {
+      "blockClass": "mini-shelf"
+    }
+  },
+  "flex-layout.col#mini-shelf-image": {
+    "props": {
+      "width": "72px",
+      "blockClass": "mini-shelf-image",
+      "preventVerticalStretch": true
+    },
+    "children": ["product-summary-image#mini-shelf"]
+  },
+  "flex-layout.col#mini-shelf-action": {
+    "props": {
+      "width": "48px",
+      "blockClass": "mini-shelf-action",
+      "preventVerticalStretch": true
+    },
+    "children": ["add-to-cart-button#mini-shelf"]
   }
 }
