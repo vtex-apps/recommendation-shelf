@@ -51,6 +51,16 @@
   padding-top: 0;
   padding-bottom: 0;
   margin: 0;
+
+  /* Product name: at most 2 lines, truncated with an ellipsis */
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
 }
 
 .container :global(.vtex-product-summary-2-x-brandName--mini-shelf) {
