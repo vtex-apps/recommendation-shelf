@@ -134,7 +134,7 @@
       "fullWidth": true,
       "navigationStep": 1,
       "blockClass": "mini-shelf",
-      "arrowSize": 16
+      "arrowSize": 12
     }
   },
   "list-context.product-list-static#mini-shelf": {
