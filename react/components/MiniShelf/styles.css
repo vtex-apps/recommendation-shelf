@@ -138,11 +138,16 @@
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderArrows) {
-  top: 10px;
+  /* Vertically centered on the 48px header, regardless of the arrow's own size */
+  top: 24px;
+  bottom: auto;
   z-index: 1;
+  box-sizing: border-box;
   width: 28px;
   height: 28px;
   margin: 0;
+  padding: 0;
+  transform: translateY(-50%);
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
 }
