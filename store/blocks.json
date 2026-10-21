@@ -122,8 +122,8 @@
   "slider-layout#mini-shelf": {
     "props": {
       "itemsPerPage": {
-        "desktop": 2,
-        "tablet": 2,
+        "desktop": 1,
+        "tablet": 1,
         "phone": 1
       },
       "centerMode": "to-the-left",
@@ -159,7 +159,7 @@
   },
   "flex-layout.col#mini-shelf-action": {
     "props": {
-      "width": "auto",
+      "width": "20%",
       "blockClass": "mini-shelf-action",
       "preventVerticalStretch": true
     },
