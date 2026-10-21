@@ -9,8 +9,10 @@
   justify-content: flex-start;
   gap: 0.5rem;
   width: 100%;
-  min-height: 44px;
-  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  height: 3rem;
+  min-height: 3rem;
+  padding: 0 1rem;
   text-align: left;
 }
 
@@ -136,17 +138,17 @@
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderArrows) {
-  top: 0.4rem;
+  top: 0.5rem;
   z-index: 1;
   width: 2rem;
   height: 2rem;
   margin: 0;
-  border: 1px solid currentColor;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderLeftArrow) {
-  right: 3rem;
+  right: 3.25rem;
   left: auto;
 }
 
@@ -157,4 +159,14 @@
 .container :global(.vtex-slider-layout-0-x-sliderArrows):disabled {
   opacity: 0.35;
   cursor: default;
+}
+
+/* Thin divider between product cards */
+.container :global(.vtex-slider-layout-0-x-slide) {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.container :global(.vtex-slider-layout-0-x-slide:last-child) {
+  border-right: 0;
 }
