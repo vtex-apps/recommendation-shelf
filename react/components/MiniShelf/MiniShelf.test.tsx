@@ -1,6 +1,5 @@
 import React from 'react'
-import { render as rtlRender, fireEvent } from '@testing-library/react'
-import { IntlProvider } from 'react-intl'
+import { render, fireEvent } from '@testing-library/react'
 
 import MiniShelf from './index'
 
@@ -26,19 +25,20 @@ jest.mock(
   { virtual: true }
 )
 
+jest.mock('react-intl', () => ({
+  defineMessages: (messages: unknown) => messages,
+  useIntl: () => ({
+    formatMessage: ({ defaultMessage }: { defaultMessage: string }) =>
+      defaultMessage,
+  }),
+}))
+
 jest.mock('./styles.css', () => ({}))
 
 jest.mock('../../utils/user', () => ({
   getCookie: () => 'cookie',
   startSession: jest.fn(),
 }))
-
-const render = (ui: React.ReactElement) =>
-  rtlRender(ui, {
-    wrapper: ({ children }) => (
-      <IntlProvider locale="en">{children}</IntlProvider>
-    ),
-  })
 
 const baseProps = {
   userId: 'user',
