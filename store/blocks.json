@@ -153,6 +153,8 @@
     "props": {
       "width": "25%",
       "blockClass": "mini-shelf-image",
+      "verticalAlign": "middle",
+      "horizontalAlign": "center",
       "preventVerticalStretch": true
     },
     "children": ["product-summary-image#mini-shelf"]

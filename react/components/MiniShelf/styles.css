@@ -59,8 +59,14 @@
   min-width: 0;
 }
 
-/* Add to cart: circular, secondary (outlined) button centered in the row */
+/*
+ * Add to cart: circular, secondary (outlined) button centered in the row.
+ * The border color comes from the theme's primary action classes on the
+ * button; the "+" is drawn with inherited borders so it uses that same color
+ * without the app having to know it.
+ */
 .container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action) button {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,11 +75,10 @@
   height: 2.5rem;
   min-height: 0;
   padding: 0;
+  border-width: 2px;
+  border-style: solid;
   border-radius: 50%;
-  border: 2px solid currentColor;
   background-color: transparent;
-  color: inherit;
-  line-height: 1;
 }
 
 .container
@@ -84,8 +89,32 @@
 
 .container
   :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  button::before,
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 0;
+  border-top: 2px solid;
+  border-color: inherit;
+  transform: translate(-50%, -50%);
+}
+
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  button::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Hide the "+" text glyph (kept in the DOM for assistive technologies) */
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
   :global(.vtex-button__label) {
   padding: 0;
-  font-size: 1.5rem;
-  line-height: 1;
+  font-size: 0;
+  color: transparent;
 }
