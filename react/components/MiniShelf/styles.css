@@ -58,8 +58,3 @@
 .container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-info) {
   min-width: 0;
 }
-
-.container
-  :global(.vtex-add-to-cart-button-0-x-buttonDataContainer--mini-shelf) {
-  min-width: 0;
-}
