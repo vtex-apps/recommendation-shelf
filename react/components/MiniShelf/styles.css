@@ -211,6 +211,8 @@
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderTrackContainer) {
+  /* The parent is a flex row: without `flex: none` the 126% would shrink back to 100% */
+  flex: none;
   width: 126%;
   max-width: none;
   overflow: visible;
