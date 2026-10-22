@@ -1,24 +1,11 @@
 import type { ReactNode } from 'react'
 import React from 'react'
-import { defineMessages } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 
 import RecommendationShelf from './RecommendationShelf'
 import { RecommendationShelfErrorBoundary } from './components/RecommendationShelfErrorBoundary'
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
 import { isPathHidden } from './utils/hiddenPaths'
-
-defineMessages({
-  miniShelf: {
-    id: 'admin/editor.recommendation-mini-shelf',
-    defaultMessage: 'Recommendation MiniShelf',
-  },
-  miniShelfDescription: {
-    id: 'admin/editor.recommendation-mini-shelf.description',
-    defaultMessage:
-      'Compact, collapsible recommendation shelf designed for small spaces such as the Mini-Cart.',
-  },
-})
 
 type Props = {
   campaignVrn: string
@@ -71,8 +58,10 @@ const shelfSchema = RecommendationShelf.schema as {
 }
 
 RecommendationMiniShelf.schema = {
-  title: 'admin/editor.recommendation-mini-shelf',
-  description: 'admin/editor.recommendation-mini-shelf.description',
+  // TODO: internationalize these strings (messages/*.json) instead of using static English
+  title: 'Recommendation MiniShelf',
+  description:
+    'Compact, collapsible recommendation shelf designed for small spaces such as the Mini-Cart.',
   type: 'object',
   properties: {
     ...shelfSchema.properties,

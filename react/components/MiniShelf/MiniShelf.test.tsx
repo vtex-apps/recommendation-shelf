@@ -25,14 +25,6 @@ jest.mock(
   { virtual: true }
 )
 
-jest.mock('react-intl', () => ({
-  defineMessages: (messages: unknown) => messages,
-  useIntl: () => ({
-    formatMessage: ({ defaultMessage }: { defaultMessage: string }) =>
-      defaultMessage,
-  }),
-}))
-
 jest.mock('./ProductList', () => ({
   MiniShelfProductList: () => <div data-testid="mini-shelf-product-list" />,
 }))

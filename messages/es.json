@@ -16,9 +16,5 @@
   "admin/editor.recommendation-shelf.loading-items-per-page.description": "Número de placeholders de carga que se muestran por tipo de dispositivo mientras se carga la estantería de productos",
   "admin/editor.recommendation-shelf.loading-items-per-page.desktop": "Escritorio",
   "admin/editor.recommendation-shelf.loading-items-per-page.tablet": "Tableta",
-  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Celular",
-  "admin/editor.recommendation-mini-shelf": "Recommendation MiniShelf",
-  "admin/editor.recommendation-mini-shelf.description": "Estante de recomendaciones compacto y plegable, pensado para espacios pequeños como el minicarrito.",
-  "store/recommendation-mini-shelf.collapse": "Contraer recomendaciones",
-  "store/recommendation-mini-shelf.expand": "Expandir recomendaciones"
+  "admin/editor.recommendation-shelf.loading-items-per-page.phone": "Celular"
 }

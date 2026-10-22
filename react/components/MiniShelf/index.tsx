@@ -1,23 +1,15 @@
 import type { ReactNode } from 'react'
 import React, { useState } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
-import { defineMessages, useIntl } from 'react-intl'
 import type { Product } from 'recommend-bff'
 
 import styles from './styles.css'
 import { useShelfTracking } from '../../hooks/useShelfTracking'
 import { MiniShelfProductList } from './ProductList'
 
-const messages = defineMessages({
-  collapse: {
-    id: 'store/recommendation-mini-shelf.collapse',
-    defaultMessage: 'Collapse recommendations',
-  },
-  expand: {
-    id: 'store/recommendation-mini-shelf.expand',
-    defaultMessage: 'Expand recommendations',
-  },
-})
+// TODO: internationalize these labels (messages/*.json) instead of using static English
+const COLLAPSE_LABEL = 'Collapse recommendations'
+const EXPAND_LABEL = 'Expand recommendations'
 
 type Props = {
   userId: string
@@ -50,7 +42,6 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
   children,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const intl = useIntl()
   // Plain React state on purpose: the choice is not persisted across mounts.
   const [collapsed, setCollapsed] = useState(false)
   const { containerAttributes, buildExtraProductProps } = useShelfTracking({
@@ -73,9 +64,7 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
         className={`${handles.recMiniShelfToggle} ${styles.toggle} ${handles.recMiniShelfHeader} bg-base c-on-base bn pointer`}
         aria-expanded={!collapsed}
         aria-controls={CONTENT_ID}
-        aria-label={intl.formatMessage(
-          collapsed ? messages.expand : messages.collapse
-        )}
+        aria-label={collapsed ? EXPAND_LABEL : COLLAPSE_LABEL}
         onClick={() => setCollapsed((current) => !current)}
       >
         <span className={`${styles.title} ${handles.recMiniShelfTitle}`}>
