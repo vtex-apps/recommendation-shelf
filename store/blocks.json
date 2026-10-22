@@ -126,6 +126,8 @@
         "tablet": 1,
         "phone": 1
       },
+      "centerMode": "to-the-left",
+      "centerModeSlidesGap": 16,
       "showNavigationArrows": "always",
       "showPaginationDots": "never",
       "infinite": false,

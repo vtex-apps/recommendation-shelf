@@ -187,7 +187,6 @@
 
 /* Spacing and thin divider between product cards */
 .container :global(.vtex-slider-layout-0-x-slide) {
-  padding: 0 8px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
@@ -197,21 +196,22 @@
 }
 
 /*
- * Peek of the next card. `slider-layout` pages by whole slides and its
- * `centerMode` fixes the first slide at two thirds of the width (fractional
- * `itemsPerPage` breaks the last page, whose transform is looked up by index).
- * So the slider keeps showing one slide per page, and the track container is
- * made narrower than the layout: the slider container clips at 100%, leaving
- * only the image of the next card visible in the remaining space.
+ * Peek of the next card. `slider-layout` only renders the slides that are
+ * visible or already visited, and with `centerMode: "to-the-left"` it also
+ * renders the next one, which is what lets us peek it. In that mode each slide
+ * is 1 / (itemsPerPage + 0.5) = 2/3 of the track container, so the container
+ * is made wider than the layout to make the first card take 84% of it:
+ * 84% / (2/3) = 126%. The layout clips at 100%, so only the start of the next
+ * card shows. To change the first card width W, use W * 1.5 below.
  */
 .container :global(.vtex-slider-layout-0-x-sliderLayoutContainer) {
-  /* Keep the narrower track on the left so the previous card never shows */
+  /* Keep the track on the left so the previous card never shows */
   justify-content: flex-start;
   overflow: hidden;
 }
 
 .container :global(.vtex-slider-layout-0-x-sliderTrackContainer) {
-  width: 84%;
-  max-width: 84%;
+  width: 126%;
+  max-width: none;
   overflow: visible;
 }
