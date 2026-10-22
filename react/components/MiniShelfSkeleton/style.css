@@ -1,0 +1,23 @@
+.container {
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.piece {
+  flex: 1 1 0;
+  height: 72px;
+}
+
+/* Fixed space for the title: 14px + 20px + 14px = 48px, the header height */
+.title {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.titlePiece {
+  flex: 1 1 auto;
+  max-width: 220px;
+  height: 20px;
+  margin: 14px 16px;
+}

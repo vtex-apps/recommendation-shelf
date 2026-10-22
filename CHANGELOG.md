@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- New `recommendation-mini-shelf` block: a compact, collapsible shelf with a no-autoplay carousel (next product visible at the edge) for small spaces such as the Mini-Cart. Its `ProductSummary` can be customized by overriding `product-summary.shelf#mini-shelf`.
+
 ## [2.25.0-hkignore] - 2026-10-23
 
 ### Added

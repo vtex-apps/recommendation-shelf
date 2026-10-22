@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
 
 import styles from './styles.css'
+import { useShelfTracking } from '../../hooks/useShelfTracking'
 
 type Props = {
   userId: string
@@ -28,37 +29,16 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   campaignId,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-
-  const productIds = useMemo(
-    () => products.map((p) => p.productId).join(', '),
-    [products]
-  )
-
-  function buildExtraProductProps(
-    product?: Record<string, string>,
-    index?: number
-  ) {
-    return {
-      'data-af-element': 'recommendation-shelf-product',
-      'data-af-correlation-id': correlationId,
-      'data-af-campaign-id': campaignId,
-      'data-af-product-id': product?.productId,
-      'data-af-onclick': !!product?.productId,
-      'data-af-product-position': (index ?? 0) + 1,
-    }
-  }
-
-  const shouldAddAFAttr = !!(correlationId && campaignId && productIds.length)
+  const { containerAttributes, buildExtraProductProps } = useShelfTracking({
+    products,
+    correlationId,
+    campaignId,
+  })
 
   return (
     <div
       className={`${handles.recommendationShelfContainer}`}
-      data-af-element="recommendation-shelf"
-      data-af-onimpression={shouldAddAFAttr}
-      data-af-onview={shouldAddAFAttr}
-      data-af-correlation-id={shouldAddAFAttr && correlationId}
-      data-af-campaign-id={shouldAddAFAttr && campaignId}
-      data-af-products={shouldAddAFAttr && productIds}
+      {...containerAttributes}
     >
       {title && displayTitle && (
         <div className={`mv4 tc v-mid ${handles.shelfTitleContainer}`}>
@@ -70,9 +50,7 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
       <ExtensionPoint
         id="list-context.product-list-static"
         products={products}
-        buildExtraProductProps={
-          shouldAddAFAttr ? buildExtraProductProps : undefined
-        }
+        buildExtraProductProps={buildExtraProductProps}
       />
     </div>
   )

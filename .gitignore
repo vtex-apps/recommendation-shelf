@@ -39,3 +39,6 @@ lib
 dist
 build
 lerna-debug.log
+
+# Specs
+specs/
