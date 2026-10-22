@@ -28,13 +28,13 @@ type Props = {
 }
 
 const CSS_HANDLES = [
-  'miniShelfContainer',
-  'miniShelfCollapsed',
-  'miniShelfHeader',
-  'miniShelfTitle',
-  'miniShelfToggle',
-  'miniShelfToggleIcon',
-  'miniShelfContent',
+  'recMiniShelfContainer',
+  'recMiniShelfCollapsed',
+  'recMiniShelfHeader',
+  'recMiniShelfTitle',
+  'recMiniShelfToggle',
+  'recMiniShelfToggleIcon',
+  'recMiniShelfContent',
 ]
 
 const CONTENT_ID = 'recommendation-mini-shelf-content'
@@ -60,14 +60,14 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
 
   return (
     <div
-      className={`${handles.miniShelfContainer} ${styles.container} ${
-        collapsed ? `${handles.miniShelfCollapsed} ${styles.collapsed}` : ''
+      className={`${handles.recMiniShelfContainer} ${styles.container} ${
+        collapsed ? `${handles.recMiniShelfCollapsed} ${styles.collapsed}` : ''
       }`}
       {...containerAttributes}
     >
       <button
         type="button"
-        className={`${handles.miniShelfToggle} ${styles.toggle} ${handles.miniShelfHeader} bg-base c-on-base bn pointer`}
+        className={`${handles.recMiniShelfToggle} ${styles.toggle} ${handles.recMiniShelfHeader} bg-base c-on-base bn pointer`}
         aria-expanded={!collapsed}
         aria-controls={CONTENT_ID}
         aria-label={intl.formatMessage(
@@ -75,12 +75,12 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
         )}
         onClick={() => setCollapsed((current) => !current)}
       >
-        <span className={`${styles.title} ${handles.miniShelfTitle}`}>
+        <span className={`${styles.title} ${handles.recMiniShelfTitle}`}>
           {showTitle ? title : ''}
         </span>
         <svg
           className={`${styles.icon} ${collapsed ? styles.iconCollapsed : ''} ${
-            handles.miniShelfToggleIcon
+            handles.recMiniShelfToggleIcon
           }`}
           width="16"
           height="16"
@@ -96,7 +96,7 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
         </svg>
       </button>
       {!collapsed && (
-        <div id={CONTENT_ID} className={handles.miniShelfContent}>
+        <div id={CONTENT_ID} className={handles.recMiniShelfContent}>
           <ExtensionPoint
             id="list-context.product-list-static"
             products={products}

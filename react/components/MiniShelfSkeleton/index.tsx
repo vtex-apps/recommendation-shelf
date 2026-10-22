@@ -5,11 +5,11 @@ import { useRuntime } from 'vtex.render-runtime'
 import styles from './style.css'
 
 const CSS_HANDLES = [
-  'miniShelfContainer',
-  'miniShelfContainerLoading',
-  'miniShelfSkeletonPiece',
-  'miniShelfSkeletonTitle',
-  'miniShelfSkeletonTitlePiece',
+  'recMiniShelfContainer',
+  'recMiniShelfContainerLoading',
+  'recMiniShelfSkeletonPiece',
+  'recMiniShelfSkeletonTitle',
+  'recMiniShelfSkeletonTitlePiece',
 ]
 
 const DEFAULT_ITEMS_PER_PAGE: Required<LoadingItemsPerPage> = {
@@ -36,18 +36,18 @@ export function MiniShelfSkeleton({ itemsPerPage }: Props) {
 
   return (
     <div
-      className={`${handles.miniShelfContainer} ${handles.miniShelfContainerLoading} w-100`}
+      className={`${handles.recMiniShelfContainer} ${handles.recMiniShelfContainerLoading} w-100`}
     >
-      <div className={`${styles.title} ${handles.miniShelfSkeletonTitle}`}>
+      <div className={`${styles.title} ${handles.recMiniShelfSkeletonTitle}`}>
         <div
-          className={`${styles.titlePiece} ${handles.miniShelfSkeletonTitlePiece} bg-muted-4 br3`}
+          className={`${styles.titlePiece} ${handles.recMiniShelfSkeletonTitlePiece} bg-muted-4 br3`}
         />
       </div>
       <div className={`${styles.container} flex`}>
         {Array.from({ length: Math.max(0, count) }, (_, index) => (
           <div
             key={index}
-            className={`${styles.piece} ${handles.miniShelfSkeletonPiece} bg-muted-4 br3`}
+            className={`${styles.piece} ${handles.recMiniShelfSkeletonPiece} bg-muted-4 br3`}
           />
         ))}
       </div>

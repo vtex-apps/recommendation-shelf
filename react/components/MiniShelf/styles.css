@@ -43,10 +43,10 @@
 
 /*
  * Compact defaults for the default product summary. Scoped under the
- * MiniShelf container (and its `mini-shelf` block class) so they win over
+ * MiniShelf container (and its `rec-mini-shelf` block class) so they win over
  * theme styles for the regular shelf without touching them.
  */
-.container :global(.vtex-product-summary-2-x-nameContainer--mini-shelf) {
+.container :global(.vtex-product-summary-2-x-nameContainer--rec-mini-shelf) {
   padding-top: 0;
   padding-bottom: 0;
   margin: 0;
@@ -58,7 +58,7 @@
  * only, because it strips the legacy `display: -webkit-box` and
  * `-webkit-box-orient` that line clamping needs.
  */
-.container :global(.vtex-product-summary-2-x-nameWrapper--mini-shelf) {
+.container :global(.vtex-product-summary-2-x-nameWrapper--rec-mini-shelf) {
   /* autoprefixer: off */
   display: -webkit-box;
   min-width: 0;
@@ -70,18 +70,18 @@
   -webkit-box-orient: vertical;
 }
 
-.container :global(.vtex-product-summary-2-x-brandName--mini-shelf) {
+.container :global(.vtex-product-summary-2-x-brandName--rec-mini-shelf) {
   font-size: 0.875rem;
   line-height: 1.25;
   font-weight: 500;
 }
 
-.container :global(.vtex-product-price-1-x-sellingPriceValue--mini-shelf) {
+.container :global(.vtex-product-price-1-x-sellingPriceValue--rec-mini-shelf) {
   font-size: 1rem;
   font-weight: 600;
 }
 
-.container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-info) {
+.container :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-info) {
   min-width: 0;
 }
 
@@ -91,7 +91,9 @@
  * button; the "+" is drawn with inherited borders so it uses that same color
  * without the app having to know it.
  */
-.container :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action) button {
+.container
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
+  button {
   position: relative;
   display: flex;
   align-items: center;
@@ -108,16 +110,16 @@
 }
 
 .container
-  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
   button:hover {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
 .container
-  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
   button::before,
 .container
-  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
   button::after {
   content: '';
   position: absolute;
@@ -131,14 +133,14 @@
 }
 
 .container
-  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
   button::after {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
 /* Hide the "+" text glyph (kept in the DOM for assistive technologies) */
 .container
-  :global(.vtex-flex-layout-0-x-flexCol--mini-shelf-action)
+  :global(.vtex-flex-layout-0-x-flexCol--rec-mini-shelf-action)
   :global(.vtex-button__label) {
   padding: 0;
   font-size: 0;

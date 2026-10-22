@@ -195,7 +195,7 @@ The `recommendation-mini-shelf` block is a compact, collapsible version of the s
 - Starts expanded. Tapping the title bar collapses it into a thin bar (title and arrow) that stays above the Mini-Cart total, and tapping again expands it. The state is kept in memory only: it isn't persisted, so it resets whenever the component is mounted again.
 - It doesn't change the Mini-Cart structure, and `recommendation-shelf` keeps working as before.
 
-It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. Like `recommendation-shelf`, each instance must declare the `list-context.product-list-static#mini-shelf` block, which brings the default carousel and product summary:
+It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. Like `recommendation-shelf`, each instance must declare the `list-context.product-list-static#rec-mini-shelf` block, which brings the default carousel and product summary:
 
 ```json
 "minicart.v2": {
@@ -205,7 +205,7 @@ It accepts the same props as `recommendation-shelf`, except that `loadingItemsPe
   ]
 },
 "recommendation-mini-shelf#minicart": {
-  "blocks": ["list-context.product-list-static#mini-shelf"],
+  "blocks": ["list-context.product-list-static#rec-mini-shelf"],
   "props": {
     "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
     "title": "You might also like",
@@ -220,33 +220,33 @@ The MiniShelf is composed of Store Framework blocks that ship with default defin
 
 | Block | Purpose |
 | - | - |
-| `list-context.product-list-static#mini-shelf` | Receives the products. Its `blocks` sets the product summary, and its `children` sets the layout. |
-| `slider-layout#mini-shelf` | The carousel (`centerMode: "to-the-left"` shows the next product, no autoplay). |
-| `product-summary.shelf#mini-shelf` | The product summary. Override its `children` to change the card. |
+| `list-context.product-list-static#rec-mini-shelf` | Receives the products. Its `blocks` sets the product summary, and its `children` sets the layout. |
+| `slider-layout#rec-mini-shelf` | The carousel (`centerMode: "to-the-left"` shows the next product, no autoplay). |
+| `product-summary.shelf#rec-mini-shelf` | The product summary. Override its `children` to change the card. |
 
 For example, to show the list price and a member price in the card:
 
 ```json
-"product-summary.shelf#mini-shelf": {
+"product-summary.shelf#rec-mini-shelf": {
   "children": [
-    "flex-layout.row#mini-shelf-summary"
+    "flex-layout.row#rec-mini-shelf-summary"
   ]
 },
-"flex-layout.col#mini-shelf-info": {
+"flex-layout.col#rec-mini-shelf-info": {
   "children": [
-    "product-summary-name#mini-shelf",
+    "product-summary-name#rec-mini-shelf",
     "product-list-price#summary",
     "product-selling-price#summary"
   ]
 }
 ```
 
-You can also point the shelf at another summary block by overriding `list-context.product-list-static#mini-shelf`:
+You can also point the shelf at another summary block by overriding `list-context.product-list-static#rec-mini-shelf`:
 
 ```json
-"list-context.product-list-static#mini-shelf": {
+"list-context.product-list-static#rec-mini-shelf": {
   "blocks": ["product-summary.shelf#my-summary"],
-  "children": ["slider-layout#mini-shelf"]
+  "children": ["slider-layout#rec-mini-shelf"]
 }
 ```
 
@@ -254,19 +254,19 @@ You can also point the shelf at another summary block by overriding `list-contex
 
 | CSS handle |
 | - |
-| `miniShelfContainer` |
-| `miniShelfContainerLoading` |
-| `miniShelfCollapsed` |
-| `miniShelfHeader` |
-| `miniShelfTitle` |
-| `miniShelfToggle` |
-| `miniShelfToggleIcon` |
-| `miniShelfContent` |
-| `miniShelfSkeletonPiece` |
-| `miniShelfSkeletonTitle` |
-| `miniShelfSkeletonTitlePiece` |
+| `recMiniShelfContainer` |
+| `recMiniShelfContainerLoading` |
+| `recMiniShelfCollapsed` |
+| `recMiniShelfHeader` |
+| `recMiniShelfTitle` |
+| `recMiniShelfToggle` |
+| `recMiniShelfToggleIcon` |
+| `recMiniShelfContent` |
+| `recMiniShelfSkeletonPiece` |
+| `recMiniShelfSkeletonTitle` |
+| `recMiniShelfSkeletonTitlePiece` |
 
-The carousel and the add-to-cart button use the `mini-shelf` block class (for example, `.sliderLayoutContainer--mini-shelf`).
+The carousel and the add-to-cart button use the `rec-mini-shelf` block class (for example, `.sliderLayoutContainer--rec-mini-shelf`).
 
 ## Placing the shelf on the Cart page (Checkout)
 
