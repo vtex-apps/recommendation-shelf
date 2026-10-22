@@ -205,6 +205,8 @@
  * only the image of the next card visible in the remaining space.
  */
 .container :global(.vtex-slider-layout-0-x-sliderLayoutContainer) {
+  /* Keep the narrower track on the left so the previous card never shows */
+  justify-content: flex-start;
   overflow: hidden;
 }
 
