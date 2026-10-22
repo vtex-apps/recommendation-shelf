@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import React from 'react'
 import { defineMessages } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
@@ -27,6 +28,7 @@ type Props = {
   hiddenPaths?: string[]
   displayLoading?: boolean
   loadingItemsPerPage?: LoadingItemsPerPage
+  children?: ReactNode
 }
 
 const RecommendationMiniShelf: StorefrontFunctionComponent<Props> = ({
@@ -37,6 +39,7 @@ const RecommendationMiniShelf: StorefrontFunctionComponent<Props> = ({
   hiddenPaths,
   displayLoading,
   loadingItemsPerPage,
+  children,
 }) => {
   const { route } = useRuntime()
 
@@ -56,7 +59,9 @@ const RecommendationMiniShelf: StorefrontFunctionComponent<Props> = ({
         itemsContext={itemsContext}
         displayLoading={displayLoading}
         loadingItemsPerPage={loadingItemsPerPage}
-      />
+      >
+        {children}
+      </RecommendationShelfContainer>
     </RecommendationShelfErrorBoundary>
   )
 }

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import { useProduct } from 'vtex.product-context'
 import { useOrderForm } from 'vtex.order-manager/OrderForm'
@@ -21,6 +22,7 @@ type Props = {
   displayLoading?: boolean
   loadingItemsPerPage?: LoadingItemsPerPage
   variant?: 'default' | 'mini'
+  children?: ReactNode
 }
 
 export const RecommendationShelfContainer: React.FC<Props> = ({
@@ -31,6 +33,7 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
   displayLoading = true,
   loadingItemsPerPage,
   variant = 'default',
+  children,
 }) => {
   const productContext = useProduct()
   const {
@@ -159,7 +162,9 @@ export const RecommendationShelfContainer: React.FC<Props> = ({
       userId={userId}
       displayTitle={displayTitle}
       campaignId={data?.campaign.id ?? ''}
-    />
+    >
+      {children}
+    </ShelfView>
   ) : (
     <Fragment />
   )

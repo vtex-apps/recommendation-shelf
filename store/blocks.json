@@ -137,12 +137,9 @@
       "arrowSize": 12
     }
   },
-  "list-context.product-list-static#rec-mini-shelf": {
+  "recommendation-mini-shelf": {
     "blocks": ["product-summary.shelf#rec-mini-shelf"],
     "children": ["slider-layout#rec-mini-shelf"]
-  },
-  "recommendation-mini-shelf": {
-    "blocks": ["list-context.product-list-static#rec-mini-shelf"]
   },
   "product-selling-price#rec-mini-shelf": {
     "props": {

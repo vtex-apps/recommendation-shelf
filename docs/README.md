@@ -195,7 +195,9 @@ The `recommendation-mini-shelf` block is a compact, collapsible version of the s
 - Starts expanded. Tapping the title bar collapses it into a thin bar (title and arrow) that stays above the Mini-Cart total, and tapping again expands it. The state is kept in memory only: it isn't persisted, so it resets whenever the component is mounted again.
 - It doesn't change the Mini-Cart structure, and `recommendation-shelf` keeps working as before.
 
-It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`. Like `recommendation-shelf`, each instance must declare the `list-context.product-list-static#rec-mini-shelf` block, which brings the default carousel and product summary:
+It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`.
+
+The product summary is a direct slot of the block, in the same way as the `gallery` block of [`vtex.search-result`](https://github.com/vtex-apps/search-result): the block receives a `product-summary` block in its `blocks` and the carousel (`slider-layout`) in its `children`. Like `recommendation-shelf`, each suffixed instance declares them itself, using the default blocks shipped by this app:
 
 ```json
 "minicart.v2": {
@@ -205,7 +207,8 @@ It accepts the same props as `recommendation-shelf`, except that `loadingItemsPe
   ]
 },
 "recommendation-mini-shelf#minicart": {
-  "blocks": ["list-context.product-list-static#rec-mini-shelf"],
+  "blocks": ["product-summary.shelf#rec-mini-shelf"],
+  "children": ["slider-layout#rec-mini-shelf"],
   "props": {
     "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
     "title": "You might also like",
@@ -214,41 +217,37 @@ It accepts the same props as `recommendation-shelf`, except that `loadingItemsPe
 }
 ```
 
+An unsuffixed `recommendation-mini-shelf` block already comes with these defaults.
+
 ### Customizing the MiniShelf
 
-The MiniShelf is composed of Store Framework blocks that ship with default definitions. To customize the displayed `ProductSummary`, redefine the block in your theme:
+To change the product summary, point the `blocks` of your `recommendation-mini-shelf` block to your own `product-summary.shelf` block. No other block needs to be redefined:
+
+```json
+"recommendation-mini-shelf#minicart": {
+  "blocks": ["product-summary.shelf#my-mini-summary"],
+  "children": ["slider-layout#rec-mini-shelf"],
+  "props": {
+    "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>"
+  }
+},
+"product-summary.shelf#my-mini-summary": {
+  "children": [
+    "product-summary-image",
+    "product-summary-name",
+    "product-list-price#summary",
+    "product-selling-price#summary",
+    "add-to-cart-button"
+  ]
+}
+```
+
+The default blocks shipped by this app, which you can reuse or redefine in your theme:
 
 | Block | Purpose |
 | - | - |
-| `list-context.product-list-static#rec-mini-shelf` | Receives the products. Its `blocks` sets the product summary, and its `children` sets the layout. |
-| `slider-layout#rec-mini-shelf` | The carousel (`centerMode: "to-the-left"` shows the next product, no autoplay). |
-| `product-summary.shelf#rec-mini-shelf` | The product summary. Override its `children` to change the card. |
-
-For example, to show the list price and a member price in the card:
-
-```json
-"product-summary.shelf#rec-mini-shelf": {
-  "children": [
-    "flex-layout.row#rec-mini-shelf-summary"
-  ]
-},
-"flex-layout.col#rec-mini-shelf-info": {
-  "children": [
-    "product-summary-name#rec-mini-shelf",
-    "product-list-price#summary",
-    "product-selling-price#summary"
-  ]
-}
-```
-
-You can also point the shelf at another summary block by overriding `list-context.product-list-static#rec-mini-shelf`:
-
-```json
-"list-context.product-list-static#rec-mini-shelf": {
-  "blocks": ["product-summary.shelf#my-summary"],
-  "children": ["slider-layout#rec-mini-shelf"]
-}
-```
+| `product-summary.shelf#rec-mini-shelf` | The default compact product summary (image, name, price and `+` button). Redefine its `children` to change the default card. |
+| `slider-layout#rec-mini-shelf` | The carousel: one card per page with a glimpse of the next one, no autoplay. |
 
 ### CSS handles
 

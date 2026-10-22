@@ -1,11 +1,12 @@
+import type { ReactNode } from 'react'
 import React, { useState } from 'react'
-import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { defineMessages, useIntl } from 'react-intl'
 import type { Product } from 'recommend-bff'
 
 import styles from './styles.css'
 import { useShelfTracking } from '../../hooks/useShelfTracking'
+import { MiniShelfProductList } from './ProductList'
 
 const messages = defineMessages({
   collapse: {
@@ -25,6 +26,7 @@ type Props = {
   displayTitle: boolean
   title?: string
   campaignId: string
+  children?: ReactNode
 }
 
 const CSS_HANDLES = [
@@ -45,6 +47,7 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
   correlationId,
   displayTitle,
   campaignId,
+  children,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const intl = useIntl()
@@ -97,11 +100,12 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
       </button>
       {!collapsed && (
         <div id={CONTENT_ID} className={handles.recMiniShelfContent}>
-          <ExtensionPoint
-            id="list-context.product-list-static"
+          <MiniShelfProductList
             products={products}
             buildExtraProductProps={buildExtraProductProps}
-          />
+          >
+            {children}
+          </MiniShelfProductList>
         </div>
       )}
     </div>

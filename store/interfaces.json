@@ -7,8 +7,9 @@
     }
   },
   "recommendation-mini-shelf": {
+    "allowed": ["product-summary"],
+    "composition": "children",
     "component": "RecommendationMiniShelf",
-    "required": ["list-context.product-list-static"],
     "content": {
       "$ref": "#/definitions/RecommendationMiniShelf"
     }

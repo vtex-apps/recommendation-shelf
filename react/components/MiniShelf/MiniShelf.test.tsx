@@ -33,6 +33,10 @@ jest.mock('react-intl', () => ({
   }),
 }))
 
+jest.mock('./ProductList', () => ({
+  MiniShelfProductList: () => <div data-testid="mini-shelf-product-list" />,
+}))
+
 jest.mock('./styles.css', () => ({}))
 
 jest.mock('../../utils/user', () => ({
@@ -53,7 +57,7 @@ describe('MiniShelf', () => {
   it('starts expanded and renders the product list', () => {
     const { getByTestId, getByRole } = render(<MiniShelf {...baseProps} />)
 
-    expect(getByTestId('list-context.product-list-static')).toBeTruthy()
+    expect(getByTestId('mini-shelf-product-list')).toBeTruthy()
     expect(getByRole('button').getAttribute('aria-expanded')).toBe('true')
   })
 
@@ -64,13 +68,13 @@ describe('MiniShelf', () => {
 
     fireEvent.click(getByRole('button'))
 
-    expect(queryByTestId('list-context.product-list-static')).toBeNull()
+    expect(queryByTestId('mini-shelf-product-list')).toBeNull()
     expect(getByText('You might also like')).toBeTruthy()
     expect(getByRole('button').getAttribute('aria-expanded')).toBe('false')
 
     fireEvent.click(getByRole('button'))
 
-    expect(queryByTestId('list-context.product-list-static')).toBeTruthy()
+    expect(queryByTestId('mini-shelf-product-list')).toBeTruthy()
   })
 
   it('adds tracking attributes when correlation data is present', () => {
