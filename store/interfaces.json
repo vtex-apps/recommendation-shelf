@@ -5,5 +5,13 @@
     "content": {
       "$ref": "#/definitions/RecommendationShelf"
     }
+  },
+  "recommendation-mini-shelf": {
+    "allowed": ["product-summary"],
+    "composition": "children",
+    "component": "RecommendationMiniShelf",
+    "content": {
+      "$ref": "#/definitions/RecommendationMiniShelf"
+    }
   }
 }

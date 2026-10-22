@@ -186,6 +186,87 @@ Example:
 }
 ```
 
+## MiniShelf
+
+The `recommendation-mini-shelf` block is a compact, collapsible version of the shelf, designed for small spaces such as the Mini-Cart on small devices. It frees space for the cart items without hiding the recommendation.
+
+- Shows each product in a compact horizontal card (image, name, price, and a `+` add-to-cart button).
+- Carousel with navigation arrows, with the next product partially visible at the edge. There is no autoplay, so products never change unless the shopper navigates.
+- Starts expanded. Tapping the title bar collapses it into a thin bar (title and arrow) that stays above the Mini-Cart total, and tapping again expands it. The state is kept in memory only: it isn't persisted, so it resets whenever the component is mounted again.
+- It doesn't change the Mini-Cart structure, and `recommendation-shelf` keeps working as before.
+
+It accepts the same props as `recommendation-shelf`, except that `loadingItemsPerPage` defaults to `{ desktop: 2, tablet: 2, phone: 1 }`.
+
+The product summary is a direct slot of the block, in the same way as the `gallery` block of [`vtex.search-result`](https://github.com/vtex-apps/search-result): the block receives a `product-summary` block in its `blocks` and the carousel (`slider-layout`) in its `children`. Like `recommendation-shelf`, each suffixed instance declares them itself, using the default blocks shipped by this app:
+
+```json
+"minicart.v2": {
+  "children": [
+    "minicart-base-content",
+    "recommendation-mini-shelf#minicart"
+  ]
+},
+"recommendation-mini-shelf#minicart": {
+  "blocks": ["product-summary.shelf#rec-mini-shelf"],
+  "children": ["slider-layout#rec-mini-shelf"],
+  "props": {
+    "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>",
+    "title": "You might also like",
+    "itemsContext": ["CART"]
+  }
+}
+```
+
+An unsuffixed `recommendation-mini-shelf` block already comes with these defaults.
+
+### Customizing the MiniShelf
+
+To change the product summary, point the `blocks` of your `recommendation-mini-shelf` block to your own `product-summary.shelf` block. No other block needs to be redefined:
+
+```json
+"recommendation-mini-shelf#minicart": {
+  "blocks": ["product-summary.shelf#my-mini-summary"],
+  "children": ["slider-layout#rec-mini-shelf"],
+  "props": {
+    "campaignVrn": "vrn:recommendations:<account>:rec-cross-v2:<campaign-id>"
+  }
+},
+"product-summary.shelf#my-mini-summary": {
+  "children": [
+    "product-summary-image",
+    "product-summary-name",
+    "product-list-price#summary",
+    "product-selling-price#summary",
+    "add-to-cart-button"
+  ]
+}
+```
+
+The default blocks shipped by this app, which you can reuse or redefine in your theme:
+
+| Block | Purpose |
+| - | - |
+| `product-summary.shelf#rec-mini-shelf` | The default compact product summary (image, name, price and `+` button). Redefine its `children` to change the default card. |
+| `slider-layout#rec-mini-shelf` | The carousel: one card per page with only the image of the next one showing, no autoplay. |
+
+### CSS handles
+
+| CSS handle |
+| - |
+| `recMiniShelfContainer` |
+| `recMiniShelfContainerLoading` |
+| `recMiniShelfCollapsed` |
+| `recMiniShelfHeader` |
+| `recMiniShelfTitle` |
+| `recMiniShelfToggle` |
+| `recMiniShelfToggleIcon` |
+| `recMiniShelfContent` |
+| `recMiniShelfSkeletonPiece` |
+| `recMiniShelfSkeletonTitle` |
+| `recMiniShelfSkeletonTitlePiece` |
+
+The carousel and the add-to-cart button use the `rec-mini-shelf` block class (for example, `.sliderLayoutContainer--rec-mini-shelf`).
+
 ## Placing the shelf on the Cart page (Checkout)
 
 Checkout isn't part of the Store Builder blocks architecture, so `recommendation-shelf` can't be nested there like it can on the Mini-Cart or a themed page. Instead, use [`examples/cart-shelf.js`](https://github.com/vtex-apps/recommendation-shelf/blob/master/examples/cart-shelf.js), a vanilla JavaScript script that fetches recommendations directly from the Recommendations API and renders them after the checkout container.
