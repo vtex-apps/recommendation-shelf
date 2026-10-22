@@ -247,7 +247,7 @@ The default blocks shipped by this app, which you can reuse or redefine in your 
 | Block | Purpose |
 | - | - |
 | `product-summary.shelf#rec-mini-shelf` | The default compact product summary (image, name, price and `+` button). Redefine its `children` to change the default card. |
-| `slider-layout#rec-mini-shelf` | The carousel: one card per page with a glimpse of the next one, no autoplay. |
+| `slider-layout#rec-mini-shelf` | The carousel: one card per page with only the image of the next one showing, no autoplay. |
 
 ### CSS handles
 
