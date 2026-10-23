@@ -46,6 +46,20 @@
  * MiniShelf container (and its `rec-mini-shelf` block class) so they win over
  * theme styles for the regular shelf without touching them.
  */
+/*
+ * Product image: a square block. Cards past the first ones are lazy loaded,
+ * and until the `src` is set an inline <img> renders its alt text, which
+ * ignores `height` and stretches every slide of the carousel. The fixed ratio
+ * keeps the loading image the same size as the loaded one, and the alt text
+ * is hidden so it never flashes inside the card.
+ */
+.container :global(.vtex-product-summary-2-x-image--rec-mini-shelf) {
+  display: block;
+  aspect-ratio: 1 / 1;
+  font-size: 0;
+  color: transparent;
+}
+
 .container :global(.vtex-product-summary-2-x-nameContainer--rec-mini-shelf) {
   padding-top: 0;
   padding-bottom: 0;
