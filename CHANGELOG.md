@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.2-hkignore] - 2026-10-23
+
+### Changed
+
+- The shelf no longer calls start-session. It only reads the control-group mark and hides the shelf for `control`.
+
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
+
 ## [2.25.1-hkignore] - 2026-10-05
 
 ### Changed
