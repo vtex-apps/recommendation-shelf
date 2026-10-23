@@ -7,28 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [2.25.2-hkignore] - 2026-10-23
-
-### Changed
-
-- The shelf stays hidden until the group is `base` or `control`. `control` never renders it. If the script does not assign a group, the shelf appears after a short wait.
-
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
-
-## [2.25.1-hkignore] - 2026-10-05
-
-### Changed
-
-- Renamed the control group identifiers to the `data-vtex-rec-control-group` body attribute and the `vtex-rec-control-group` localStorage key, so the experiment does not inherit group assignments from previous tests.
-- Group values are now `base` (sees the shelf) and `control` (shelf hidden) instead of `A` and `B`.
-
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
-
-## [2.25.0-hkignore] - 2026-10-01
+## [2.25.0-hkignore] - 2026-10-23
 
 ### Added
 
-- Control group support: sessions assigned to the control group (identified by the `data-test-snrs-vtwo` body attribute / `test-snrs-vtwo` localStorage value set by an external split script) no longer render the shelf, including its loading placeholder.
+- Control group support. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read from `data-vtex-rec-control-group` on `<body>`, then from `localStorage` key `vtex-rec-control-group`.
+
+### Changed
+
+- The shelf stays hidden until that group is known. If the script never assigns one, the shelf appears after 5 seconds.
+- The shelf no longer calls start-session.
 
 > This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
 
