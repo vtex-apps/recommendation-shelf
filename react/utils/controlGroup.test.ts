@@ -3,7 +3,7 @@ import {
   CONTROL_GROUP_STORAGE_KEY,
   getAssignedVariant,
   isControlGroup,
-  watchControlGroup,
+  watchShelfVisibility,
 } from './controlGroup'
 
 describe('getAssignedVariant', () => {
@@ -49,26 +49,50 @@ describe('isControlGroup', () => {
     expect(isControlGroup()).toBe(true)
   })
 
+  it('stays hidden until base is assigned', async () => {
+    const onChange = jest.fn()
+    const stop = watchShelfVisibility(onChange)
+
+    expect(onChange).not.toHaveBeenCalled()
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'base')
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(onChange).toHaveBeenCalledWith('show')
+    stop()
+  })
+
   it('notices a control assignment that arrives after the shelf mounted', async () => {
-    const onControl = jest.fn()
-    const stop = watchControlGroup(onControl)
+    const onChange = jest.fn()
+    const stop = watchShelfVisibility(onChange)
 
     document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'control')
     await new Promise((resolve) => setTimeout(resolve, 0))
 
-    expect(onControl).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith('hide')
     stop()
   })
 
   it('notices a late localStorage assignment', () => {
     jest.useFakeTimers()
-    const onControl = jest.fn()
-    const stop = watchControlGroup(onControl)
+    const onChange = jest.fn()
+    const stop = watchShelfVisibility(onChange)
 
     window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'control')
     jest.advanceTimersByTime(100)
 
-    expect(onControl).toHaveBeenCalledTimes(1)
+    expect(onChange).toHaveBeenCalledWith('hide')
+    stop()
+    jest.useRealTimers()
+  })
+
+  it('shows the shelf when the script never assigns a group', () => {
+    jest.useFakeTimers()
+    const onChange = jest.fn()
+    const stop = watchShelfVisibility(onChange)
+
+    jest.advanceTimersByTime(5000)
+
+    expect(onChange).toHaveBeenCalledWith('show')
     stop()
     jest.useRealTimers()
   })

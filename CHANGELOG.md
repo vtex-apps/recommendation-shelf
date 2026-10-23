@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- The shelf no longer calls start-session. It hides the shelf for `control`, including when the store script sets that group after the first render.
+- The shelf stays hidden until the group is `base` or `control`. `control` never renders it. If the script does not assign a group, the shelf appears after a short wait.
 
 > This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
 
