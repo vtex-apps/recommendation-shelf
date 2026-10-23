@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo } from 'react'
-import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
+import React, { useMemo } from 'react'
+import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
 
 import styles from './styles.css'
-import { getCookie, startSession } from '../../utils/user'
 
 type Props = {
   userId: string
@@ -21,8 +20,6 @@ const CSS_HANDLES = [
   'shelfTitle',
 ]
 
-const USER_START_SESSION_COOKIE = 'vtex-rec-user-start-session'
-
 const Shelf: StorefrontFunctionComponent<Props> = ({
   title,
   products,
@@ -31,15 +28,6 @@ const Shelf: StorefrontFunctionComponent<Props> = ({
   campaignId,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  const { account } = useRuntime()
-
-  useEffect(() => {
-    const sessionCookie = getCookie(USER_START_SESSION_COOKIE)
-
-    if (!sessionCookie) {
-      startSession({ account })
-    }
-  }, [account])
 
   const productIds = useMemo(
     () => products.map((p) => p.productId).join(', '),
