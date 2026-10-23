@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.1] - 2026-10-23
+
 ### Fixed
 
 - `recommendation-mini-shelf`: the carousel no longer grows and shrinks the first time it shows each product, while that product's lazy-loaded image is still loading.
