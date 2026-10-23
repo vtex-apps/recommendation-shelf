@@ -3,6 +3,7 @@ import {
   CONTROL_GROUP_STORAGE_KEY,
   getAssignedVariant,
   isControlGroup,
+  watchControlGroup,
 } from './controlGroup'
 
 describe('getAssignedVariant', () => {
@@ -46,6 +47,30 @@ describe('isControlGroup', () => {
 
     document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'control')
     expect(isControlGroup()).toBe(true)
+  })
+
+  it('notices a control assignment that arrives after the shelf mounted', async () => {
+    const onControl = jest.fn()
+    const stop = watchControlGroup(onControl)
+
+    document.body.setAttribute(CONTROL_GROUP_BODY_ATTRIBUTE, 'control')
+    await new Promise((resolve) => setTimeout(resolve, 0))
+
+    expect(onControl).toHaveBeenCalledTimes(1)
+    stop()
+  })
+
+  it('notices a late localStorage assignment', () => {
+    jest.useFakeTimers()
+    const onControl = jest.fn()
+    const stop = watchControlGroup(onControl)
+
+    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'control')
+    jest.advanceTimersByTime(100)
+
+    expect(onControl).toHaveBeenCalledTimes(1)
+    stop()
+    jest.useRealTimers()
   })
 
   it('does not hide the shelf when the split script is absent', () => {
