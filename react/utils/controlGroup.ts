@@ -76,7 +76,8 @@ export function watchShelfVisibility(
     return () => undefined
   }
 
-  let close = () => undefined
+  // Explicit void return: inferring `() => undefined` fails the IO builder.
+  let close: () => void = () => undefined
   let announced: ShelfVisibility = 'pending'
   const publish = (next: Exclude<ShelfVisibility, 'pending'>) => {
     if (announced === next) return

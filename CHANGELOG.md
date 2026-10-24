@@ -7,17 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Fixed
-
-- `recommendation-mini-shelf`: the carousel no longer grows and shrinks the first time it shows each product, while that product's lazy-loaded image is still loading.
-
-## [2.25.0] - 2026-10-22
-
-### Added
-
-- New `recommendation-mini-shelf` block: a compact, collapsible shelf with a no-autoplay carousel (next product visible at the edge) for small spaces such as the Mini-Cart. Its `ProductSummary` can be customized by overriding `product-summary.shelf#mini-shelf`.
-
-## [2.25.0-hkignore] - 2026-10-23
+## [2.25.1-hkignore] - 2026-10-24
 
 ### Added
 
@@ -28,7 +18,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - The shelf stays hidden until that group is known. If the script never assigns one, the shelf appears after 5 seconds.
 - The shelf no longer calls start-session.
 
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
+### Fixed
+
+- `recommendation-mini-shelf`: the carousel no longer grows and shrinks the first time it shows each product, while that product's lazy-loaded image is still loading.
+
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment. `2.25.0` is already published, so this experiment is `2.25.1-hkignore`.
+
+## [2.25.0] - 2026-10-22
+
+### Added
+
+- New `recommendation-mini-shelf` block: a compact, collapsible shelf with a no-autoplay carousel (next product visible at the edge) for small spaces such as the Mini-Cart. Its `ProductSummary` can be customized by overriding `product-summary.shelf#mini-shelf`.
 
 ## [2.24.2] - 2026-08-28
 
