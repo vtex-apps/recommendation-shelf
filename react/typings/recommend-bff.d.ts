@@ -1,6 +1,7 @@
 declare module 'recommend-bff' {
   export type Product = {
     productId: string
+    productName?: string
     items: Array<{
       itemId: string
     }>
