@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCssHandles } from 'vtex.css-handles'
 import type { Product } from 'recommend-bff'
 
@@ -10,6 +10,7 @@ import { MiniShelfProductList } from './ProductList'
 // TODO: internationalize these labels (messages/*.json) instead of using static English
 const COLLAPSE_LABEL = 'Collapse recommendations'
 const EXPAND_LABEL = 'Expand recommendations'
+const COLLAPSED_STORAGE_KEY = 'vtex.recommendation-shelf:mini-shelf-collapsed'
 
 type Props = {
   userId: string
@@ -42,7 +43,6 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
   children,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
-  // Plain React state on purpose: the choice is not persisted across mounts.
   const [collapsed, setCollapsed] = useState(false)
   const { containerAttributes, buildExtraProductProps } = useShelfTracking({
     products,
@@ -51,6 +51,30 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
   })
 
   const showTitle = Boolean(title && displayTitle)
+
+  useEffect(() => {
+    try {
+      setCollapsed(
+        window.sessionStorage.getItem(COLLAPSED_STORAGE_KEY) === 'true'
+      )
+    } catch {
+      // The shelf starts expanded when storage is unavailable.
+    }
+  }, [])
+
+  const toggleCollapsed = () => {
+    setCollapsed((current) => {
+      const next = !current
+
+      try {
+        window.sessionStorage.setItem(COLLAPSED_STORAGE_KEY, String(next))
+      } catch {
+        // The shelf still works when storage is unavailable.
+      }
+
+      return next
+    })
+  }
 
   return (
     <div
@@ -65,7 +89,7 @@ const MiniShelf: StorefrontFunctionComponent<Props> = ({
         aria-expanded={!collapsed}
         aria-controls={CONTENT_ID}
         aria-label={collapsed ? EXPAND_LABEL : COLLAPSE_LABEL}
-        onClick={() => setCollapsed((current) => !current)}
+        onClick={toggleCollapsed}
       >
         <span className={`${styles.title} ${handles.recMiniShelfTitle}`}>
           {showTitle ? title : ''}
