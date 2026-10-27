@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.2] - 2026-10-27
+
 ### Fixed
 
 - `recommendation-mini-shelf`: improved the mobile title layout and compact sizing, persisted the collapsed state for the browser session, and added product-specific accessible names to add-to-cart buttons.
