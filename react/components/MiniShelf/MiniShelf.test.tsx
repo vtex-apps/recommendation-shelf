@@ -46,6 +46,10 @@ const baseProps = {
 }
 
 describe('MiniShelf', () => {
+  beforeEach(() => {
+    window.sessionStorage.clear()
+  })
+
   it('starts expanded and renders the product list', () => {
     const { getByTestId, getByRole } = render(<MiniShelf {...baseProps} />)
 
@@ -67,6 +71,20 @@ describe('MiniShelf', () => {
     fireEvent.click(getByRole('button'))
 
     expect(queryByTestId('mini-shelf-product-list')).toBeTruthy()
+  })
+
+  it('keeps the collapsed state when remounted in the same session', () => {
+    const firstRender = render(<MiniShelf {...baseProps} />)
+
+    fireEvent.click(firstRender.getByRole('button'))
+    firstRender.unmount()
+
+    const secondRender = render(<MiniShelf {...baseProps} />)
+
+    expect(secondRender.queryByTestId('mini-shelf-product-list')).toBeNull()
+    expect(secondRender.getByRole('button').getAttribute('aria-expanded')).toBe(
+      'false'
+    )
   })
 
   it('adds tracking attributes when correlation data is present', () => {

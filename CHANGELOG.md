@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.2-hkignore] - 2026-11-04
+
+### Fixed
+
+- `recommendation-mini-shelf`: improved the mobile title layout and compact sizing, persisted the collapsed state for the browser session, and added product-specific accessible names to add-to-cart buttons.
+
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment. It keeps the control-group behavior from `2.25.1-hkignore` and adds the MiniShelf fixes released in `2.25.2`.
+
 ## [2.25.1-hkignore] - 2026-10-24
 
 ### Added

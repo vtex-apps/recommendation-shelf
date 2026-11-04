@@ -73,7 +73,7 @@
     "props": {
       "showBadge": false,
       "aspectRatio": "1:1",
-      "maxHeight": 72,
+      "maxHeight": 56,
       "blockClass": "rec-mini-shelf"
     }
   },
@@ -104,8 +104,8 @@
       "colGap": 2,
       "preserveLayoutOnMobile": true,
       "verticalAlign": "middle",
-      "paddingTop": 2,
-      "paddingBottom": 2,
+      "paddingTop": 0,
+      "paddingBottom": 0,
       "blockClass": "rec-mini-shelf",
       "paddingLeft": 1,
       "paddingRight": 1
