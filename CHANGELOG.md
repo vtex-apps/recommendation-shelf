@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- The shelf reads the control group only from `localStorage` and stays hidden until that value is `base`. It checks again once a second, up to five times, and does not show itself when the group never arrives.
+
 ## [2.25.2-hkignore] - 2026-11-04
 
 ### Fixed

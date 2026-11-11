@@ -114,8 +114,7 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
 
   if (isPathHidden(currentPath, hiddenPaths)) return null
 
-  // Stay hidden until the group is known. `control` never renders.
-  // A missing script reveals the shelf after the watch times out.
+  // Stay hidden until storage is `base`. `control` and a missing group never render.
   if (shelfVisibility !== 'show') return null
 
   return (

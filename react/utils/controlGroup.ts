@@ -2,18 +2,15 @@ import { useEffect, useState } from 'react'
 
 // Control group handling.
 //
-// An external script splits traffic and tags the current session by setting a
-// `data-vtex-rec-control-group` attribute on <body> (and mirroring it in
-// localStorage under `vtex-rec-control-group`) to either `base` or `control`.
-// The script can run after the shelf's first render. Until the group is
-// known, the shelf stays hidden. `control` keeps it hidden. `base` shows it.
-// If no group arrives, the shelf is shown so pages without the script still
-// render.
+// Activity Flow writes `localStorage["vtex-rec-control-group"]` after
+// start-session returns. The shelf only reads that key. `control` stays
+// hidden. `base` renders. A missing key stays hidden and is read again
+// every second, up to 5 times.
 
 export const CONTROL_GROUP_BODY_ATTRIBUTE = 'data-vtex-rec-control-group'
 export const CONTROL_GROUP_STORAGE_KEY = 'vtex-rec-control-group'
-const CONTROL_GROUP_POLL_INTERVAL_MS = 100
-const CONTROL_GROUP_POLL_TIMEOUT_MS = 5000
+const CONTROL_GROUP_POLL_INTERVAL_MS = 1000
+const CONTROL_GROUP_MAX_RETRIES = 5
 
 // Variant value that identifies the control group. Change here if the external
 // script starts using a different value.
@@ -33,23 +30,21 @@ export function shelfVisibility(): ShelfVisibility {
 }
 
 /**
- * Reads the variant assigned to the current session.
+ * Reads the variant Activity Flow stored for this browser.
  *
- * Prefers the <body> attribute (set synchronously by the external script
- * before hydration) and falls back to localStorage. Returns null when it
- * cannot be resolved (e.g. server-side rendering).
+ * Returns null during server-side rendering, or when the key is missing
+ * or holds something other than `base` or `control`.
  */
 export function getAssignedVariant(): string | null {
-  if (typeof document === 'undefined') return null
-
-  const bodyVariant = document.body?.getAttribute(CONTROL_GROUP_BODY_ATTRIBUTE)
-
-  if (bodyVariant) return bodyVariant
+  if (typeof window === 'undefined') return null
 
   try {
-    return window.localStorage?.getItem(CONTROL_GROUP_STORAGE_KEY) ?? null
+    const stored = window.localStorage?.getItem(CONTROL_GROUP_STORAGE_KEY)
+
+    return stored === CONTROL_GROUP_VARIANT || stored === BASE_GROUP_VARIANT
+      ? stored
+      : null
   } catch {
-    // localStorage may be unavailable (e.g. privacy mode); ignore.
     return null
   }
 }
@@ -65,25 +60,24 @@ export function isControlGroup(): boolean {
 /**
  * Reports when the shelf should be shown or kept hidden.
  *
- * The body attribute is observed until a group is assigned. localStorage is
- * polled for a few seconds because a same-tab write does not emit an event.
- * When that wait ends with no group, the shelf is shown.
+ * localStorage is polled because a same-tab write does not emit an event.
+ * Five misses leave the shelf hidden. There is no timeout that shows it.
  */
 export function watchShelfVisibility(
   onChange: (visibility: Exclude<ShelfVisibility, 'pending'>) => void
 ): () => void {
-  if (typeof document === 'undefined' || !document.body) {
+  if (typeof window === 'undefined') {
     return () => undefined
   }
 
-  // Explicit void return: inferring `() => undefined` fails the IO builder.
   let close: () => void = () => undefined
   let announced: ShelfVisibility = 'pending'
+  let retries = 0
   const publish = (next: Exclude<ShelfVisibility, 'pending'>) => {
     if (announced === next) return
     announced = next
     onChange(next)
-    if (next === 'hide') close()
+    close()
   }
 
   const check = () => {
@@ -93,26 +87,18 @@ export function watchShelfVisibility(
     publish(visibility)
   }
 
-  const observer = new MutationObserver(check)
-
-  observer.observe(document.body, {
-    attributes: true,
-    attributeFilter: [CONTROL_GROUP_BODY_ATTRIBUTE],
-  })
-  const intervalId = window.setInterval(check, CONTROL_GROUP_POLL_INTERVAL_MS)
-  const timeoutId = window.setTimeout(() => {
-    window.clearInterval(intervalId)
-    if (shelfVisibility() === 'pending') publish('show')
-  }, CONTROL_GROUP_POLL_TIMEOUT_MS)
+  const intervalId = window.setInterval(() => {
+    retries += 1
+    check()
+    if (retries >= CONTROL_GROUP_MAX_RETRIES) close()
+  }, CONTROL_GROUP_POLL_INTERVAL_MS)
 
   let closed = false
 
   close = () => {
     if (closed) return
     closed = true
-    observer.disconnect()
     window.clearInterval(intervalId)
-    window.clearTimeout(timeoutId)
   }
 
   check()
