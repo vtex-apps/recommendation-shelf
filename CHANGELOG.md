@@ -7,34 +7,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.25.4-hkignore] - 2026-11-11
+
+### Added
+
+- Control group support. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read only from `localStorage` key `vtex-rec-control-group`.
+
 ### Changed
 
-- The shelf reads the control group only from `localStorage` and stays hidden until that value is `base`. It checks again once a second, up to five times, and does not show itself when the group never arrives.
+- The shelf stays hidden until that value is `base`. It checks again once a second, up to five times, and does not show itself when the group never arrives.
+- The shelf does not call start-session. Activity Flow registers the session.
 
-## [2.25.2-hkignore] - 2026-11-04
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
+
+## [2.25.2] - 2026-10-27
 
 ### Fixed
 
 - `recommendation-mini-shelf`: improved the mobile title layout and compact sizing, persisted the collapsed state for the browser session, and added product-specific accessible names to add-to-cart buttons.
 
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment. It keeps the control-group behavior from `2.25.1-hkignore` and adds the MiniShelf fixes released in `2.25.2`.
-
-## [2.25.1-hkignore] - 2026-10-24
-
-### Added
-
-- Control group support. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read from `data-vtex-rec-control-group` on `<body>`, then from `localStorage` key `vtex-rec-control-group`.
-
-### Changed
-
-- The shelf stays hidden until that group is known. If the script never assigns one, the shelf appears after 5 seconds.
-- The shelf no longer calls start-session.
+## [2.25.1] - 2026-10-23
 
 ### Fixed
 
 - `recommendation-mini-shelf`: the carousel no longer grows and shrinks the first time it shows each product, while that product's lazy-loaded image is still loading.
-
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment. `2.25.0` is already published, so this experiment is `2.25.1-hkignore`.
 
 ## [2.25.0] - 2026-10-22
 
