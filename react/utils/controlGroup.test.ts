@@ -43,6 +43,15 @@ describe('isControlGroup', () => {
     expect(isControlGroup()).toBe(true)
   })
 
+  it('reports a group that is already stored', () => {
+    window.localStorage.setItem(CONTROL_GROUP_STORAGE_KEY, 'base')
+    const onChange = jest.fn()
+    const stop = watchShelfVisibility(onChange)
+
+    expect(onChange).toHaveBeenCalledWith('show')
+    stop()
+  })
+
   it('stays hidden until base is assigned', () => {
     jest.useFakeTimers()
     const onChange = jest.fn()

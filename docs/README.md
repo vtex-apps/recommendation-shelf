@@ -281,14 +281,13 @@ To use it:
 
 To measure the shelf's impact, you can keep a control group of sessions that never see the shelf. When a session belongs to the control group, the `recommendation-shelf` block renders nothing at all — not even its loading placeholder.
 
-The control group is defined by an external split script (managed outside this app) that assigns each session to a variant and tags the page accordingly:
+Activity Flow writes the group to `localStorage` under `vtex-rec-control-group` after start-session. The shelf only reads that key.
 
-- A `data-vtex-rec-control-group` attribute on the `<body>` element (checked first).
-- A `vtex-rec-control-group` value in `localStorage` (used as a fallback).
+- `base` renders the shelf.
+- `control` renders nothing, including the loading placeholder.
+- A missing key stays hidden. The shelf reads the key again once a second, up to five times, and does not show itself when the group never arrives.
 
-The value is either `base` (the session sees the shelf) or `control`. Sessions whose variant matches the control group value (`control`) don't render the shelf; every other session renders normally. Because the check runs before anything is displayed, the control group never sees the loading skeleton.
-
-> ℹ️ This behavior is automatic and has no block props to configure. It only takes effect on stores where the external split script is installed; without it, the shelf always renders normally.
+> ℹ️ This behavior is automatic and has no block props to configure. This `-hkignore` build stays hidden until the stored value is `base`, so install it only on stores where Activity Flow assigns the group.
 
 ## Troubleshooting
 

@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [2.25.4-hkignore] - 2026-11-11
-
 ### Added
 
 - Control group support. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read only from `localStorage` key `vtex-rec-control-group`.

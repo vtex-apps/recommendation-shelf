@@ -110,11 +110,7 @@ export function watchShelfVisibility(
 export function useShelfVisibility(): ShelfVisibility {
   const [visibility, setVisibility] = useState(shelfVisibility)
 
-  useEffect(() => {
-    if (shelfVisibility() !== 'pending') return undefined
-
-    return watchShelfVisibility(setVisibility)
-  }, [])
+  useEffect(() => watchShelfVisibility(setVisibility), [])
 
   return visibility
 }
