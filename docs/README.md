@@ -277,6 +277,18 @@ To use it:
 2. Edit the `SHELF_CONFIG` object at the top of the script with your `account`, `campaignVrn`, and optional `title`, `displayTitle`, and `itemsPerPage` values.
 3. Add the edited script to your Checkout custom scripts.
 
+## Control group
+
+To measure the shelf's impact, you can keep a control group of sessions that never see the shelf. When a session belongs to the control group, the `recommendation-shelf` block renders nothing at all — not even its loading placeholder.
+
+Activity Flow writes the group to `localStorage` under `vtex-rec-control-group` after start-session. The shelf only reads that key.
+
+- `base` renders the shelf.
+- `control` renders nothing, including the loading placeholder.
+- A missing key stays hidden. The shelf reads the key again once a second, up to five times, and does not show itself when the group never arrives.
+
+> ℹ️ This behavior is automatic and has no block props to configure. This `-hkignore` build stays hidden until the stored value is `base`, so install it only on stores where Activity Flow assigns the group.
+
 ## Troubleshooting
 
 Check if others have encountered similar issues [here](https://github.com/vtex-apps/recommendation-shelf/issues). Feel free to [open issues](https://github.com/vtex-apps/recommendation-shelf/issues/new) or contribute with pull requests.

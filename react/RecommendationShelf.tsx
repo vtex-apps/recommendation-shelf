@@ -5,6 +5,7 @@ import { useRuntime } from 'vtex.render-runtime'
 import { RecommendationShelfErrorBoundary } from './components/RecommendationShelfErrorBoundary'
 import { RecommendationShelfContainer } from './components/RecommendationShelfContainer'
 import { isPathHidden } from './utils/hiddenPaths'
+import { useShelfVisibility } from './utils/controlGroup'
 
 defineMessages({
   shelf: {
@@ -105,12 +106,16 @@ const RecommendationShelf: StorefrontFunctionComponent<Props> = ({
   loadingItemsPerPage,
 }) => {
   const { route } = useRuntime()
+  const shelfVisibility = useShelfVisibility()
 
   if (!campaignVrn) return null
 
   const currentPath = route?.canonicalPath ?? route?.path ?? '/'
 
   if (isPathHidden(currentPath, hiddenPaths)) return null
+
+  // Stay hidden until storage is `base`. `control` and a missing group never render.
+  if (shelfVisibility !== 'show') return null
 
   return (
     <RecommendationShelfErrorBoundary>

@@ -14,7 +14,6 @@
   const VRN_PATTERN =
     /^vrn:recommendations:[^:]+:(rec-cross-v1|rec-similar-v1|rec-persona-v1|rec-last-v1|rec-top-items-v1|rec-cross-v2|rec-similar-v2|rec-persona-v2|rec-last-v2|rec-top-items-v2|rec-search-v2):[^:]+$/
 
-  const USER_START_SESSION_COOKIE = 'vtex-rec-user-start-session'
   const workspaceCookie = 'VtexWorkspace'
   const targetWorkspace = 'master'
 
@@ -208,30 +207,6 @@
       method: 'GET',
       headers: recOriginHeader(account),
     }).then(function (response) {
-      if (!response.ok) {
-        throw new Error('HTTP error! status: ' + response.status)
-      }
-      return response.json()
-    })
-  }
-
-  function startSession(account) {
-    if (getCookie(USER_START_SESSION_COOKIE)) {
-      return Promise.resolve(null)
-    }
-    var body = {}
-    return fetch(
-      '/api/recommend-bff/v2/users/start-session?an=' +
-        encodeURIComponent(account),
-      {
-        method: 'POST',
-        headers: Object.assign(
-          { 'Content-Type': 'application/json' },
-          recOriginHeader(account)
-        ),
-        body: JSON.stringify(body),
-      }
-    ).then(function (response) {
       if (!response.ok) {
         throw new Error('HTTP error! status: ' + response.status)
       }
@@ -592,9 +567,7 @@
           orderFormId: of.orderFormId,
         })
 
-        return startSession(account).catch(function (err) {
-          warn('start-session failed', err)
-        })
+        return null
       })
       .catch(function (err) {
         warn('Recommendation shelf pipeline error', err)
