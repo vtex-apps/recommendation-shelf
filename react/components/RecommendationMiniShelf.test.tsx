@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import RecommendationMiniShelf from './RecommendationMiniShelf'
-import { CONTROL_GROUP_STORAGE_KEY } from './utils/controlGroup'
+import RecommendationMiniShelf from '../RecommendationMiniShelf'
+import { CONTROL_GROUP_STORAGE_KEY } from '../utils/controlGroup'
 
 jest.mock(
   'vtex.render-runtime',
@@ -12,7 +12,7 @@ jest.mock(
   { virtual: true }
 )
 
-jest.mock('./components/RecommendationShelfContainer', () => ({
+jest.mock('./RecommendationShelfContainer', () => ({
   RecommendationShelfContainer: () => (
     <div data-testid="recommendation-shelf-container" />
   ),
