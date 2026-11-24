@@ -279,9 +279,9 @@ To use it:
 
 ## Control group
 
-To measure the shelf's impact, you can keep a control group of sessions that never see the shelf. When a session belongs to the control group, the `recommendation-shelf` block renders nothing at all — not even its loading placeholder.
+To measure the shelf's impact, you can keep a control group of sessions that never see the shelf. When a session belongs to the control group, the `recommendation-shelf` and `recommendation-mini-shelf` blocks render nothing at all — not even their loading placeholders.
 
-Activity Flow writes the group to `localStorage` under `vtex-rec-control-group` after start-session. The shelf only reads that key.
+Activity Flow writes the group to `localStorage` under `vtex-rec-control-group` after start-session. Both blocks only read that key.
 
 - `base` renders the shelf.
 - `control` renders nothing, including the loading placeholder.

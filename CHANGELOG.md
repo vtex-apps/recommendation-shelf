@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Control group support. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read only from `localStorage` key `vtex-rec-control-group`.
+- Control group support for `recommendation-shelf` and `recommendation-mini-shelf`. `control` hides the shelf, including its loading placeholder. `base` shows it. The group is read only from `localStorage` key `vtex-rec-control-group`.
 
 ### Changed
 
 - The shelf stays hidden until that value is `base`. It checks again once a second, up to five times, and does not show itself when the group never arrives.
 - The shelf does not call start-session. Activity Flow registers the session.
 
-> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment.
+> This is an `-hkignore` build: Housekeeper will not auto-update accounts to or from this version, so it can be used for a controlled rollout/experiment. This release is `2.25.5-hkignore`.
 
 ## [2.25.2] - 2026-10-27
 
