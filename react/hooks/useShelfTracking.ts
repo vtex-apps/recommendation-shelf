@@ -1,10 +1,5 @@
-import { useEffect, useMemo } from 'react'
-import { useRuntime } from 'vtex.render-runtime'
+import { useMemo } from 'react'
 import type { Product } from 'recommend-bff'
-
-import { getCookie, startSession } from '../utils/user'
-
-const USER_START_SESSION_COOKIE = 'vtex-rec-user-start-session'
 
 type Params = {
   products: Product[]
@@ -13,24 +8,15 @@ type Params = {
 }
 
 /**
- * Shared analytics wiring for the shelf views: starts the user session once
- * and builds the `data-af-*` attributes for the container and each product.
+ * Shared analytics wiring for the shelf views. Builds the `data-af-*`
+ * attributes for the container and each product. The control-group script
+ * registers the session, so this hook does not call start-session.
  */
 export function useShelfTracking({
   products,
   correlationId,
   campaignId,
 }: Params) {
-  const { account } = useRuntime()
-
-  useEffect(() => {
-    const sessionCookie = getCookie(USER_START_SESSION_COOKIE)
-
-    if (!sessionCookie) {
-      startSession({ account })
-    }
-  }, [account])
-
   const productIds = useMemo(
     () => products.map((p) => p.productId).join(', '),
     [products]
